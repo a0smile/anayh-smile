@@ -548,7 +548,6 @@
     "title": "احجز موعدك",
     "subtitle": "املأ النموذج وسيتواصل معك فريقنا عبر الواتساب في أقرب وقت",
     "button": "إرسال عبر واتساب"
-  },
   "sections": {
     "servicesBadge": "عروض اليوم الوطني 96",
     "servicesTitle": "خدماتنا وأسعارنا بمناسبة اليوم الوطني 96",
@@ -587,11 +586,29 @@
     "contactPhoneTitle": "التواصل",
     "contactHoursTitle": "أوقات الدوام"
   },
+  "landmarks": [
+    {
+      "title": "برج المملكة",
+      "subtitle": "الرياض",
+      "image": "assets/national/hero-blend.jpg"
+    },
+    {
+      "title": "برج الفيصلية",
+      "subtitle": "الرياض",
+      "image": "assets/national/hero-blend.jpg"
+    },
+    {
+      "title": "أفق العاصمة",
+      "subtitle": "الرياض",
+      "image": "assets/national/hero-blend.jpg"
+    }
+  ],
   "serviceCategories": [
     {
       "title": "عروض اليوم الوطني السعودي 96",
       "icon": "flag",
       "items": [
+
         {
           "name": "تنظيف الأسنان وإزالة الجير",
           "oldPrice": 130,
