@@ -206,7 +206,7 @@ function renderSite(data) {
       if (e) e.src = nd.emblemImage;
     }
 
-    setText('ndBannerBadge', nd.badge || sections.nationalDayBadge);
+     setText('ndBannerBadge', nd.badge || sections.nationalDayBadge);
     setText('ndBannerTitle', nd.greetingTitle);
     setText('ndBannerSlogan', nd.slogan);
     setText('nationalDayBadge', sections.nationalDayBadge);
@@ -220,27 +220,14 @@ function renderSite(data) {
     setText('landmarksSubtitle', sections.landmarksSubtitle);
     const lg = document.getElementById('landmarksGrid');
     if (lg) {
-      lg.innerHTML = l.map((m, i) => {
-        // تحديد صورة العيادة المناسبة لكل برج بشكل تلقائي وحقيقي
-        let clinicImg = 'clinic-exterior.jpg'; 
-        if (i === 1) clinicImg = 'clinic-interior.jpg'; // البرج الثاني (الفيصلية) يأخذ التصميم الداخلي
-        if (i === 2) clinicImg = 'clinic-exterior.jpg'; // البرج الثالث يأخذ التصميم الخارجي
-
-        return `
-        <figure class="landmark-card reveal"${editAttr(`landmarks.\${i}.image`)} style="position: relative; overflow: hidden;">
-          <!-- الطبقة الأولى: صورة البرج في الخلفية كاملة -->
-          <div class="landmark-bg-layer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('${m.image}'); background-size: cover; background-position: center; z-index: 1;"></div>
-          
-          <!-- الطبقة الثانية: صورة العيادة في المقدمة بالأسفل مع دمج التلاشي السحري -->
-          <div class="clinic-fg-layer" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background-image: url('${clinicImg}'); background-size: cover; background-position: center; z-index: 2; -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%); mask-image: linear-gradient(to top, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);"></div>
-          
-          <!-- الطبقة الثالثة: النصوص فوق الصورتين المدمجتين -->
-          <figcaption style="position: relative; z-index: 3; background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);">
+      lg.innerHTML = l.map((m, i) => `
+        <figure class="landmark-card reveal"${editAttr(`landmarks.\${i}.image`)}>
+          <figcaption>
             <h3${editAttr(`landmarks.\${i}.title`)}>${m.title}</h3>
             <p${editAttr(`landmarks.\${i}.subtitle`)}>${m.subtitle || ''}</p>
           </figcaption>
         </figure>
-      `; }).join('');
+      `).join('');
     }
 
     const logoNd = document.getElementById('logoNationalDay');
