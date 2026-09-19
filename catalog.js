@@ -38,7 +38,7 @@ function renderCatalog() {
 
   if (!items.length) {
     grid.innerHTML = `<div class="catalog-empty">
-      <div class="catalog-placeholder-icon">🖼️</div>
+      <div class="catalog-placeholder-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:1.1em;height:1.1em"><rect x="7" y="9" width="34" height="30" rx="5"/><circle cx="17" cy="20" r="3"/><path d="M9 34l10-9 8 6 6-5 7 6"/></svg></div>
       <p>لا توجد صور في المعرض بعد.</p>
       <p style="font-size:.9rem;color:#999;margin-top:6px;">في وضع المالك أضف صورك من زر "＋ إضافة صورة".</p>
     </div>`;
@@ -55,9 +55,9 @@ function renderCatalog() {
     const tools = document.createElement('div');
     tools.className = 'catalog-tools';
     tools.innerHTML = `
-      <button type="button" class="ctool-img" data-action="img" data-index="${i}">🖼️ تغيير</button>
-      <button type="button" class="ctool-del" data-action="del" data-index="${i}">🗑️ حذف</button>
-      <button type="button" class="ctool-shape" data-action="shape" data-index="${i}">⬠ شكل</button>
+      <button type="button" class="ctool-img" data-action="img" data-index="${i}"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:1.1em;height:1.1em"><rect x="7" y="9" width="34" height="30" rx="5"/><circle cx="17" cy="20" r="3"/><path d="M9 34l10-9 8 6 6-5 7 6"/></svg> تغيير</button>
+      <button type="button" class="ctool-del" data-action="del" data-index="${i}"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:1.1em;height:1.1em"><path d="M10 14h28M19 14V9h10v5M14 14l2 28h16l2-28"/><path d="M21 22v13M27 22v13"/></svg> حذف</button>
+      <button type="button" class="ctool-shape" data-action="shape" data-index="${i}"> شكل</button>
       <button type="button" class="ctool-size" data-action="size" data-index="${i}">⤢ حجم</button>
     `;
 
@@ -75,7 +75,7 @@ function renderCatalog() {
     } else {
       const ph = document.createElement('div');
       ph.className = 'catalog-placeholder';
-      ph.innerHTML = `<div class="catalog-placeholder-icon">🖼️</div><p>الصورة ${i+1}</p>`;
+      ph.innerHTML = `<div class="catalog-placeholder-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:1.1em;height:1.1em"><rect x="7" y="9" width="34" height="30" rx="5"/><circle cx="17" cy="20" r="3"/><path d="M9 34l10-9 8 6 6-5 7 6"/></svg></div><p>الصورة ${i+1}</p>`;
       imgWrap.appendChild(ph);
     }
 
@@ -96,7 +96,7 @@ function renderCatalog() {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      if (!window.adminActive) { alert('فعّل وضع المالك أولاً 🔐'); return; }
+      if (!window.adminActive) { alert('فعّل وضع المالك أولاً '); return; }
       const idx = +btn.dataset.index;
       const action = btn.dataset.action;
       const items = getCatalogItems();
@@ -108,7 +108,7 @@ function renderCatalog() {
         items.splice(idx, 1);
         saveCatalogItems(items);
         renderCatalog();
-        showCatalogToast('🗑️ تم حذف الصورة');
+        showCatalogToast('<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:1.1em;height:1.1em"><path d="M10 14h28M19 14V9h10v5M14 14l2 28h16l2-28"/><path d="M21 22v13M27 22v13"/></svg> تم حذف الصورة');
       } else if (action === 'img') {
         changeCatalogImage(idx);
       } else if (action === 'shape') {
@@ -116,7 +116,7 @@ function renderCatalog() {
         const next = cur === 'circle' ? 'round' : 'square';
         saveCatalogShape(idx, next);
         renderCatalog();
-        showCatalogToast('⬠ تم تغيير شكل الصورة');
+        showCatalogToast(' تم تغيير شكل الصورة');
       } else if (action === 'size') {
         const w = prompt('نسبة العرض بالنسبة المئوية (40-100):', '100');
         if (w && !isNaN(+w)) {
@@ -152,7 +152,7 @@ document.getElementById('catalogAddBtn').addEventListener('click', () => {
 document.getElementById('catalogFileInput').addEventListener('change', () => {
   const file = document.getElementById('catalogFileInput').files[0];
   if (!file) { pendingCatalogImageIndex = null; return; }
-  if (!file.type.startsWith('image/')) { alert('❌ اختر ملف صورة صحيح.'); return; }
+  if (!file.type.startsWith('image/')) { alert('اختر ملف صورة صحيح.'); return; }
 
   const target = pendingCatalogImageIndex;
   pendingCatalogImageIndex = null;
@@ -164,14 +164,14 @@ document.getElementById('catalogFileInput').addEventListener('change', () => {
       items.push({ src: reader.result, caption: '' });
       saveCatalogItems(items);
       renderCatalog();
-      showCatalogToast('➕ تمت إضافة الصورة');
+      showCatalogToast('<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:1.1em;height:1.1em"><path d="M24 10v28M10 24h28"/></svg> تمت إضافة الصورة');
     } else {
       const item = items[target];
       if (!item) return;
       item.src = reader.result;
       saveCatalogItems(items);
       renderCatalog();
-      showCatalogToast('✅ تم تغيير الصورة');
+      showCatalogToast('<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="width:1.1em;height:1.1em"><circle cx="24" cy="24" r="17"/><path d="M15 25l6 6 12-13"/></svg> تم تغيير الصورة');
     }
   };
   reader.readAsDataURL(file);

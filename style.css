@@ -5,17 +5,21 @@
    ============================================ */
 
 :root {
-  --primary: #0d9488;
-  --primary-dark: #0f766e;
-  --primary-light: #5eead4;
-  --primary-bg: #f0fdfa;
-  --accent: #f59e0b;
-  --accent-dark: #d97706;
-  --text: #134e4a;
+  /* لوحة اليوم الوطني السعودي 96: أخضر سعودي + أبيض + ذهبي */
+  --primary: #007a3d;
+  --primary-dark: #006c35;
+  --primary-light: #34a06b;
+  --primary-bg: #f2faf5;
+  --accent: #bfa15f;
+  --accent-dark: #97762f;
+  --text: #10381f;
   --text-light: #4b7285;
   --white: #ffffff;
-  --shadow: 0 10px 30px rgba(13, 148, 136, 0.12);
-  --shadow-lg: 0 20px 50px rgba(13, 148, 136, 0.2);
+  --nd-green: #006c35;
+  --nd-green-deep: #004d26;
+  --nd-gold: #bfa15f;
+  --shadow: 0 10px 30px rgba(0, 108, 53, 0.12);
+  --shadow-lg: 0 20px 50px rgba(0, 108, 53, 0.2);
   --radius: 18px;
 }
 
@@ -1026,11 +1030,13 @@ ul {
   right: 0;
   left: 0;
   z-index: 300;
-  background: linear-gradient(90deg, var(--primary-dark), var(--primary), var(--primary-dark));
+  /* خلفية خضراء سعودية والنص أبيض بمناسبة اليوم الوطني 96 */
+  background: linear-gradient(90deg, var(--nd-green-deep), var(--nd-green), var(--nd-green-deep));
   color: var(--white);
   overflow: hidden;
   padding: 8px 0;
-  box-shadow: 0 2px 10px rgba(13, 148, 136, 0.3);
+  border-bottom: 2px solid var(--nd-gold);
+  box-shadow: 0 2px 10px rgba(0, 108, 53, 0.35);
 }
 
 .announcement-track {
@@ -1045,11 +1051,28 @@ ul {
 .announcement-text {
   font-size: 0.95rem;
   font-weight: 700;
+  color: var(--white);
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   /* المسافة بين الرسالة المكررة */
   padding-right: 120px;
+}
+
+/* السيفان والنخلة في بداية الشريط ونهايته */
+.nd-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 20px;
+  color: var(--nd-gold);
+  flex: 0 0 auto;
+}
+
+.nd-mark .nd-emblem {
+  width: 100%;
+  height: 100%;
 }
 
 /* حركة دائرية سلسة ومتكررة للاتجاه الصحيح (عربي) */
@@ -1075,7 +1098,7 @@ ul {
 }
 
 .hero-content {
-  text-align: right;
+  text-align: center;
 }
 
 .hero-image-side {
@@ -1689,3 +1712,349 @@ body.admin-mode {
   z-index: 1200;
 }
 #smileToast.show { opacity: 1; }
+/* ==================================================
+   اليوم الوطني السعودي 96 — الإضافات
+   ================================================== */
+
+/* ===== لوحة الدمج الحقيقي الخافت لصورتي المجمع (أعلى الصفحة) ===== */
+.nd-banner-wrap {
+  padding-top: 0;
+  padding-bottom: 24px;
+}
+
+.nd-banner {
+  position: relative;
+  border-radius: 26px;
+  overflow: hidden;
+  min-height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 3px var(--nd-green), 0 0 0 7px var(--nd-gold), 0 22px 45px rgba(0, 77, 38, 0.32);
+  background: var(--nd-green-deep);
+}
+
+.nd-banner-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;           /* خافت حتى يبقى النص مقروءاً */
+  filter: saturate(0.95) contrast(1.02);
+}
+
+.nd-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 108, 53, 0.30) 0%, rgba(0, 60, 30, 0.72) 100%);
+}
+
+.nd-banner-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: var(--white);
+  padding: 34px 22px;
+  max-width: 860px;
+}
+
+.nd-emblem-img {
+  width: 84px;
+  height: auto;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.35));
+}
+
+.nd-banner-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid var(--nd-gold);
+  color: var(--white);
+  padding: 7px 20px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 14px;
+}
+
+.nd-banner-title {
+  font-size: clamp(1.5rem, 3.6vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 10px;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+}
+
+.nd-banner-slogan {
+  font-size: clamp(1rem, 2.2vw, 1.3rem);
+  font-weight: 700;
+  color: #ffe9b3;
+}
+
+.nd-flag-img {
+  position: absolute;
+  bottom: 14px;
+  left: 18px;
+  width: 74px;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  z-index: 2;
+}
+
+/* ===== قسم التهنئة ===== */
+.nd-greeting-section {
+  background: linear-gradient(180deg, var(--primary-bg) 0%, var(--white) 100%);
+}
+
+.nd-greeting {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.nd-badge {
+  background: var(--nd-green) !important;
+  color: var(--white) !important;
+  border: 1px solid var(--nd-gold);
+}
+
+.nd-greeting-title {
+  font-size: clamp(1.6rem, 3.8vw, 2.5rem);
+  font-weight: 900;
+  color: var(--nd-green-deep);
+  margin: 12px 0 10px;
+}
+
+.nd-greeting-text {
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 2.1;
+  max-width: 800px;
+  margin: 0 auto 14px;
+}
+
+.nd-greeting-closing {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--nd-green);
+  line-height: 2;
+  margin: 6px auto 4px;
+}
+
+.nd-flag-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 14px auto;
+}
+
+.nd-flag-line::before,
+.nd-flag-line::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  max-width: 160px;
+  background: linear-gradient(90deg, transparent, var(--nd-gold), transparent);
+}
+
+.nd-line-emblem {
+  width: 62px;
+  height: auto;
+  margin: 0 16px;
+}
+
+.nd-line-flag {
+  width: 96px;
+  height: auto;
+  border-radius: 5px;
+  margin: 0 16px;
+  box-shadow: 0 3px 10px rgba(0, 60, 30, 0.25);
+}
+
+/* ===== معالم الوطن ===== */
+.landmarks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+}
+
+.landmark-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--nd-green-deep);
+  box-shadow: 0 0 0 2px var(--nd-gold), 0 14px 30px rgba(0, 60, 30, 0.22);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 0;
+}
+
+.landmark-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 0 3px var(--nd-gold), 0 20px 40px rgba(0, 60, 30, 0.3);
+}
+
+.landmark-card img {
+  display: block;
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.landmark-card:hover img {
+  transform: scale(1.06);
+}
+
+.landmark-card figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 26px 18px 16px;
+  text-align: center;
+  color: var(--white);
+  background: linear-gradient(180deg, transparent, rgba(0, 60, 30, 0.88));
+}
+
+.landmark-card h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin-bottom: 2px;
+}
+
+.landmark-card p {
+  font-size: 0.9rem;
+  color: #ffe9b3;
+}
+
+/* ===== لمسات اليوم الوطني على بقية الموقع ===== */
+.hero {
+  min-height: auto;
+  padding: 120px 0 70px;
+  background: linear-gradient(180deg, var(--primary-bg) 0%, var(--white) 100%);
+}
+
+.offers-grid .offer-card {
+  border-color: var(--nd-gold);
+}
+
+.offer-note {
+  background: var(--nd-green) !important;
+  color: var(--white) !important;
+}
+
+.section-badge {
+  border: 1px solid var(--nd-gold);
+}
+
+@media (max-width: 768px) {
+  .nd-banner {
+    min-height: 320px;
+    border-radius: 18px;
+  }
+  .nd-emblem-img {
+    width: 60px;
+  }
+  .nd-flag-img {
+    width: 56px;
+  }
+  .landmark-card img {
+    height: 180px;
+  }
+}
+/* ===== سطر اليوم الوطني تحت اسم المجمع ===== */
+.logo-nd {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--nd-green) !important;
+  letter-spacing: 0.2px;
+  margin-top: 1px;
+}
+
+/* ===== أيقونات SVG حقيقية ===== */
+.nd-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: middle;
+}
+.nd-icon svg {
+  width: 100%;
+  height: 100%;
+}
+.price-cat-icon {
+  display: inline-flex;
+  align-items: center;
+  width: 1.4em;
+  height: 1.4em;
+  color: var(--nd-green);
+  vertical-align: -0.28em;
+}
+.price-cat-icon svg {
+  width: 100%;
+  height: 100%;
+}
+.offer-icon, .tip-icon, .feature-icon {
+  color: var(--nd-green);
+}
+.offer-card .offer-icon {
+  color: var(--nd-gold);
+}
+.offer-icon .nd-icon, .tip-icon .nd-icon, .feature-icon .nd-icon {
+  width: 1em;
+  height: 1em;
+}
+/* أيقونة الصح في قسم الحجز */
+.check-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.1em;
+  height: 1.1em;
+  flex: 0 0 auto;
+}
+.check-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* عناوين بطاقات التواصل */
+.contact-card-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.contact-card-title .nd-icon {
+  width: 1.15em;
+  height: 1.15em;
+  color: var(--nd-green);
+}
+
+/* الشريط المتحرك: أيقونة السيفين والنخلة بلون ذهبي على الأخضر */
+.announcement-bar .nd-mark svg {
+  fill: none;
+}
+
+/* نجوم التقييم كأيقونة SVG حقيقية */
+.star-icon {
+  display: inline-flex;
+  align-items: center;
+  width: 1em;
+  height: 1em;
+  color: var(--accent);
+}
+.star-icon svg {
+  width: 100%;
+  height: 100%;
+}
+.testimonial-stars .star-icon {
+  width: 1.05em;
+  height: 1.05em;
+  margin-inline-end: 2px;
+}
+/* زر القائمة على الجوال */
+.menu-toggle svg {
+  display: block;
+}

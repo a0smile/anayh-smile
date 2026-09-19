@@ -1,0 +1,57 @@
+/* ============================================
+   أيقونات SVG حقيقية (بدل الإيموجي)
+   مجمع عناية الابتسامة الطبي — اليوم الوطني 96
+   ============================================ */
+window.ND_ICONS = {
+  tooth: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6c3 0 5 2 10 2s7-2 10-2c4 0 6 3 6 8 0 5-2 9-3 14-1 4-2 8-4 8s-3-3-4-7c-.6-2.6-1.6-5-5-5s-4.4 2.4-5 5c-1 4-2 7-4 7s-3-4-4-8c-1-5-3-9-3-14 0-5 2-8 6-8z"/></svg>',
+  clean: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8c3 0 5 2 10 2s7-2 10-2c4 0 6 3 6 8 0 5-2 9-3 14-1 4-2 7-4 7s-3-3-4-7c-.6-2.6-1.6-5-5-5s-4.4 2.4-5 5c-1 4-2 7-4 7s-3-3-4-7c-1-5-3-9-3-14 0-5 2-8 6-8z"/><path d="M36 4l2 4 4 2-4 2-2 4-2-4-4-2 4-2z"/><path d="M8 20l1 2 2 1-2 1-1 2-1-2-2-1 2-1z"/></svg>',
+  filling: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8c3 0 5 2 10 2s7-2 10-2c4 0 6 3 6 8 0 5-2 9-3 14-1 4-2 7-4 7s-3-3-4-7c-.6-2.6-1.6-5-5-5s-4.4 2.4-5 5c-1 4-2 7-4 7s-3-3-4-7c-1-5-3-9-3-14 0-5 2-8 6-8z"/><path d="M18 17h12M24 17v8" stroke-width="2.6"/></svg>',
+  extract: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8c3 0 5 2 10 2s7-2 10-2c4 0 6 3 6 8 0 5-2 9-3 14-1 4-2 7-4 7s-3-3-4-7c-.6-2.6-1.6-5-5-5s-4.4 2.4-5 5c-1 4-2 7-4 7s-3-3-4-7c-1-5-3-9-3-14 0-5 2-8 6-8z"/><path d="M20 30l8-8M20 22l8 8"/></svg>',
+  root: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 40c-5 0-9-5-9-13 0-7 4-13 9-13s9 6 9 13c0 8-4 13-9 13z"/><path d="M24 14v18M19 20l5 4M29 20l-5 4"/></svg>',
+  braces: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="18" width="36" height="12" rx="3"/><path d="M6 24h36M15 18v12M24 18v12M33 18v12"/><circle cx="15" cy="24" r="2.4" fill="currentColor" stroke="none"/><circle cx="24" cy="24" r="2.4" fill="currentColor" stroke="none"/><circle cx="33" cy="24" r="2.4" fill="currentColor" stroke="none"/></svg>',
+  retainer: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 20c0-5 7-9 16-9s16 4 16 9"/><path d="M8 20v8c0 4 5 6 16 6s16-2 16-6v-8"/><path d="M14 22v8M24 22v10M34 22v8"/></svg>',
+  fluoride: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6c6 8 11 13 11 20a11 11 0 0 1-22 0c0-7 5-12 11-20z"/><path d="M20 30a4 4 0 0 0 4 4"/></svg>',
+  crown: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 34l-2-16 9 7 9-13 9 13 9-7-2 16z"/><path d="M8 40h32"/></svg>',
+  spacer: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="19" width="36" height="10" rx="4"/><path d="M16 19v10M24 19v10M32 19v10"/><path d="M24 13v-5M20 8h8"/></svg>',
+  laser: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8h20l-4 10-6 4-6-4z"/><path d="M24 22v6"/><path d="M24 30l-4 10M24 30l4 10M24 30v12M16 34l-4 6M32 34l4 6"/></svg>',
+  veneer: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 10h24v18c0 7-5 12-12 14-7-2-12-7-12-14z"/><path d="M12 18h24"/><path d="M20 26l3 3 6-6"/></svg>',
+  smile: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><path d="M15 30c2.4 3.4 5.4 5 9 5s6.6-1.6 9-5z" fill="currentColor" stroke="none"/><path d="M18 19h.02M30 19h.02" stroke-width="3.4"/></svg>',
+  brush: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="8" width="13" height="20" rx="4"/><path d="M10 8V5h7v3M10 14h7M24 12h17M24 18h17M24 24h11"/><path d="M7 34c0-3 3-5 7-5M39 30v14"/></svg>',
+  floss: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14h32v20a10 10 0 0 1-10 10H18A10 10 0 0 1 8 34z"/><path d="M8 20h32M18 26v14M30 26v14"/></svg>',
+  candy: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="9"/><path d="M15 17L6 11v26l9-6M33 17l9-6v26l-9-6"/><path d="M20 21a4 4 0 0 1 4-2"/></svg>',
+  stethoscope: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v12a8 8 0 0 0 16 0V8"/><path d="M10 8h4M26 8h4"/><path d="M28 28v6a8 8 0 0 0 16 0v-4"/><circle cx="44" cy="26" r="3"/></svg>',
+  doctor: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="15" r="8"/><path d="M9 42c0-8 7-13 15-13s15 5 15 13"/><path d="M24 34v8M20 38h8"/></svg>',
+  water: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6c7 9 12 15 12 22a12 12 0 0 1-24 0c0-7 5-13 12-22z"/><path d="M19 32a5 5 0 0 0 5 5"/></svg>',
+  nosmoke: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="25" width="28" height="8" rx="2"/><path d="M38 33h4M36 20c0-4 4-4 4-8M42 27c0-3 2-3 2-6"/><path d="M8 10l32 28"/></svg>',
+  tech: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="11" y="15" width="26" height="20" rx="5"/><path d="M20 15V9h8v6M18 24h.02M30 24h.02" stroke-width="3.4"/><path d="M17 35v4M31 35v4"/></svg>',
+  quality: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6l5 11 12 2-9 8 2 12-10-6-10 6 2-12-9-8 12-2z"/></svg>',
+  price: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6v36M34 15c-1.8-3-5.4-5-10-5s-9 2.4-9 6.5S18 24 24 24s9 2 9 6.5-4 6.5-9 6.5-8.2-2-10-5"/></svg>',
+  calendar: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="11" width="34" height="30" rx="5"/><path d="M7 20h34M15 7v7M33 7v7"/><path d="M17 27h4v4h-4z" fill="currentColor" stroke="none"/></svg>',
+  emergency: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6c8 0 14 6 14 14v18H10V20C10 12 16 6 24 6z"/><path d="M24 15v13M17.5 21.5h13"/><path d="M6 38h36"/></svg>',
+  pin: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6c7 0 13 6 13 13 0 10-13 23-13 23S11 29 11 19c0-7 6-13 13-13z"/><circle cx="24" cy="19" r="5"/></svg>',
+  phone: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6h6l3 8-5 3a22 22 0 0 0 12 12l3-5 8 3v6c0 3-3 5-6 5A32 32 0 0 1 9 12c0-3 2-6 5-6z"/></svg>',
+  clock: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="17"/><path d="M24 13v11l7 5"/></svg>',
+  chat: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 12h34v22H24l-9 8v-8H7z"/><path d="M16 21h16M16 27h10"/></svg>',
+  pen: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M33 7l8 8-22 22-10 2 2-10z"/><path d="M29 11l8 8"/></svg>',
+  mail: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="11" width="36" height="26" rx="4"/><path d="M7 13l17 13 17-13"/></svg>',
+  fire: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 5c6 8 12 12 12 21a12 12 0 0 1-24 0c0-5 3-9 6-13 0 4 1 6 3 7-1-6 1-11 3-15z"/></svg>',
+  project: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 8l14 8v16l-14 8-14-8V16z"/><path d="M10 16l14 8 14-8M24 24v16"/></svg>',
+  flag: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 43V6"/><path d="M12 8h26l-6 8 6 8H12z"/></svg>',
+  check: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><path d="M15 25l6 6 12-13"/></svg>',
+  instagram: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="34" height="34" rx="11"/><circle cx="24" cy="24" r="8"/><circle cx="34" cy="14" r="2" fill="currentColor" stroke="none"/></svg>',
+  snapchat: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6c8 0 14 6 14 14v22l-5-4-5 4-4-4-4 4-5-4-5 4V20c0-8 6-14 14-14z"/><path d="M18 23h.02M30 23h.02" stroke-width="3.6"/></svg>',
+  tiktok: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M30 8l10-2v22"/><circle cx="25" cy="33" r="6"/><circle cx="41" cy="28" r="4"/><path d="M30 12v21"/></svg>',
+  twitter: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M11 10l26 28M37 10L11 38"/></svg>',
+  whatsapp: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6a18 18 0 0 0-15 28L7 42l8-2A18 18 0 1 0 24 6z"/><path d="M17 17c0 8 6 14 14 14 1.6 0 3-2 2-3.4l-3.6-2-2.4 2.4c-2.6-1-5-3.4-6-6l2.4-2.4-2-3.6C20 15 17 16 17 17z" fill="currentColor" stroke="none"/></svg>',
+  star: '<svg viewBox="0 0 48 48" fill="none"><path d="M24 5.5l5.4 11.6 12.6 1.7-9.2 8.8 2.3 12.5L24 34l-11.1 6.1 2.3-12.5-9.2-8.8 12.6-1.7z" fill="currentColor"/></svg>'
+};
+
+/* يحوّل قيمة الأيقونة إلى SVG حقيقي، وإلا يعرضها كما هي */
+window.ndIcon = function (value) {
+  const v = (value == null ? '' : String(value)).trim();
+  return window.ND_ICONS[v] || v;
+};
+window.ndIconHtml = function (value) {
+  const html = window.ndIcon(value);
+  return `<span class="nd-icon">${html}</span>`;
+};

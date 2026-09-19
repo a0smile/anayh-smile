@@ -22,12 +22,12 @@ async function verifyAdminCode(code) {
 
 async function enterAdminMode() {
   if (adminActive) return;
-  const code = prompt('🔐 أدخل كود المالك لتفعيل وضع التعديل:');
+  const code = prompt(' أدخل كود المالك لتفعيل وضع التعديل:');
   if (code === null) return;
 
   const ok = await verifyAdminCode(code);
   if (!ok) {
-    alert('❌ الكود غير صحيح. فقط مالك الموقع يستطيع التعديل.');
+    alert('الكود غير صحيح. فقط مالك الموقع يستطيع التعديل.');
     return;
   }
 
@@ -40,7 +40,7 @@ async function enterAdminMode() {
   attachEditButtons();
   if (typeof renderCatalog === 'function') renderCatalog();
   
-  // 👇 ربط حقيقي: إظهار لوحة التحكم بالصور فوراً عند إدخال الرقم السري الصحيح
+  //  ربط حقيقي: إظهار لوحة التحكم بالصور فوراً عند إدخال الرقم السري الصحيح
   if (typeof window.activateClinicImageManagement === 'function') {
     window.activateClinicImageManagement();
   }
@@ -70,7 +70,7 @@ function attachEditButtons() {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'edit-btn';
-    btn.textContent = '✏️ تعديل';
+    btn.innerHTML = '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em"><path d="M33 7l8 8-22 22-10 2 2-10z"/><path d="M29 11l8 8"/></svg> تعديل';
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
@@ -108,7 +108,7 @@ function handleEdit(el) {
 
   if (type === 'list') {
     const arr = Array.isArray(current) ? current : [];
-    const value = prompt(`✏️ تعديل: ${label}\n\nكل بند في سطر مستقل:\n(احذف سطراً لحذف البند وأضف سطراً لإضافة بند)`, arr.join('\n'));
+    const value = prompt(` تعديل: ${label}\n\nكل بند في سطر مستقل:\n(احذف سطراً لحذف البند وأضف سطراً لإضافة بند)`, arr.join('\n'));
     if (value === null) return;
     const items = value.split(/[\n,،]/).map(s => s.trim()).filter(Boolean);
     window.saveOverride(path, items);
@@ -117,7 +117,7 @@ function handleEdit(el) {
     return;
   }
 
-  const value = prompt(`✏️ تعديل: ${label}\n\nالقيمة الحالية:`, current != null ? String(current) : '');
+  const value = prompt(` تعديل: ${label}\n\nالقيمة الحالية:`, current != null ? String(current) : '');
   if (value === null) return;
 
   let finalValue = value;
@@ -136,7 +136,7 @@ function showSavedToast() {
     toast.id = 'smileToast';
     document.body.appendChild(toast);
   }
-  toast.textContent = '✅ تم حفظ التعديل';
+  toast.textContent = 'تم حفظ التعديل';
   toast.classList.add('show');
   setTimeout(() => toast.classList.remove('show'), 1400);
 }
@@ -159,7 +159,7 @@ if (fileInput) {
     const file = fileInput.files && fileInput.files[0];
     if (!file || !pendingImagePath) return;
     if (!file.type.startsWith('image/')) {
-      alert('❌ الرجاء اختيار ملف صورة صحيح.');
+      alert('الرجاء اختيار ملف صورة صحيح.');
       return;
     }
     const reader = new FileReader();
@@ -191,7 +191,7 @@ function downloadUpdatedJson() {
   a.download = 'content.json';
   a.click();
   URL.revokeObjectURL(a.href);
-  alert('✅ تم تحميل content.json بالتعديلات.\nارفعها على استضافتك حتى تظهر للزوار كلهم.');
+  alert('تم تحميل content.json بالتعديلات.\nارفعها على استضافتك حتى تظهر للزوار كلهم.');
 }
 
 function resetOverrides() {

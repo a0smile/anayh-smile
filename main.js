@@ -42,7 +42,7 @@ async function loadContent() {
     siteData = applyOverrides(data);
     renderSite(siteData);
 
-    // 👇 كود حقيقي ومضمون لعرض الصور تلقائياً لجميع الزوار فور تحميل الصفحة
+    //  كود حقيقي ومضمون لعرض الصور تلقائياً لجميع الزوار فور تحميل الصفحة
     if (siteData) {
       if (siteData.heroImage1) {
         const img1 = document.getElementById('heroImage1');
@@ -123,7 +123,16 @@ function animateCounters() {
   els.forEach((el) => io.observe(el));
 }
 
+function ndStar() {
+  return '<span class="star-icon">' + (window.ndIcon ? window.ndIcon('star') : '') + '</span>';
+}
+function renderDataIcons() {
+  document.querySelectorAll('.nd-icon[data-icon]').forEach((el) => {
+    el.innerHTML = window.ndIconHtml ? window.ndIconHtml(el.getAttribute('data-icon')) : '';
+  });
+}
 function renderSite(data) {
+  renderDataIcons();
   const { clinic, hero, offers, booking } = data;
   const sections = data.sections || {};
   const testimonials = data.testimonials || data.reviews || [];
@@ -157,6 +166,9 @@ function renderSite(data) {
       ['reviewSubmitBtn', 'sections.reviewButton'],
       ['contactBadge', 'sections.contactBadge'],
       ['contactTitle', 'sections.contactTitle'],
+      ['contactAddressTitle', 'sections.contactAddressTitle'],
+      ['contactPhoneTitle', 'sections.contactPhoneTitle'],
+      ['contactHoursTitle', 'sections.contactHoursTitle'],
       ['formNote', 'sections.formNote'],
       ['support1', 'sections.support1'],
       ['support2', 'sections.support2'],
@@ -172,6 +184,55 @@ function renderSite(data) {
       noteEl.innerHTML = sections.servicesNote || '';
       markEditable('servicesNote', 'sections.servicesNote');
     }
+  });
+
+  safeRender('nationalDay', () => {
+    const nd = data.nationalDay || {};
+    const l = data.landmarks || [];
+    const sections = data.sections || {};
+    const greeting = document.getElementById('nationalDay');
+    if (!nd.enabled && greeting) { greeting.style.display = 'none'; }
+
+    if (nd.blendImage) {
+      const b = document.getElementById('ndBlendImage');
+      if (b) b.src = nd.blendImage;
+    }
+    if (nd.flagImage) {
+      const f = document.getElementById('ndFlagImage');
+      if (f) f.src = nd.flagImage;
+    }
+    if (nd.emblemImage) {
+      const e = document.getElementById('ndEmblemImage');
+      if (e) e.src = nd.emblemImage;
+    }
+
+    setText('ndBannerBadge', nd.badge || sections.nationalDayBadge);
+    setText('ndBannerTitle', nd.greetingTitle);
+    setText('ndBannerSlogan', nd.slogan);
+    setText('nationalDayBadge', sections.nationalDayBadge);
+    setText('nationalDayTitle', nd.greetingTitle);
+    setText('nationalDayGreeting', nd.greeting);
+    setText('nationalDayGreeting2', nd.greeting2);
+    setText('nationalDayClosing', nd.closing);
+
+    setText('landmarksBadge', sections.landmarksBadge);
+    setText('landmarksTitle', sections.landmarksTitle);
+    setText('landmarksSubtitle', sections.landmarksSubtitle);
+    const lg = document.getElementById('landmarksGrid');
+    if (lg) {
+      lg.innerHTML = l.map((m, i) => `
+        <figure class="landmark-card reveal"${editAttr(`landmarks.${i}.image`)}>
+          <img src="${m.image}" alt="${m.title} — ${m.subtitle || ''}" loading="lazy">
+          <figcaption>
+            <h3${editAttr(`landmarks.${i}.title`)}>${m.title}</h3>
+            <p${editAttr(`landmarks.${i}.subtitle`)}>${m.subtitle || ''}</p>
+          </figcaption>
+        </figure>
+      `).join('');
+    }
+
+    const logoNd = document.getElementById('logoNationalDay');
+    if (logoNd) logoNd.textContent = `${nd.badge || ''}`.trim() || `اليوم الوطني السعودي ${nd.year || ''}`;
   });
 
   safeRender('announcement', () => {
@@ -255,7 +316,7 @@ function renderSite(data) {
     const servicesGrid = document.getElementById('servicesGrid');
     servicesGrid.innerHTML = (data.serviceCategories || []).map((cat, ci) => `
       <div class="price-category reveal">
-        <h3 class="price-cat-title"><span${editAttr(`serviceCategories.${ci}.icon`)}>${cat.icon}</span> <span${editAttr(`serviceCategories.${ci}.title`)}>${cat.title}</span></h3>
+        <h3 class="price-cat-title"><span class="price-cat-icon"${editAttr(`serviceCategories.${ci}.icon`)}>${ndIconHtml(cat.icon)}</span> <span${editAttr(`serviceCategories.${ci}.title`)}>${cat.title}</span></h3>
         <ul class="price-items">
           ${cat.items.map((item, ii) => {
             const waMsg = encodeURIComponent(`مرحباً، أرغب بالاستفسار عن خدمة: ${item.name}`);
@@ -266,7 +327,7 @@ function renderSite(data) {
                 <span class="price-old"${editAttr(base + '.oldPrice')}>${item.oldPrice ? item.oldPrice + ' ريال' : ''}</span>
                 <span class="price-now"${editAttr(base + '.price')}>${item.price} ريال</span>
               </span>
-              <a class="price-wa-btn" href="https://wa.me/${clinic.whatsapp}?text=${waMsg}" target="_blank" rel="noopener">💬 اطلبها</a>
+              <a class="price-wa-btn" href="https://wa.me/${clinic.whatsapp}?text=${waMsg}" target="_blank" rel="noopener"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:1.05em;height:1.05em"><path d="M24 6a18 18 0 0 0-15 28L7 42l8-2A18 18 0 1 0 24 6z"/><path d="M17 17c0 8 6 14 14 14 1.6 0 3-2 2-3.4l-3.6-2-2.4 2.4c-2.6-1-5-3.4-6-6l2.4-2.4-2-3.6C20 15 17 16 17 17z" fill="currentColor" stroke="none"/></svg> اطلبها</a>
             </li>`;
           }).join('')}
         </ul>
@@ -285,7 +346,7 @@ function renderSite(data) {
     const tipsGrid = document.getElementById('tipsGrid');
     tipsGrid.innerHTML = (data.tips || []).map((t, i) => `
       <div class="tip-card reveal">
-        <div class="tip-icon"${editAttr(`tips.${i}.icon`)}>${t.icon}</div>
+        <div class="tip-icon"${editAttr(`tips.${i}.icon`)}>${ndIconHtml(t.icon)}</div>
         <h3${editAttr(`tips.${i}.title`)}>${t.title}</h3>
         <p${editAttr(`tips.${i}.description`)}>${t.description}</p>
       </div>
@@ -296,7 +357,7 @@ function renderSite(data) {
     const featuresGrid = document.getElementById('featuresGrid');
     featuresGrid.innerHTML = (data.features || []).map((f, i) => `
       <div class="feature-card reveal">
-        <div class="feature-icon"${editAttr(`features.${i}.icon`)}>${f.icon}</div>
+        <div class="feature-icon"${editAttr(`features.${i}.icon`)}>${ndIconHtml(f.icon)}</div>
         <div>
           <h3${editAttr(`features.${i}.title`)}>${f.title}</h3>
           <p${editAttr(`features.${i}.description`)}>${f.description}</p>
@@ -322,7 +383,7 @@ function renderSite(data) {
       offersGrid.innerHTML = offers.items.map((o, i) => `
         <div class="offer-card reveal">
           <span class="offer-note"${editAttr(`offers.items.${i}.note`)}>${o.note || ''}</span>
-          <div class="offer-icon"${editAttr(`offers.items.${i}.icon`)}>${o.icon}</div>
+          <div class="offer-icon"${editAttr(`offers.items.${i}.icon`)}>${ndIconHtml(o.icon)}</div>
           <h3${editAttr(`offers.items.${i}.title`)}>${o.title}</h3>
           <div class="offer-old-price"${editAttr(`offers.items.${i}.oldPrice`)}>${o.oldPrice} ريال</div>
           <div class="offer-price"${editAttr(`offers.items.${i}.price`)}>${o.price}</div>
@@ -350,7 +411,7 @@ function renderSite(data) {
     const testimonialsGrid = document.getElementById('testimonialsGrid');
     testimonialsGrid.innerHTML = (testimonials || []).map((t, i) => `
       <div class="testimonial-card reveal">
-        <div class="testimonial-stars"${editAttr(`reviews.${i}.rating`)}>${'★'.repeat(t.rating || 5)}</div>
+        <div class="testimonial-stars"${editAttr(`reviews.${i}.rating`)}>${ndStar().repeat(t.rating || 5)}</div>
         <p class="testimonial-text"${editAttr(`reviews.${i}.text`)}>"${t.text}"</p>
         <p class="testimonial-name"${editAttr(`reviews.${i}.name`)}>${t.name}</p>
       </div>
@@ -406,14 +467,14 @@ function renderSite(data) {
   safeRender('social', () => {
     const socialLinks = document.getElementById('socialLinks');
     const socials = [
-      { url: clinic.instagram, icon: '📸', name: 'انستقرام', path: 'clinic.instagram' },
-      { url: clinic.snapchat, icon: '👻', name: 'سناب شات', path: 'clinic.snapchat' },
-      { url: clinic.tiktok, icon: '🎵', name: 'تيك توك', path: 'clinic.tiktok' },
-      { url: clinic.twitter, icon: '🐦', name: 'تويتر', path: 'clinic.twitter' }
+      { url: clinic.instagram, icon: 'instagram', name: 'انستقرام', path: 'clinic.instagram' },
+      { url: clinic.snapchat, icon: 'snapchat', name: 'سناب شات', path: 'clinic.snapchat' },
+      { url: clinic.tiktok, icon: 'tiktok', name: 'تيك توك', path: 'clinic.tiktok' },
+      { url: clinic.twitter, icon: 'twitter', name: 'تويتر', path: 'clinic.twitter' }
     ];
     socialLinks.innerHTML = socials
       .filter(s => s.url)
-      .map(s => `<a href="${s.url}" target="_blank" aria-label="${s.name}" title="${s.name}"${editAttr(s.path)}>${s.icon}</a>`)
+      .map(s => `<a href="${s.url}" target="_blank" aria-label="${s.name}" title="${s.name}"${editAttr(s.path)}>${ndIconHtml(s.icon)}</a>`)
       .join('');
   });
 
@@ -444,7 +505,7 @@ window.saveOverride = function (path, value) {
 window.getSiteData = () => siteData;
 window.getOverrideValue = (path) => getDeep(siteData || {}, path);
 
-// ===== نموذج الحجز → واتساب =====
+// ===== نموذج الحجز to واتساب =====
   const bookingFormEl = document.getElementById('bookingForm');
   if (bookingFormEl) bookingFormEl.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -455,17 +516,17 @@ window.getOverrideValue = (path) => getDeep(siteData || {}, path);
     const service = document.getElementById('service').value;
     const date = document.getElementById('date').value;
 
-    let message = `🦷 طلب حجز موعد جديد\n\n`;
-    message += `👤 الاسم: ${name}\n`;
-    message += `📱 الجوال: ${phone}\n`;
-    message += `🩺 الخدمة: ${service}\n`;
-    if (date) message += `📅 اليوم المفضل: ${date}\n`;
+    let message = `طلب حجز موعد جديد\n\n`;
+    message += `الاسم: ${name}\n`;
+    message += `الجوال: ${phone}\n`;
+    message += `الخدمة: ${service}\n`;
+    if (date) message += `اليوم المفضل: ${date}\n`;
 
     const waUrl = `https://wa.me/${siteData.clinic.whatsapp}?text=${encodeURIComponent(message)}`;
     window.open(waUrl, '_blank');
   });
 
-// ===== نموذج إضافة تعليق → واتساب =====
+// ===== نموذج إضافة تعليق to واتساب =====
   const reviewFormEl = document.getElementById('reviewForm');
   if (reviewFormEl) reviewFormEl.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -474,9 +535,9 @@ window.getOverrideValue = (path) => getDeep(siteData || {}, path);
     const name = document.getElementById('reviewName').value.trim();
     const text = document.getElementById('reviewText').value.trim();
 
-    let message = `⭐ تعليق جديد من موقع المجمع\n\n`;
-    message += `👤 الاسم: ${name}\n`;
-    message += `💬 التعليق: ${text}\n`;
+    let message = `تعليق جديد من موقع المجمع\n\n`;
+    message += `الاسم: ${name}\n`;
+    message += `التعليق: ${text}\n`;
 
     const waUrl = `https://wa.me/${siteData.clinic.whatsapp}?text=${encodeURIComponent(message)}`;
     window.open(waUrl, '_blank');

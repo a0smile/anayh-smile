@@ -1,0 +1,5 @@
+flag-sa.png	File:Flag of Saudi Arabia.svg	Public domain	https://commons.wikimedia.org/wiki/File:Flag_of_Saudi_Arabia.svg
+emblem-sa.png	File:Emblem of Saudi Arabia.svg	Public domain	https://commons.wikimedia.org/wiki/File:Emblem_of_Saudi_Arabia.svg
+kingdom-centre.jpg	File:Kingdom Centre Riyadh 2024.jpeg	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File:Kingdom_Centre_Riyadh_2024.jpeg
+faisaliah.jpg	File:Faisaliah tower riyadh.jpg	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File:Faisaliah_tower_riyadh.jpg
+riyadh.jpg	File:Riyadh Skyline.jpg	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File:Riyadh_Skyline.jpg
