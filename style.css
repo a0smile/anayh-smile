@@ -1927,8 +1927,7 @@ body.admin-mode {
   color: #ffe9b3;
 }
 
-/* ===== لمسات اليوم الوطني على بقية الموقع ===== */
-.hero {
+/* ===== لمسات اليوم الوطني على بقية الموقع ===== */.hero {
   min-height: auto;
   padding: 120px 0 70px;
   background: linear-gradient(180deg, var(--primary-bg) 0%, var(--white) 100%);
@@ -2057,4 +2056,41 @@ body.admin-mode {
 /* زر القائمة على الجوال */
 .menu-toggle svg {
   display: block;
+}
+
+/* ========================================================
+   ===== إضافتك الجديدة: الدمج الحقيقي الفخم لخلفية القسم ===== 
+   ======================================================== */
+#landmarks {
+    position: relative;
+    z-index: 1;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.9) 100%), url('assets/national/hero-blend.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 60px 20px;
+}
+
+/* جعل المربعات الخضراء الثلاثة شفافة وتطفو فوق الخلفية المدمجة */
+#landmarks .landmarks-grid .landmark-card, 
+.landmarks-grid .landmark-card {
+    background: rgba(11, 108, 98, 0.85) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;
+}
+
+/* جعل لون نصوص المربعات باللون الأبيض الواضح */
+#landmarks .landmark-card h3, .landmark-card h3 {
+    color: #ffffff !important;
+}
+#landmarks .landmark-card p, .landmark-card p {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* إخفاء الصور القديمة المنفصلة لمنع تكرارها وتشويه الخلفية المدمجة */
+#landmarks .landmark-card img, .landmark-card img {
+    display: none !important;
 }
