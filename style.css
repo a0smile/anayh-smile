@@ -1,6 +1,5 @@
 /* ============================================
    مجمع عناية الابتسامة الطبي — ملف التصميم
-   خط ملكي فاخر + زخارف إسلامية + تدرجات 3D
    ============================================ */
 
 :root {
@@ -20,7 +19,6 @@
   --shadow-lg: 0 20px 50px rgba(0, 108, 53, 0.2);
   --radius: 16px;
   --radius-sm: 12px;
-  --font-royal: 'Amiri', 'Traditional Arabic', 'Cairo', serif;
   --font-body: 'Cairo', 'Segoe UI', sans-serif;
 }
 
@@ -41,55 +39,6 @@ body {
   line-height: 1.55;
   overflow-x: hidden;
   text-align: center;
-}
-
-/* ===== تطبيق دقيق للخط الملكي ===== */
-.nd-greeting-title,
-.nd-slogan-main,
-.nd-greeting-closing,
-.section-title,
-.nd-badge,
-.section-badge,
-.announcement-text,
-.offer-card h3,
-.price-cat-title,
-.booking-card .section-title,
-.nd-greeting-text,
-.daily-tips-box h3,
-.contact-card-title,
-.footer-brand h2 {
-  font-family: var(--font-royal) !important;
-}
-
-.nd-greeting-title {
-  font-weight: 700;
-  font-size: clamp(1.55rem, 4.2vw, 2.4rem);
-  letter-spacing: 0.6px;
-  line-height: 1.4;
-}
-
-.nd-slogan-main {
-  font-weight: 700;
-  font-size: 1.18rem;
-  letter-spacing: 0.5px;
-}
-
-.nd-greeting-closing {
-  font-weight: 700;
-  font-size: 1.35rem;
-  letter-spacing: 0.5px;
-}
-
-.section-title {
-  font-weight: 700;
-  letter-spacing: 0.4px;
-}
-
-.announcement-text {
-  font-family: var(--font-royal) !important;
-  font-weight: 700;
-  font-size: 1.12rem;
-  letter-spacing: 0.7px;
 }
 
 .container {
@@ -187,11 +136,14 @@ ul {
   display: flex;
   align-items: center;
   gap: 10px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1.05rem;
   text-shadow: 0 1px 4px rgba(0,0,0,0.35);
 }
 
 .announcement-text .nd-mark {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   filter: drop-shadow(0 0 6px rgba(255,255,255,0.85));
 }
 
@@ -258,94 +210,92 @@ ul {
   pointer-events: none;
 }
 
-/* ===== قسم التهنئة + زخارف إسلامية ===== */
+/* ===== قسم التهنئة (بدون إطار وبدون زخارف) ===== */
 .nd-greeting-section {
-  background: linear-gradient(180deg, #f2faf5 0%, #ffffff 100%);
-  padding: 36px 16px 32px;
+  background: #f7faf8;
+  padding: 16px 14px 14px;
   position: relative;
 }
 
 .nd-greeting {
-  max-width: 860px;
+  max-width: 600px;
   margin: 0 auto;
   text-align: center;
 }
 
 .nd-gold-frame {
-  background: linear-gradient(165deg, #ffffff 0%, #f8f5eb 100%);
-  border-radius: 24px;
-  padding: 32px 24px 28px;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
   position: relative;
-  box-shadow:
-    0 0 0 2px #bfa15f,
-    0 0 0 6px rgba(191, 161, 95, 0.3),
-    0 14px 36px rgba(0, 108, 53, 0.14),
-    inset 0 1px 0 rgba(255,255,255,0.95);
 }
 
 .nd-gold-frame::before {
-  content: "";
-  position: absolute;
-  inset: -5px;
-  border-radius: 28px;
-  background: linear-gradient(135deg, #e8d48b, #bfa15f, #97762f, #bfa15f, #e8d48b);
-  z-index: -1;
-  opacity: 0.9;
+  display: none !important;
+  content: none !important;
 }
 
-/* زخارف إسلامية */
 .islamic-ornament .ornament-top,
 .islamic-ornament .ornament-bottom {
-  font-size: 1.15rem;
-  color: var(--nd-gold);
-  letter-spacing: 8px;
-  margin: 6px 0 14px;
-  opacity: 0.9;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-}
-
-.islamic-ornament .ornament-bottom {
-  margin: 18px 0 0;
+  display: none !important;
 }
 
 .nd-badge {
-  background: linear-gradient(135deg, #006c35, #0b8a47) !important;
-  color: #fff !important;
-  border: 1.5px solid #bfa15f;
+  background: linear-gradient(135deg, #006c35, #0b8a47);
+  color: #fff;
+  border: 1px solid #bfa15f;
   display: inline-block;
-  padding: 8px 22px;
+  padding: 4px 14px;
   border-radius: 50px;
   font-weight: 700;
-  font-size: 0.95rem;
-  margin-bottom: 16px;
-  box-shadow: 0 4px 14px rgba(0, 108, 53, 0.35);
-  font-family: var(--font-royal) !important;
+  font-size: 0.8rem;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 8px rgba(0, 108, 53, 0.2);
+  font-family: 'Cairo', sans-serif;
+}
+
+.nd-greeting-title {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: #004d26;
+  margin: 0 0 6px;
+  line-height: 1.3;
 }
 
 .nd-slogan-main {
   display: inline-block;
-  background: linear-gradient(135deg, #bfa15f 0%, #e8d48b 45%, #bfa15f 100%);
+  background: linear-gradient(135deg, #bfa15f, #e8d48b, #bfa15f);
   color: #1a3a1f;
-  padding: 11px 28px;
+  padding: 5px 16px;
   border-radius: 50px;
-  margin: 0 auto 20px;
-  box-shadow: 0 6px 18px rgba(191, 161, 95, 0.4);
+  margin: 0 auto 8px;
+  font-family: 'Cairo', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 0 3px 10px rgba(191, 161, 95, 0.25);
 }
 
 .nd-greeting-text {
-  font-size: 1.02rem;
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.84rem;
   font-weight: 600;
-  color: var(--text);
-  line-height: 1.7;
-  max-width: 700px;
-  margin: 0 auto 14px;
+  color: #1a3a1f;
+  line-height: 1.5;
+  max-width: 540px;
+  margin: 0 auto 5px;
   text-align: center;
-  font-family: var(--font-royal) !important;
 }
 
 .nd-greeting-closing {
-  color: var(--nd-green);
-  margin: 18px auto 0;
+  font-family: 'Cairo', sans-serif;
+  font-weight: 800;
+  font-size: 0.98rem;
+  color: #006c35;
+  margin: 8px auto 0;
+  line-height: 1.4;
 }
 
 /* ===== Offers ===== */
@@ -369,11 +319,13 @@ ul {
   font-size: 0.9rem;
   margin-bottom: 12px;
   border: 1px solid var(--nd-gold);
-  font-family: var(--font-royal) !important;
+  font-family: var(--font-body);
 }
 
 .section-title {
-  font-size: clamp(1.45rem, 3.9vw, 2.2rem);
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: clamp(1.35rem, 3.6vw, 2rem);
   margin-bottom: 10px;
   color: var(--nd-green-deep);
   line-height: 1.35;
@@ -474,6 +426,7 @@ ul {
   margin-bottom: 6px;
   line-height: 1.4;
   color: var(--text);
+  font-family: var(--font-body);
 }
 
 .offer-old-price {
@@ -563,6 +516,7 @@ ul {
   align-items: center;
   gap: 8px;
   justify-content: center;
+  font-family: var(--font-body);
 }
 
 .price-items {
@@ -775,6 +729,7 @@ ul {
   margin-bottom: 12px;
   color: var(--primary-dark);
   text-align: center;
+  font-family: var(--font-body);
 }
 
 .daily-tips-list li {
@@ -915,6 +870,7 @@ ul {
   font-weight: 700;
   color: var(--nd-green);
   margin-bottom: 8px;
+  font-family: var(--font-body);
 }
 
 .hours-list li {
@@ -1186,7 +1142,7 @@ body.admin-mode {
   transform: translateY(0);
 }
 
-/* ===== صوت + ألعاب نارية اليوم الوطني 96 (مصحح) ===== */
+/* ===== صوت + ألعاب نارية ===== */
 .fireworks-container {
   position: fixed;
   inset: 0;
@@ -1277,15 +1233,15 @@ body.admin-mode {
     min-height: 240px;
   }
   .nd-greeting-text {
-    font-size: 0.95rem;
+    font-size: 0.8rem;
   }
   .announcement-bar {
     height: 46px;
   }
   .announcement-text {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
-  .nd-gold-frame {
-    padding: 24px 16px 22px;
+  .nd-greeting-title {
+    font-size: 1.08rem;
   }
 }
