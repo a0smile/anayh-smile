@@ -300,16 +300,20 @@ ul {
   pointer-events: none;
 }
 
-/* ===== قسم التهنئة ===== */
+/* ===== قسم التهنئة ===== *//* ===== قسم التهنئة المطور لليوم الوطني ===== */
 .nd-greeting-section {
-  background: #fdfcfa;
-  padding: 12px 10px 10px;
+  background: #006C35; /* جعل الخلفية خضراء للتهنئة فقط */
+  padding: 20px 15px;
   position: relative;
   order: 3;
+  max-width: 550px;    /* حجم صغير ومتناسق للبطاقة الخضراء */
+  margin: 20px auto;   /* تتوسط في منتصف الصفحة */
+  border-radius: 12px; /* زوايا منحنية أنيقة للبطاقة */
+  box-sizing: border-box;
 }
 
 .nd-greeting {
-  max-width: 580px;
+  max-width: 100%;
   margin: 0 auto;
   text-align: center;
 }
@@ -334,60 +338,68 @@ ul {
 }
 
 .nd-badge {
-  background: linear-gradient(135deg, #006c35, #0b8a47);
+  background: #1A824C; /* لون الشارة */
   color: #fff;
-  border: 1px solid #bfa15f;
+  border: 1px solid #D4AF37;
   display: inline-block;
   padding: 3px 12px;
   border-radius: 50px;
   font-weight: 700;
   font-size: 0.7rem;
-  margin-bottom: 6px;
-  box-shadow: 0 2px 8px rgba(0, 108, 53, 0.2);
+  margin-bottom: 12px;
   font-family: 'Cairo', sans-serif;
 }
 
 .nd-greeting-title {
   font-family: 'Cairo', sans-serif;
   font-weight: 800;
-  font-size: 1rem;
-  color: #004d26;
-  margin: 0 0 4px;
+  font-size: 1.1rem;
+  color: #D4AF37; /* لون ذهبي فخم للعنوان */
+  margin: 0 0 12px;
   line-height: 1.25;
-}
-
-.nd-slogan-main {
-  display: inline-block;
-  background: linear-gradient(135deg, #bfa15f, #e8d48b, #bfa15f);
-  color: #1a3a1f;
-  padding: 4px 14px;
-  border-radius: 50px;
-  margin: 0 auto 6px;
-  font-family: 'Cairo', sans-serif;
-  font-weight: 700;
-  font-size: 0.8rem;
-  box-shadow: 0 3px 10px rgba(191, 161, 95, 0.25);
 }
 
 .nd-greeting-text {
   font-family: 'Cairo', sans-serif;
-  font-size: 0.74rem;
+  font-size: 0.8rem; /* حجم خط متناسق وصغير */
   font-weight: 600;
-  color: #334155;
-  line-height: 1.35;
-  max-width: 540px;
-  margin: 0 auto 3px;
+  color: #f0f0f0; /* لون أبيض ناصع ومريح فوق الأخضر */
+  line-height: 1.5; /* سطور متقاربة ومنسقة */
+  max-width: 500px;
+  margin: 0 auto 10px;
   text-align: center;
+  text-align-last: center; /* محاذاة الأسطر بالتساوي */
+}
+
+/* تكبير وتلوين اسم المجمع بالخط العريض والذهبي */
+.nd-greeting-text strong {
+  color: #D4AF37 !important;
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.nd-slogan-main {
+  display: block;
+  background: transparent;
+  color: #D4AF37; /* لون ذهبي */
+  padding: 0;
+  margin: 5px auto 15px 15px; /* تم نقلها لزاوية اليسار تحت النص */
+  font-family: 'Cairo', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  box-shadow: none;
+  text-align: left; /* محاذاة لليسار */
 }
 
 .nd-greeting-closing {
   font-family: 'Cairo', sans-serif;
   font-weight: 800;
-  font-size: 0.8rem;
-  color: #006c35;
-  margin: 4px auto 0;
+  font-size: 0.9rem;
+  color: #D4AF37; /* لون ذهبي لخاتمة دام عزك يا وطن */
+  margin: 10px auto 0;
   line-height: 1.25;
 }
+
 
 /* ===== Offers ===== */
 .section {
