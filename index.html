@@ -3,236 +3,142 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="مجمع عناية الابتسامة الطبي لطب وجراحة الأسنان - خدمات الأسنان بأحدث التقنيات وبأفضل الأسعار">
-  <title>مجمع عناية الابتسامة الطبي - اليوم الوطني 96</title>
+  <meta name="description" content="مجمع عناية الابتسامة الطبي - اليوم الوطني السعودي 96">
+  <title>مجمع عناية الابتسامة الطبي - اليوم الوطني السعودي 96</title>
   <meta name="theme-color" content="#006c35">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/svg+xml" href="icon.svg">
-  <link rel="apple-touch-icon" href="icon-192.png">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="عناية الابتسامة">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- الترويسة الرسمية -->
-  <header class="header" id="header">
+  <header class="header">
     <nav class="nav container">
       <div class="logo">
-        <span class="logo-icon"><img src="icon.svg" alt="" width="42" height="42"></span>
+        <span class="logo-icon"><img src="icon.svg" alt="" width="38" height="38"></span>
         <div class="logo-text">
-          <h1 id="logoName">مجمع عناية الابتسامة الطبي</h1>
-          <p id="logoTagline">لطب وجراحة الأسنان</p>
+          <h1>مجمع عناية الابتسامة الطبي</h1>
+          <p>لطب وجراحة الأسنان</p>
         </div>
       </div>
       <ul class="nav-links" id="navLinks">
         <li><a href="#hero">الرئيسية</a></li>
-        <li><a href="#nationalDay">اليوم الوطني 96</a></li>
+        <li><a href="#nationalDay">اليوم الوطني السعودي 96</a></li>
         <li><a href="#offers">العروض</a></li>
         <li><a href="#services">الخدمات</a></li>
         <li><a href="#booking">الحجز</a></li>
         <li><a href="#contact">تواصل</a></li>
       </ul>
-      <button class="nav-toggle" id="navToggle" aria-label="القائمة">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
     </nav>
   </header>
 
   <main>
-    <!-- صورة الهيرو -->
+    <!-- الصورة - مصلحة -->
     <div class="nd-banner-wrap" id="hero">
-      <div class="nd-banner reveal">
-        <img class="nd-banner-img" id="ndBlendImage" src="hero-blend.jpg" alt="مجمع عناية الابتسامة الطبي — عروض اليوم الوطني السعودي 96">
+      <div class="nd-banner">
+        <img class="nd-banner-img" src="./hero-blend.jpg" alt="اليوم الوطني السعودي 96">
         <div class="nd-banner-overlay"></div>
       </div>
     </div>
 
-    <!-- الشريط المتحرك (تحت الصورة مباشرة) -->
-    <div class="announcement-bar" id="announcementBar">
+    <!-- الشريط المتحرك -->
+    <div class="announcement-bar">
       <div class="announcement-track">
-        <span class="announcement-text">
-          <span class="nd-mark">⚔️</span>
-          وطنٌ لا نحميه لا نستحق العيش فيه
-          <span class="nd-mark">⚔️</span>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <span class="nd-mark">⚔️🌴</span>
-          عروض مجمع عناية الابتسامة معكم أينما كنتم ✨ مجمع عناية الابتسامة يراهن على أن أسعارنا لا مثيل لها ✨
-          <span class="nd-mark">🌴⚔️</span>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </span>
-        <span class="announcement-text">
-          <span class="nd-mark">⚔️</span>
-          وطنٌ لا نحميه لا نستحق العيش فيه
-          <span class="nd-mark">⚔️</span>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <span class="nd-mark">⚔️🌴</span>
-          عروض مجمع عناية الابتسامة معكم أينما كنتم ✨ مجمع عناية الابتسامة يراهن على أن أسعارنا لا مثيل لها ✨
-          <span class="nd-mark">🌴⚔️</span>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </span>
+        <span class="announcement-text">⚔️ وطنٌ لا نحميه لا نستحق العيش فيه ⚔️ &nbsp;&nbsp; 🌴 عروض اليوم الوطني السعودي 96 - أسعار لا مثيل لها 🌴 &nbsp;&nbsp;</span>
+        <span class="announcement-text">⚔️ وطنٌ لا نحميه لا نستحق العيش فيه ⚔️ &nbsp;&nbsp; 🌴 عروض اليوم الوطني السعودي 96 - أسعار لا مثيل لها 🌴 &nbsp;&nbsp;</span>
       </div>
     </div>
 
+    <!-- التهنئة - فيها عزنا بطبعنا مرة وحدة فقط -->
     <section class="nd-greeting-section" id="nationalDay">
       <div class="nd-greeting">
-        <div class="nd-gold-frame islamic-ornament">
-          <div class="ornament-top">✦ ❈ ✦</div>
-          <span class="nd-badge" id="nationalDayBadge">🇸🇦 عزنا بطبعنا 🇸🇦</span>
-          <h2 class="nd-greeting-title" id="nationalDayTitle">تهنئة باليوم الوطني السعودي 96</h2>
-          <div class="nd-slogan-main">ابتسامة أجمل .. لوطن أعظم</div>
-          <p class="nd-greeting-text" id="nationalDayGreeting">نرفع أسمى التهاني لمقام القيادة الرشيدة والشعب السعودي النبيل بمناسبة اليوم الوطني السادس والتسعين، سائلين الله أن يديم على وطننا الأمن والرخاء.</p>
-          <p class="nd-greeting-text" id="nationalDayGreeting2">وبهذه المناسبة الغالية، يسر مجمع عناية الابتسامة الطبي مشاركتكم الفرحة بتقديم عروض حصرية وخصومات خاصة على كافة الخدمات الطبية.</p>
-          <p class="nd-greeting-closing" id="nationalDayClosing">🇸🇦 دام عزك يا وطن 🇸🇦</p>
-          <div class="ornament-bottom">✦ ❈ ✦</div>
-        </div>
+        <span class="nd-badge">🇸🇦 اليوم الوطني السعودي 96 🇸🇦</span>
+        <h2 class="nd-greeting-title">تهنئة باليوم الوطني السعودي 96</h2>
+        <div class="nd-slogan-main">عزنا بطبعنا</div>
+        <p class="nd-greeting-text">نرفع أسمى التهاني للقيادة الرشيدة والشعب النبيل بمناسبة اليوم الوطني السعودي 96، سائلين الله أن يديم الأمن والرخاء.</p>
+        <p class="nd-greeting-closing">🇸🇦 دام عزك يا وطن 🇸🇦</p>
       </div>
     </section>
 
+    <!-- العروض - مرفوعة فوق بعد التهنئة مباشرة -->
     <section class="section" id="offers">
       <div class="container">
         <div class="section-head">
-          <span class="section-badge" id="offersBadge">🇸🇦 عزنا بطبعنا 🇸🇦</span>
-          <h2 class="section-title" id="offersTitle">🇸🇦 عروض اليوم الوطني السعودي 96 🇸🇦</h2>
-          <p class="section-subtitle" id="offersSubtitle">🇸🇦 عزنا بطبعنا 🇸🇦 — أقوى باقات الخصومات الحصرية المصممة بعامودين منسقين لتناسب جوالك، احجز موعدك الآن قبل نفاد المقاعد.</p>
+          <span class="section-badge">عروض حصرية</span>
+          <h2 class="section-title">عروض اليوم الوطني السعودي 96</h2>
+          <p class="section-subtitle">باقات حصرية بتصميم منسق للجوال - احجز قبل نفاد المقاعد</p>
         </div>
         <div class="offers-grid" id="offersGrid"></div>
       </div>
     </section>
 
     <section class="stats">
-      <div class="container">
-        <div class="stats-grid" id="statsGrid"></div>
-      </div>
+      <div class="container"><div class="stats-grid" id="statsGrid"></div></div>
     </section>
 
-    <section class="section section-alt" id="services">
+    <!-- الخدمات - مختصرة -->
+    <section class="section" id="services">
       <div class="container">
         <div class="section-head">
-          <span class="section-badge" id="servicesBadge">🇸🇦 عزنا بطبعنا 96</span>
-          <h2 class="section-title" id="servicesTitle">خدماتنا وأسعارنا الفخمة بمناسبة اليوم الوطني 96</h2>
-          <p class="section-subtitle" id="servicesSubtitle">عروض حصرية وخصومات خاصة ومحاذية بالوسط تماماً على كافة الخدمات الطبية — اضغط زر الواتساب بجانب أي خدمة للحجز فوراً</p>
+          <span class="section-badge">خدماتنا</span>
+          <h2 class="section-title">خدماتنا - اليوم الوطني السعودي 96</h2>
+          <p class="section-subtitle">خصومات حصرية - اضغط واتساب بجانب الخدمة للحجز</p>
         </div>
         <div class="price-note">
-          <span class="price-note-icon">⚠️</span>
-          <p id="servicesNote">جميع الأسعار <strong>متغيرة يومياً</strong> — هذه أسعار حملة اليوم الوطني السعودي 96 الاستثنائية، وللتحقق من المقاعد المتاحة في فرع حفر الباطن راسلونا مباشرة</p>
+          <span>⚠️</span>
+          <p>الأسعار ضمن حملة اليوم الوطني السعودي 96 - متغيرة يومياً - تواصل للتأكيد</p>
         </div>
         <div class="price-list" id="servicesGrid"></div>
-      </div>
-    </section>
-
-    <section class="section" id="tips">
-      <div class="container">
-        <div class="section-head">
-          <span class="section-badge" id="tipsBadge">ثقافة طبية</span>
-          <h2 class="section-title" id="tipsTitle">نصائح أطبائنا للحفاظ على أسنانك</h2>
-          <p class="section-subtitle" id="tipsSubtitle">إرشادات طبية من أخصائيينا لصحة فم وأسنان أفضل تليق بابتسامتك</p>
-        </div>
-        <div class="daily-tips-box">
-          <h3 id="dailyTipsTitle">🇸🇦 دام عزك يا وطن 96 🇸🇦 | عادات يومية لأسنان قوية</h3>
-          <ul class="daily-tips-list" id="dailyTipsList"></ul>
-        </div>
-        <div class="tips-grid" id="tipsGrid"></div>
-      </div>
-    </section>
-
-    <section class="section section-alt" id="features">
-      <div class="container">
-        <div class="section-head">
-          <span class="section-badge" id="featuresBadge">لماذا نحن؟</span>
-          <h2 class="section-title" id="featuresTitle">مجمع عناية الابتسامة الطبي بحفر الباطن</h2>
-          <p class="section-subtitle" id="featuresSubtitle">معايير رعاية رقمية حديثة تجعلنا الخيار الفخم والأول لعائلتك الكريمة</p>
-        </div>
-        <div class="features-grid" id="featuresGrid"></div>
-      </div>
-    </section>
-
-    <section class="section" id="doctors">
-      <div class="container">
-        <div class="section-head">
-          <span class="section-badge" id="doctorsBadge">كفاءاتنا الوطنية</span>
-          <h2 class="section-title" id="doctorsTitle">أطباؤنا الأخصائيون</h2>
-          <p class="section-subtitle" id="doctorsSubtitle">نخبة من الأطباء الاستشاريين المرخصين والمعتمدين من الهيئة السعودية للتخصصات الصحية</p>
-        </div>
-        <div class="doctors-grid" id="doctorsGrid"></div>
-      </div>
-    </section>
-
-    <section class="section section-alt" id="reviews">
-      <div class="container">
-        <div class="section-head">
-          <span class="section-badge" id="reviewsBadge">ثقة مراجعينا</span>
-          <h2 class="section-title" id="reviewsTitle">ابتسامات سعيدة تفخر بالوطن</h2>
-          <p class="section-subtitle" id="reviewsSubtitle">تجارب حقيقية موثقة من زبائن مجمع عناية الابتسامة الأعزاء في حفر الباطن</p>
-        </div>
-        <div class="testimonials-grid" id="testimonialsGrid"></div>
       </div>
     </section>
 
     <section class="section section-booking" id="booking">
       <div class="container">
         <div class="booking-card">
-          <div class="booking-info">
-            <h2 class="section-title" id="bookingTitle" style="color:#006c35;">🇸🇦 احجز موعدك لليوم الوطني 96 🇸🇦</h2>
-            <p id="bookingSubtitle"></p>
-            <div class="booking-support">
-              <span class="check-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="24" cy="24" r="18"/><path d="M15 25l6 6 12-13"/></svg></span>
-              <span id="support1">تواصل فوري ومباشر من موظف الاستقبال خلال دقائق معدودة من طلبك</span>
-            </div>
-            <div class="booking-support">
-              <span class="check-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="24" cy="24" r="18"/><path d="M15 25l6 6 12-13"/></svg></span>
-              <span id="support2">الكشف الطبي، الاستشارة، والتقييم الأولي مجاني بالكامل فخراً بالوطن 🇸🇦</span>
-            </div>
-          </div>
+          <h2 class="section-title" style="color:#006c35;">🇸🇦 احجز لليوم الوطني السعودي 96 🇸🇦</h2>
+          <p id="bookingSubtitle" style="font-size:0.8rem;color:#666;margin:6px 0 10px;">الكشف والاستشارة مجاني فخراً بالوطن</p>
           <form class="booking-form" id="bookingForm">
-            <div class="form-group">
-              <label for="name">الاسم الكامل</label>
-              <input type="text" id="name" placeholder="ادخل اسمك الكريم" required>
-            </div>
-            <div class="form-group">
-              <label for="phone">رقم الجوال</label>
-              <input type="tel" id="phone" placeholder="05xxxxxxxx" required style="direction:ltr;">
-            </div>
-            <div class="form-group">
-              <label for="service">الخدمة المطلوبة</label>
-              <select id="service" required></select>
-            </div>
-            <div class="form-group">
-              <label for="date">اليوم المفضل (اختياري)</label>
-              <input type="date" id="date">
-            </div>
-            <button type="submit" class="btn btn-primary btn-block" id="submitBtn">تأكيد وإرسال الحجز عبر واتساب</button>
-            <p class="form-note" id="formNote" style="font-size:0.82rem;color:#666;margin-top:8px;">سيقوم النظام بتحويل بياناتك إلى رسالة واتساب جاهزة، فقط اضغط إرسال في هاتفك</p>
+            <div class="form-group"><label>الاسم الكامل</label><input type="text" id="name" placeholder="اسمك الكريم" required></div>
+            <div class="form-group"><label>رقم الجوال</label><input type="tel" id="phone" placeholder="05xxxxxxxx" required style="direction:ltr;"></div>
+            <div class="form-group"><label>الخدمة</label><select id="service" required></select></div>
+            <button type="submit" class="btn btn-primary btn-block">تأكيد الحجز عبر واتساب</button>
           </form>
         </div>
       </div>
     </section>
 
+    <!-- تم نقلهم لتحت قبل الفوتر - مقربين -->
+    <section class="section" id="tips">
+      <div class="container">
+        <div class="section-head"><span class="section-badge">ثقافة طبية</span><h2 class="section-title">نصائح للحفاظ على أسنانك</h2></div>
+        <div class="daily-tips-box"><h3>عادات يومية لأسنان قوية - اليوم الوطني السعودي 96</h3><ul class="daily-tips-list" id="dailyTipsList"></ul></div>
+        <div class="tips-grid" id="tipsGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="doctors">
+      <div class="container">
+        <div class="section-head"><span class="section-badge">كفاءاتنا</span><h2 class="section-title">أطباؤنا الأخصائيون</h2></div>
+        <div class="doctors-grid" id="doctorsGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="reviews">
+      <div class="container">
+        <div class="section-head"><span class="section-badge">ثقة مراجعينا</span><h2 class="section-title">ابتسامات سعيدة</h2></div>
+        <div class="testimonials-grid" id="testimonialsGrid"></div>
+      </div>
+    </section>
+
     <section class="section" id="contact">
       <div class="container">
-        <div class="section-head">
-          <span class="section-badge" id="contactBadge">تواصل معنا</span>
-          <h2 class="section-title" id="contactTitle">موقعنا في حفر الباطن وأوقات الدوام الرسمي</h2>
-        </div>
+        <div class="section-head"><span class="section-badge">تواصل</span><h2 class="section-title">موقعنا وأوقات الدوام</h2></div>
         <div class="contact-grid">
-          <div class="contact-card">
-            <h3 class="contact-card-title"><span class="nd-icon" data-icon="pin"></span><span id="contactAddressTitle">موقع المجمع بفرع حفر الباطن</span></h3>
-            <p id="contactAddress"></p>
-            <a href="#" class="btn btn-outline btn-sm" id="mapBtn" target="_blank" rel="noopener">فتح الموقع عبر خرائط Google</a>
-          </div>
-          <div class="contact-card">
-            <h3 class="contact-card-title"><span class="nd-icon" data-icon="phone"></span><span id="contactPhoneTitle">أرقام التواصل وحجز العروض</span></h3>
-            <p id="contactPhone" style="direction:ltr;"></p>
-            <p id="contactEmail"></p>
-          </div>
-          <div class="contact-card">
-            <h3 class="contact-card-title"><span class="nd-icon" data-icon="clock"></span><span id="contactHoursTitle">ساعات العمل الرسمية</span></h3>
-            <ul class="hours-list" id="hoursList"></ul>
-          </div>
+          <div class="contact-card"><h3>📍 موقع المجمع - حفر الباطن</h3><p id="contactAddress"></p><a href="#" class="btn btn-outline btn-sm" id="mapBtn" target="_blank">فتح الخرائط</a></div>
+          <div class="contact-card"><h3>📞 التواصل</h3><p id="contactPhone" style="direction:ltr;"></p><p id="contactEmail"></p></div>
+          <div class="contact-card"><h3>⏰ ساعات العمل</h3><ul class="hours-list" id="hoursList"></ul></div>
         </div>
       </div>
     </section>
@@ -240,143 +146,20 @@
 
   <footer class="footer">
     <div class="container footer-content">
-      <div class="footer-brand">
-        <div class="logo" style="display:flex;flex-direction:column;align-items:center;gap:4px;">
-          <span class="logo-icon"><img src="icon.svg" alt="" width="40" height="40"></span>
-          <div class="logo-text">
-            <h2 id="footerName" style="font-size:1.15rem;font-weight:900;color:#fff;margin:4px 0 0;">مجمع عناية الابتسامة الطبي</h2>
-            <p id="footerTagline" style="font-size:0.85rem;font-weight:700;color:#bfa15f;margin:2px 0 0;">🇸🇦 عزّنا بطبعنا | اليوم الوطني 96</p>
-          </div>
-        </div>
-        <p class="footer-desc" id="footerDesc"></p>
-        <div class="social-links" id="socialLinks"></div>
-      </div>
-      <div class="footer-links-block" style="width:100%;border-top:1px dashed rgba(255,255,255,0.15);padding-top:14px;">
-        <h4 style="font-size:0.95rem;font-weight:900;color:#bfa15f;margin:0 0 10px;">روابط سريعة</h4>
-        <ul style="list-style:none;padding:0;margin:0;display:flex;gap:18px;justify-content:center;font-size:0.9rem;font-weight:800;">
-          <li><a href="#services" style="color:#fff;">الخدمات</a></li>
-          <li><a href="#doctors" style="color:#fff;">الأطباء</a></li>
-          <li><a href="#offers" style="color:#fff;">العروض</a></li>
-          <li><a href="#booking" style="color:#fff;">الحجز الفوري</a></li>
-        </ul>
-      </div>
-      <div class="footer-links-block" style="width:100%;border-top:1px dashed rgba(255,255,255,0.15);padding-top:14px;">
-        <h4 style="font-size:0.95rem;font-weight:900;color:#bfa15f;margin:0 0 10px;">بيانات تواصل العيادة</h4>
-        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px;font-size:0.88rem;font-weight:600;color:#f0f4f1;">
-          <li id="footerAddress"></li>
-          <li id="footerPhone" style="direction:ltr;"></li>
-          <li id="footerEmail"></li>
-        </ul>
-      </div>
+      <h2 style="font-size:1rem;color:#fff;">مجمع عناية الابتسامة الطبي</h2>
+      <p style="font-size:0.8rem;color:#c4a35a;">🇸🇦 اليوم الوطني السعودي 96</p>
+      <p class="footer-desc" id="footerDesc"></p>
+      <div class="social-links" id="socialLinks"></div>
     </div>
-    <div class="footer-bottom">
-      <div class="container">
-        <p>© <span id="currentYear"></span> <span id="footerNameBottom">مجمع عناية الابتسامة الطبي</span> — جميع الحقوق محفوظة فخراً للوطن.</p>
-      </div>
-    </div>
+    <div class="footer-bottom"><p>© <span id="currentYear"></span> مجمع عناية الابتسامة الطبي - جميع الحقوق محفوظة</p></div>
   </footer>
 
-  <a href="#" class="whatsapp-float" id="whatsappFloat" target="_blank" aria-label="تواصل عبر واتساب">
-    <span class="whatsapp-ping"></span>
-    <span class="whatsapp-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.3-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.6-1.3.1-.2 0-.4 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg></span>
-  </a>
-
-  <div class="admin-toolbar" id="adminToolbar" hidden>
-    <span class="admin-toolbar-title"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:1.1em;height:1.1em"><rect x="10" y="20" width="28" height="22" rx="5"/><path d="M17 20v-6a7 7 0 0 1 14 0v6"/><circle cx="24" cy="30" r="3" fill="currentColor" stroke="none"/></svg> وضع المالك</span>
-    <button type="button" id="adminDownloadBtn" class="admin-btn"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:1.1em;height:1.1em"><path d="M24 7v22M15 21l9 9 9-9"/><path d="M9 38h30"/></svg> تحميل content.json</button>
-    <button type="button" id="adminResetBtn" class="admin-btn"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:1.1em;height:1.1em"><path d="M40 24a16 16 0 1 1-5-11.6"/><path d="M40 8v9h-9"/></svg> التراجع</button>
-    <button type="button" id="adminExitBtn" class="admin-btn"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:1.1em;height:1.1em"><circle cx="24" cy="24" r="17"/><path d="M17 17l14 14M31 17L17 31"/></svg> إنهاء</button>
-  </div>
-  <button type="button" class="admin-entry-btn" id="adminEntryBtn" title="دخول المالك"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:1.1em;height:1.1em"><rect x="10" y="20" width="28" height="22" rx="5"/><path d="M17 20v-6a7 7 0 0 1 14 0v6"/><circle cx="24" cy="30" r="3" fill="currentColor" stroke="none"/></svg></button>
-  <input type="file" id="adminFileInput" accept="image/*" hidden>
-
-  <audio id="nationalAudio" preload="auto" playsinline>
-   <source src="national-day.mp3" type="audio/mpeg">
-  </audio>
-
+  <a href="#" class="whatsapp-float" id="whatsappFloat" target="_blank"><span class="whatsapp-ping"></span>💬</a>
+  <audio id="nationalAudio" preload="auto"><source src="national-day.mp3" type="audio/mpeg"></audio>
   <div id="fireworksContainer" class="fireworks-container"></div>
-
   <script>
-    // ===== ألعاب نارية تعمل دائماً + صوت عند الإمكان =====
-    (function () {
-      const audio = document.getElementById('nationalAudio');
-      const container = document.getElementById('fireworksContainer');
-      let fireworksDone = false;
-      let audioPlayed = false;
-
-      function launchFireworks() {
-        if (fireworksDone || !container) return;
-        fireworksDone = true;
-
-        container.innerHTML = '';
-        container.style.display = 'block';
-
-        const colors = ['#006c35', '#0b8a47', '#34a06b', '#bfa15f', '#e8d48b', '#ffffff', '#004d26'];
-        for (let i = 0; i < 60; i++) {
-          const p = document.createElement('div');
-          p.className = 'firework-particle';
-          const color = colors[Math.floor(Math.random() * colors.length)];
-          const x = Math.random() * 100;
-          const y = Math.random() * 60 + 5;
-          const size = Math.random() * 8 + 4;
-          const delay = Math.random() * 1.8;
-          const tx = (Math.random() - 0.5) * 220;
-          const ty = -80 - Math.random() * 140;
-
-          p.style.cssText = `
-            left:${x}%;
-            top:${y}%;
-            width:${size}px;
-            height:${size}px;
-            background:${color};
-            box-shadow:0 0 ${size * 2.5}px ${color};
-            --tx:${tx}px;
-            --ty:${ty}px;
-            animation:fireworkBurst 2.2s ease-out ${delay}s forwards;
-          `;
-          container.appendChild(p);
-        }
-
-        setTimeout(() => {
-          container.style.display = 'none';
-          container.innerHTML = '';
-        }, 5000);
-      }
-
-      function tryPlayAudio() {
-        if (audioPlayed || !audio) return;
-        audio.currentTime = 0;
-        audio.volume = 1;
-        const promise = audio.play();
-        if (promise !== undefined) {
-          promise.then(() => {
-            audioPlayed = true;
-          }).catch(() => {});
-        }
-      }
-
-      function start() {
-        launchFireworks();
-        tryPlayAudio();
-      }
-
-      document.addEventListener('DOMContentLoaded', start);
-      window.addEventListener('load', start);
-
-      const evs = ['click', 'touchstart', 'touchend', 'mousedown', 'keydown', 'scroll', 'pointerdown'];
-      function onInteract() {
-        launchFireworks();
-        tryPlayAudio();
-        evs.forEach(e => document.removeEventListener(e, onInteract));
-      }
-      evs.forEach(e => document.addEventListener(e, onInteract, { once: true, passive: true }));
-    })();
-
-    // قائمة الجوال
-    document.getElementById('navToggle')?.addEventListener('click', function() {
-      document.getElementById('navLinks').classList.toggle('open');
-      this.classList.toggle('active');
-    });
+    document.getElementById('navToggle')?.addEventListener('click', function(){document.getElementById('navLinks').classList.toggle('open');});
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
