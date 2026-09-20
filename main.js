@@ -206,7 +206,7 @@ function renderSite(data) {
       if (e) e.src = nd.emblemImage;
     }
 
-     setText('ndBannerBadge', nd.badge || sections.nationalDayBadge);
+    setText('ndBannerBadge', nd.badge || sections.nationalDayBadge);
     setText('ndBannerTitle', nd.greetingTitle);
     setText('ndBannerSlogan', nd.slogan);
     setText('nationalDayBadge', sections.nationalDayBadge);
@@ -221,10 +221,11 @@ function renderSite(data) {
     const lg = document.getElementById('landmarksGrid');
     if (lg) {
       lg.innerHTML = l.map((m, i) => `
-        <figure class="landmark-card reveal"${editAttr(`landmarks.\${i}.image`)}>
+        <figure class="landmark-card reveal"${editAttr(`landmarks.${i}.image`)}>
+          <img src="${m.image}" alt="${m.title} — ${m.subtitle || ''}" loading="lazy">
           <figcaption>
-            <h3${editAttr(`landmarks.\${i}.title`)}>${m.title}</h3>
-            <p${editAttr(`landmarks.\${i}.subtitle`)}>${m.subtitle || ''}</p>
+            <h3${editAttr(`landmarks.${i}.title`)}>${m.title}</h3>
+            <p${editAttr(`landmarks.${i}.subtitle`)}>${m.subtitle || ''}</p>
           </figcaption>
         </figure>
       `).join('');
@@ -275,7 +276,6 @@ function renderSite(data) {
       document.getElementById(id).setAttribute('data-edit', paths[i]);
       document.getElementById(id).setAttribute('data-edit-type', 'text');
     });
-
     heroTitle.setAttribute('data-edit', 'hero.title');
     heroTitle.setAttribute('data-edit-type', 'text');
     markEditable('heroTitle', 'hero.title');

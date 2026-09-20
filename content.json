@@ -558,7 +558,7 @@
     "tipsTitle": "نصائح للحفاظ على أسنانك",
     "tipsSubtitle": "نصائح من أطبائنا لصحة فم وأسنان أفضل",
     "dailyTipsTitle": "نصائح يومية لأسنان أفضل",
-    "featuresBadge": "لماذا نحن? ",
+    "featuresBadge": "لماذا نحن؟",
     "featuresTitle": "مجمع عناية الابتسامة",
     "featuresSubtitle": "معايير تجعلنا الخيار الأول للعائلة",
     "offersBadge": "عروض اليوم الوطني 96",
@@ -567,7 +567,7 @@
     "doctorsSubtitle": "نخبة من الأطباء المرخصين من الهيئة السعودية للتخصصات الصحية",
     "reviewsBadge": "آراء مراجعينا",
     "reviewsTitle": "ابتسامات سعيدة",
-    "reviewsSubtitle": "تجارب حقيقية من زبائننا العزيزين",
+    "reviewsSubtitle": "تجارب حقيقية من زبائننا الأعزاء",
     "reviewBoxTitle": "شاركنا تجربتك",
     "reviewBoxText": "رأيك يهمنا! اكتب تعليقك وسنضيفه بعد مراجعته من إدارة المجمع.",
     "reviewButton": "إرسال التعليق عبر واتساب",
@@ -587,23 +587,6 @@
     "contactPhoneTitle": "التواصل",
     "contactHoursTitle": "أوقات الدوام"
   },
-  "landmarks": [
-    {
-      "title": "برج المملكة",
-      "subtitle": "الرياض",
-      "image": "assets/national/hero-blend.jpg"
-    },
-    {
-      "title": "برج الفيصلية",
-      "subtitle": "الرياض",
-      "image": "assets/national/hero-blend.jpg"
-    },
-    {
-      "title": "أفق العاصمة",
-      "subtitle": "الرياض",
-      "image": "assets/national/hero-blend.jpg"
-    }
-  ],
   "serviceCategories": [
     {
       "title": "عروض اليوم الوطني السعودي 96",
