@@ -1,6 +1,6 @@
 /* ============================================
    مجمع عناية الابتسامة الطبي — ملف التصميم
-   اليوم الوطني السعودي 96 — تحديث 3D فاخر
+   خط ملكي فاخر + زخارف إسلامية + تدرجات 3D
    ============================================ */
 
 :root {
@@ -20,6 +20,8 @@
   --shadow-lg: 0 20px 50px rgba(0, 108, 53, 0.2);
   --radius: 16px;
   --radius-sm: 12px;
+  --font-royal: 'Amiri', 'Traditional Arabic', 'Cairo', serif;
+  --font-body: 'Cairo', 'Segoe UI', sans-serif;
 }
 
 * {
@@ -33,12 +35,61 @@ html {
 }
 
 body {
-  font-family: 'Cairo', sans-serif;
+  font-family: var(--font-body);
   color: var(--text);
   background: var(--white);
   line-height: 1.55;
   overflow-x: hidden;
   text-align: center;
+}
+
+/* ===== تطبيق دقيق للخط الملكي ===== */
+.nd-greeting-title,
+.nd-slogan-main,
+.nd-greeting-closing,
+.section-title,
+.nd-badge,
+.section-badge,
+.announcement-text,
+.offer-card h3,
+.price-cat-title,
+.booking-card .section-title,
+.nd-greeting-text,
+.daily-tips-box h3,
+.contact-card-title,
+.footer-brand h2 {
+  font-family: var(--font-royal) !important;
+}
+
+.nd-greeting-title {
+  font-weight: 700;
+  font-size: clamp(1.55rem, 4.2vw, 2.4rem);
+  letter-spacing: 0.6px;
+  line-height: 1.4;
+}
+
+.nd-slogan-main {
+  font-weight: 700;
+  font-size: 1.18rem;
+  letter-spacing: 0.5px;
+}
+
+.nd-greeting-closing {
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: 0.5px;
+}
+
+.section-title {
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.announcement-text {
+  font-family: var(--font-royal) !important;
+  font-weight: 700;
+  font-size: 1.12rem;
+  letter-spacing: 0.7px;
 }
 
 .container {
@@ -69,7 +120,7 @@ ul {
   gap: 8px;
   padding: 14px 28px;
   border-radius: 50px;
-  font-family: inherit;
+  font-family: var(--font-body);
   font-size: 1.05rem;
   font-weight: 700;
   cursor: pointer;
@@ -111,15 +162,15 @@ ul {
   width: 100%;
 }
 
-/* ===== Announcement — إطار أبيض لامع + خلفية خضراء لامعة + أطول قليلاً ===== */
+/* ===== الشريط المتحرك ===== */
 .announcement-bar {
   position: relative;
   z-index: 200;
-  background: linear-gradient(90deg, #006c35 0%, #0b8a47 50%, #006c35 100%);
+  background: linear-gradient(90deg, #004d26 0%, #006c35 30%, #0b8a47 50%, #006c35 70%, #004d26 100%);
   border: 3px solid #ffffff;
-  box-shadow: 0 0 14px rgba(255,255,255,0.75), inset 0 0 10px rgba(255,255,255,0.25);
+  box-shadow: 0 0 16px rgba(255,255,255,0.8), inset 0 0 12px rgba(255,255,255,0.3);
   overflow: hidden;
-  height: 42px;
+  height: 50px;
   display: flex;
   align-items: center;
 }
@@ -127,23 +178,21 @@ ul {
 .announcement-track {
   display: flex;
   white-space: nowrap;
-  animation: marquee 32s linear infinite;
+  animation: marquee 48s linear infinite;
 }
 
 .announcement-text {
-  font-size: 0.9rem;
-  font-weight: 800;
   color: #fff;
-  padding: 0 30px;
-  letter-spacing: 0.5px;
+  padding: 0 24px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.35);
 }
 
 .announcement-text .nd-mark {
-  font-size: 1.15rem;
-  filter: drop-shadow(0 0 4px rgba(255,255,255,0.7));
+  font-size: 1.3rem;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.85));
 }
 
 @keyframes marquee {
@@ -151,7 +200,7 @@ ul {
   100% { transform: translateX(-50%); }
 }
 
-/* ===== Header — مبسط بدون لوجو مزدحم ===== */
+/* ===== Header ===== */
 .header {
   position: relative;
   z-index: 100;
@@ -168,7 +217,7 @@ ul {
   display: none !important;
 }
 
-/* ===== Full-Width 3D Banner — صورة نظيفة ===== */
+/* ===== البنر ===== */
 .nd-banner-wrap {
   width: 100%;
   max-width: 100%;
@@ -179,8 +228,8 @@ ul {
 .nd-banner {
   position: relative;
   width: 100%;
-  min-height: 320px;
-  max-height: 480px;
+  min-height: 300px;
+  max-height: 460px;
   overflow: hidden;
   border-radius: 0;
   box-shadow:
@@ -189,7 +238,6 @@ ul {
     0 0 0 4px var(--nd-gold),
     0 0 0 8px rgba(0, 108, 53, 0.4);
   background: var(--nd-green-deep);
-  transform: translateZ(0);
 }
 
 .nd-banner-img {
@@ -199,93 +247,21 @@ ul {
   height: 100%;
   object-fit: cover;
   object-position: center top;
-  opacity: 0.95;
-  filter: saturate(1.05) contrast(1.05);
+  opacity: 1;
+  filter: saturate(1.08) contrast(1.08) brightness(1.05);
 }
 
 .nd-banner-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0, 108, 53, 0.12) 0%, rgba(0, 40, 20, 0.45) 100%);
+  background: linear-gradient(180deg, rgba(0, 108, 53, 0.08) 0%, rgba(0, 40, 20, 0.35) 100%);
   pointer-events: none;
 }
 
-.nd-banner-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  color: var(--white);
-  padding: 28px 18px 36px;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-/* الشعار فقط في مكان مناسب */
-.nd-banner-emblem-only {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 3;
-  text-align: center;
-}
-
-.nd-banner-emblem-only .nd-emblem-img {
-  width: 90px;
-  height: auto;
-  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
-}
-
-.nd-emblem-img {
-  width: 72px;
-  height: auto;
-  margin: 0 auto 10px;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
-}
-
-.nd-banner-badge {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.18);
-  border: 1.5px solid var(--nd-gold);
-  color: #fff;
-  padding: 6px 18px;
-  border-radius: 50px;
-  font-weight: 800;
-  font-size: 0.9rem;
-  margin-bottom: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-}
-
-.nd-banner-title {
-  font-size: clamp(1.45rem, 4.2vw, 2.35rem);
-  font-weight: 900;
-  margin-bottom: 8px;
-  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.5);
-  line-height: 1.3;
-}
-
-.nd-banner-slogan {
-  font-size: clamp(0.95rem, 2.4vw, 1.25rem);
-  font-weight: 800;
-  color: #ffe9b3;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
-}
-
-.nd-flag-img {
-  position: absolute;
-  bottom: 12px;
-  left: 14px;
-  width: 64px;
-  height: auto;
-  border-radius: 4px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
-  z-index: 3;
-}
-
-/* ===== Greeting Section 3D — نصوص مضغوطة ومتناسقة ===== */
+/* ===== قسم التهنئة + زخارف إسلامية ===== */
 .nd-greeting-section {
   background: linear-gradient(180deg, #f2faf5 0%, #ffffff 100%);
-  padding: 28px 16px 22px;
+  padding: 36px 16px 32px;
   position: relative;
 }
 
@@ -295,118 +271,86 @@ ul {
   text-align: center;
 }
 
+.nd-gold-frame {
+  background: linear-gradient(165deg, #ffffff 0%, #f8f5eb 100%);
+  border-radius: 24px;
+  padding: 32px 24px 28px;
+  position: relative;
+  box-shadow:
+    0 0 0 2px #bfa15f,
+    0 0 0 6px rgba(191, 161, 95, 0.3),
+    0 14px 36px rgba(0, 108, 53, 0.14),
+    inset 0 1px 0 rgba(255,255,255,0.95);
+}
+
+.nd-gold-frame::before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #e8d48b, #bfa15f, #97762f, #bfa15f, #e8d48b);
+  z-index: -1;
+  opacity: 0.9;
+}
+
+/* زخارف إسلامية */
+.islamic-ornament .ornament-top,
+.islamic-ornament .ornament-bottom {
+  font-size: 1.15rem;
+  color: var(--nd-gold);
+  letter-spacing: 8px;
+  margin: 6px 0 14px;
+  opacity: 0.9;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.islamic-ornament .ornament-bottom {
+  margin: 18px 0 0;
+}
+
 .nd-badge {
-  background: var(--nd-green) !important;
+  background: linear-gradient(135deg, #006c35, #0b8a47) !important;
   color: #fff !important;
-  border: 1.5px solid var(--nd-gold);
+  border: 1.5px solid #bfa15f;
   display: inline-block;
-  padding: 6px 18px;
+  padding: 8px 22px;
   border-radius: 50px;
-  font-weight: 800;
-  font-size: 0.88rem;
-  margin-bottom: 10px;
-  box-shadow: 0 4px 14px rgba(0, 108, 53, 0.3);
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 14px rgba(0, 108, 53, 0.35);
+  font-family: var(--font-royal) !important;
 }
 
-.nd-greeting-title {
-  font-size: clamp(1.4rem, 3.8vw, 2.1rem);
-  font-weight: 900;
-  color: var(--nd-green-deep);
-  margin: 8px 0 10px;
-  line-height: 1.3;
-}
-
-/* العبارة الرئيسية مكان لافتة */
 .nd-slogan-main {
   display: inline-block;
   background: linear-gradient(135deg, #bfa15f 0%, #e8d48b 45%, #bfa15f 100%);
   color: #1a3a1f;
-  padding: 9px 24px;
+  padding: 11px 28px;
   border-radius: 50px;
-  font-size: 1.05rem;
-  font-weight: 900;
-  margin: 8px auto 12px;
-  box-shadow: 0 5px 16px rgba(191, 161, 95, 0.4);
-  letter-spacing: 0.3px;
+  margin: 0 auto 20px;
+  box-shadow: 0 6px 18px rgba(191, 161, 95, 0.4);
 }
 
 .nd-greeting-text {
-  font-size: 0.95rem;
+  font-size: 1.02rem;
   font-weight: 600;
   color: var(--text);
-  line-height: 1.55;
-  max-width: 720px;
-  margin: 0 auto 8px;
+  line-height: 1.7;
+  max-width: 700px;
+  margin: 0 auto 14px;
+  text-align: center;
+  font-family: var(--font-royal) !important;
 }
 
 .nd-greeting-closing {
-  font-size: 1.15rem;
-  font-weight: 900;
   color: var(--nd-green);
-  margin: 12px auto 6px;
-  line-height: 1.5;
+  margin: 18px auto 0;
 }
 
-/* شريط عزنا بطبعنا ثلاثي الأبعاد */
-.nd-ribbon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin: 12px auto 10px;
-  padding: 8px 20px;
-  background: linear-gradient(135deg, #bfa15f 0%, #e8d48b 40%, #bfa15f 100%);
-  border-radius: 50px;
-  box-shadow:
-    0 6px 18px rgba(191, 161, 95, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  animation: ribbonPulse 2.4s ease-in-out infinite;
-  max-width: fit-content;
-}
-
-.nd-ribbon span {
-  font-size: 1rem;
-  font-weight: 900;
-  color: #1a3a1f;
-  letter-spacing: 0.5px;
-}
-
-.nd-ribbon .flag-mini {
-  font-size: 1.2rem;
-  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.25));
-}
-
-@keyframes ribbonPulse {
-  0%, 100% { transform: scale(1); box-shadow: 0 6px 18px rgba(191, 161, 95, 0.45); }
-  50% { transform: scale(1.03); box-shadow: 0 8px 24px rgba(191, 161, 95, 0.55); }
-}
-
-.nd-flag-line {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 12px auto 4px;
-  gap: 10px;
-}
-
-.nd-flag-line::before,
-.nd-flag-line::after {
-  content: "";
-  flex: 1;
-  height: 2px;
-  max-width: 120px;
-  background: linear-gradient(90deg, transparent, var(--nd-gold), transparent);
-}
-
-.nd-line-emblem {
-  width: 44px;
-  height: auto;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
-}
-
-/* ===== Offers — عامودين 3D ===== */
+/* ===== Offers ===== */
 .section {
-  padding: 40px 0;
+  padding: 42px 0;
 }
 
 .section-head {
@@ -419,27 +363,28 @@ ul {
   display: inline-block;
   background: rgba(0, 108, 53, 0.1);
   color: var(--primary-dark);
-  padding: 5px 16px;
+  padding: 6px 18px;
   border-radius: 50px;
-  font-weight: 800;
-  font-size: 0.85rem;
-  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
   border: 1px solid var(--nd-gold);
+  font-family: var(--font-royal) !important;
 }
 
 .section-title {
-  font-size: clamp(1.4rem, 3.8vw, 2.1rem);
-  font-weight: 900;
-  margin-bottom: 8px;
+  font-size: clamp(1.45rem, 3.9vw, 2.2rem);
+  margin-bottom: 10px;
   color: var(--nd-green-deep);
-  line-height: 1.3;
+  line-height: 1.35;
 }
 
 .section-subtitle {
   color: var(--text-light);
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  line-height: 1.5;
+  line-height: 1.55;
+  font-family: var(--font-body);
 }
 
 .offers-grid {
@@ -464,7 +409,6 @@ ul {
     0 10px 28px rgba(0, 108, 53, 0.14),
     0 4px 10px rgba(0, 0, 0, 0.06),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  transform: translateZ(0);
 }
 
 .offer-card:hover {
@@ -525,10 +469,10 @@ ul {
 }
 
 .offer-card h3 {
-  font-size: 0.95rem;
-  font-weight: 800;
+  font-size: 1rem;
+  font-weight: 700;
   margin-bottom: 6px;
-  line-height: 1.35;
+  line-height: 1.4;
   color: var(--text);
 }
 
@@ -544,6 +488,7 @@ ul {
   font-weight: 900;
   color: var(--primary);
   margin-bottom: 10px;
+  font-family: var(--font-body);
 }
 
 .offer-card .btn {
@@ -578,6 +523,7 @@ ul {
   font-weight: 900;
   color: var(--primary);
   line-height: 1.2;
+  font-family: var(--font-body);
 }
 
 .stat-label {
@@ -586,7 +532,7 @@ ul {
   font-size: 0.78rem;
 }
 
-/* ===== Services / Price List ===== */
+/* ===== Services ===== */
 .price-list {
   display: grid;
   grid-template-columns: 1fr;
@@ -610,9 +556,9 @@ ul {
 .price-cat-title {
   background: linear-gradient(135deg, var(--primary), var(--primary-light));
   color: #fff;
-  padding: 12px 16px;
-  font-size: 1rem;
-  font-weight: 800;
+  padding: 13px 16px;
+  font-size: 1.05rem;
+  font-weight: 700;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -824,8 +770,8 @@ ul {
 }
 
 .daily-tips-box h3 {
-  font-size: 1.05rem;
-  font-weight: 800;
+  font-size: 1.1rem;
+  font-weight: 700;
   margin-bottom: 12px;
   color: var(--primary-dark);
   text-align: center;
@@ -866,7 +812,7 @@ ul {
   background: linear-gradient(135deg, var(--primary-dark), var(--primary));
   position: relative;
   overflow: hidden;
-  padding: 40px 16px;
+  padding: 42px 16px;
 }
 
 .booking-card {
@@ -874,7 +820,7 @@ ul {
   z-index: 2;
   background: #fff;
   border-radius: 18px;
-  padding: 24px 18px;
+  padding: 26px 18px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
   max-width: 480px;
   margin: 0 auto;
@@ -905,7 +851,7 @@ ul {
   padding: 11px 14px;
   border: 2px solid #e2e8f0;
   border-radius: 12px;
-  font-family: inherit;
+  font-family: var(--font-body);
   font-size: 0.92rem;
   color: var(--text);
   background: #fafcfe;
@@ -965,8 +911,8 @@ ul {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 1rem;
-  font-weight: 800;
+  font-size: 1.05rem;
+  font-weight: 700;
   color: var(--nd-green);
   margin-bottom: 8px;
 }
@@ -1249,7 +1195,7 @@ body.admin-mode {
     padding: 24px 16px 20px;
   }
   .offer-card h3 {
-    font-size: 1.02rem;
+    font-size: 1.05rem;
   }
   .tips-grid,
   .features-grid,
@@ -1272,8 +1218,8 @@ body.admin-mode {
     max-width: 1100px;
   }
   .nd-banner {
-    min-height: 400px;
-    max-height: 520px;
+    min-height: 380px;
+    max-height: 500px;
   }
   .price-list {
     grid-template-columns: repeat(2, 1fr);
@@ -1296,21 +1242,18 @@ body.admin-mode {
     font-size: 1.2rem;
   }
   .nd-banner {
-    min-height: 260px;
-  }
-  .nd-emblem-img {
-    width: 56px;
-  }
-  .nd-banner-emblem-only .nd-emblem-img {
-    width: 70px;
-  }
-  .nd-flag-img {
-    width: 48px;
+    min-height: 240px;
   }
   .nd-greeting-text {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
   .announcement-bar {
-    height: 40px;
+    height: 46px;
+  }
+  .announcement-text {
+    font-size: 1rem;
+  }
+  .nd-gold-frame {
+    padding: 24px 16px 22px;
   }
 }
