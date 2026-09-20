@@ -300,15 +300,15 @@ ul {
   pointer-events: none;
 }
 
-/* ===== قسم التهنئة ===== *//* ===== قسم التهنئة المطور لليوم الوطني ===== */
+/* ===== قسم التهنئة ===== *//* ===== قسم التهنئة المطور لليوم الوطني ===== *//* ===== قسم التهنئة المطور لليوم الوطني ===== */
 .nd-greeting-section {
-  background: #006C35; /* جعل الخلفية خضراء للتهنئة فقط */
+  background: #006C35; /* لون بطاقة التهنئة الخضراء فقط */
   padding: 20px 15px;
   position: relative;
-  order: 3;
-  max-width: 550px;    /* حجم صغير ومتناسق للبطاقة الخضراء */
-  margin: 20px auto;   /* تتوسط في منتصف الصفحة */
-  border-radius: 12px; /* زوايا منحنية أنيقة للبطاقة */
+  order: 3; /* يضمن بقاء التهنئة في ترتيبها الصحيح رقم 3 */
+  max-width: 550px;
+  margin: 20px auto;
+  border-radius: 12px;
   box-sizing: border-box;
 }
 
@@ -318,27 +318,8 @@ ul {
   text-align: center;
 }
 
-.nd-gold-frame {
-  background: transparent!important;
-  border: none!important;
-  border-radius: 0!important;
-  padding: 0!important;
-  box-shadow: none!important;
-  position: relative;
-}
-
-.nd-gold-frame::before {
-  display: none!important;
-  content: none!important;
-}
-
-.islamic-ornament.ornament-top,
-.islamic-ornament.ornament-bottom {
-  display: none!important;
-}
-
 .nd-badge {
-  background: #1A824C; /* لون الشارة */
+  background: #1A824C;
   color: #fff;
   border: 1px solid #D4AF37;
   display: inline-block;
@@ -354,22 +335,62 @@ ul {
   font-family: 'Cairo', sans-serif;
   font-weight: 800;
   font-size: 1.1rem;
-  color: #D4AF37; /* لون ذهبي فخم للعنوان */
+  color: #D4AF37; /* عنوان ذهبي */
   margin: 0 0 12px;
   line-height: 1.25;
 }
 
 .nd-greeting-text {
   font-family: 'Cairo', sans-serif;
-  font-size: 0.8rem; /* حجم خط متناسق وصغير */
+  font-size: 0.8rem;
   font-weight: 600;
-  color: #f0f0f0; /* لون أبيض ناصع ومريح فوق الأخضر */
-  line-height: 1.5; /* سطور متقاربة ومنسقة */
+  color: #f0f0f0; /* نص أبيض مريح للعين فوق الأخضر */
+  line-height: 1.5;
   max-width: 500px;
   margin: 0 auto 10px;
   text-align: center;
-  text-align-last: center; /* محاذاة الأسطر بالتساوي */
+  text-align-last: center;
 }
+
+.nd-greeting-text strong {
+  color: #D4AF37 !important;
+  font-weight: 800;
+}
+
+.nd-slogan-main {
+  display: block;
+  background: transparent;
+  color: #D4AF37;
+  padding: 0;
+  margin: 5px auto 15px 15px;
+  font-family: 'Cairo', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-align: left; /* شعار عزنا بطبعنا باليسار */
+}
+
+.nd-greeting-closing {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #D4AF37;
+  margin: 10px auto 0;
+  line-height: 1.25;
+}
+
+/* ===== قسم العروض التلقائي ليعود لطبيعته الواضحة ===== */
+.offers-section, .nd-offers, #offers {
+  background: #ffffff !important; /* يجبر قسم العروض تحت التهنئة أن يكون أبيض */
+  color: #333333 !important; /* يجعل نصوص العروض سوداء واضحة */
+  padding: 30px 15px;
+}
+
+/* تنسيق العناوين داخل العروض لتظهر بوضوح */
+.offers-title, .offers-subtitle {
+  color: #006C35 !important; /* عنوان العروض بالأخضر */
+  text-align: center;
+}
+
 
 /* تكبير وتلوين اسم المجمع بالخط العريض والذهبي */
 .nd-greeting-text strong {
