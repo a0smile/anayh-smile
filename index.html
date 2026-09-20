@@ -23,9 +23,9 @@
   <div class="announcement-bar" id="announcementBar">
     <div class="announcement-track">
       <span class="announcement-text">
-        <span class="nd-mark">⚔️🌴</span>
+        <span class="nd-mark">⚔️</span>
         وطنٌ لا نحميه لا نستحق العيش فيه
-        <span class="nd-mark">🌴⚔️</span>
+        <span class="nd-mark">⚔️</span>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span class="nd-mark">⚔️🌴</span>
         عروض مجمع عناية الابتسامة معكم أينما كنتم ✨ مجمع عناية الابتسامة يراهن على أن أسعارنا لا مثيل لها ✨
@@ -33,9 +33,9 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </span>
       <span class="announcement-text">
-        <span class="nd-mark">⚔️🌴</span>
+        <span class="nd-mark">⚔️</span>
         وطنٌ لا نحميه لا نستحق العيش فيه
-        <span class="nd-mark">🌴⚔️</span>
+        <span class="nd-mark">⚔️</span>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span class="nd-mark">⚔️🌴</span>
         عروض مجمع عناية الابتسامة معكم أينما كنتم ✨ مجمع عناية الابتسامة يراهن على أن أسعارنا لا مثيل لها ✨
@@ -286,7 +286,7 @@
   <button type="button" class="admin-entry-btn" id="adminEntryBtn" title="دخول المالك"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:1.1em;height:1.1em"><rect x="10" y="20" width="28" height="22" rx="5"/><path d="M17 20v-6a7 7 0 0 1 14 0v6"/><circle cx="24" cy="30" r="3" fill="currentColor" stroke="none"/></svg></button>
   <input type="file" id="adminFileInput" accept="image/*" hidden>
 
-  <!-- صوت اليوم الوطني -->  <!-- صوت اليوم الوطني -->
+  <!-- صوت اليوم الوطني -->  <!-- صوت اليوم الوطني -->  <!-- صوت اليوم الوطني -->
   <audio id="nationalAudio" preload="auto" playsinline>
     <source src="national-day-96.mp3" type="audio/mpeg">
   </audio>
@@ -294,22 +294,18 @@
   <!-- ألعاب نارية -->
   <div id="fireworksContainer" class="fireworks-container"></div>
 
-  <script src="icons.js"></script>
-  <script src="main.js"></script>
-  <script src="admin.js"></script>
   <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => navigator.serviceWorker.register('sw.js'));
-    }
-
-    // ===== تشغيل الصوت + ألعاب نارية لمدة 5 ثواني فقط =====
+    // ===== ألعاب نارية تعمل دائماً + صوت عند الإمكان =====
     (function () {
       const audio = document.getElementById('nationalAudio');
       const container = document.getElementById('fireworksContainer');
-      let played = false;
+      let fireworksDone = false;
+      let audioPlayed = false;
 
       function launchFireworks() {
-        if (!container) return;
+        if (fireworksDone || !container) return;
+        fireworksDone = true;
+
         container.innerHTML = '';
         container.style.display = 'block';
 
@@ -339,35 +335,39 @@
           container.appendChild(p);
         }
 
-        // تختفي بعد 5 ثواني بالضبط
+        // تختفي بعد 5 ثواني
         setTimeout(() => {
           container.style.display = 'none';
           container.innerHTML = '';
         }, 5000);
       }
 
-      function forcePlay() {
-        if (played || !audio) return;
+      function tryPlayAudio() {
+        if (audioPlayed || !audio) return;
         audio.currentTime = 0;
         audio.volume = 1;
         const promise = audio.play();
         if (promise !== undefined) {
           promise.then(() => {
-            played = true;
-            launchFireworks();
+            audioPlayed = true;
           }).catch(() => {});
         }
       }
 
-      document.addEventListener('DOMContentLoaded', forcePlay);
-      window.addEventListener('load', forcePlay);
-      document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible') forcePlay();
-      });
+      // الألعاب النارية تشتغل فوراً عند الدخول
+      function start() {
+        launchFireworks();
+        tryPlayAudio();
+      }
 
+      document.addEventListener('DOMContentLoaded', start);
+      window.addEventListener('load', start);
+
+      // احتياطي عند أي تفاعل
       const evs = ['click', 'touchstart', 'touchend', 'mousedown', 'keydown', 'scroll', 'pointerdown'];
       function onInteract() {
-        forcePlay();
+        launchFireworks();
+        tryPlayAudio();
         evs.forEach(e => document.removeEventListener(e, onInteract));
       }
       evs.forEach(e => document.addEventListener(e, onInteract, { once: true, passive: true }));
