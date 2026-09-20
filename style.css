@@ -1186,6 +1186,41 @@ body.admin-mode {
   transform: translateY(0);
 }
 
+/* ===== صوت + ألعاب نارية اليوم الوطني 96 ===== */
+.fireworks-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99999;
+  display: none;
+  overflow: hidden;
+}
+
+.firework-particle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0);
+}
+
+@keyframes fireworkBurst {
+  0% {
+    opacity: 1;
+    transform: scale(0) translate(0, 0);
+  }
+  25% {
+    opacity: 1;
+    transform: scale(1.5) translate(0, -25px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.2) translate(
+      calc((0.5 - 0.5) * 200px),
+      calc((0.5 - 0.5) * 240px)
+    );
+  }
+}
+
 /* ===== Responsive ===== */
 @media (min-width: 640px) {
   .offers-grid {
