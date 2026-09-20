@@ -98,9 +98,29 @@
       max-width: 90%;
       margin: 10px auto !important;
     }
+
+    /* 🎨 لمسات احترافية مضافة لحل مشكلة الدوائر المشوهة وتثبيت المستطيلات الفخمة */
+    .offers-grid img, .offers-grid .card-image, .hero-image-frame, .hero-image-frame2, .gallery-frame img {
+      border-radius: 16px !important; /* تحويل الدوائر المشوهة إلى مستطيلات فخمة متناسقة مع أبعاد البنر */
+      width: 100% !important;
+      height: auto !important;
+      max-height: 280px !important;
+      object-fit: cover !important;
+    }
+    .offers-grid .card, .offers-card {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important; /* محاذاة كروت العروض بالوسط تماماً */
+      text-align: center !important;
+      border: 2px solid #e2e8f0 !important;
+      border-radius: 16px !important;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.03) !important;
+      padding: 15px !important;
+    }
   </style>
 </head>
 <body>
+
 
   <!-- ===== شريط الإعلانات المتحرك التلقائي — اليوم الوطني السعودي 96 وعروض الوطن ===== -->
   <div class="announcement-bar" id="announcementBar">
