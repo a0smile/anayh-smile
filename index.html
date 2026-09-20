@@ -14,12 +14,12 @@
   <meta name="apple-mobile-web-app-title" content="عناية الابتسامة">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- شريط الإعلانات المتحرك — نصين يتناوبان + سيوف ونخلة + 24 ساعة -->
+  <!-- شريط الإعلانات المتحرك -->
   <div class="announcement-bar" id="announcementBar">
     <div class="announcement-track">
       <span class="announcement-text">
@@ -45,7 +45,6 @@
     </div>
   </div>
 
-  <!-- Header مخفي -->
   <header class="header" id="header">
     <nav class="nav container">
       <div class="logo" style="display:none;">
@@ -68,25 +67,26 @@
   </header>
 
   <main>
-    <!-- البنر — صورة نظيفة 100٪ بدون سيوف ونخلة -->
+    <!-- البنر — صورة نظيفة -->
     <div class="nd-banner-wrap" id="hero">
       <div class="nd-banner reveal">
         <img class="nd-banner-img" id="ndBlendImage" src="hero-blend.jpg" alt="مجمع عناية الابتسامة الطبي — عروض اليوم الوطني السعودي 96">
         <div class="nd-banner-overlay"></div>
-        <!-- لا يوجد أي شعار أو نص على الصورة -->
       </div>
     </div>
 
-    <!-- قسم التهنئة — إطار ذهبي لامع + سطور متساوية -->
+    <!-- قسم التهنئة — إطار ذهبي + زخارف إسلامية + خط ملكي -->
     <section class="nd-greeting-section" id="nationalDay">
       <div class="nd-greeting">
-        <div class="nd-gold-frame">
+        <div class="nd-gold-frame islamic-ornament">
+          <div class="ornament-top">✦ ❈ ✦</div>
           <span class="nd-badge" id="nationalDayBadge">🇸🇦 عزنا بطبعنا 🇸🇦</span>
           <h2 class="nd-greeting-title" id="nationalDayTitle">تهنئة باليوم الوطني السعودي 96</h2>
           <div class="nd-slogan-main">ابتسامة أجمل .. لوطن أعظم</div>
           <p class="nd-greeting-text" id="nationalDayGreeting">نرفع أسمى التهاني لمقام القيادة الرشيدة والشعب السعودي النبيل بمناسبة اليوم الوطني السادس والتسعين، سائلين الله أن يديم على وطننا الأمن والرخاء.</p>
           <p class="nd-greeting-text" id="nationalDayGreeting2">وبهذه المناسبة الغالية، يسر مجمع عناية الابتسامة الطبي مشاركتكم الفرحة بتقديم عروض حصرية وخصومات خاصة على كافة الخدمات الطبية.</p>
           <p class="nd-greeting-closing" id="nationalDayClosing">🇸🇦 دام عزك يا وطن 🇸🇦</p>
+          <div class="ornament-bottom">✦ ❈ ✦</div>
         </div>
       </div>
     </section>
@@ -245,7 +245,6 @@
     </section>
   </main>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="container footer-content">
       <div class="footer-brand">
@@ -284,13 +283,11 @@
     </div>
   </footer>
 
-  <!-- واتساب -->
   <a href="#" class="whatsapp-float" id="whatsappFloat" target="_blank" aria-label="تواصل عبر واتساب">
     <span class="whatsapp-ping"></span>
     <span class="whatsapp-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.3-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.6-1.3.1-.2 0-.4 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg></span>
   </a>
 
-  <!-- أدوات المالك -->
   <div class="admin-toolbar" id="adminToolbar" hidden>
     <span class="admin-toolbar-title"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:1.1em;height:1.1em"><rect x="10" y="20" width="28" height="22" rx="5"/><path d="M17 20v-6a7 7 0 0 1 14 0v6"/><circle cx="24" cy="30" r="3" fill="currentColor" stroke="none"/></svg> وضع المالك</span>
     <button type="button" id="adminDownloadBtn" class="admin-btn"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:1.1em;height:1.1em"><path d="M24 7v22M15 21l9 9 9-9"/><path d="M9 38h30"/></svg> تحميل content.json</button>
