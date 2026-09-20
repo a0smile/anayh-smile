@@ -20,8 +20,8 @@
     "subtitle": "🇸🇦 دام عزك يا وطن 🇸🇦 — ابتسامة أجمل .. لوطن أعظم — عروض حصرية وخصومات خاصة ومميزة على كافة خدمات عيادات الأسنان بمناسبة اليوم الوطني السعودي 96.",
     "buttonMain": "احجز عرض اليوم الوطني",
     "buttonSecondary": "اكتشف العروض",
-    "image": "assets/national/hero-blend.png",
-    "image2": "assets/national/hero-blend.png"
+    "image": "hero-blend.jpg",
+    "image2": "hero-blend.jpg"
   },
   "stats": [
     {
@@ -43,6 +43,7 @@
   ],
   "services": [
     {
+
       "icon": "tooth",
       "title": "تنظيف الأسنان وإزالة الجير",
       "description": "🇸🇦 نحلم ونحقق 🇸🇦 — تنظيف وتلميع عميق بأحدث أجهزة الـ Ultrasonic لإزالة التصبغات والترسبات الجيرية."
@@ -935,11 +936,11 @@
     "greeting": "نرفع أسمى التهاني لمقام القيادة الرشيدة والشعب السعودي النبيل بمناسبة اليوم الوطني السادس والتسعين، سائلين الله أن يديم على وطننا الأمن والرخاء.",
     "greeting2": "وبهذه المناسبة الغالية، يسر مجمع عناية الابتسامة الطبي مشاركتكم الفرحة بتقديم عروض حصرية وخصومات خاصة على كافة الخدمات الطبية.",
     "closing": "دام عزك يا وطن، ودامت ابتسامتكم بصحة وخير.",
-    "blendImage": "assets/national/hero-blend.png",
-    "exteriorImage": "assets/national/hero-blend.png",
-    "interiorImage": "assets/national/hero-blend.png",
-    "flagImage": "assets/national/flag-sa.png",
-    "emblemImage": "assets/national/emblem-sa.png"
+    "blendImage": "hero-blend.jpg",
+    "exteriorImage": "hero-blend.jpg",
+    "interiorImage": "hero-blend.jpg",
+    "flagImage": "flag-sa.png",
+    "emblemImage": "emblem-sa.png"
   },
   "landmarks": []
 }
