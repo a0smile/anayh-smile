@@ -1186,7 +1186,7 @@ body.admin-mode {
   transform: translateY(0);
 }
 
-/* ===== صوت + ألعاب نارية اليوم الوطني 96 ===== */
+/* ===== صوت + ألعاب نارية اليوم الوطني 96 (مصحح) ===== */
 .fireworks-container {
   position: fixed;
   inset: 0;
@@ -1200,24 +1200,21 @@ body.admin-mode {
   position: absolute;
   border-radius: 50%;
   opacity: 0;
-  transform: scale(0);
+  will-change: transform, opacity;
 }
 
 @keyframes fireworkBurst {
   0% {
     opacity: 1;
-    transform: scale(0) translate(0, 0);
+    transform: translate(0, 0) scale(0.3);
   }
-  25% {
+  30% {
     opacity: 1;
-    transform: scale(1.5) translate(0, -25px);
+    transform: translate(var(--tx, 0), var(--ty, -40px)) scale(1.4);
   }
   100% {
     opacity: 0;
-    transform: scale(0.2) translate(
-      calc((0.5 - 0.5) * 200px),
-      calc((0.5 - 0.5) * 240px)
-    );
+    transform: translate(var(--tx, 0), var(--ty, -120px)) scale(0.1);
   }
 }
 
