@@ -265,9 +265,9 @@ button { font-family: inherit; }
   color: #0A1F14;
   padding: 0 28px;
   font-weight: 900;
-  font-size: 0.9rem;
-  letter-spacing: 0.3px;
-  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+  font-size: 0.95rem;
+  letter-spacing: 0.4px;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.7);
 }
 
 @keyframes marquee {
@@ -339,10 +339,11 @@ button { font-family: inherit; }
 .nd-greeting-text strong { color: var(--green-800); font-weight: 900; }
 
 .nd-greeting-closing {
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   font-weight: 900;
-  color: var(--green-800);
-  padding-top: 4px;
+  color: var(--green-900);
+  padding-top: 6px;
+  letter-spacing: 0.5px;
 }
 
 .hero-cta-section {
@@ -416,26 +417,27 @@ button { font-family: inherit; }
 }
 
 .price-note {
-  max-width: 800px;
-  margin: 0 auto 14px;
-  background: linear-gradient(135deg, var(--green-800), var(--green-600));
-  border: 1.5px solid var(--gold);
-  border-radius: var(--radius-sm);
-  padding: 10px 14px;
+  max-width: 720px;
+  margin: 0 auto 12px;
+  background: #5C4A32;
+  border: 1px solid #3E3222;
+  border-radius: 10px;
+  padding: 6px 12px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  text-align: right;
+  justify-content: center;
+  gap: 6px;
+  text-align: center;
 }
 
-.price-note-icon { font-size: 1.1rem; flex-shrink: 0; }
+.price-note-icon { display: none; }
 
 .price-note p {
-  font-size: 0.82rem;
-  color: #fff;
-  line-height: 1.55;
+  font-size: 0.68rem;
+  color: #F5EDE0;
+  line-height: 1.45;
   margin: 0;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .price-list {

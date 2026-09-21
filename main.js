@@ -345,10 +345,10 @@ function renderSite(data) {
 
     servicesGrid.innerHTML = (data.serviceCategories || []).map((cat, ci) => `
       <div class="price-category reveal">
-        <h3 class="price-cat-title">
+        ${cat.title ? `<h3 class="price-cat-title">
           <span class="price-cat-icon"${editAttr(`serviceCategories.${ci}.icon`)}>${ndIconHtml(categoryIcon(cat, ci))}</span>
           <span${editAttr(`serviceCategories.${ci}.title`)}>${cat.title}</span>
-        </h3>
+        </h3>` : ''}
         <div class="service-cards">
           ${cat.items.map((item, ii) => {
             const waMsg = encodeURIComponent(`مرحباً، أرغب بالاستفسار عن خدمة: ${item.name}`);
