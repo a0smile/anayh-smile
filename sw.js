@@ -1,4 +1,4 @@
-const CACHE_NAME = 'smile-care-v8';
+const CACHE_NAME = 'smile-care-v9';
 const ASSETS = [
   './',
   './index.html',
@@ -15,7 +15,8 @@ const ASSETS = [
   './icon-512.png',
   './hero-blend.jpg',
   './flag-sa.png',
-  './emblem-sa.png'
+  './emblem-sa.png',
+  './national-day.mp3'
 ];
 
 self.addEventListener('install', (event) => {

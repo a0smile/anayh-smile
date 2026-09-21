@@ -691,4 +691,74 @@ function initScrollReveal() {
   document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
 }
 
+
+// ===== نشيد اليوم الوطني — national-day.mp3 (لا يمس نظام المالك) =====
+(function initNationalMusic() {
+  const audio = document.getElementById('nationalAudio');
+  const btn = document.getElementById('ndMusicBtn');
+  const icon = document.getElementById('ndMusicIcon');
+  if (!audio || !btn) return;
+
+  // تأكد من المصدر الحقيقي
+  if (!audio.getAttribute('src')) {
+    audio.src = 'national-day.mp3';
+  }
+  audio.loop = true;
+  audio.volume = 0.55;
+
+  let started = false;
+
+  function setPlayingUI(playing) {
+    btn.classList.toggle('playing', playing);
+    if (icon) icon.textContent = playing ? '🔊' : '🎵';
+    btn.setAttribute('aria-label', playing ? 'إيقاف النشيد' : 'تشغيل نشيد اليوم الوطني');
+    btn.title = playing ? 'إيقاف النشيد' : 'تشغيل نشيد اليوم الوطني';
+  }
+
+  function playMusic() {
+    const p = audio.play();
+    if (p && typeof p.then === 'function') {
+      p.then(() => {
+        started = true;
+        setPlayingUI(true);
+      }).catch(() => {
+        // المتصفح منع التشغيل التلقائي — الزر جاهز للضغط
+        setPlayingUI(false);
+      });
+    } else {
+      started = true;
+      setPlayingUI(true);
+    }
+  }
+
+  function pauseMusic() {
+    audio.pause();
+    setPlayingUI(false);
+  }
+
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (audio.paused) playMusic();
+    else pauseMusic();
+  });
+
+  audio.addEventListener('ended', () => setPlayingUI(false));
+  audio.addEventListener('pause', () => {
+    if (!audio.ended) setPlayingUI(false);
+  });
+  audio.addEventListener('play', () => setPlayingUI(true));
+
+  // محاولة تشغيل خفيفة بعد أول تفاعل (سياسة المتصفح)
+  const unlock = () => {
+    if (started) return;
+    playMusic();
+    document.removeEventListener('click', unlock);
+    document.removeEventListener('touchstart', unlock);
+  };
+  document.addEventListener('click', unlock, { once: true, passive: true });
+  document.addEventListener('touchstart', unlock, { once: true, passive: true });
+})();
+
+
 loadContent();

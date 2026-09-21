@@ -70,7 +70,7 @@ function attachEditButtons() {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'edit-btn';
-    btn.innerHTML = '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em"><path d="M33 7l8 8-22 22-10 2 2-10z"/><path d="M29 11l8 8"/></svg> تعديل';
+    btn.innerHTML = '✏️ تعديل';
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
@@ -136,7 +136,7 @@ function showSavedToast() {
     toast.id = 'smileToast';
     document.body.appendChild(toast);
   }
-  toast.textContent = 'تم حفظ التعديل';
+  toast.textContent = 'تم الحفظ بنجاح ✓';
   toast.classList.add('show');
   setTimeout(() => toast.classList.remove('show'), 1400);
 }
