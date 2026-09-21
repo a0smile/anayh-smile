@@ -37,7 +37,8 @@ window.applyOverrides = applyOverrides;
 
 async function loadContent() {
   try {
-    const response = await fetch('content.json');
+    /* no-cache: يعيد التحقق من السيرفر حتى لا تُعرض نسخة قديمة من الأسعار */
+    const response = await fetch('content.json', { cache: 'no-cache' });
     let data = await response.json();
     siteData = applyOverrides(data);
     renderSite(siteData);
@@ -142,7 +143,7 @@ function renderDataIcons() {
 }
 function renderSite(data) {
   renderDataIcons();
-  const { clinic, hero, offers, booking } = data;
+  const { clinic, hero, booking } = data;
   const sections = data.sections || {};
   const testimonials = data.testimonials || data.reviews || [];
   const workingHours = data.workingHours || [];
@@ -163,7 +164,6 @@ function renderSite(data) {
       ['featuresBadge', 'sections.featuresBadge'],
       ['featuresTitle', 'sections.featuresTitle'],
       ['featuresSubtitle', 'sections.featuresSubtitle'],
-      ['offersBadge', 'sections.offersBadge'],
       ['doctorsBadge', 'sections.doctorsBadge'],
       ['doctorsTitle', 'sections.doctorsTitle'],
       ['doctorsSubtitle', 'sections.doctorsSubtitle'],
@@ -401,36 +401,6 @@ function renderSite(data) {
         </div>
       </div>
     `).join('');
-  });
-
-  safeRender('offers', () => {
-    const offersSection = document.getElementById('offers');
-    /* زر تفعيل/إخفاء قسم العروض (اكتب true أو false) */
-    if (offersSection) {
-      offersSection.setAttribute('data-edit', 'offers.enabled');
-      offersSection.setAttribute('data-edit-type', 'text');
-      offersSection.setAttribute('data-edit-label', 'تفعيل قسم العروض (اكتب true أو false)');
-    }
-    if (offers && offers.enabled && (offers.items || []).length > 0) {
-      setText('offersTitle', offers.title);
-      setText('offersSubtitle', offers.subtitle);
-      markEditable('offersTitle', 'offers.title');
-      markEditable('offersSubtitle', 'offers.subtitle');
-      const offersGrid = document.getElementById('offersGrid');
-      if (!offersGrid) return;
-      offersGrid.innerHTML = offers.items.map((o, i) => `
-        <div class="offer-card reveal">
-          <span class="offer-note"${editAttr(`offers.items.${i}.note`)}>${o.note || ''}</span>
-          <div class="offer-icon"${editAttr(`offers.items.${i}.icon`)}>${ndIconHtml(o.icon)}</div>
-          <h3${editAttr(`offers.items.${i}.title`)}>${o.title}</h3>
-          <div class="offer-old-price"${editAttr(`offers.items.${i}.oldPrice`)}>${o.oldPrice} ريال</div>
-          <div class="offer-price"${editAttr(`offers.items.${i}.price`)}>${o.price}</div>
-          <a href="#booking" class="btn btn-primary btn-sm">احجز العرض</a>
-        </div>
-      `).join('');
-    } else if (offersSection) {
-      offersSection.style.display = 'none';
-    }
   });
 
   safeRender('doctors', () => {

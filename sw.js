@@ -1,4 +1,4 @@
-const CACHE_NAME = 'smile-care-v7';
+const CACHE_NAME = 'smile-care-v8';
 const ASSETS = [
   './',
   './index.html',
