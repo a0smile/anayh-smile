@@ -1,23 +1,21 @@
-const CACHE_NAME = 'smile-care-v6';
+const CACHE_NAME = 'smile-care-v7';
 const ASSETS = [
   './',
   './index.html',
+  './catalog.html',
   './style.css',
+  './icons.js',
   './main.js',
+  './catalog.js',
   './admin.js',
   './content.json',
   './manifest.json',
   './icon.svg',
   './icon-192.png',
   './icon-512.png',
-  './assets/national/hero-blend.jpg',
-  './assets/national/clinic-exterior.jpg',
-  './assets/national/clinic-interior.jpg',
-  './assets/national/flag-sa.png',
-  './assets/national/emblem-sa.png',
-  './assets/national/tower-kingdom.jpg',
-  './assets/national/tower-faisaliah.jpg',
-  './assets/national/riyadh-skyline.jpg'
+  './hero-blend.jpg',
+  './flag-sa.png',
+  './emblem-sa.png'
 ];
 
 self.addEventListener('install', (event) => {

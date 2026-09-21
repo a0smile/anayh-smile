@@ -124,7 +124,16 @@ function animateCounters() {
 }
 
 function ndStar() {
-  return '<span class="star-icon">' + (window.ndIcon ? window.ndIcon('star') : '') + '</span>';
+  /* نستخدم ndIconHtml لضمان معرّفات تدرّج فريدة لكل نجمة */
+  return window.ndIconHtml ? window.ndIconHtml('star') : '<span class="nd-icon"></span>';
+}
+
+/* تكرار نص الأيقونة نفسه يكرّر معرّف التدرّج، لذلك ننشئ كل نجمة على حدة */
+function ndStars(count) {
+  const n = Math.max(0, Math.min(5, Number(count) || 5));
+  let html = '';
+  for (let i = 0; i < n; i++) html += ndStar();
+  return html;
 }
 function renderDataIcons() {
   document.querySelectorAll('.nd-icon[data-icon]').forEach((el) => {
@@ -206,10 +215,7 @@ function renderSite(data) {
       if (e) e.src = nd.emblemImage;
     }
 
-    setText('ndBannerBadge', nd.badge || sections.nationalDayBadge);
-    setText('ndBannerTitle', nd.greetingTitle);
-    setText('ndBannerSlogan', nd.slogan);
-    setText('nationalDayBadge', sections.nationalDayBadge);
+    setText('nationalDayBadge', nd.badge || sections.nationalDayBadge);
     setText('nationalDayTitle', nd.greetingTitle);
     setText('nationalDayGreeting', nd.greeting);
     setText('nationalDayGreeting2', nd.greeting2);
@@ -238,15 +244,18 @@ function renderSite(data) {
   safeRender('announcement', () => {
     if (data.announcement) {
       const bar = document.getElementById('announcementBar');
+      if (!bar) return;
       bar.style.display = '';
-      document.getElementById('announcementText').textContent = data.announcement;
-      document.getElementById('announcementText2').textContent = data.announcement;
+      const t1 = document.getElementById('announcementText');
+      const t2 = document.getElementById('announcementText2');
+      if (t1) t1.textContent = data.announcement;
+      if (t2) t2.textContent = data.announcement;
       bar.setAttribute('data-edit', 'announcement');
       bar.setAttribute('data-edit-type', 'text');
       bar.setAttribute('data-edit-label', 'نص الشريط المتحرك');
     } else {
-      document.getElementById('announcementBar').style.display = 'none';
-      document.getElementById('header').style.top = '0';
+      const bar = document.getElementById('announcementBar');
+      if (bar) bar.style.display = 'none';
     }
   });
 
@@ -256,8 +265,10 @@ function renderSite(data) {
     setText('footerName', clinic.name);
     setText('footerTagline', clinic.tagline);
     setText('footerNameBottom', clinic.name);
-    document.getElementById('logoName').setAttribute('data-edit', 'clinic.name');
-    document.getElementById('logoTagline').setAttribute('data-edit', 'clinic.tagline');
+    const nameEl = document.getElementById('logoName');
+    const tagEl = document.getElementById('logoTagline');
+    if (nameEl) nameEl.setAttribute('data-edit', 'clinic.name');
+    if (tagEl) tagEl.setAttribute('data-edit', 'clinic.tagline');
     markEditable('logoName', 'clinic.name');
     markEditable('logoTagline', 'clinic.tagline');
     markEditable('footerName', 'clinic.name');
@@ -265,22 +276,17 @@ function renderSite(data) {
   });
 
   safeRender('hero', () => {
-    setText('heroBadge', hero.badge);
-    const heroTitle = document.getElementById('heroTitle');
-    heroTitle.innerHTML = `${hero.title || ''} <span class="highlight">${hero.titleHighlight || ''}</span>`;
-    setText('heroSubtitle', hero.subtitle);
+    const title = [hero.title, hero.titleHighlight].filter(Boolean).join(' ').trim();
+    setText('ndBannerBadge', hero.badge);
+    setText('ndBannerTitle', title);
+    setText('ndBannerSlogan', hero.subtitle);
     setText('heroBtnMain', hero.buttonMain);
     setText('heroBtnSecondary', hero.buttonSecondary);
-    ['heroBadge', 'heroSubtitle', 'heroBtnMain', 'heroBtnSecondary'].forEach((id, i) => {
-      const paths = ['hero.badge', 'hero.subtitle', 'hero.buttonMain', 'hero.buttonSecondary'];
-      document.getElementById(id).setAttribute('data-edit', paths[i]);
-      document.getElementById(id).setAttribute('data-edit-type', 'text');
-    });
-    heroTitle.setAttribute('data-edit', 'hero.title');
-    heroTitle.setAttribute('data-edit-type', 'text');
-    markEditable('heroTitle', 'hero.title');
-    heroTitle.innerHTML = `${hero.title || ''} <span class="highlight" id="heroTitleHighlight">${hero.titleHighlight || ''}</span>`;
-    markEditable('heroTitleHighlight', 'hero.titleHighlight');
+    markEditable('ndBannerBadge', 'hero.badge');
+    markEditable('ndBannerTitle', 'hero.title');
+    markEditable('ndBannerSlogan', 'hero.subtitle');
+    markEditable('heroBtnMain', 'hero.buttonMain');
+    markEditable('heroBtnSecondary', 'hero.buttonSecondary');
   });
 
   safeRender('heroImages', () => {
@@ -303,6 +309,7 @@ function renderSite(data) {
 
   safeRender('stats', () => {
     const statsGrid = document.getElementById('statsGrid');
+    if (!statsGrid) return;
     statsGrid.innerHTML = (data.stats || []).map((s, i) => `
       <div class="stat-item reveal">
         <div class="stat-number count-up" data-target="${s.number}"${editAttr(`stats.${i}.number`)}>${s.number}</div>
@@ -314,29 +321,57 @@ function renderSite(data) {
 
   safeRender('services', () => {
     const servicesGrid = document.getElementById('servicesGrid');
+    if (!servicesGrid) return;
+    const ICON_BY_NAME = [
+      [/ابتسامة|هوليود|زيركون|إيماكس|ايمكس|بورسلان|تركيب/, 'veneer'],
+      [/تقويم|مثبت|شد/, 'braces'],
+      [/تبييض|ليزر/, 'laser'],
+      [/عصب|جذور/, 'root'],
+      [/خلع|ضرس|قلع/, 'extract'],
+      [/حشو/, 'filling'],
+      [/فلورايد/, 'fluoride'],
+      [/أطفال|طفال|تاج|حافظة/, 'crown'],
+      [/تنظيف|جير|تلميع/, 'clean'],
+      [/زراع/, 'tooth']
+    ];
+    const iconFor = (name, idx) => {
+      const found = ICON_BY_NAME.find(([re]) => re.test(name));
+      return found ? found[1] : ['tooth', 'clean', 'brush'][idx % 3];
+    };
+    const categoryIcon = (cat, ci) => {
+      if (cat.icon && cat.icon !== 'flag') return cat.icon;
+      return iconFor(cat.title || '', ci);
+    };
+
     servicesGrid.innerHTML = (data.serviceCategories || []).map((cat, ci) => `
       <div class="price-category reveal">
-        <h3 class="price-cat-title"><span class="price-cat-icon"${editAttr(`serviceCategories.${ci}.icon`)}>${ndIconHtml(cat.icon)}</span> <span${editAttr(`serviceCategories.${ci}.title`)}>${cat.title}</span></h3>
-        <ul class="price-items">
+        <h3 class="price-cat-title">
+          <span class="price-cat-icon"${editAttr(`serviceCategories.${ci}.icon`)}>${ndIconHtml(categoryIcon(cat, ci))}</span>
+          <span${editAttr(`serviceCategories.${ci}.title`)}>${cat.title}</span>
+        </h3>
+        <div class="service-cards">
           ${cat.items.map((item, ii) => {
             const waMsg = encodeURIComponent(`مرحباً، أرغب بالاستفسار عن خدمة: ${item.name}`);
             const base = `serviceCategories.${ci}.items.${ii}`;
-            return `<li class="price-item">
-              <span class="price-item-name"${editAttr(base + '.name')}>${item.name}</span>
-              <span class="price-item-prices">
-                <span class="price-old"${editAttr(base + '.oldPrice')}>${item.oldPrice ? item.oldPrice + ' ريال' : ''}</span>
-                <span class="price-now"${editAttr(base + '.price')}>${item.price} ريال</span>
-              </span>
-              <a class="price-wa-btn" href="https://wa.me/${clinic.whatsapp}?text=${waMsg}" target="_blank" rel="noopener"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:1.05em;height:1.05em"><path d="M24 6a18 18 0 0 0-15 28L7 42l8-2A18 18 0 1 0 24 6z"/><path d="M17 17c0 8 6 14 14 14 1.6 0 3-2 2-3.4l-3.6-2-2.4 2.4c-2.6-1-5-3.4-6-6l2.4-2.4-2-3.6C20 15 17 16 17 17z" fill="currentColor" stroke="none"/></svg> اطلبها</a>
-            </li>`;
+            const icon = iconFor(item.name || '', ii);
+            return `<article class="service-card">
+              <div class="service-card-icon"${editAttr(base + '.icon')}>${ndIconHtml(icon)}</div>
+              <h4 class="service-card-name"${editAttr(base + '.name')}>${item.name}</h4>
+              <div class="service-card-prices">
+                ${item.oldPrice ? `<span class="price-old"><span class="price-label">قبل</span><span class="price-value"${editAttr(base + '.oldPrice')}>${item.oldPrice} ريال</span></span>` : ''}
+                <span class="price-now"><span class="price-label">بعد</span><span class="price-value"${editAttr(base + '.price')}>${item.price} ريال</span></span>
+              </div>
+              <a class="price-wa-btn" href="https://wa.me/${clinic.whatsapp}?text=${waMsg}" target="_blank" rel="noopener">${ndIconHtml('whatsapp')} اطلبها</a>
+            </article>`;
           }).join('')}
-        </ul>
+        </div>
       </div>
     `).join('');
   });
 
   safeRender('dailyTips', () => {
     const dailyTipsList = document.getElementById('dailyTipsList');
+    if (!dailyTipsList) return;
     dailyTipsList.innerHTML = (data.dailyTips || []).map((tip, i) => `
       <li${editAttr('dailyTips.' + i)}><span class="daily-tip-num">${i + 1}</span>${tip}</li>
     `).join('');
@@ -344,6 +379,7 @@ function renderSite(data) {
 
   safeRender('tips', () => {
     const tipsGrid = document.getElementById('tipsGrid');
+    if (!tipsGrid) return;
     tipsGrid.innerHTML = (data.tips || []).map((t, i) => `
       <div class="tip-card reveal">
         <div class="tip-icon"${editAttr(`tips.${i}.icon`)}>${ndIconHtml(t.icon)}</div>
@@ -355,6 +391,7 @@ function renderSite(data) {
 
   safeRender('features', () => {
     const featuresGrid = document.getElementById('featuresGrid');
+    if (!featuresGrid) return;
     featuresGrid.innerHTML = (data.features || []).map((f, i) => `
       <div class="feature-card reveal">
         <div class="feature-icon"${editAttr(`features.${i}.icon`)}>${ndIconHtml(f.icon)}</div>
@@ -380,6 +417,7 @@ function renderSite(data) {
       markEditable('offersTitle', 'offers.title');
       markEditable('offersSubtitle', 'offers.subtitle');
       const offersGrid = document.getElementById('offersGrid');
+      if (!offersGrid) return;
       offersGrid.innerHTML = offers.items.map((o, i) => `
         <div class="offer-card reveal">
           <span class="offer-note"${editAttr(`offers.items.${i}.note`)}>${o.note || ''}</span>
@@ -397,6 +435,7 @@ function renderSite(data) {
 
   safeRender('doctors', () => {
     const doctorsGrid = document.getElementById('doctorsGrid');
+    if (!doctorsGrid) return;
     doctorsGrid.innerHTML = (data.doctors || []).map((d, i) => `
       <div class="doctor-card reveal">
         <div class="doctor-avatar"${editAttr(`doctors.${i}.initial`)}>${d.initial}</div>
@@ -409,9 +448,10 @@ function renderSite(data) {
 
   safeRender('testimonials', () => {
     const testimonialsGrid = document.getElementById('testimonialsGrid');
+    if (!testimonialsGrid) return;
     testimonialsGrid.innerHTML = (testimonials || []).map((t, i) => `
       <div class="testimonial-card reveal">
-        <div class="testimonial-stars"${editAttr(`reviews.${i}.rating`)}>${ndStar().repeat(t.rating || 5)}</div>
+        <div class="testimonial-stars"${editAttr(`reviews.${i}.rating`)}>${ndStars(t.rating)}</div>
         <p class="testimonial-text"${editAttr(`reviews.${i}.text`)}>"${t.text}"</p>
         <p class="testimonial-name"${editAttr(`reviews.${i}.name`)}>${t.name}</p>
       </div>
@@ -426,6 +466,7 @@ function renderSite(data) {
     markEditable('bookingSubtitle', 'booking.subtitle');
     markEditable('submitBtn', 'booking.button');
     const serviceSelect = document.getElementById('service');
+    if (!serviceSelect) return;
     serviceSelect.innerHTML = '<option value="">اختر الخدمة</option>' +
       bookingServices.map(s => `<option value="${s}">${s}</option>`).join('');
     /* قائمة الخدمات داخل الحجز: قابلة للتعديل كنصوص أسطر */
@@ -436,26 +477,61 @@ function renderSite(data) {
 
   safeRender('contact', () => {
     setText('contactAddress', clinic.address);
-    document.getElementById('contactAddress').setAttribute('data-edit', 'clinic.address');
+    const addrEl = document.getElementById('contactAddress');
+    if (addrEl) addrEl.setAttribute('data-edit', 'clinic.address');
+
     const phoneEl = document.getElementById('contactPhone');
-    phoneEl.innerHTML = `جوال: <a href="tel:${clinic.phone}" data-edit="clinic.phone" data-edit-type="text">${clinic.phone}</a>`;
+    if (phoneEl) {
+      phoneEl.innerHTML = `جوال: <a href="tel:${clinic.phone}" data-edit="clinic.phone" data-edit-type="text">${clinic.phone}</a>`;
+    }
     const emailEl = document.getElementById('contactEmail');
-    emailEl.innerHTML = `بريد: <a href="mailto:${clinic.email}" data-edit="clinic.email" data-edit-type="text">${clinic.email}</a>`;
+    if (emailEl) {
+      emailEl.innerHTML = clinic.email
+        ? `بريد: <a href="mailto:${clinic.email}" data-edit="clinic.email" data-edit-type="text">${clinic.email}</a>`
+        : '';
+    }
+
     const mapBtn = document.getElementById('mapBtn');
-    mapBtn.href = clinic.mapUrl || ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(clinic.address || ''));
-    mapBtn.setAttribute('data-edit', 'clinic.mapUrl');
-    mapBtn.setAttribute('data-edit-type', 'text');
-    mapBtn.setAttribute('data-edit-label', 'رابط الخريطة');
+    const mapQuery = clinic.mapUrl || ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(clinic.address || ''));
+    if (mapBtn) {
+      mapBtn.href = mapQuery;
+      mapBtn.setAttribute('data-edit', 'clinic.mapUrl');
+      mapBtn.setAttribute('data-edit-type', 'text');
+      mapBtn.setAttribute('data-edit-label', 'رابط الخريطة');
+    }
+
+    // خريطة مدمجة تعمل بدون مفاتيح API
+    const mapFrame = document.getElementById('mapFrame');
+    if (mapFrame) {
+      mapFrame.src = 'https://maps.google.com/maps?q=' + encodeURIComponent(clinic.address || '') + '&hl=ar&z=15&output=embed';
+    }
+
+    const waBtn = document.getElementById('whatsappBtn');
+    if (waBtn && clinic.whatsapp) {
+      waBtn.href = `https://wa.me/${clinic.whatsapp}?text=${encodeURIComponent('مرحباً، أرغب بالاستفسار عن خدمات ' + (clinic.name || ''))}`;
+    }
+
     setText('footerAddress', clinic.address);
-    markEditable('footerAddress', 'clinic.address');
+    const footerAddressEl = document.getElementById('footerAddress');
+    if (footerAddressEl) markEditable('footerAddress', 'clinic.address');
+
     const footerPhoneEl = document.getElementById('footerPhone');
-    footerPhoneEl.innerHTML = clinic.phone ? `جوال: <a href="tel:${clinic.phone}" data-edit="clinic.phone" data-edit-type="text">${clinic.phone}</a>` : '';
+    if (footerPhoneEl) {
+      footerPhoneEl.innerHTML = clinic.phone
+        ? `جوال: <a href="tel:${clinic.phone}" data-edit="clinic.phone" data-edit-type="text">${clinic.phone}</a>`
+        : '';
+    }
     const footerEmailEl = document.getElementById('footerEmail');
-    footerEmailEl.innerHTML = clinic.email ? `بريد: <a href="mailto:${clinic.email}" data-edit="clinic.email" data-edit-type="text">${clinic.email}</a>` : '';
+    if (footerEmailEl) {
+      footerEmailEl.innerHTML = clinic.email
+        ? `بريد: <a href="mailto:${clinic.email}" data-edit="clinic.email" data-edit-type="text">${clinic.email}</a>`
+        : '';
+    }
   });
 
   safeRender('workingHours', () => {
     const hoursList = document.getElementById('hoursList');
+    if (!hoursList) return;
     hoursList.innerHTML = workingHours.map((h, i) => `
       <li>
         <span${editAttr(`workingHours.${i}.days`)}>${h.days}</span>
@@ -466,21 +542,26 @@ function renderSite(data) {
 
   safeRender('social', () => {
     const socialLinks = document.getElementById('socialLinks');
+    if (!socialLinks) return;
     const socials = [
+      { url: clinic.whatsapp ? `https://wa.me/${clinic.whatsapp}` : '', icon: 'whatsapp', name: 'واتساب', path: 'clinic.whatsapp' },
       { url: clinic.instagram, icon: 'instagram', name: 'انستقرام', path: 'clinic.instagram' },
       { url: clinic.snapchat, icon: 'snapchat', name: 'سناب شات', path: 'clinic.snapchat' },
       { url: clinic.tiktok, icon: 'tiktok', name: 'تيك توك', path: 'clinic.tiktok' },
       { url: clinic.twitter, icon: 'twitter', name: 'تويتر', path: 'clinic.twitter' }
     ];
-    socialLinks.innerHTML = socials
-      .filter(s => s.url)
-      .map(s => `<a href="${s.url}" target="_blank" aria-label="${s.name}" title="${s.name}"${editAttr(s.path)}>${ndIconHtml(s.icon)}</a>`)
+    const list = socials.filter(s => s.url);
+    socialLinks.innerHTML = list
+      .map(s => `<a href="${s.url}" target="_blank" rel="noopener" aria-label="${s.name}" title="${s.name}"${editAttr(s.path)}>${ndIconHtml(s.icon)}</a>`)
       .join('');
+    const block = document.querySelector('.social-block');
+    if (block) block.style.display = list.length ? '' : 'none';
   });
 
   safeRender('whatsapp', () => {
     const waMessage = encodeURIComponent('مرحباً، أرغب بحجز موعد في ' + clinic.name);
     const floatBtn = document.getElementById('whatsappFloat');
+    if (!floatBtn) return;
     floatBtn.href = `https://wa.me/${clinic.whatsapp}?text=${waMessage}`;
     floatBtn.setAttribute('data-edit', 'clinic.whatsapp');
     floatBtn.setAttribute('data-edit-type', 'text');
@@ -488,10 +569,12 @@ function renderSite(data) {
   });
 
   safeRender('year', () => {
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
+    const yearEl = document.getElementById('currentYear');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
   });
 
   initScrollReveal();
+  initNavSpy();
 }
 
 // ===== وضع المالك: حفظ تعديل نص =====
@@ -514,7 +597,8 @@ window.getOverrideValue = (path) => getDeep(siteData || {}, path);
     const name = document.getElementById('name').value.trim();
     const phone = document.getElementById('phone').value.trim();
     const service = document.getElementById('service').value;
-    const date = document.getElementById('date').value;
+    const dateEl = document.getElementById('date');
+    const date = dateEl ? dateEl.value : '';
 
     let message = `طلب حجز موعد جديد\n\n`;
     message += `الاسم: ${name}\n`;
@@ -542,22 +626,77 @@ window.getOverrideValue = (path) => getDeep(siteData || {}, path);
     const waUrl = `https://wa.me/${siteData.clinic.whatsapp}?text=${encodeURIComponent(message)}`;
     window.open(waUrl, '_blank');
 
-    document.getElementById('reviewName').value = '';
-    document.getElementById('reviewText').value = '';
+    const rn = document.getElementById('reviewName');
+    const rt = document.getElementById('reviewText');
+    if (rn) rn.value = '';
+    if (rt) rt.value = '';
     alert('شكراً لك! تم إرسال تعليقك، وسيظهر بعد المراجعة.');
   });
 
 // ===== قائمة الجوال =====
-const menuToggle = document.getElementById('menuToggle');
+const menuToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
+
+function closeMobileMenu() {
+  if (!navLinks) return;
+  navLinks.classList.remove('open');
+  if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+}
+
 if (menuToggle && navLinks) {
   menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
+    const isOpen = navLinks.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   });
 
-navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => navLinks.classList.remove('open'));
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMobileMenu);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!navLinks.classList.contains('open')) return;
+    if (navLinks.contains(e.target) || menuToggle.contains(e.target)) return;
+    closeMobileMenu();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMobileMenu();
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) closeMobileMenu();
+  });
+}
+
+// ===== إبراز الخيار النشط في الترويسة حسب القسم المعروض =====
+function initNavSpy() {
+  if (!navLinks) return;
+  const links = Array.from(navLinks.querySelectorAll('.nav-link'));
+  if (!links.length) return;
+
+  const targets = links
+    .map(link => {
+      const id = (link.getAttribute('href') || '').replace('#', '');
+      const section = id ? document.getElementById(id) : null;
+      return section ? { link, section } : null;
+    })
+    .filter(Boolean);
+
+  if (!targets.length) return;
+
+  const setActive = (link) => {
+    links.forEach(l => l.classList.toggle('active', l === link));
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const match = targets.find(t => t.section === entry.target);
+      if (match) setActive(match.link);
     });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+  targets.forEach(t => observer.observe(t.section));
 }
 
 // ===== ظل الترويسة عند التمرير =====
@@ -565,7 +704,7 @@ const headerEl = document.getElementById('header');
 if (headerEl) {
   window.addEventListener('scroll', () => {
     headerEl.classList.toggle('scrolled', window.scrollY > 30);
-  });
+  }, { passive: true });
 }
 
 // ===== ظهور العناصر عند التمرير =====
