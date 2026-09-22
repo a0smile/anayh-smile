@@ -86,8 +86,7 @@
       </div>
     </section>
 
-    <!-- ===== الخدمات والأسعار (بطاقات الأيقونات) — بعد التهنئة مباشرة ===== -->
-    <section class="section" id="services">
+    <!-- ===== الخدمات والأسعار (بطاقات الأيقونات) — بعد التهنئة مباشرة ===== -->    <section class="section" id="services">
       <div class="container">
         <div class="section-head" id="servicesSectionHead" hidden>
           <span class="section-badge" id="servicesBadge"></span>
@@ -107,24 +106,27 @@
     <!-- ===== نبذة عن المجمع ===== -->
     <section class="section section-alt" id="about">
       <div class="container">
-        <div class="section-head">
-          <span class="section-badge" id="featuresBadge">لماذا نحن؟</span>
-          <h2 class="section-title" id="featuresTitle">نبذة عن مجمع عناية الابتسامة الطبي</h2>
-          <p class="section-subtitle" id="featuresSubtitle">معايير رعاية رقمية حديثة تجعلنا الخيار الأول لعائلتك الكريمة</p>
+        <div class="section-head" style="text-align: center; margin-bottom: 30px;">
+          <!-- "رؤيتنا وقيمنا" بخط أسود عريض وقوي، بحجم كبير وبدون أي خلفية خضراء -->
+          <h2 id="featuresBadge" style="font-size: 32px; font-weight: 900; color: #000000 !important; background: none !important; padding: 0 !important; border-radius: 0 !important; display: block; margin: 0 auto 10px auto;">رؤيتنا وقيمنا</h2>
+          <h2 class="section-title" id="featuresTitle" style="display: none !important;"></h2>
+          <p class="section-subtitle" id="featuresSubtitle" style="display: none !important;"></p>
         </div>
         <div class="features-grid" id="featuresGrid"></div>
       </div>
     </section>
 
     <!-- ===== النصائح الطبية ===== -->
-    <section class="section" id="tips">
+    <!-- تم تغيير الخلفية هنا لتصبح بيج غامق لقسم الثقافة الطبية بأكمله -->
+    <section class="section" id="tips" style="background-color: #e5dacb !important; padding: 60px 0;">
       <div class="container">
-        <div class="section-head">
-          <span class="section-badge" id="tipsBadge">ثقافة طبية</span>
-          <h2 class="section-title" id="tipsTitle">نصائح أطبائنا للحفاظ على أسنانك</h2>
-          <p class="section-subtitle" id="tipsSubtitle">إرشادات طبية من أخصائيينا لصحة فم وأسنان أفضل تليق بابتسامتك</p>
+        <div class="section-head" style="text-align: center; margin-bottom: 30px;">
+          <!-- "ثقافة طبية" بدون خلفية خضراء، بحجم كبير وخط أسود قوي عريض -->
+          <h2 id="tipsBadge" style="font-size: 32px; font-weight: 900; color: #000000 !important; background: none !important; padding: 0 !important; border-radius: 0 !important; display: block; margin: 0 auto 10px auto;">ثقافة طبية</h2>
+          <h2 class="section-title" id="tipsTitle" style="display: none !important;"></h2>
+          <p class="section-subtitle" id="tipsSubtitle" style="display: none !important;"></p>
         </div>
-        <div class="daily-tips-box">
+        <div class="daily-tips-box" style="background-color: #ffffff; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
           <h3 id="dailyTipsTitle">عادات يومية لأسنان قوية | اليوم الوطني السعودي 96</h3>
           <ul class="daily-tips-list" id="dailyTipsList"></ul>
         </div>
@@ -183,9 +185,11 @@
     <!-- ===== التعليقات ===== -->
     <section class="section" id="reviews">
       <div class="container">
-        <div class="section-head">
-          <span class="section-badge" id="reviewsBadge">ثقة مراجعينا</span>
-          <h2 class="section-title" id="reviewsTitle">ابتسامات سعيدة تفخر بالوطن</h2>
+        <div class="section-head" style="text-align: center; margin-bottom: 30px;">
+          <!-- "آراء وتجارب متميزة" بدون خلفية خضراء وبخط أسود عريض وقوي #000000 وحجم كبير -->
+          <h2 id="reviewsBadge" style="font-size: 32px; font-weight: 900; color: #000000 !important; background: none !important; padding: 0 !important; border-radius: 0 !important; display: block; margin: 0 auto 10px auto;">آراء وتجارب متميزة</h2>
+          <!-- "ابتسامات سعيدة..." بخلفية ذهبية خفيفة لامعة وخط أسود عريض وقوي #000000 -->
+          <h2 class="section-title" id="reviewsTitle" style="font-size: 24px; font-weight: 900; color: #000000 !important; background: linear-gradient(135deg, #fff3cc 0%, #ffe699 100%) !important; padding: 12px 24px; border-radius: 8px; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-top: 5px;">ابتسامات سعيدة نصنعها بتميز وإتقان تلبي تطلعاتكم</h2>
           <p class="section-subtitle" id="reviewsSubtitle">تجارب حقيقية موثقة من زبائن مجمع عناية الابتسامة الأعزاء في حفر الباطن</p>
         </div>
         <div class="testimonials-grid" id="testimonialsGrid"></div>
@@ -213,22 +217,24 @@
     <!-- ===== الأسئلة الشائعة ===== -->
     <section class="section section-faq" id="faq">
       <div class="container">
-        <div class="section-head">
-          <span class="section-badge">أسئلة شائعة</span>
-          <h2 class="section-title">الأسئلة الشائعة</h2>
+        <div class="section-head" style="text-align: center; margin-bottom: 30px;">
+          <!-- تم حذف وسم الكلمة المكررة الصغيرة بالخلفية الخضراء بناء على طلبك والاعتماد فقط على العنوان الرئيسي بعد تكبيره وجعله عريضاً وبخط أسود قوي #000000 -->
+          <h2 class="section-title" style="font-size: 32px; font-weight: 900; color: #000000 !important; margin: 0 auto;">الأسئلة الشائعة</h2>
           <p class="section-subtitle">إجابات رسمية وواضحة لأكثر الاستفسارات تكراراً</p>
         </div>
         <div class="faq-list" id="faqList"></div>
       </div>
     </section>
 
-<section class="section section-contact" id="contact">
+    <section class="section section-contact" id="contact">
       <div class="container">
-        <div class="section-head">
-          <span class="section-badge" id="contactBadge">تواصل معنا</span>
+        <div class="section-head" style="text-align: center; margin-bottom: 30px;">
+          <!-- "اتصل بنا" بدون خلفية خضراء وبخط أسود عريض وقوي #000000 وحجم كبير -->
+          <h2 id="contactBadge" style="font-size: 32px; font-weight: 900; color: #000000 !important; background: none !important; padding: 0 !important; border-radius: 0 !important; display: block; margin: 0 auto 10px auto;">اتصل بنا</h2>
           <h2 class="section-title" id="contactTitle">موقعنا في حفر الباطن وأوقات الدوام الرسمي</h2>
           <p class="section-subtitle">نحن في خدمتكم — تواصلوا معنا عبر أي وسيلة تناسبكم</p>
         </div>
+
 
         <div class="contact-grid">
           <div class="contact-card">
