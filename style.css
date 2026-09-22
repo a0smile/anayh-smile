@@ -2613,3 +2613,299 @@ body.admin-mode .admin-edit-bar {
 /* إخفاء زر الدخول عن الزوار بصرياً شبه شفاف */
 .admin-entry-btn { opacity: 0.22; }
 .admin-entry-btn:hover, .admin-entry-btn:focus { opacity: 0.9; }
+
+
+/* ============================================================
+   إصلاح شامل — فخامة طبية خضراء · أيقونات · أزرار · نصوص
+   ============================================================ */
+
+html, body {
+  font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif !important;
+  color: #000000 !important;
+  background: #F3F9F6 !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* كل النصوص محاذاة وسط في الأقسام الرئيسية */
+.nd-greeting-section,
+.hero-cta-section,
+.section-head,
+.service-card,
+.feature-card,
+.tip-card,
+.doctor-card,
+.testimonial-card,
+.contact-card,
+.stats-grid,
+.booking-card {
+  text-align: center !important;
+}
+
+/* إخفاء ملاحظة الأسعار نهائياً */
+.price-note { display: none !important; height: 0 !important; margin: 0 !important; padding: 0 !important; border: 0 !important; overflow: hidden !important; }
+
+/* ----- شارة التهنئة: أخضر فاتح + خط أبيض عريض ----- */
+.nd-badge {
+  background: linear-gradient(135deg, #1FA96A, #12854A) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  padding: 5px 16px !important;
+  font-size: 0.7rem !important;
+  font-weight: 900 !important;
+  border-radius: 50px !important;
+  box-shadow: 0 3px 10px rgba(18, 133, 74, 0.28) !important;
+  letter-spacing: 0.02em;
+}
+
+/* صندوق التهنئة مضغوط */
+.nd-greeting-section {
+  max-width: 640px !important;
+  margin: 14px auto 10px !important;
+  padding: 14px 16px 12px !important;
+  background: #FFFFFF !important;
+  border: 1.5px solid #C5E5D3 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 6px 20px rgba(10, 61, 42, 0.07) !important;
+}
+.nd-greeting { gap: 5px !important; }
+.nd-greeting-title {
+  font-size: 1rem !important;
+  font-weight: 900 !important;
+  color: #000000 !important;
+  line-height: 1.35 !important;
+  margin: 2px 0 !important;
+}
+.nd-greeting-text {
+  font-size: 0.74rem !important;
+  font-weight: 600 !important;
+  color: #0A1F14 !important;
+  line-height: 1.55 !important;
+  max-width: 560px !important;
+  margin: 0 auto !important;
+}
+.nd-greeting-text strong { color: #000 !important; font-weight: 800 !important; }
+.nd-greeting-closing {
+  font-size: 0.9rem !important;
+  font-weight: 900 !important;
+  color: #0A3D2A !important;
+  margin-top: 2px !important;
+}
+
+/* ----- أزرار CTA بجانب بعض وليست طويلة ----- */
+.hero-cta-section {
+  max-width: 520px !important;
+  margin: 0 auto 14px !important;
+  padding: 4px 12px 8px !important;
+}
+.hero-cta-title {
+  font-size: 1rem !important;
+  font-weight: 900 !important;
+  color: #000000 !important;
+}
+.hero-cta-sub {
+  font-size: 0.74rem !important;
+  font-weight: 700 !important;
+  color: #1A4D35 !important;
+}
+.hero-cta-actions {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+.hero-cta-actions .btn {
+  width: auto !important;
+  min-width: 140px !important;
+  max-width: 48% !important;
+  flex: 0 1 auto !important;
+  padding: 9px 16px !important;
+  font-size: 0.78rem !important;
+  font-weight: 800 !important;
+  border-radius: 50px !important;
+  white-space: nowrap !important;
+}
+.btn-primary {
+  background: linear-gradient(145deg, #1FA96A, #0D5C3A) !important;
+  color: #fff !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(18, 133, 74, 0.28) !important;
+}
+.btn-outline {
+  background: #fff !important;
+  color: #0D5C3A !important;
+  border: 1.6px solid #12854A !important;
+  box-shadow: none !important;
+}
+
+/* شارة "عزنا بطبعنا" تحت التهنئة */
+.hero-cta-section .nd-badge,
+.hero-cta-section .section-badge {
+  background: linear-gradient(135deg, #1FA96A, #12854A) !important;
+  color: #fff !important;
+}
+
+/* ----- بطاقات الخدمات: أيقونة أصغر فخمة ----- */
+.service-card {
+  padding: 12px 10px 10px !important;
+  border-radius: 14px !important;
+  border: 1px solid #D0E8DA !important;
+  background: #fff !important;
+  box-shadow: 0 3px 12px rgba(10, 61, 42, 0.05) !important;
+  text-align: center !important;
+}
+.service-card-icon {
+  width: 56px !important;
+  height: 56px !important;
+  margin: 0 auto 6px !important;
+  border-radius: 14px !important;
+  background: linear-gradient(145deg, #F8F1DC 0%, #EAD7A8 50%, #D9C07A 100%) !important;
+  border: 2.5px solid #FFFFFF !important;
+  box-shadow:
+    0 0 0 1.5px #C9A24D,
+    0 4px 0 rgba(18, 133, 74, 0.18),
+    0 8px 16px rgba(18, 133, 74, 0.15) !important;
+  overflow: hidden !important;
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+}
+.service-card-photo {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  border-radius: 11px !important;
+}
+.service-card-svg-fallback {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.service-card-svg-fallback svg {
+  width: 1.7em !important;
+  height: 1.7em !important;
+}
+.service-card-name {
+  font-size: 0.8rem !important;
+  font-weight: 900 !important;
+  color: #000000 !important;
+  line-height: 1.35 !important;
+}
+.price-now .price-value {
+  font-weight: 900 !important;
+  color: #0A3D2A !important;
+  font-size: 0.85rem !important;
+}
+.price-old .price-value {
+  color: #444 !important;
+  font-weight: 600 !important;
+}
+.price-label {
+  font-weight: 800 !important;
+}
+
+/* ----- عناوين أقسام ----- */
+.section-title {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+.section-subtitle {
+  color: #1A4D35 !important;
+  font-weight: 600 !important;
+}
+.section-badge {
+  background: linear-gradient(135deg, #1FA96A, #12854A) !important;
+  color: #FFFFFF !important;
+  font-weight: 900 !important;
+}
+
+/* باقي البطاقات */
+.feature-card h3, .tip-card h3, .doctor-card h3, .testimonial-name,
+.contact-card-title, .stat-number, .footer-brand h2 {
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+.feature-card p, .tip-card p, .testimonial-text, .footer-desc,
+.doctor-specialty, .contact-line {
+  color: #0A1F14 !important;
+  font-weight: 600 !important;
+}
+
+.feature-icon, .tip-icon {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 12px !important;
+  background: linear-gradient(145deg, #F8F1DC, #EAD7A8) !important;
+  border: 2px solid #fff !important;
+  box-shadow: 0 0 0 1.5px #C9A24D, 0 4px 0 rgba(18,133,74,0.15), 0 6px 12px rgba(18,133,74,0.12) !important;
+}
+
+/* موبايل: أزرار بجانب بعض إن أمكن */
+@media (max-width: 420px) {
+  .hero-cta-actions .btn {
+    min-width: 130px !important;
+    font-size: 0.72rem !important;
+    padding: 8px 12px !important;
+  }
+  .service-card-icon {
+    width: 50px !important;
+    height: 50px !important;
+  }
+}
+
+
+/* ===== صورة المجمع كاملة من الأعلى بدون قص الرأس ===== */
+.nd-banner {
+  height: min(52vw, 420px) !important;
+  min-height: 260px !important;
+  max-height: 480px !important;
+  overflow: hidden !important;
+  border-radius: 0 0 18px 18px !important;
+  background: #0A3D2A !important;
+}
+.nd-banner-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+  transform: none !important;
+  transition: transform 0.6s ease !important;
+}
+.nd-banner:hover .nd-banner-img {
+  transform: scale(1.03) !important;
+}
+.nd-banner-overlay {
+  background: linear-gradient(180deg, transparent 55%, rgba(10,61,42,0.18) 100%) !important;
+  pointer-events: none !important;
+}
+
+@media (max-width: 900px) {
+  .nd-banner {
+    height: min(58vw, 320px) !important;
+    min-height: 220px !important;
+  }
+}
+@media (max-width: 640px) {
+  .nd-banner {
+    height: min(62vw, 280px) !important;
+    min-height: 200px !important;
+    border-radius: 0 0 14px 14px !important;
+  }
+}
+@media (max-width: 400px) {
+  .nd-banner {
+    height: min(68vw, 240px) !important;
+    min-height: 180px !important;
+  }
+}

@@ -389,7 +389,8 @@ function renderSite(data) {
             const photo = photoFor(item.name || '', ii);
             return `<article class="service-card">
               <div class="service-card-icon"${editAttr(base + '.icon')}>
-                <img class="service-card-photo" src="${photo}" alt="" loading="lazy" width="128" height="128" onerror="this.style.display='none'">
+                <img class="service-card-photo" src="${photo}" alt="" loading="lazy" width="128" height="128" onerror="this.remove();">
+                <span class="service-card-svg-fallback">${(window.ndIconHtml ? window.ndIconHtml(icon) : '')}</span>
               </div>
               <h4 class="service-card-name"${editAttr(base + '.name')}>${item.name}</h4>
               <div class="service-card-prices">
