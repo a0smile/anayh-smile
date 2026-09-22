@@ -14,10 +14,29 @@
   <link rel="preload" as="image" href="hero-blend.jpg" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;800&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;800;900&family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=22">
 </head>
 <body>
+
+<!-- شاشة الدخول الفخمة - تخلي الصوت يشتغل 100% في الجوال والكمبيوتر -->
+<div id="entryOverlay" style="position:fixed;inset:0;z-index:99999;background:radial-gradient(120% 120% at 50% 0%, #1a8c55 0%, #0d4a2b 100%);display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(2px);">
+  <div style="width:100%;max-width:430px;background:linear-gradient(145deg,#ffffff 0%,#f7f7f7 100%);border-radius:26px;padding:38px 26px 28px;text-align:center;box-shadow:0 30px 70px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,1);border:2px solid rgba(18,133,74,0.15);position:relative;overflow:hidden;animation:popIn 0.6s ease;">
+    <div style="position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#12854A,#FFD700,#12854A);"></div>
+    <div style="position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:radial-gradient(circle, rgba(18,133,74,0.12) 0%, transparent 70%);border-radius:50%;"></div>
+    <div style="font-size:54px;margin-bottom:12px;">💐</div>
+    <h1 style="font-family:'Cairo',sans-serif;font-size:27px;font-weight:900;color:#0d4a2b;line-height:1.5;margin:0 0 8px 0;">أهلاً وسهلاً بكم في<br>مجمع عناية الابتسامة الطبي</h1>
+    <p style="font-family:'Tajawal',sans-serif;font-size:17px;font-weight:800;color:#12854A;margin:0 0 18px 0;letter-spacing:0.5px;">طب وجراحة الأسنان</p>
+    <div style="background:linear-gradient(135deg,#fff8e1 0%,#ffecb3 100%);border-radius:14px;padding:12px;margin-bottom:24px;border:1px solid #ffe082;">
+      <p style="font-family:'Cairo',sans-serif;font-size:22px;font-weight:900;color:#000;margin:0;">✨ نورتونا ✨</p>
+    </div>
+    <button id="enterSiteBtn" style="width:100%;background:linear-gradient(135deg,#12854A 0%,#0a5c33 100%);color:#fff;border:none;border-radius:16px;padding:18px 20px;font-family:'Cairo',sans-serif;font-size:21px;font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(18,133,74,0.45), inset 0 1px 0 rgba(255,255,255,0.35);transition:all 0.25s;display:flex;align-items:center;justify-content:center;gap:12px;">
+      <span>للدخول الى الموقع اضغط هنا</span><span style="font-size:26px;">💐</span>
+    </button>
+    <p style="font-family:'Tajawal',sans-serif;font-size:13px;color:#777;margin-top:16px;">🇸🇦 دام عزك يا وطن - اليوم الوطني 96</p>
+  </div>
+</div>
+<style>@keyframes popIn{0%{transform:scale(0.85);opacity:0}100%{transform:scale(1);opacity:1}}</style>
 
   <header class="header" id="header">
     <nav class="nav container">
@@ -186,7 +205,6 @@
           <p class="section-subtitle" id="reviewsSubtitle">تجارب حقيقية موثقة من زبائن مجمع عناية الابتسامة الأعزاء في حفر الباطن</p>
         </div>
         <div class="testimonials-grid" id="testimonialsGrid"></div>
-
         <div class="review-box">
           <h3 id="reviewBoxTitle">🇸🇦 شاركنا تجربتك لليوم الوطني</h3>
           <p id="reviewBoxText">رأيك فخر لنا ووسام! اكتب تعليقك وسنضيفه فوراً في واجهة الموقع بعد مراجعته.</p>
@@ -222,7 +240,6 @@
           <h2 class="section-title" id="contactTitle">موقعنا في حفر الباطن وأوقات الدوام الرسمي</h2>
           <p class="section-subtitle">نحن في خدمتكم — تواصلوا معنا عبر أي وسيلة تناسبكم</p>
         </div>
-
         <div class="contact-grid">
           <div class="contact-card">
             <h3 class="contact-card-title">📞 <span id="contactPhoneTitle">أرقام التواصل وحجز العروض</span></h3>
@@ -230,30 +247,25 @@
             <p class="contact-line" id="contactEmail"></p>
             <a class="btn btn-primary btn-sm" id="whatsappBtn" href="#" target="_blank" rel="noopener">تواصل عبر واتساب</a>
           </div>
-
           <div class="contact-card">
             <h3 class="contact-card-title">📍 <span id="contactAddressTitle">موقع المجمع بفرع حفر الباطن</span></h3>
             <p class="contact-line" id="contactAddress"></p>
             <a class="btn btn-outline btn-sm" id="mapBtn" href="#" target="_blank" rel="noopener">فتح الخريطة في خرائط جوجل</a>
           </div>
-
           <div class="contact-card">
             <h3 class="contact-card-title">⏰ <span id="contactHoursTitle">ساعات العمل الرسمية</span></h3>
             <ul class="hours-list" id="hoursList"></ul>
           </div>
         </div>
-
         <div class="map-wrap">
           <iframe id="mapFrame" class="map-frame" title="موقع مجمع عناية الابتسامة الطبي على الخريطة" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
-
         <div class="social-block">
           <h3 class="social-title">تابعنا على مواقع التواصل الاجتماعي</h3>
           <div class="social-links" id="socialLinks"></div>
         </div>
       </div>
     </section>
-
   </main>
 
   <section class="payment-banner" id="paymentBanner" aria-label="حلول الدفع">
@@ -286,8 +298,7 @@
   <button type="button" class="admin-entry-btn" id="adminEntryBtn" title="دخول المالك" aria-label="دخول المالك">🔒</button>
   <input type="file" id="adminFileInput" accept="image/*" hidden>
 
-  <!-- تم التعديل: تشغيل تلقائي صامت + يفتح الصوت بأول لمسة -->
-  <audio id="nationalAudio" src="national-day.mp3" autoplay muted loop playsinline webkit-playsinline preload="auto"></audio>
+  <audio id="nationalAudio" src="national-day.mp3" preload="auto" loop playsinline webkit-playsinline></audio>
   <div id="fireworksContainer" class="fireworks-container" aria-hidden="true"></div>
 
   <button type="button" class="nd-music-btn" id="ndMusicBtn" title="تشغيل نشيد اليوم الوطني" aria-label="تشغيل نشيد اليوم الوطني">
@@ -295,23 +306,38 @@
   </button>
 
   <script>
-  // كود التشغيل التلقائي - يشتغل مع أول لمسة كأنه تلقائي
+  // تشغيل الصوت 100% عند الضغط على زر الدخول
   (function(){
+    const enterBtn = document.getElementById('enterSiteBtn');
+    const overlay = document.getElementById('entryOverlay');
     const audio = document.getElementById('nationalAudio');
-    if(!audio) return;
-    function enableSound(){
+    const musicBtnIcon = document.getElementById('ndMusicIcon');
+    
+    function startAudio(){
+      if(!audio) return;
       audio.muted = false;
       audio.volume = 0.45;
-      audio.play().catch(()=>{});
-      document.removeEventListener('click', enableSound);
-      document.removeEventListener('touchstart', enableSound);
-      document.removeEventListener('scroll', enableSound);
+      audio.play().then(()=>{ if(musicBtnIcon) musicBtnIcon.textContent='🔊'; }).catch(()=>{});
     }
-    document.addEventListener('click', enableSound, {once:true});
-    document.addEventListener('touchstart', enableSound, {once:true});
-    document.addEventListener('scroll', enableSound, {once:true});
-    // محاولة تشغيل مباشرة (للكمبيوتر)
-    audio.play().catch(()=>{});
+
+    enterBtn.addEventListener('click', function(){
+      startAudio();
+      overlay.style.transition = 'all 0.7s cubic-bezier(0.4,0,0.2,1)';
+      overlay.style.opacity = '0';
+      overlay.style.transform = 'scale(1.15)';
+      overlay.style.pointerEvents = 'none';
+      setTimeout(()=>{ overlay.remove(); }, 700);
+      enterBtn.style.transform = 'scale(0.95)';
+    });
+
+    // زر الصوت الجانبي
+    const ndBtn = document.getElementById('ndMusicBtn');
+    if(ndBtn){
+      ndBtn.addEventListener('click', function(){
+        if(audio.paused){ startAudio(); } 
+        else { audio.pause(); if(musicBtnIcon) musicBtnIcon.textContent='🎵'; }
+      });
+    }
   })();
   </script>
 
