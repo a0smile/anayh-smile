@@ -2,6 +2,51 @@ const ADMIN_SESSION_KEY = 'smile_admin_active';
 var adminActive = false;
 window.adminActive = false;
 
+/* ===== إصلاح واجهة زر دخول المالك - يكون يمين صغير ومخفي عن الزوار ===== */
+(function fixAdminUIStyle(){
+  const css = `
+  #adminEntryBtn{
+    position: fixed!important;
+    bottom: 20px!important;
+    right: 20px!important;
+    z-index: 99999!important;
+    width: 52px!important;
+    height: 52px!important;
+    border-radius: 50%!important;
+    background: #0a5c36!important;
+    color: #fff!important;
+    border: 2px solid #ffd700!important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25)!important;
+    font-size: 22px!important;
+    display: flex!important;
+    align-items: center!important;
+    justify-content: center!important;
+    cursor: pointer!important;
+  }
+  #adminToolbar{
+    position: fixed!important;
+    bottom: 0!important;
+    left: 0!important;
+    right: 0!important;
+    z-index: 99998!important;
+    background: rgba(10,61,42,0.97)!important;
+    backdrop-filter: blur(8px);
+    padding: 10px 12px!important;
+    display: flex!important;
+    gap: 8px!important;
+    justify-content: center!important;
+    flex-wrap: wrap!important;
+    border-top: 2px solid #ffd700!important;
+  }
+  #adminToolbar[hidden]{ display: none!important; }
+  body:not(.admin-mode).admin-edit-bar,
+  body:not(.admin-mode).edit-btn{ display: none!important; }
+  `;
+  const st = document.createElement('style');
+  st.textContent = css;
+  document.head.appendChild(st);
+})();
+
 /* كود الدخول من جهة الخادم فقط — لا تغيّر كلمة المرور هنا */
 async function verifyAdminCode(code) {
   try {
@@ -33,9 +78,13 @@ async function enterAdminMode() {
   adminActive = true;
   window.adminActive = true;
   sessionStorage.setItem(ADMIN_SESSION_KEY, '1');
+  sessionStorage.setItem('smile_admin_code', code);
+  lastAdminCode = code;
   document.body.classList.add('admin-mode');
   const tb = document.getElementById('adminToolbar');
   if (tb) tb.hidden = false;
+  const entry = document.getElementById('adminEntryBtn');
+  if (entry) entry.style.display = 'none';
   attachEditButtons();
   if (typeof renderCatalog === 'function') renderCatalog();
   if (typeof window.activateClinicImageManagement === 'function') {
@@ -54,14 +103,16 @@ function exitAdminMode() {
   document.body.classList.remove('admin-mode');
   const tb = document.getElementById('adminToolbar');
   if (tb) tb.hidden = true;
+  const entry = document.getElementById('adminEntryBtn');
+  if (entry) entry.style.display = 'flex';
   removeEditButtons();
   notifyAdminChanged();
+  showSavedToast('تم الخروج من وضع المالك');
 }
 
 function notifyAdminChanged() {
   document.dispatchEvent(new CustomEvent('adminModeChanged'));
 }
-
 
 /* حفظ تلقائي إلى content.json عبر Cloudflare + GitHub */
 let lastAdminCode = sessionStorage.getItem('smile_admin_code') || '';
@@ -73,7 +124,6 @@ async function persistToServer(actionLabel) {
     return;
   }
 
-  // نطلب الرمز مرة واحدة فقط إن لم يكن محفوظاً في الجلسة
   if (!lastAdminCode) {
     const code = prompt('أدخل كود المالك مرة واحدة لربط الحفظ التلقائي بالملف:');
     if (!code) {
@@ -114,7 +164,6 @@ async function persistToServer(actionLabel) {
     showSavedToast((actionLabel || 'تم الحفظ') + ' محلياً ✓');
   }
 }
-
 
 function showSavedToast(msg) {
   let toast = document.getElementById('smileToast');
@@ -184,12 +233,10 @@ function attachEditButtons() {
 
     bar.appendChild(mk('تعديل', 'op-edit', () => handleEdit(el)));
 
-    // إضافة — للقوائم والمصفوفات
     if (type === 'list' || parentArrayPath(path)) {
       bar.appendChild(mk('إضافة', 'op-add', () => handleAdd(el)));
     }
 
-    // حذف — لعناصر المصفوفات
     if (parentArrayPath(path) && itemIndexFromPath(path) >= 0) {
       bar.appendChild(mk('حذف', 'op-del', () => handleDelete(el)));
     }
@@ -198,8 +245,7 @@ function attachEditButtons() {
       persistToServer('تم الحفظ بنجاح');
     }));
 
-    // موضع الشريط
-    const host = (type === 'image') ? el : (el.parentElement || el);
+    const host = (type === 'image')? el : (el.parentElement || el);
     if (getComputedStyle(host).position === 'static') {
       host.style.position = 'relative';
     }
@@ -208,7 +254,7 @@ function attachEditButtons() {
 }
 
 function removeEditButtons() {
-  document.querySelectorAll('.admin-edit-bar, .edit-btn').forEach(b => b.remove());
+  document.querySelectorAll('.admin-edit-bar,.edit-btn').forEach(b => b.remove());
 }
 
 function handleEdit(el) {
@@ -224,7 +270,7 @@ function handleEdit(el) {
   const current = window.getOverrideValue(path);
 
   if (type === 'list') {
-    const arr = Array.isArray(current) ? current : [];
+    const arr = Array.isArray(current)? current : [];
     const value = prompt(
       'تعديل: ' + label + '\n\nكل بند في سطر مستقل:\n(احذف سطراً للحذف · أضف سطراً للإضافة)',
       arr.join('\n')
@@ -237,7 +283,7 @@ function handleEdit(el) {
     return;
   }
 
-  const value = prompt('تعديل: ' + label + '\n\nالقيمة الحالية:', current != null ? String(current) : '');
+  const value = prompt('تعديل: ' + label + '\n\nالقيمة الحالية:', current!= null? String(current) : '');
   if (value === null) return;
 
   let finalValue = value;
@@ -255,9 +301,9 @@ function handleAdd(el) {
 
   if (type === 'list') {
     const current = window.getOverrideValue(path);
-    const arr = Array.isArray(current) ? current.slice() : [];
+    const arr = Array.isArray(current)? current.slice() : [];
     const value = prompt('إضافة عنصر جديد إلى: ' + label);
-    if (value === null || !String(value).trim()) return;
+    if (value === null ||!String(value).trim()) return;
     arr.push(String(value).trim());
     window.saveOverride(path, arr);
     rerender();
@@ -277,11 +323,10 @@ function handleAdd(el) {
     return;
   }
 
-  // قالب عنصر حسب القسم
   let template = {};
   if (arrPath === 'doctors') {
     const name = prompt('اسم الطبيب الجديد:');
-    if (name === null || !name.trim()) return;
+    if (name === null ||!name.trim()) return;
     template = {
       name: name.trim(),
       specialty: prompt('التخصص:') || 'طب أسنان',
@@ -290,7 +335,7 @@ function handleAdd(el) {
     };
   } else if (arrPath === 'reviews') {
     const name = prompt('اسم صاحب التعليق:');
-    if (name === null || !name.trim()) return;
+    if (name === null ||!name.trim()) return;
     template = {
       name: name.trim(),
       text: prompt('نص التعليق:') || '',
@@ -298,7 +343,7 @@ function handleAdd(el) {
     };
   } else if (arrPath === 'features' || arrPath === 'tips') {
     const title = prompt('عنوان العنصر الجديد:');
-    if (title === null || !title.trim()) return;
+    if (title === null ||!title.trim()) return;
     template = {
       title: title.trim(),
       description: prompt('الوصف:') || '',
@@ -306,7 +351,7 @@ function handleAdd(el) {
     };
   } else if (arrPath.includes('serviceCategories') && arrPath.endsWith('items')) {
     const name = prompt('اسم الخدمة الجديدة:');
-    if (name === null || !name.trim()) return;
+    if (name === null ||!name.trim()) return;
     template = {
       name: name.trim(),
       price: Number(prompt('السعر بعد الخصم:') || 0),
@@ -357,7 +402,7 @@ function openImageUploader(path) {
 if (fileInput) {
   fileInput.addEventListener('change', () => {
     const file = fileInput.files && fileInput.files[0];
-    if (!file || !pendingImagePath) return;
+    if (!file ||!pendingImagePath) return;
     if (!file.type.startsWith('image/')) {
       alert('الرجاء اختيار ملف صورة صحيح.');
       return;
@@ -407,25 +452,49 @@ const exitBtnEl = document.getElementById('adminExitBtn');
 const downloadBtnEl = document.getElementById('adminDownloadBtn');
 const resetBtnEl = document.getElementById('adminResetBtn');
 
-if (entryBtnEl) entryBtnEl.addEventListener('click', enterAdminMode);
+if (entryBtnEl) {
+  entryBtnEl.textContent = '🔒';
+  entryBtnEl.title = 'دخول المالك';
+  entryBtnEl.addEventListener('click', enterAdminMode);
+}
 if (exitBtnEl) exitBtnEl.addEventListener('click', exitAdminMode);
 if (downloadBtnEl) downloadBtnEl.addEventListener('click', downloadUpdatedJson);
 if (resetBtnEl) resetBtnEl.addEventListener('click', resetOverrides);
 
-/* ===== استعادة الجلسة ===== */
-if (sessionStorage.getItem(ADMIN_SESSION_KEY) === '1') {
-  adminActive = true;
-  window.adminActive = true;
-  document.body.classList.add('admin-mode');
+/* ===== استعادة الجلسة + إخفاء الشريط عن الزوار ===== */
+(function restoreSessionSecure(){
+  const isAdmin = sessionStorage.getItem(ADMIN_SESSION_KEY) === '1';
   const tb = document.getElementById('adminToolbar');
-  if (tb) tb.hidden = false;
-  if (typeof renderCatalog === 'function') renderCatalog();
-}
+  const entry = document.getElementById('adminEntryBtn');
+  if (isAdmin) {
+    adminActive = true;
+    window.adminActive = true;
+    document.body.classList.add('admin-mode');
+    if (tb) tb.hidden = false;
+    if (entry) entry.style.display = 'none';
+    if (typeof renderCatalog === 'function') renderCatalog();
+  } else {
+    adminActive = false;
+    window.adminActive = false;
+    document.body.classList.remove('admin-mode');
+    if (tb) tb.hidden = true;
+    if (entry) entry.style.display = 'flex';
+    removeEditButtons();
+  }
+})();
 
 document.addEventListener('siteRendered', () => {
   if (adminActive) attachEditButtons();
+  else {
+    const tb = document.getElementById('adminToolbar');
+    if (tb) tb.hidden = true;
+  }
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+  const tb = document.getElementById('adminToolbar');
+  if (sessionStorage.getItem(ADMIN_SESSION_KEY)!== '1' && tb) {
+    tb.hidden = true;
+  }
   if (adminActive) setTimeout(attachEditButtons, 80);
 });
