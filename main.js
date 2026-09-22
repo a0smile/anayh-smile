@@ -8,6 +8,7 @@ let siteData = null;
 
 /* ===== مسارات قابلة للتعديل تُقرأ من localStorage (وضع المالك) ===== */
 const OVERRIDES_KEY = 'smile_overrides';
+window.OVERRIDES_KEY = OVERRIDES_KEY;
 
 function getOverrides() {
   try { return JSON.parse(localStorage.getItem(OVERRIDES_KEY)) || {}; }
@@ -334,9 +335,40 @@ function renderSite(data) {
       [/تنظيف|جير|تلميع/, 'clean'],
       [/زراع/, 'tooth']
     ];
+    /* صور حقيقية صغيرة لكل نوع خدمة */
+    const PHOTO_BY_NAME = [
+      [/أطفال|طفال|حافظة|تاج أسنان الأطفال/, 'service-icons/braces-child.jpg'],
+      [/تقويم الزينة|زينة/, 'service-icons/braces-pink.jpg'],
+      [/تقويم شفاف|مثبت تقويم شفاف|مثبت.*شفاف/, 'service-icons/aligner-wear.jpg'],
+      [/مثبت تقويم/, 'service-icons/aligner-kit.jpg'],
+      [/مقدم تقويم|تقويم.*فكين|تقويم.*فك|شد تقويم/, 'service-icons/braces-metal.jpg'],
+      [/تقويم/, 'service-icons/braces-close.jpg'],
+      [/تبييض|ليزر/, 'service-icons/whitening-laser.jpg'],
+      [/ابتسامة|هوليود|زيركون|إيماكس|ايمكس|بورسلان|تركيب/, 'service-icons/smile-white.jpg'],
+      [/عصب|جذور|خلع الجذور/, 'service-icons/xray.jpg'],
+      [/خلع ضرس العقل|ضرس العقل/, 'service-icons/dental-model.jpg'],
+      [/خلع|قلع/, 'service-icons/dental-model.jpg'],
+      [/حشو/, 'service-icons/smile-white.jpg'],
+      [/فلورايد|تنظيف|جير|تلميع/, 'service-icons/whitening-laser.jpg'],
+      [/استشارة|تقييم/, 'service-icons/xray.jpg']
+    ];
     const iconFor = (name, idx) => {
       const found = ICON_BY_NAME.find(([re]) => re.test(name));
       return found ? found[1] : ['tooth', 'clean', 'brush'][idx % 3];
+    };
+    const photoFor = (name, idx) => {
+      const found = PHOTO_BY_NAME.find(([re]) => re.test(name || ''));
+      if (found) return found[1];
+      const fallback = [
+        'service-icons/smile-white.jpg',
+        'service-icons/braces-metal.jpg',
+        'service-icons/whitening-laser.jpg',
+        'service-icons/aligner-kit.jpg',
+        'service-icons/xray.jpg',
+        'service-icons/dental-model.jpg',
+        'service-icons/braces-child.jpg'
+      ];
+      return fallback[idx % fallback.length];
     };
     const categoryIcon = (cat, ci) => {
       if (cat.icon && cat.icon !== 'flag') return cat.icon;
@@ -346,7 +378,7 @@ function renderSite(data) {
     servicesGrid.innerHTML = (data.serviceCategories || []).map((cat, ci) => `
       <div class="price-category reveal">
         ${cat.title ? `<h3 class="price-cat-title">
-          <span class="price-cat-icon"${editAttr(`serviceCategories.${ci}.icon`)}>${ndIconHtml(categoryIcon(cat, ci))}</span>
+          <span class="price-cat-icon"${editAttr(`serviceCategories.${ci}.icon`)}>${(window.ndIconHtml ? window.ndIconHtml(categoryIcon(cat, ci)) : "")}</span>
           <span${editAttr(`serviceCategories.${ci}.title`)}>${cat.title}</span>
         </h3>` : ''}
         <div class="service-cards">
@@ -354,14 +386,17 @@ function renderSite(data) {
             const waMsg = encodeURIComponent(`مرحباً، أرغب بالاستفسار عن خدمة: ${item.name}`);
             const base = `serviceCategories.${ci}.items.${ii}`;
             const icon = iconFor(item.name || '', ii);
+            const photo = photoFor(item.name || '', ii);
             return `<article class="service-card">
-              <div class="service-card-icon"${editAttr(base + '.icon')}>${ndIconHtml(icon)}</div>
+              <div class="service-card-icon"${editAttr(base + '.icon')}>
+                <img class="service-card-photo" src="${photo}" alt="" loading="lazy" width="128" height="128" onerror="this.style.display='none'">
+              </div>
               <h4 class="service-card-name"${editAttr(base + '.name')}>${item.name}</h4>
               <div class="service-card-prices">
                 ${item.oldPrice ? `<span class="price-old"><span class="price-label">قبل</span><span class="price-value"${editAttr(base + '.oldPrice')}>${item.oldPrice} ريال</span></span>` : ''}
                 <span class="price-now"><span class="price-label">بعد</span><span class="price-value"${editAttr(base + '.price')}>${item.price} ريال</span></span>
               </div>
-              <a class="price-wa-btn" href="https://wa.me/${clinic.whatsapp}?text=${waMsg}" target="_blank" rel="noopener">${ndIconHtml('whatsapp')} اطلبها</a>
+              <a class="price-wa-btn" href="https://wa.me/${clinic.whatsapp}?text=${waMsg}" target="_blank" rel="noopener">${(window.ndIconHtml ? window.ndIconHtml('whatsapp') : '')} اطلبها</a>
             </article>`;
           }).join('')}
         </div>
@@ -382,7 +417,7 @@ function renderSite(data) {
     if (!tipsGrid) return;
     tipsGrid.innerHTML = (data.tips || []).map((t, i) => `
       <div class="tip-card reveal">
-        <div class="tip-icon"${editAttr(`tips.${i}.icon`)}>${ndIconHtml(t.icon)}</div>
+        <div class="tip-icon"${editAttr(`tips.${i}.icon`)}>${(window.ndIconHtml ? window.ndIconHtml(t.icon) : "")}</div>
         <h3${editAttr(`tips.${i}.title`)}>${t.title}</h3>
         <p${editAttr(`tips.${i}.description`)}>${t.description}</p>
       </div>
@@ -394,7 +429,7 @@ function renderSite(data) {
     if (!featuresGrid) return;
     featuresGrid.innerHTML = (data.features || []).map((f, i) => `
       <div class="feature-card reveal">
-        <div class="feature-icon"${editAttr(`features.${i}.icon`)}>${ndIconHtml(f.icon)}</div>
+        <div class="feature-icon"${editAttr(`features.${i}.icon`)}>${(window.ndIconHtml ? window.ndIconHtml(f.icon) : "")}</div>
         <div>
           <h3${editAttr(`features.${i}.title`)}>${f.title}</h3>
           <p${editAttr(`features.${i}.description`)}>${f.description}</p>
@@ -522,7 +557,7 @@ function renderSite(data) {
     ];
     const list = socials.filter(s => s.url);
     socialLinks.innerHTML = list
-      .map(s => `<a href="${s.url}" target="_blank" rel="noopener" aria-label="${s.name}" title="${s.name}"${editAttr(s.path)}>${ndIconHtml(s.icon)}</a>`)
+      .map(s => `<a href="${s.url}" target="_blank" rel="noopener" aria-label="${s.name}" title="${s.name}"${editAttr(s.path)}>${(window.ndIconHtml ? window.ndIconHtml(s.icon) : "")}</a>`)
       .join('');
     const block = document.querySelector('.social-block');
     if (block) block.style.display = list.length ? '' : 'none';
@@ -699,40 +734,53 @@ function initScrollReveal() {
   const icon = document.getElementById('ndMusicIcon');
   if (!audio || !btn) return;
 
-  // تأكد من المصدر الحقيقي
-  if (!audio.getAttribute('src')) {
-    audio.src = 'national-day.mp3';
-  }
+  audio.src = 'national-day.mp3';
+  audio.setAttribute('playsinline', '');
+  audio.setAttribute('webkit-playsinline', '');
   audio.loop = true;
-  audio.volume = 0.55;
+  audio.preload = 'auto';
+  audio.volume = 0.6;
+  try { audio.load(); } catch (e) {}
 
   let started = false;
 
   function setPlayingUI(playing) {
-    btn.classList.toggle('playing', playing);
+    btn.classList.toggle('playing', !!playing);
     if (icon) icon.textContent = playing ? '🔊' : '🎵';
     btn.setAttribute('aria-label', playing ? 'إيقاف النشيد' : 'تشغيل نشيد اليوم الوطني');
     btn.title = playing ? 'إيقاف النشيد' : 'تشغيل نشيد اليوم الوطني';
   }
 
   function playMusic() {
-    const p = audio.play();
-    if (p && typeof p.then === 'function') {
-      p.then(() => {
+    try {
+      audio.muted = false;
+      const p = audio.play();
+      if (p && typeof p.then === 'function') {
+        p.then(() => {
+          started = true;
+          setPlayingUI(true);
+        }).catch(() => {
+          // بعض المتصفحات تمنع الصوت بدون تفاعل — نجرب مكتوماً ثم نرفع الكتم
+          audio.muted = true;
+          audio.play().then(() => {
+            started = true;
+            setPlayingUI(true);
+            setTimeout(() => {
+              audio.muted = false;
+            }, 200);
+          }).catch(() => setPlayingUI(false));
+        });
+      } else {
         started = true;
         setPlayingUI(true);
-      }).catch(() => {
-        // المتصفح منع التشغيل التلقائي — الزر جاهز للضغط
-        setPlayingUI(false);
-      });
-    } else {
-      started = true;
-      setPlayingUI(true);
+      }
+    } catch (e) {
+      setPlayingUI(false);
     }
   }
 
   function pauseMusic() {
-    audio.pause();
+    try { audio.pause(); } catch (e) {}
     setPlayingUI(false);
   }
 
@@ -749,15 +797,29 @@ function initScrollReveal() {
   });
   audio.addEventListener('play', () => setPlayingUI(true));
 
-  // محاولة تشغيل خفيفة بعد أول تفاعل (سياسة المتصفح)
-  const unlock = () => {
-    if (started) return;
-    playMusic();
-    document.removeEventListener('click', unlock);
-    document.removeEventListener('touchstart', unlock);
+  // تشغيل تلقائي فوري + عند أول لمس/نقر (لسياسات المتصفح وPWA)
+  const tryAuto = () => {
+    if (!started) playMusic();
   };
-  document.addEventListener('click', unlock, { once: true, passive: true });
-  document.addEventListener('touchstart', unlock, { once: true, passive: true });
+  // محاولات متعددة للتشغيل التلقائي
+  tryAuto();
+  setTimeout(tryAuto, 400);
+  setTimeout(tryAuto, 1200);
+
+  const unlock = () => {
+    if (!audio.paused) return;
+    playMusic();
+  };
+  document.addEventListener('click', unlock, { passive: true });
+  document.addEventListener('touchstart', unlock, { passive: true });
+  document.addEventListener('keydown', unlock, { passive: true });
+
+  // عند العودة للتطبيق / الصفحة
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && started && audio.paused) {
+      playMusic();
+    }
+  });
 })();
 
 

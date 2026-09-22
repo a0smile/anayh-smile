@@ -1,4 +1,4 @@
-const CACHE_NAME = 'smile-care-v10';
+const CACHE_NAME = 'smile-care-v15';
 const ASSETS = [
   './',
   './index.html',
@@ -17,6 +17,18 @@ const ASSETS = [
   './flag-sa.png',
   './emblem-sa.png',
   './national-day.mp3'
+,
+  './service-icons/braces-metal.jpg',
+  './service-icons/braces-pink.jpg',
+  './service-icons/braces-close.jpg',
+  './service-icons/braces-child.jpg',
+  './service-icons/braces-kids-treat.jpg',
+  './service-icons/aligner-kit.jpg',
+  './service-icons/aligner-wear.jpg',
+  './service-icons/smile-white.jpg',
+  './service-icons/whitening-laser.jpg',
+  './service-icons/xray.jpg',
+  './service-icons/dental-model.jpg'
 ];
 
 self.addEventListener('install', (event) => {
