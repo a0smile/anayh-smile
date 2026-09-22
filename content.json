@@ -669,7 +669,7 @@
     "enabled": true,
     "year": "96",
     "badge": "🇸🇦 عزنا بطبعنا 🇸🇦",
-    "title": "اليوم الوطني السعودي 96",
+    "title": "تهنئة باليوم الوطني السعودي 96",
     "slogan": "ابتسامة أجمل .. لوطن أعظم — 🇸🇦 دام عزك يا وطن 🇸🇦",
     "greetingTitle": "تهنئة باليوم الوطني السعودي 96",
     "greeting": "يسر مجمع عناية الابتسامة الطبي ونيابةً عن منسوبيه أن يرفع أصدق التهاني وأسمى التبريكات إلى قيادتنا الرشيدة والشعب السعودي النبيل بمناسبة اليوم الوطني السعودي الـ 96.",
@@ -679,7 +679,8 @@
     "exteriorImage": "hero-blend.jpg",
     "interiorImage": "hero-blend.jpg",
     "flagImage": "flag-sa.png",
-    "emblemImage": "emblem-sa.png"
+    "emblemImage": "emblem-sa.png",
+    "greeting3": "وكل عام وأنتم بعز وفخر وأمان"
   },
   "landmarks": []
 }

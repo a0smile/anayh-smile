@@ -220,6 +220,7 @@ function renderSite(data) {
     setText('nationalDayTitle', nd.greetingTitle);
     setText('nationalDayGreeting', nd.greeting);
     setText('nationalDayGreeting2', nd.greeting2);
+    setText('nationalDayGreeting3', nd.greeting3 || 'وكل عام وأنتم بعز وفخر وأمان');
     setText('nationalDayClosing', nd.closing);
 
     setText('landmarksBadge', sections.landmarksBadge);
@@ -389,8 +390,7 @@ function renderSite(data) {
             const photo = photoFor(item.name || '', ii);
             return `<article class="service-card">
               <div class="service-card-icon"${editAttr(base + '.icon')}>
-                <img class="service-card-photo" src="${photo}" alt="" loading="lazy" width="128" height="128" onerror="this.remove();">
-                <span class="service-card-svg-fallback">${(window.ndIconHtml ? window.ndIconHtml(icon) : '')}</span>
+                <img class="service-card-photo" src="${photo}" alt="${item.name || ''}" loading="lazy" decoding="async" width="128" height="128">
               </div>
               <h4 class="service-card-name"${editAttr(base + '.name')}>${item.name}</h4>
               <div class="service-card-prices">
@@ -708,8 +708,14 @@ function initNavSpy() {
 // ===== ظل الترويسة عند التمرير =====
 const headerEl = document.getElementById('header');
 if (headerEl) {
+  let scrollTicking = false;
   window.addEventListener('scroll', () => {
-    headerEl.classList.toggle('scrolled', window.scrollY > 30);
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(() => {
+      headerEl.classList.toggle('scrolled', window.scrollY > 30);
+      scrollTicking = false;
+    });
   }, { passive: true });
 }
 

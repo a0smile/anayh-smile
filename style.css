@@ -2620,7 +2620,7 @@ body.admin-mode .admin-edit-bar {
    ============================================================ */
 
 html, body {
-  font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif !important;
+  font-family: 'Tajawal', 'Segoe UI', Tahoma, sans-serif !important;
   color: #000000 !important;
   background: #F3F9F6 !important;
   -webkit-font-smoothing: antialiased;
@@ -2908,4 +2908,267 @@ html, body {
     height: min(68vw, 240px) !important;
     min-height: 180px !important;
   }
+}
+
+
+/* ===== ترويسة أكبر + تذييل مرتب + لوقو تواصل ===== */
+.logo-name {
+  font-size: 1.05rem !important;
+  font-weight: 900 !important;
+  color: #0A3D2A !important;
+  line-height: 1.25 !important;
+  letter-spacing: -0.01em;
+}
+.logo-tagline {
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  color: #1A4D35 !important;
+}
+@media (max-width: 380px) {
+  .logo-text { display: flex !important; max-width: none !important; }
+  .logo-name {
+    font-size: 0.88rem !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+  }
+  .logo-tagline { font-size: 0.62rem !important; }
+}
+
+.footer {
+  background: #0A3D2A !important;
+  color: #fff !important;
+  padding: 28px 16px 16px !important;
+  border-top: 3px solid #C9A24D !important;
+}
+.footer-content {
+  max-width: 860px !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 12px !important;
+  text-align: center !important;
+}
+.footer-brand {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  text-align: right !important;
+  margin-bottom: 4px !important;
+}
+.footer-brand h2 {
+  font-size: 1rem !important;
+  font-weight: 900 !important;
+  color: #fff !important;
+  line-height: 1.3 !important;
+}
+.footer-brand p {
+  font-size: 0.75rem !important;
+  color: #E8D9AE !important;
+  font-weight: 700 !important;
+}
+.footer-desc {
+  font-size: 0.78rem !important;
+  color: #D4EDE0 !important;
+  line-height: 1.7 !important;
+  max-width: 560px !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+  padding: 0 8px !important;
+}
+.footer-line {
+  font-size: 0.8rem !important;
+  color: #E8F5EE !important;
+  font-weight: 700 !important;
+  line-height: 1.6 !important;
+  margin: 0 !important;
+  padding: 2px 0 !important;
+}
+.footer-line a {
+  color: #E8D9AE !important;
+  font-weight: 900 !important;
+  direction: ltr !important;
+  unicode-bidi: embed !important;
+  display: inline-block !important;
+}
+.footer-bottom {
+  margin-top: 16px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+  padding-top: 12px !important;
+  font-size: 0.72rem !important;
+  color: #A8D4BC !important;
+  text-align: center !important;
+  line-height: 1.5 !important;
+}
+
+.social-links a {
+  width: 48px !important;
+  height: 48px !important;
+  background: rgba(255,255,255,0.16) !important;
+  border: 2px solid rgba(255,255,255,0.35) !important;
+}
+.social-links a svg {
+  width: 1.55em !important;
+  height: 1.55em !important;
+}
+
+
+/* ===== تحسين أداء المتصفح ===== */
+img, video, iframe {
+  content-visibility: auto;
+  max-width: 100%;
+}
+.section,
+.price-category,
+.feature-card,
+.tip-card,
+.doctor-card,
+.testimonial-card,
+.contact-card,
+.booking-card,
+.map-wrap,
+.social-block,
+.footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 200px;
+}
+.nd-banner-img {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+.service-card,
+.feature-card,
+.tip-card {
+  contain: layout style;
+}
+.announcement-track {
+  will-change: transform;
+  transform: translateZ(0);
+}
+/* تقليل عمل الرسم على الأجهزة الضعيفة */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@media (max-width: 640px) {
+  .nd-banner:hover .nd-banner-img { transform: none !important; }
+  .service-card:hover,
+  .feature-card:hover,
+  .price-category:hover {
+    transform: none !important;
+  }
+}
+
+
+/* ===== خط عربي عالمي نظيف + أيقونات صور حقيقية + إطار عريض ===== */
+html, body, button, input, select, textarea {
+  font-family: 'Tajawal', 'Segoe UI', Tahoma, Arial, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* التهنئة: محاذاة وسط · سطور متساوية · عناوين عريضة صغيرة */
+.nd-greeting-section {
+  text-align: center !important;
+}
+.nd-greeting {
+  text-align: center !important;
+  gap: 6px !important;
+}
+.nd-greeting-title {
+  font-size: 0.98rem !important;
+  font-weight: 800 !important;
+  color: #000 !important;
+  line-height: 1.4 !important;
+  text-align: center !important;
+}
+.nd-greeting-text {
+  font-size: 0.74rem !important;
+  font-weight: 500 !important;
+  color: #0A1F14 !important;
+  line-height: 1.75 !important;
+  text-align: center !important;
+  max-width: 540px !important;
+  margin: 0 auto !important;
+  text-wrap: balance;
+}
+.nd-greeting-wish {
+  font-size: 0.78rem !important;
+  font-weight: 800 !important;
+  color: #0A3D2A !important;
+  text-align: center !important;
+}
+.nd-greeting-closing {
+  font-size: 0.88rem !important;
+  font-weight: 800 !important;
+  text-align: center !important;
+}
+
+/* خلفية الأيقونة بيج بيج بيج + صورة حقيقية تملأ المربع */
+.service-card-icon {
+  width: 64px !important;
+  height: 64px !important;
+  margin: 0 auto 8px !important;
+  border-radius: 14px !important;
+  background: #E8DCC4 !important;
+  background-image: none !important;
+  border: 3px solid #FFFFFF !important;
+  box-shadow:
+    0 0 0 2px #C4B48A,
+    0 4px 0 rgba(18, 133, 74, 0.16),
+    0 8px 16px rgba(10, 61, 42, 0.12) !important;
+  overflow: hidden !important;
+  position: relative !important;
+  padding: 0 !important;
+  display: block !important;
+}
+.service-card-photo {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: 11px !important;
+  background: #E8DCC4 !important;
+}
+.service-card-svg-fallback { display: none !important; }
+
+/* مربع الخدمة: برواز عريض كامل */
+.service-card {
+  border: 2.5px solid #C9A24D !important;
+  outline: none !important;
+  border-radius: 16px !important;
+  padding: 14px 12px 12px !important;
+  background: #FFFFFF !important;
+  box-shadow: 0 4px 14px rgba(10, 61, 42, 0.06) !important;
+  text-align: center !important;
+}
+.service-card:hover {
+  border-color: #12854A !important;
+  box-shadow: 0 8px 20px rgba(18, 133, 74, 0.12) !important;
+}
+
+.service-card-name {
+  font-family: 'Tajawal', sans-serif !important;
+  font-weight: 800 !important;
+  color: #000 !important;
+}
+.price-now .price-value,
+.price-old .price-value {
+  font-family: 'Tajawal', sans-serif !important;
+  font-weight: 800 !important;
+}
+
+/* إخفاء أي إيموجي زائد في الأزرار إن وُجد عبر الخط */
+.nd-badge {
+  font-family: 'Tajawal', sans-serif !important;
 }

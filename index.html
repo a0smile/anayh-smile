@@ -9,10 +9,12 @@
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/svg+xml" href="icon.svg">
   <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=17">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20">
 </head>
 <body>
 
@@ -46,7 +48,7 @@
     <!-- ===== الصورة الرئيسية — نقية بدون كتابة ===== -->
     <section class="nd-banner-wrap" id="hero">
       <div class="nd-banner">
-        <img class="nd-banner-img" id="ndBlendImage" src="hero-blend.jpg" alt="مجمع عناية الابتسامة الطبي — اليوم الوطني السعودي 96">
+        <img class="nd-banner-img" id="ndBlendImage" src="hero-blend.jpg" decoding="async" fetchpriority="high" alt="مجمع عناية الابتسامة الطبي — اليوم الوطني السعودي 96">
         <div class="nd-banner-overlay"></div>
       </div>
     </section>
@@ -64,8 +66,9 @@
       <div class="nd-greeting">
         <span class="nd-badge" id="nationalDayBadge">🇸🇦 اليوم الوطني السعودي 96 🇸🇦</span>
         <h2 class="nd-greeting-title" id="nationalDayTitle">تهنئة باليوم الوطني السعودي 96</h2>
-        <p class="nd-greeting-text" id="nationalDayGreeting">يسر <strong>مجمع عناية الابتسامة الطبي</strong> ونيابةً عن منسوبيه أن يرفع أصدق التهاني وأسمى التبريكات إلى قيادتنا الرشيدة والشعب السعودي النبيل بمناسبة اليوم الوطني السعودي الـ 96.</p>
+        <p class="nd-greeting-text" id="nationalDayGreeting">يسر مجمع عناية الابتسامة الطبي ونيابةً عن منسوبيه أن يرفع أصدق التهاني وأسمى التبريكات إلى قيادتنا الرشيدة والشعب السعودي النبيل بمناسبة اليوم الوطني السعودي الـ 96.</p>
         <p class="nd-greeting-text" id="nationalDayGreeting2">نسأل الله أن يديم على مملكتنا الغالية نعمة الأمن والأمان والاستقرار، ويجعل راية التوحيد دائماً شامخة خفاقة بالعز والتمكين والريادة.</p>
+        <p class="nd-greeting-text nd-greeting-wish" id="nationalDayGreeting3">وكل عام وأنتم بعز وفخر وأمان</p>
         <p class="nd-greeting-closing" id="nationalDayClosing">⚔️ دام عزك يا وطن ⚔️</p>
       </div>
     </section>
@@ -279,7 +282,7 @@
   <button type="button" class="admin-entry-btn" id="adminEntryBtn" title="دخول المالك" aria-label="دخول المالك">🔒</button>
   <input type="file" id="adminFileInput" accept="image/*" hidden>
 
-  <audio id="nationalAudio" preload="auto" src="national-day.mp3" playsinline webkit-playsinline loop></audio>
+  <audio id="nationalAudio" preload="metadata" src="national-day.mp3" playsinline webkit-playsinline loop></audio>
   <div id="fireworksContainer" class="fireworks-container" aria-hidden="true"></div>
 
   <!-- زر تشغيل نشيد اليوم الوطني — لا يمس دخول المالك -->
@@ -287,8 +290,8 @@
     <span class="nd-music-icon" id="ndMusicIcon">🎵</span>
   </button>
 
-  <script src="icons.js?v=17"></script>
-  <script src="main.js?v=17"></script>
+  <script src="icons.js?v=20"></script>
+  <script src="main.js?v=20"></script>
   <script src="admin.js"></script>
 </body>
 </html>

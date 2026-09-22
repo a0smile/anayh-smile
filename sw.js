@@ -1,23 +1,15 @@
-const CACHE_NAME = 'smile-care-v17';
+const CACHE_NAME = 'smile-care-v20';
 const ASSETS = [
   './',
   './index.html',
-  './catalog.html',
   './style.css',
   './icons.js',
   './main.js',
-  './catalog.js',
   './admin.js',
   './content.json',
   './manifest.json',
-  './icon.svg',
-  './icon-192.png',
-  './icon-512.png',
   './hero-blend.jpg',
-  './flag-sa.png',
-  './emblem-sa.png',
-  './national-day.mp3'
-,
+  './national-day.mp3',
   './service-icons/braces-metal.jpg',
   './service-icons/braces-pink.jpg',
   './service-icons/braces-close.jpg',
@@ -33,7 +25,9 @@ const ASSETS = [
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
+    caches.open(CACHE_NAME).then((cache) =>
+      Promise.allSettled(ASSETS.map((u) => cache.add(u).catch(() => null)))
+    )
   );
   self.skipWaiting();
 });
@@ -49,12 +43,40 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
-  // ملفات الموقع: الشبكة أولاً حتى تظهر التحديثات فوراً، والكاش احتياط عند انقطاع الاتصال
+  const url = new URL(event.request.url);
+  if (url.origin !== self.location.origin) return;
+
+  const path = url.pathname;
+  const isStatic = /\.(css|js|jpg|jpeg|png|webp|svg|mp3|woff2?|json)$/i.test(path)
+    || path.includes('/service-icons/');
+
+  if (isStatic) {
+    // الكاش أولاً للملفات الثابتة = أسرع
+    event.respondWith(
+      caches.match(event.request).then((cached) => {
+        const fetched = fetch(event.request)
+          .then((res) => {
+            if (res && res.ok) {
+              const clone = res.clone();
+              caches.open(CACHE_NAME).then((c) => c.put(event.request, clone));
+            }
+            return res;
+          })
+          .catch(() => cached);
+        return cached || fetched;
+      })
+    );
+    return;
+  }
+
+  // HTML وباقي الطلبات: الشبكة أولاً
   event.respondWith(
     fetch(event.request)
       .then((res) => {
-        const clone = res.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+        if (res && res.ok) {
+          const clone = res.clone();
+          caches.open(CACHE_NAME).then((c) => c.put(event.request, clone));
+        }
         return res;
       })
       .catch(() => caches.match(event.request))
