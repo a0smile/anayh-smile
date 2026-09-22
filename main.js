@@ -338,20 +338,20 @@ function renderSite(data) {
     ];
     /* صور حقيقية صغيرة لكل نوع خدمة */
     const PHOTO_BY_NAME = [
-      [/أطفال|طفال|حافظة|تاج أسنان الأطفال/, 'service-icons/braces-child.jpg'],
-      [/تقويم الزينة|زينة/, 'service-icons/braces-pink.jpg'],
-      [/تقويم شفاف|مثبت تقويم شفاف|مثبت.*شفاف/, 'service-icons/aligner-wear.jpg'],
-      [/مثبت تقويم/, 'service-icons/aligner-kit.jpg'],
-      [/مقدم تقويم|تقويم.*فكين|تقويم.*فك|شد تقويم/, 'service-icons/braces-metal.jpg'],
-      [/تقويم/, 'service-icons/braces-close.jpg'],
-      [/تبييض|ليزر/, 'service-icons/whitening-laser.jpg'],
-      [/ابتسامة|هوليود|زيركون|إيماكس|ايمكس|بورسلان|تركيب/, 'service-icons/smile-white.jpg'],
-      [/عصب|جذور|خلع الجذور/, 'service-icons/xray.jpg'],
-      [/خلع ضرس العقل|ضرس العقل/, 'service-icons/dental-model.jpg'],
-      [/خلع|قلع/, 'service-icons/dental-model.jpg'],
-      [/حشو/, 'service-icons/smile-white.jpg'],
-      [/فلورايد|تنظيف|جير|تلميع/, 'service-icons/whitening-laser.jpg'],
-      [/استشارة|تقييم/, 'service-icons/xray.jpg']
+      [/أطفال|طفال|حافظة|تاج أسنان الأطفال/, './service-icons/braces-child.jpg'],
+      [/تقويم الزينة|زينة/, './service-icons/braces-pink.jpg'],
+      [/تقويم شفاف|مثبت تقويم شفاف|مثبت.*شفاف/, './service-icons/aligner-wear.jpg'],
+      [/مثبت تقويم/, './service-icons/aligner-kit.jpg'],
+      [/مقدم تقويم|تقويم.*فكين|تقويم.*فك|شد تقويم/, './service-icons/braces-metal.jpg'],
+      [/تقويم/, './service-icons/braces-close.jpg'],
+      [/تبييض|ليزر/, './service-icons/whitening-laser.jpg'],
+      [/ابتسامة|هوليود|زيركون|إيماكس|ايمكس|بورسلان|تركيب/, './service-icons/smile-white.jpg'],
+      [/عصب|جذور|خلع الجذور/, './service-icons/xray.jpg'],
+      [/خلع ضرس العقل|ضرس العقل/, './service-icons/dental-model.jpg'],
+      [/خلع|قلع/, './service-icons/dental-model.jpg'],
+      [/حشو/, './service-icons/smile-white.jpg'],
+      [/فلورايد|تنظيف|جير|تلميع/, './service-icons/whitening-laser.jpg'],
+      [/استشارة|تقييم/, './service-icons/xray.jpg']
     ];
     const iconFor = (name, idx) => {
       const found = ICON_BY_NAME.find(([re]) => re.test(name));
@@ -361,13 +361,13 @@ function renderSite(data) {
       const found = PHOTO_BY_NAME.find(([re]) => re.test(name || ''));
       if (found) return found[1];
       const fallback = [
-        'service-icons/smile-white.jpg',
-        'service-icons/braces-metal.jpg',
-        'service-icons/whitening-laser.jpg',
-        'service-icons/aligner-kit.jpg',
-        'service-icons/xray.jpg',
-        'service-icons/dental-model.jpg',
-        'service-icons/braces-child.jpg'
+        './service-icons/smile-white.jpg',
+        './service-icons/braces-metal.jpg',
+        './service-icons/whitening-laser.jpg',
+        './service-icons/aligner-kit.jpg',
+        './service-icons/xray.jpg',
+        './service-icons/dental-model.jpg',
+        './service-icons/braces-child.jpg'
       ];
       return fallback[idx % fallback.length];
     };
@@ -377,7 +377,7 @@ function renderSite(data) {
     };
 
     servicesGrid.innerHTML = (data.serviceCategories || []).map((cat, ci) => `
-      <div class="price-category reveal">
+      <div class="price-category">
         ${cat.title ? `<h3 class="price-cat-title">
           <span class="price-cat-icon"${editAttr(`serviceCategories.${ci}.icon`)}>${(window.ndIconHtml ? window.ndIconHtml(categoryIcon(cat, ci)) : "")}</span>
           <span${editAttr(`serviceCategories.${ci}.title`)}>${cat.title}</span>
@@ -479,6 +479,22 @@ function renderSite(data) {
     serviceSelect.setAttribute('data-edit', 'bookingServices');
     serviceSelect.setAttribute('data-edit-type', 'list');
     serviceSelect.setAttribute('data-edit-label', 'قائمة خدمات الحجز (كل خدمة في سطر)');
+  });
+
+  
+  safeRender('faq', () => {
+    const list = document.getElementById('faqList');
+    if (!list) return;
+    const items = data.faq || [];
+    list.innerHTML = items.map((item, i) => `
+      <details class="faq-item"${editAttr('faq.' + i + '.q')}>
+        <summary class="faq-q">
+          <span class="faq-q-text"${editAttr('faq.' + i + '.q')}>${item.q}</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-a"${editAttr('faq.' + i + '.a')}>${item.a}</div>
+      </details>
+    `).join('');
   });
 
   safeRender('contact', () => {

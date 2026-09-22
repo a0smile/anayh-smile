@@ -11,10 +11,11 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="preload" as="image" href="hero-blend.jpg" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;800&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=22">
 </head>
 <body>
 
@@ -35,7 +36,8 @@
         <li><a href="#doctors" class="nav-link">الأطباء</a></li>
         <li><a href="#reviews" class="nav-link">التعليقات</a></li>
         <li><a href="#booking" class="nav-link">الحجز</a></li>
-        <li><a href="#contact" class="nav-link">تواصل معنا</a></li>
+        <li><a href="#faq">الأسئلة الشائعة</a>
+        <a href="#contact" class="nav-link">تواصل معنا</a></li>
       </ul>
       <button class="nav-toggle" id="navToggle" type="button" aria-label="القائمة" aria-controls="navLinks" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -207,7 +209,20 @@
     </section>
 
     <!-- ===== التواصل: الرقم + المواقع الاجتماعية + موقع المجمع ===== -->
-    <section class="section section-contact" id="contact">
+    
+    <!-- ===== الأسئلة الشائعة ===== -->
+    <section class="section section-faq" id="faq">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-badge">أسئلة شائعة</span>
+          <h2 class="section-title">الأسئلة الشائعة</h2>
+          <p class="section-subtitle">إجابات رسمية وواضحة لأكثر الاستفسارات تكراراً</p>
+        </div>
+        <div class="faq-list" id="faqList"></div>
+      </div>
+    </section>
+
+<section class="section section-contact" id="contact">
       <div class="container">
         <div class="section-head">
           <span class="section-badge" id="contactBadge">تواصل معنا</span>
@@ -249,24 +264,23 @@
   </main>
 
   <!-- ===== الفوتر ===== -->
-  <footer class="footer">
-    <div class="container footer-content">
-      <div class="footer-brand">
-        <span class="logo-icon"><img src="icon.svg" alt="" width="34" height="34"></span>
-        <div>
-          <h2 id="footerName">مجمع عناية الابتسامة الطبي</h2>
-          <p id="footerTagline">لطب وجراحة الأسنان</p>
-        </div>
+    <!-- بانر تابي وتمارا -->
+  <section class="payment-banner" id="paymentBanner" aria-label="حلول الدفع">
+    <div class="container payment-banner-inner">
+      <p class="payment-banner-text">نوفر لكم حلول دفع ميسرة: يوجد لدينا تابي وتمارا</p>
+      <div class="payment-logos" aria-hidden="true">
+        <span class="pay-logo pay-tabby">tabby</span>
+        <span class="pay-logo pay-tamara">تمارا</span>
       </div>
-      <p class="footer-desc" id="footerDesc"></p>
-      <p class="footer-line" id="footerAddress"></p>
-      <p class="footer-line" id="footerPhone"></p>
-      <p class="footer-line" id="footerEmail"></p>
     </div>
-    <div class="footer-bottom">
-      <p>© <span id="currentYear"></span> <span id="footerNameBottom">مجمع عناية الابتسامة الطبي</span> — جميع الحقوق محفوظة</p>
+  </section>
+
+  <footer class="footer" id="footer">
+    <div class="footer-bottom footer-simple">
+      <p>© 2026 مجمع عناية الابتسامة الطبي — جميع الحقوق محفوظة</p>
     </div>
   </footer>
+
 
   <a href="#" class="whatsapp-float" id="whatsappFloat" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">
     <span class="whatsapp-ping"></span>
@@ -282,7 +296,7 @@
   <button type="button" class="admin-entry-btn" id="adminEntryBtn" title="دخول المالك" aria-label="دخول المالك">🔒</button>
   <input type="file" id="adminFileInput" accept="image/*" hidden>
 
-  <audio id="nationalAudio" preload="metadata" src="national-day.mp3" playsinline webkit-playsinline loop></audio>
+  <audio id="nationalAudio" preload="none" src="national-day.mp3" playsinline webkit-playsinline loop></audio>
   <div id="fireworksContainer" class="fireworks-container" aria-hidden="true"></div>
 
   <!-- زر تشغيل نشيد اليوم الوطني — لا يمس دخول المالك -->
@@ -290,8 +304,8 @@
     <span class="nd-music-icon" id="ndMusicIcon">🎵</span>
   </button>
 
-  <script src="icons.js?v=20"></script>
-  <script src="main.js?v=20"></script>
-  <script src="admin.js"></script>
+  <script src="icons.js?v=22" defer></script>
+  <script src="main.js?v=22" defer></script>
+  <script src="admin.js?v=22" defer></script>
 </body>
 </html>
