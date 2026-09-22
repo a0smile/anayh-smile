@@ -338,20 +338,20 @@ function renderSite(data) {
     ];
     /* صور حقيقية صغيرة لكل نوع خدمة */
     const PHOTO_BY_NAME = [
-      [/أطفال|طفال|حافظة|تاج أسنان الأطفال/, './service-icons/braces-child.jpg'],
-      [/تقويم الزينة|زينة/, './service-icons/braces-pink.jpg'],
-      [/تقويم شفاف|مثبت تقويم شفاف|مثبت.*شفاف/, './service-icons/aligner-wear.jpg'],
-      [/مثبت تقويم/, './service-icons/aligner-kit.jpg'],
-      [/مقدم تقويم|تقويم.*فكين|تقويم.*فك|شد تقويم/, './service-icons/braces-metal.jpg'],
-      [/تقويم/, './service-icons/braces-close.jpg'],
-      [/تبييض|ليزر/, './service-icons/whitening-laser.jpg'],
-      [/ابتسامة|هوليود|زيركون|إيماكس|ايمكس|بورسلان|تركيب/, './service-icons/smile-white.jpg'],
-      [/عصب|جذور|خلع الجذور/, './service-icons/xray.jpg'],
-      [/خلع ضرس العقل|ضرس العقل/, './service-icons/dental-model.jpg'],
-      [/خلع|قلع/, './service-icons/dental-model.jpg'],
-      [/حشو/, './service-icons/smile-white.jpg'],
-      [/فلورايد|تنظيف|جير|تلميع/, './service-icons/whitening-laser.jpg'],
-      [/استشارة|تقييم/, './service-icons/xray.jpg']
+      [/أطفال|طفال|حافظة|تاج أسنان الأطفال/, 'service-icons/braces-child.jpg'],
+      [/تقويم الزينة|زينة/, 'service-icons/braces-pink.jpg'],
+      [/تقويم شفاف|مثبت تقويم شفاف|مثبت.*شفاف/, 'service-icons/aligner-wear.jpg'],
+      [/مثبت تقويم/, 'service-icons/aligner-kit.jpg'],
+      [/مقدم تقويم|تقويم.*فكين|تقويم.*فك|شد تقويم/, 'service-icons/braces-metal.jpg'],
+      [/تقويم/, 'service-icons/braces-close.jpg'],
+      [/تبييض|ليزر/, 'service-icons/whitening-laser.jpg'],
+      [/ابتسامة|هوليود|زيركون|إيماكس|ايمكس|بورسلان|تركيب/, 'service-icons/smile-white.jpg'],
+      [/عصب|جذور|خلع الجذور/, 'service-icons/xray.jpg'],
+      [/خلع ضرس العقل|ضرس العقل/, 'service-icons/dental-model.jpg'],
+      [/خلع|قلع/, 'service-icons/dental-model.jpg'],
+      [/حشو/, 'service-icons/smile-white.jpg'],
+      [/فلورايد|تنظيف|جير|تلميع/, 'service-icons/whitening-laser.jpg'],
+      [/استشارة|تقييم/, 'service-icons/xray.jpg']
     ];
     const iconFor = (name, idx) => {
       const found = ICON_BY_NAME.find(([re]) => re.test(name));
@@ -361,13 +361,13 @@ function renderSite(data) {
       const found = PHOTO_BY_NAME.find(([re]) => re.test(name || ''));
       if (found) return found[1];
       const fallback = [
-        './service-icons/smile-white.jpg',
-        './service-icons/braces-metal.jpg',
-        './service-icons/whitening-laser.jpg',
-        './service-icons/aligner-kit.jpg',
-        './service-icons/xray.jpg',
-        './service-icons/dental-model.jpg',
-        './service-icons/braces-child.jpg'
+        'service-icons/smile-white.jpg',
+        'service-icons/braces-metal.jpg',
+        'service-icons/whitening-laser.jpg',
+        'service-icons/aligner-kit.jpg',
+        'service-icons/xray.jpg',
+        'service-icons/dental-model.jpg',
+        'service-icons/braces-child.jpg'
       ];
       return fallback[idx % fallback.length];
     };
@@ -406,19 +406,17 @@ function renderSite(data) {
   });
 
   safeRender('dailyTips', () => {
+    const box = document.querySelector('.daily-tips-box');
+    if (box) box.style.display = 'none';
     const dailyTipsList = document.getElementById('dailyTipsList');
-    if (!dailyTipsList) return;
-    dailyTipsList.innerHTML = (data.dailyTips || []).map((tip, i) => `
-      <li${editAttr('dailyTips.' + i)}><span class="daily-tip-num">${i + 1}</span>${tip}</li>
-    `).join('');
+    if (dailyTipsList) dailyTipsList.innerHTML = '';
   });
 
   safeRender('tips', () => {
     const tipsGrid = document.getElementById('tipsGrid');
     if (!tipsGrid) return;
     tipsGrid.innerHTML = (data.tips || []).map((t, i) => `
-      <div class="tip-card reveal">
-        <div class="tip-icon"${editAttr(`tips.${i}.icon`)}>${(window.ndIconHtml ? window.ndIconHtml(t.icon) : "")}</div>
+      <div class="tip-card tip-card-clean">
         <h3${editAttr(`tips.${i}.title`)}>${t.title}</h3>
         <p${editAttr(`tips.${i}.description`)}>${t.description}</p>
       </div>
@@ -429,12 +427,9 @@ function renderSite(data) {
     const featuresGrid = document.getElementById('featuresGrid');
     if (!featuresGrid) return;
     featuresGrid.innerHTML = (data.features || []).map((f, i) => `
-      <div class="feature-card reveal">
-        <div class="feature-icon"${editAttr(`features.${i}.icon`)}>${(window.ndIconHtml ? window.ndIconHtml(f.icon) : "")}</div>
-        <div>
-          <h3${editAttr(`features.${i}.title`)}>${f.title}</h3>
-          <p${editAttr(`features.${i}.description`)}>${f.description}</p>
-        </div>
+      <div class="feature-card feature-card-premium">
+        <h3${editAttr(`features.${i}.title`)}>${f.title}</h3>
+        <p${editAttr(`features.${i}.description`)}>${f.description}</p>
       </div>
     `).join('');
   });
