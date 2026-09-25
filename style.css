@@ -516,7 +516,7 @@ button { font-family: inherit; }
 .service-cards {
   display: grid !important;
   grid-template-columns: repeat(2, 1fr) !important;
-  gap: 10px !important;
+  gap: 22px 12px !important;
   padding: 10px !important;
   background: linear-gradient(180deg, var(--green-50), #fff);
   max-width: 720px;
@@ -527,34 +527,29 @@ button { font-family: inherit; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   min-width: 0;
 }
 
 .service-card {
-  background: #fff;
-  border: 2px solid #fff;
-  outline: 2px solid var(--green-100);
-  border-radius: 14px;
-  padding: 10px 6px 10px;
+  background: transparent;
+  border: none;
+  outline: none;
+  border-radius: 0;
+  padding: 6px 4px 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
   text-align: center;
-  box-shadow:
-    0 3px 0 rgba(59, 30, 109, 0.1),
-    0 8px 18px rgba(59, 30, 109, 0.12),
-    0 1px 0 rgba(255,255,255,0.9) inset;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, outline-color 0.2s ease;
+  box-shadow: none;
+  transition: transform 0.2s ease;
   min-width: 0;
   width: 100%;
 }
 
 .service-card-wrap:hover .service-card {
-  transform: translateY(-3px);
-  outline-color: var(--gold);
-  box-shadow: 0 6px 0 rgba(59, 30, 109, 0.1), 0 10px 20px rgba(59, 30, 109, 0.12);
+  transform: translateY(-2px);
 }
 
 .service-card-icon {
@@ -594,9 +589,10 @@ button { font-family: inherit; }
   line-height: 1.35;
   max-width: 100%;
   padding: 0 2px;
+  margin-top: 6px;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
 
@@ -604,53 +600,53 @@ button { font-family: inherit; }
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 6px;
   flex-wrap: wrap;
+  margin-top: 2px;
 }
 
 .price-old,
 .price-now {
   display: inline-flex;
   align-items: center;
-  gap: 3px;
-  padding: 2px 6px;
-  border-radius: 50px;
+  gap: 2px;
+  padding: 0;
+  border-radius: 0;
   white-space: nowrap;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 .price-old {
-  background: #F4EFFF;
-  border: 1px solid var(--line);
+  background: none !important;
+  border: none !important;
 }
 
 .price-now {
-  background: var(--green-50);
-  border: 1.5px solid var(--green-300);
+  background: none !important;
+  border: none !important;
 }
 
 .price-label {
-  font-size: 0.52rem;
-  font-weight: 900;
-  padding: 1px 4px;
-  border-radius: 50px;
-  color: #fff;
+  display: none !important;
 }
-
-.price-old .price-label { background: #8A6BB0; }
-
-.price-now .price-label { background: var(--green-700); }
 
 .price-old .price-value {
   color: var(--text-light);
   text-decoration: line-through;
-  font-size: 0.62rem;
-  font-weight: 700;
+  font-size: 0.58rem;
+  font-weight: 600;
+  background: none !important;
+  border: none !important;
 }
 
 .price-now .price-value {
   color: var(--green-800);
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 900;
+  background: none !important;
+  border: none !important;
 }
 
 .service-card-wrap .price-wa-btn {
@@ -1480,13 +1476,14 @@ button { font-family: inherit; }
   .contact-grid { grid-template-columns: 1fr; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .nd-banner { height: 160px; }
-  .service-cards { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
-  .service-card { padding: 8px 6px 10px !important; }
-  .service-card-icon { width: 48px !important; height: 48px !important; margin-bottom: 4px !important; }
-  .service-card-name { font-size: 0.78rem !important; }
-  .price-now .price-value { font-size: 0.92rem !important; }
-  .price-old .price-value { font-size: 0.72rem !important; }
-  .service-card .price-wa-btn { font-size: 0.7rem !important; padding: 5px 10px !important; }
+  .service-cards { grid-template-columns: repeat(2, 1fr) !important; gap: 20px 10px !important; }
+  .service-card { padding: 4px 4px 2px !important; border: none !important; outline: none !important; box-shadow: none !important; background: transparent !important; }
+  .service-card-icon { width: 48px !important; height: 48px !important; margin-bottom: 2px !important; }
+  .service-card-name { font-size: 0.78rem !important; margin-top: 6px !important; -webkit-line-clamp: 3 !important; }
+  .price-now .price-value { font-size: 0.85rem !important; background: none !important; }
+  .price-old .price-value { font-size: 0.58rem !important; background: none !important; }
+  .price-label { display: none !important; }
+  .service-card-wrap .price-wa-btn { font-size: 0.7rem !important; padding: 6px 12px !important; }
 }
 
 @media (max-width: 420px) {
@@ -1623,19 +1620,20 @@ html, body {
 }
 
 .service-card {
-  padding: 12px 10px 10px !important;
-  border-radius: 14px !important;
-  border: 1px solid #D0E8DA !important;
-  background: #fff !important;
-  box-shadow: 0 3px 12px rgba(59, 30, 109, 0.05) !important;
+  padding: 4px 4px 2px !important;
+  border-radius: 0 !important;
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
   text-align: center !important;
 }
 .service-card-icon {
   width: 56px !important;
   height: 56px !important;
-  margin: 0 auto 6px !important;
+  margin: 0 auto 2px !important;
   border-radius: 14px !important;
-  background: linear-gradient(145deg, #F8F1DC 0%, #EAD7A8 50%, #D9C07A 100%) !important;
+  background: linear-gradient(145deg, #F4EFFF 0%, #C4B0F0 45%, #A78BEA 100%) !important;
   border: 2.5px solid #FFFFFF !important;
   box-shadow:
     0 0 0 1.5px #8F6ADB,
@@ -1676,18 +1674,33 @@ html, body {
   font-weight: 900 !important;
   color: #3B1E6D !important;
   line-height: 1.35 !important;
+  margin-top: 6px !important;
+  -webkit-line-clamp: 3 !important;
 }
 .price-now .price-value {
   font-weight: 900 !important;
   color: #3B1E6D !important;
   font-size: 0.85rem !important;
+  background: none !important;
+  border: none !important;
 }
 .price-old .price-value {
-  color: #444 !important;
+  color: #8A6BB0 !important;
   font-weight: 600 !important;
+  font-size: 0.58rem !important;
+  background: none !important;
+  border: none !important;
+  text-decoration: line-through !important;
 }
 .price-label {
-  font-weight: 800 !important;
+  display: none !important;
+}
+.price-old,
+.price-now {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
 }
 
 .section-title {
@@ -3074,107 +3087,87 @@ body {
 }
 
 /* ============================================================
-   FORCE CLEAN SERVICE CARDS - 25 Sep 2026 FINAL
-   Removes ALL frames, backgrounds, pills from service cards
+   FINAL FIX — service cards: no frame, clean prices, button outside
    ============================================================ */
-
-.price-list,
-#servicesGrid,
-.price-category,
-.service-cards,
-.service-card-wrap,
-.service-card {
-  background: transparent !important;
-  background-color: transparent !important;
-  border: none !important;
-  border-width: 0 !important;
-  outline: none !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-}
-
 .service-cards {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 30px 16px !important;
-  padding: 12px 6px !important;
+  gap: 24px 14px !important;
+  padding: 8px 6px !important;
+  background: transparent !important;
+  max-width: 720px !important;
   margin: 0 auto !important;
-  max-width: 100% !important;
 }
 
 .service-card-wrap {
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
-  gap: 12px !important;
-  padding: 0 !important;
+  gap: 10px !important;
+  min-width: 0 !important;
 }
 
 .service-card {
-  padding: 0 !important;
-  gap: 0 !important;
-  min-height: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 4px 2px 2px !important;
+  gap: 2px !important;
+  min-height: auto !important;
   width: 100% !important;
 }
 
-.service-card:hover,
-.service-card-wrap:hover .service-card {
+.service-card:hover {
   transform: none !important;
   box-shadow: none !important;
   border: none !important;
 }
 
-/* Icon only keeps nice look */
 .service-card-icon {
-  width: 54px !important;
-  height: 54px !important;
-  margin: 0 auto 6px !important;
+  width: 52px !important;
+  height: 52px !important;
+  margin: 0 auto 2px !important;
   border-radius: 14px !important;
-  background: linear-gradient(145deg, #F4EFFF, #C4B0F0, #A78BEA) !important;
+  background: linear-gradient(145deg, #F4EFFF 0%, #C4B0F0 45%, #A78BEA 100%) !important;
   border: 2px solid #fff !important;
-  box-shadow: 0 0 0 2px #8F6ADB, 0 4px 12px rgba(127,83,209,0.25) !important;
-  overflow: hidden !important;
+  box-shadow: 0 0 0 1.5px #8F6ADB, 0 4px 10px rgba(127, 83, 209, 0.2) !important;
 }
 
-/* Service name - lower + clear */
 .service-card-name {
-  font-size: 0.82rem !important;
+  font-size: 0.8rem !important;
   font-weight: 900 !important;
   color: #3B1E6D !important;
   line-height: 1.4 !important;
-  margin: 10px 0 6px 0 !important;
+  margin: 8px 0 4px !important;
   padding: 0 4px !important;
-  text-align: center !important;
   -webkit-line-clamp: 3 !important;
   display: -webkit-box !important;
   -webkit-box-orient: vertical !important;
   overflow: hidden !important;
   min-height: auto !important;
-  background: transparent !important;
 }
 
-/* Prices - pure text only */
 .service-card-prices {
   display: flex !important;
   flex-wrap: wrap !important;
-  justify-content: center !important;
   align-items: center !important;
-  gap: 8px !important;
-  margin: 0 !important;
-  background: transparent !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  margin: 2px 0 0 !important;
+  width: 100% !important;
 }
 
 .price-old,
-.price-now,
-.service-card-prices .price-old,
-.service-card-prices .price-now {
-  background: transparent !important;
-  background-color: transparent !important;
+.price-now {
+  background: none !important;
   border: none !important;
   padding: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
-  display: inline !important;
+  display: inline-flex !important;
+  gap: 2px !important;
 }
 
 .price-label {
@@ -3190,35 +3183,93 @@ body {
 }
 
 .price-now .price-value {
-  font-size: 0.95rem !important;
+  font-size: 0.9rem !important;
   font-weight: 900 !important;
   color: #3B1E6D !important;
   background: none !important;
 }
 
-/* Button outside + purple */
 .service-card-wrap .price-wa-btn,
-a.price-wa-btn {
+.service-card .price-wa-btn {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 5px !important;
+  gap: 4px !important;
   background: linear-gradient(135deg, #7F53D1, #4A2A85) !important;
   color: #fff !important;
-  font-size: 0.75rem !important;
+  font-size: 0.72rem !important;
   font-weight: 800 !important;
-  padding: 9px 18px !important;
+  padding: 8px 14px !important;
   border-radius: 50px !important;
-  box-shadow: 0 4px 14px rgba(127,83,209,0.35) !important;
-  border: none !important;
+  box-shadow: 0 3px 10px rgba(127, 83, 209, 0.3) !important;
   width: auto !important;
   max-width: 150px !important;
-  margin-top: 4px !important;
-  text-decoration: none !important;
+  margin-top: 0 !important;
+  border: none !important;
 }
 
-/* Kill any remaining green buttons or frames */
 .service-card-wrap .price-wa-btn:hover {
-  transform: translateY(-2px) !important;
-  box-shadow: 0 6px 18px rgba(127,83,209,0.45) !important;
+  transform: translateY(-1px) scale(1.03) !important;
+  box-shadow: 0 5px 14px rgba(127, 83, 209, 0.4) !important;
+}
+
+/* remove any green-ish leftover borders on cards */
+.service-card,
+.service-card-wrap .service-card {
+  border-color: transparent !important;
+  outline-color: transparent !important;
+}
+
+/* ULTIMATE service card clean — no box at all */
+.price-list .service-cards,
+#servicesGrid .service-cards,
+.service-cards {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  gap: 28px 12px !important;
+}
+
+.price-list .service-card,
+#servicesGrid .service-card,
+.service-card,
+article.service-card-wrap .service-card {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  border-width: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 2px !important;
+}
+
+.price-list .service-card-wrap,
+#servicesGrid .service-card-wrap {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* prices pure text */
+.price-old, .price-now,
+.service-card-prices .price-old,
+.service-card-prices .price-now {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.price-label { display: none !important; visibility: hidden !important; height: 0 !important; width: 0 !important; overflow: hidden !important; }
+
+.price-old .price-value {
+  font-size: 0.58rem !important;
+  opacity: 0.75;
+}
+
+.price-now .price-value {
+  font-size: 0.92rem !important;
 }
