@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="مجمع عناية الابتسامة الطبي - لطب وجراحة الأسنان في حفر الباطن">
+  <title>مجمع عناية الابتسامة الطبي</title>
+  <meta name="theme-color" content="#3B1E6D">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="preload" as="image" href="hero-blend.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="service-card-bg.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=99">
+</head>
+<body>
+
+<!-- شاشة دخول فخمة ملكية — خلفية سوداء لامعة + إطار ذهبي -->
+<div id="entryOverlay" style="position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:18px;background:#000;
+background-image:
+  radial-gradient(ellipse 90% 60% at 50% -10%, rgba(201,162,77,0.22) 0%, transparent 55%),
+  radial-gradient(ellipse 70% 50% at 50% 110%, rgba(201,162,77,0.12) 0%, transparent 50%),
+  linear-gradient(180deg, #0a0a0a 0%, #000 40%, #050505 100%);
+overflow:hidden;">
+  <!-- لمعان خفيف متحرك -->
+  <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg, transparent 40%, rgba(255,215,120,0.04) 50%, transparent 60%);animation:shineSweep 4s ease-in-out infinite;"></div>
+
+  <div style="width:100%;max-width:400px;position:relative;animation:popIn 0.65s cubic-bezier(0.22,1,0.36,1);">
+    <!-- إطار ذهبي مزدوج مزخرف -->
+    <div style="
+      background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 50%, #151515 100%);
+      border-radius: 28px;
+      padding: 3px;
+      box-shadow:
+        0 0 0 1px #C9A24D,
+        0 0 0 4px #1a1508,
+        0 0 0 5px #E8D9AE,
+        0 0 0 8px #0a0800,
+        0 0 0 9px rgba(201,162,77,0.5),
+        0 25px 60px rgba(0,0,0,0.85),
+        0 0 80px rgba(201,162,77,0.15);
+    ">
+      <div style="
+        background: linear-gradient(165deg, #141414 0%, #0a0a0a 45%, #111 100%);
+        border-radius: 25px;
+        padding: 36px 24px 28px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(201,162,77,0.25);
+      ">
+        <!-- زخرفة علوية ذهبية -->
+        <div style="position:absolute;top:0;left:12%;right:12%;height:2px;background:linear-gradient(90deg,transparent,#C9A24D,#F5E6B8,#C9A24D,transparent);opacity:0.9;"></div>
+        <div style="position:absolute;top:6px;left:20%;right:20%;height:1px;background:linear-gradient(90deg,transparent,rgba(232,217,174,0.5),transparent);"></div>
+
+        <!-- أيقونة سن فاخرة -->
+        <div style="margin:8px auto 16px;width:72px;height:72px;display:flex;align-items:center;justify-content:center;
+          background:radial-gradient(circle at 40% 30%, #F5EBCF 0%, #C9A24D 45%, #9E7C2F 100%);
+          border-radius:50%;
+          box-shadow:0 6px 20px rgba(201,162,77,0.45), inset 0 2px 4px rgba(255,255,255,0.35), 0 0 0 3px rgba(201,162,77,0.3);">
+          <span style="font-size:38px;line-height:1;filter:drop-shadow(0 2px 3px rgba(0,0,0,0.35));">🦷</span>
+        </div>
+
+        <!-- العنوان الذهبي اللامع -->
+        <h1 style="font-family:'Cairo',sans-serif;font-size:22px;font-weight:900;line-height:1.55;margin:0 0 6px 0;
+          background:linear-gradient(180deg, #FFF8E0 0%, #F5E6B8 25%, #C9A24D 55%, #E8D9AE 80%, #9E7C2F 100%);
+          -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+          filter:drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+          letter-spacing:0.02em;">
+          أهلاً وسهلاً بكم في<br>مجمع عناية الابتسامة الطبي
+        </h1>
+
+        <p style="font-family:'Tajawal',sans-serif;font-size:15px;font-weight:800;margin:0 0 18px 0;
+          color:#E8D9AE;letter-spacing:0.04em;text-shadow:0 1px 3px rgba(0,0,0,0.5);">
+          طب وجراحة الأسنان
+        </p>
+
+        <!-- شارة نورتونا -->
+        <div style="
+          margin:0 auto 22px;display:inline-block;
+          padding:10px 28px;border-radius:50px;
+          background:linear-gradient(135deg, rgba(201,162,77,0.2) 0%, rgba(158,124,47,0.15) 100%);
+          border:1.5px solid rgba(201,162,77,0.55);
+          box-shadow:inset 0 1px 0 rgba(255,248,220,0.15), 0 4px 12px rgba(0,0,0,0.3);
+        ">
+          <p style="font-family:'Cairo',sans-serif;font-size:17px;font-weight:900;margin:0;
+            background:linear-gradient(180deg,#FFF8E0,#C9A24D);
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+            ✨ نورتونا ✨
+          </p>
+        </div>
+
+        <!-- زر إضافة التطبيق للهاتف -->
+        <p style="font-family:'Cairo',sans-serif;font-size:15px;font-weight:900;color:#E8D9AE;margin:0 0 8px 0;letter-spacing:0.02em;">
+          لإضافة التطبيق إلى الهاتف اضغط هنا
+        </p>
+        <button id="installAppBtn" type="button" style="
+          width:100%;border:1.5px solid rgba(201,162,77,0.7);cursor:pointer;
+          font-family:'Cairo',sans-serif;font-size:16px;font-weight:900;
+          padding:13px 18px;border-radius:14px;margin-bottom:12px;
+          color:#F5EBCF;
+          background:linear-gradient(135deg, rgba(201,162,77,0.25) 0%, rgba(158,124,47,0.15) 100%);
+          box-shadow:inset 0 1px 0 rgba(255,248,220,0.12), 0 4px 14px rgba(0,0,0,0.35);
+          display:flex;align-items:center;justify-content:center;gap:8px;
+        ">
+          <span>📲 تثبيت تطبيق المجمع على هاتفي</span>
+        </button>
+        <p id="installAppHint" style="display:none;font-family:'Tajawal',sans-serif;font-size:12px;color:rgba(232,217,174,0.7);margin:0 0 12px 0;line-height:1.5;"></p>
+
+        <!-- زر الدخول الذهبي -->
+        <button id="enterSiteBtn" type="button" style="
+          width:100%;border:none;cursor:pointer;
+          font-family:'Cairo',sans-serif;font-size:17px;font-weight:900;
+          padding:16px 20px;border-radius:16px;
+          color:#1a1200;
+          background:linear-gradient(180deg, #F5EBCF 0%, #E8D9AE 30%, #C9A24D 70%, #9E7C2F 100%);
+          box-shadow:
+            0 6px 0 #6B5220,
+            0 10px 28px rgba(201,162,77,0.4),
+            inset 0 1px 0 rgba(255,255,255,0.5);
+          transition:transform 0.2s, box-shadow 0.2s;
+          display:flex;align-items:center;justify-content:center;gap:8px;
+        " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+          <span>للدخول إلى الموقع اضغط هنا</span>
+        </button>
+
+        <!-- زخرفة سفلية -->
+        <div style="margin-top:18px;height:1px;background:linear-gradient(90deg,transparent,rgba(201,162,77,0.4),transparent);"></div>
+        <p style="margin:10px 0 0;font-family:'Tajawal',sans-serif;font-size:11px;color:rgba(232,217,174,0.45);font-weight:600;">
+          رعاية طبية متخصصة · حفر الباطن
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+@keyframes popIn{0%{transform:scale(0.88);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes shineSweep{0%,100%{opacity:0.3;transform:translateX(-30%)}50%{opacity:0.7;transform:translateX(30%)}}
+</style>
+
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a class="logo" href="#hero">
+        <span class="logo-icon"><img src="icon.svg" alt="شعار المجمع" width="38" height="38"></span>
+        <span class="logo-text">
+          <span class="logo-name" id="logoName">مجمع عناية الابتسامة الطبي</span>
+          <span class="logo-tagline" id="logoTagline">لطب وجراحة الأسنان</span>
+        </span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero" class="nav-link">الرئيسية</a></li>
+        <li><a href="#services" class="nav-link">الخدمات والأسعار</a></li>
+        <li><a href="#about" class="nav-link">نبذة عنا</a></li>
+        <li><a href="#doctors" class="nav-link">الأطباء</a></li>
+        <li><a href="#reviews" class="nav-link">التعليقات</a></li>
+        <li><a href="#booking" class="nav-link">الحجز</a></li>
+        <li><a href="#faq" class="nav-link">الأسئلة الشائعة</a></li>
+        <li><a href="#contact" class="nav-link">تواصل معنا</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="القائمة" aria-controls="navLinks" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="nd-banner-wrap" id="hero">
+      <div class="nd-banner">
+        <img class="nd-banner-img" id="ndBlendImage" src="hero-blend.jpg" decoding="async" fetchpriority="high" alt="مجمع عناية الابتسامة الطبي">
+  <link rel="preload" as="image" href="service-card-bg.jpg">
+        <div class="nd-banner-overlay"></div>
+      </div>
+    </section>
+
+    <div class="announcement-bar" id="announcementBar">
+      <div class="announcement-track">
+        <span class="announcement-text"><span id="announcementText">أهلاً وسهلاً بكم في مجمعكم عناية الابتسامة الطبي — ابتسامتكم سر ثقتكم، ونحن هنا لنحافظ عليها — احجز موعدك الآن بسهولة عبر الواتساب</span></span>
+        <span class="announcement-text" aria-hidden="true"><span id="announcementText2">أهلاً وسهلاً بكم في مجمعكم عناية الابتسامة الطبي — ابتسامتكم سر ثقتكم، ونحن هنا لنحافظ عليها — احجز موعدك الآن بسهولة عبر الواتساب</span></span>
+      </div>
+    </div>
+
+    <!-- قسم التهنئة مخفي — لا يُعرض -->
+    <section class="nd-greeting-section" id="nationalDay" style="display:none!important" hidden>
+      <div class="nd-greeting">
+        <span class="nd-badge" id="nationalDayBadge"></span>
+        <h2 class="nd-greeting-title" id="nationalDayTitle"></h2>
+        <p class="nd-greeting-text" id="nationalDayGreeting"></p>
+        <p class="nd-greeting-text" id="nationalDayGreeting2"></p>
+        <p class="nd-greeting-text nd-greeting-wish" id="nationalDayGreeting3"></p>
+        <p class="nd-greeting-closing" id="nationalDayClosing"></p>
+      </div>
+    </section>
+
+    <section class="hero-cta-section" id="heroCta">
+      <span class="nd-badge" id="ndBannerBadge">رعاية طبية متخصصة</span>
+      <h2 class="hero-cta-title" id="ndBannerTitle">ابتسامة أجمل تبدأ من هنا</h2>
+      <p class="hero-cta-sub" id="ndBannerSlogan">مجمع متخصص في طب وجراحة الأسنان بأحدث التقنيات وأعلى معايير الجودة والتعقيم</p>
+      <div class="hero-cta-actions">
+        <a href="#booking" class="btn btn-primary" id="heroBtnMain">احجز موعدك الآن</a>
+        <a href="#services" class="btn btn-outline" id="heroBtnSecondary">اكتشف خدماتنا</a>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head" id="servicesSectionHead">
+          <span class="section-badge" id="servicesBadge">خدماتنا</span>
+          <h2 class="section-title" id="servicesTitle">أسعار وخدمات المجمع</h2>
+          <p class="section-subtitle" id="servicesSubtitle">أسعار واضحة وشفافة — احجز الخدمة التي تناسبك مباشرة عبر الواتساب</p>
+        </div>
+        <div class="price-note" hidden style="display:none!important"></div>
+        <div class="price-list" id="servicesGrid"></div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="container"><div class="stats-grid" id="statsGrid"></div></div>
+    </section>
+
+    <section class="section section-alt" id="about">
+      <div class="container">
+        <details class="section-fold">
+          <summary class="section-toggle" id="featuresBadge">رؤيتنا وقيمنا</summary>
+          <div class="section-fold-body">
+            <h2 class="section-title" id="featuresTitle" style="display:none"></h2>
+            <p class="section-subtitle" id="featuresSubtitle" style="display:none"></p>
+            <div class="features-grid" id="featuresGrid"></div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section" id="tips" style="background-color: #E8F4F7 !important; padding: 40px 0;">
+      <div class="container">
+        <details class="section-fold">
+          <summary class="section-toggle" id="tipsBadge">ثقافة طبية</summary>
+          <div class="section-fold-body">
+            <h2 class="section-title" id="tipsTitle" style="display:none"></h2>
+            <p class="section-subtitle" id="tipsSubtitle" style="display:none"></p>
+            <div class="daily-tips-box" style="display:none!important">
+              <h3 id="dailyTipsTitle"></h3>
+              <ul class="daily-tips-list" id="dailyTipsList"></ul>
+            </div>
+            <div class="tips-grid" id="tipsGrid"></div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="doctors">
+      <div class="container">
+        <details class="section-fold">
+          <summary class="section-toggle" id="doctorsBadge">أطباؤنا الأخصائيون</summary>
+          <div class="section-fold-body">
+            <h2 class="section-title" id="doctorsTitle" style="display:none"></h2>
+            <p class="section-subtitle" id="doctorsSubtitle">نخبة من الأطباء المرخصين والمعتمدين من الهيئة السعودية للتخصصات الصحية</p>
+            <div class="doctors-grid" id="doctorsGrid"></div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section section-booking" id="booking">
+      <div class="container">
+        <div class="booking-card">
+          <h2 class="section-title" id="bookingTitle">احجز موعدك الآن</h2>
+          <p class="booking-subtitle" id="bookingSubtitle">املأ النموذج وسيتواصل معك فريق المجمع عبر الواتساب فوراً لتأكيد حجزك.</p>
+          <div class="booking-support">
+            <span class="check-icon" aria-hidden="true">✓</span><span id="support1">تواصل فوري ومباشر من موظف الاستقبال خلال دقائق معدودة</span>
+          </div>
+          <div class="booking-support">
+            <span class="check-icon" aria-hidden="true">✓</span><span id="support2">الكشف الطبي والاستشارة والتقييم الأولي مجاني</span>
+          </div>
+          <form class="booking-form" id="bookingForm">
+            <div class="form-group">
+              <label for="name">الاسم الكامل</label>
+              <input type="text" id="name" name="name" placeholder="اسمك الكريم" autocomplete="name" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">رقم الجوال</label>
+              <input type="tel" id="phone" name="phone" placeholder="05xxxxxxxx" inputmode="tel" autocomplete="tel" required>
+            </div>
+            <div class="form-group">
+              <label for="service">الخدمة</label>
+              <select id="service" name="service" required></select>
+            </div>
+            <div class="form-group">
+              <label for="date">اليوم المفضل (اختياري)</label>
+              <input type="date" id="date" name="date">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="submitBtn">تأكيد وإرسال الحجز عبر واتساب</button>
+            <p class="form-note" id="formNote">سيقوم النظام بتحويل بياناتك إلى رسالة واتساب جاهزة، فقط اضغط إرسال في هاتفك</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="reviews">
+      <div class="container">
+        <details class="section-fold">
+          <summary class="section-toggle" id="reviewsBadge">آراء وتجارب</summary>
+          <div class="section-fold-body">
+            <h2 class="section-title" id="reviewsTitle">ابتسامات سعيدة نصنعها بتميز وإتقان</h2>
+            <p class="section-subtitle" id="reviewsSubtitle">تجارب حقيقية موثقة من زبائن مجمع عناية الابتسامة في حفر الباطن</p>
+            <div class="testimonials-grid" id="testimonialsGrid"></div>
+            <div class="review-box">
+              <h3 id="reviewBoxTitle">شاركنا تجربتك</h3>
+              <p id="reviewBoxText">رأيك يهمنا! اكتب تعليقك وسنضيفه في الموقع بعد مراجعته.</p>
+              <form class="review-form" id="reviewForm">
+                <div class="form-group">
+                  <label for="reviewName">اسمك</label>
+                  <input type="text" id="reviewName" name="reviewName" placeholder="اسمك الكريم" required>
+                </div>
+                <div class="form-group">
+                  <label for="reviewText">تعليقك</label>
+                  <textarea id="reviewText" name="reviewText" rows="3" placeholder="اكتب تجربتك معنا..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" id="reviewSubmitBtn">إرسال التعليق عبر واتساب</button>
+              </form>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section section-faq" id="faq">
+      <div class="container">
+        <details class="section-fold">
+          <summary class="section-toggle">الأسئلة الشائعة</summary>
+          <div class="section-fold-body">
+            <p class="section-subtitle">إجابات رسمية وواضحة لأكثر الاستفسارات تكراراً</p>
+            <div class="faq-list" id="faqList"></div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section section-contact" id="contact">
+      <div class="container">
+        <div class="section-head" style="text-align: center; margin-bottom: 30px;">
+          <h2 id="contactBadge" style="font-size: 28px; font-weight: 900; color: #063A4A !important; background: none !important; padding: 0 !important; border-radius: 0 !important; display: block; margin: 0 auto 10px auto;">اتصل بنا</h2>
+          <h2 class="section-title" id="contactTitle">موقعنا في حفر الباطن وأوقات الدوام</h2>
+          <p class="section-subtitle">نحن في خدمتكم — تواصلوا معنا عبر أي وسيلة تناسبكم</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <h3 class="contact-card-title">📞 <span id="contactPhoneTitle">أرقام التواصل والحجز</span></h3>
+            <p class="contact-line" id="contactPhone"></p>
+            <p class="contact-line" id="contactEmail"></p>
+            <a class="btn btn-primary btn-sm" id="whatsappBtn" href="#" target="_blank" rel="noopener">تواصل عبر واتساب</a>
+          </div>
+          <div class="contact-card">
+            <h3 class="contact-card-title">📍 <span id="contactAddressTitle">موقع المجمع بفرع حفر الباطن</span></h3>
+            <p class="contact-line" id="contactAddress"></p>
+            <a class="btn btn-outline btn-sm" id="mapBtn" href="#" target="_blank" rel="noopener">فتح الخريطة في خرائط جوجل</a>
+          </div>
+          <div class="contact-card">
+            <h3 class="contact-card-title">⏰ <span id="contactHoursTitle">ساعات العمل الرسمية</span></h3>
+            <ul class="hours-list" id="hoursList"></ul>
+          </div>
+        </div>
+        <div class="map-wrap">
+          <iframe id="mapFrame" class="map-frame" title="موقع مجمع عناية الابتسامة الطبي على الخريطة" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="social-block">
+          <h3 class="social-title">تابعنا على مواقع التواصل الاجتماعي</h3>
+          <div class="social-links" id="socialLinks"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="payment-banner" id="paymentBanner" aria-label="حلول الدفع">
+    <div class="container payment-banner-inner">
+      <p class="payment-banner-text">نوفر لكم حلول دفع ميسرة: يوجد لدينا تابي وتمارا</p>
+      <div class="payment-logos" aria-hidden="true">
+        <span class="pay-logo pay-tabby">tabby</span>
+        <span class="pay-logo pay-tamara">تمارا</span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" id="footer">
+    <div class="footer-bottom footer-simple">
+      <p>© <span id="currentYear">2026</span> مجمع عناية الابتسامة الطبي — جميع الحقوق محفوظة</p>
+    </div>
+  </footer>
+
+  <a href="#" class="whatsapp-float" id="whatsappFloat" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">
+    <span class="whatsapp-ping"></span>
+    <span class="whatsapp-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:1.4em;height:1.4em"><path d="M24 6a18 18 0 0 0-15 28L7 42l8-2A18 18 0 1 0 24 6z"/><path d="M17 17c0 8 6 14 14 14 1.6 0 3-2 2-3.4l-3.6-2-2.4 2.4c-2.6-1-5-3.4-6-6l2.4-2.4-2-3.6C20 15 17 16 17 17z" fill="currentColor" stroke="none"/></svg></span>
+  </a>
+
+  <div class="admin-toolbar" id="adminToolbar" hidden>
+    <span class="admin-toolbar-title">🔒 وضع المالك</span>
+    <button type="button" id="adminDownloadBtn" class="admin-btn">تحميل content.json</button>
+    <button type="button" id="adminResetBtn" class="admin-btn">التراجع عن التعديلات</button>
+    <button type="button" id="adminExitBtn" class="admin-btn">إنهاء وضع التعديل</button>
+  </div>
+  <button type="button" class="admin-entry-btn" id="adminEntryBtn" title="دخول المالك" aria-label="دخول المالك">🔒</button>
+  <input type="file" id="adminFileInput" accept="image/*" hidden>
+
+  <script>
+  (function(){
+    /* دخول الموقع */
+    const enterBtn = document.getElementById('enterSiteBtn');
+    const overlay = document.getElementById('entryOverlay');
+    if (enterBtn && overlay) {
+      enterBtn.addEventListener('click', function(){
+        overlay.style.transition = 'all 0.5s ease';
+        overlay.style.opacity = '0';
+        overlay.style.pointerEvents = 'none';
+        setTimeout(function(){ overlay.remove(); }, 500);
+      });
+    }
+
+    /* تسجيل Service Worker لتفعيل PWA */
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function(){
+        navigator.serviceWorker.register('./sw.js').catch(function(){});
+      });
+    }
+
+    /* تثبيت التطبيق — ربط حقيقي بـ beforeinstallprompt */
+    var deferredPrompt = null;
+    var installBtn = document.getElementById('installAppBtn');
+    var installHint = document.getElementById('installAppHint');
+
+    function isStandalone() {
+      return window.matchMedia('(display-mode: standalone)').matches
+        || window.navigator.standalone === true;
+    }
+
+    function showHint(msg) {
+      if (!installHint) return;
+      installHint.style.display = 'block';
+      installHint.textContent = msg;
+    }
+
+    if (isStandalone()) {
+      if (installBtn) installBtn.style.display = 'none';
+      showHint('التطبيق مثبت مسبقاً على جهازك ✓');
+    }
+
+    window.addEventListener('beforeinstallprompt', function(e) {
+      e.preventDefault();
+      deferredPrompt = e;
+      if (installBtn) {
+        installBtn.style.opacity = '1';
+        installBtn.style.pointerEvents = 'auto';
+      }
+    });
+
+    window.addEventListener('appinstalled', function() {
+      deferredPrompt = null;
+      if (installBtn) installBtn.style.display = 'none';
+      showHint('تم تثبيت التطبيق بنجاح على هاتفك ✓');
+    });
+
+    if (installBtn) {
+      installBtn.addEventListener('click', async function() {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          try {
+            var choice = await deferredPrompt.userChoice;
+            if (choice && choice.outcome === 'accepted') {
+              showHint('جاري التثبيت… افتح التطبيق من شاشتك الرئيسية');
+            } else {
+              showHint('تم إلغاء التثبيت. يمكنك المحاولة لاحقاً');
+            }
+          } catch (err) {}
+          deferredPrompt = null;
+          return;
+        }
+        /* إن لم يظهر نافذة التثبيت التلقائية — إرشادات حسب النظام */
+        var ua = navigator.userAgent || '';
+        var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        var isAndroid = /Android/i.test(ua);
+        if (isIOS) {
+          showHint('على الآيفون: اضغط زر المشاركة ⎙ ثم «إضافة إلى الشاشة الرئيسية»');
+        } else if (isAndroid) {
+          showHint('على أندرويد: من قائمة المتصفح ⋮ اختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية»');
+        } else {
+          showHint('من قائمة المتصفح اختر «تثبيت التطبيق» أو «Install app»');
+        }
+      });
+    }
+  })();
+  </script>
+
+  <script src="icons.js?v=26" defer></script>
+  <script src="main.js?v=26" defer></script>
+  <script src="admin.js?v=26" defer></script>
+</body>
+</html>
