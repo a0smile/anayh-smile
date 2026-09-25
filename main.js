@@ -42,7 +42,7 @@ function purgeNationalDayOverrides() {
     const raw = localStorage.getItem(OVERRIDES_KEY);
     if (!raw) return;
     const ov = JSON.parse(raw);
-    if (!ov || typeof ov !== 'object') return;
+    if (!ov || typeof ov!== 'object') return;
     const bad = /وطني|دام عزك|عزنا بطبعنا|نحلم ونحقق|اليوم الوطني|عرض اليوم|احجز عرض اليوم/i;
     let changed = false;
     Object.keys(ov).forEach((k) => {
@@ -68,7 +68,6 @@ async function loadContent() {
     const response = await fetch('content.json?v=25', { cache: 'no-cache' });
     let data = await response.json();
     siteData = applyOverrides(data);
-    if (siteData.nationalDay) siteData.nationalDay.enabled = false;
     renderSite(siteData);
 
     if (siteData) {
@@ -217,8 +216,6 @@ function renderSite(data) {
     const nd = data.nationalDay || {};
     const l = data.landmarks || [];
     const sections = data.sections || {};
-    const greeting = document.getElementById('nationalDay');
-    if (!nd.enabled && greeting) { greeting.style.display = 'none'; }
 
     if (nd.blendImage) {
       const b = document.getElementById('ndBlendImage');
@@ -255,17 +252,6 @@ function renderSite(data) {
         </figure>
       `).join('');
     }
-
-    const logoNd = document.getElementById('logoNationalDay');
-    if (logoNd) {
-      logoNd.textContent = '';
-      logoNd.style.display = 'none';
-    }
-    // إخفاء عناصر اليوم الوطني عند التعطيل
-    ['ndFlagImage','ndEmblemImage','nationalDay','landmarksSection'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el && !nd.enabled) el.style.display = 'none';
-    });
   });
 
   safeRender('announcement', () => {
@@ -276,9 +262,6 @@ function renderSite(data) {
       const t1 = document.getElementById('announcementText');
       const t2 = document.getElementById('announcementText2');
       let ann = String(data.announcement || '');
-      if (/وطني|دام عزك|عزنا بطبعنا|اليوم الوطني/i.test(ann)) {
-        ann = 'أهلاً وسهلاً بكم في مجمعكم عناية الابتسامة الطبي — ابتسامتكم سر ثقتكم، ونحن هنا لنحافظ عليها — احجز موعدك الآن بسهولة عبر الواتساب';
-      }
       if (t1) t1.textContent = ann;
       if (t2) t2.textContent = ann;
       bar.setAttribute('data-edit', 'announcement');
@@ -307,22 +290,11 @@ function renderSite(data) {
   });
 
   safeRender('hero', () => {
-    const bad = /وطني|دام عزك|عزنا بطبعنا|اليوم الوطني|عرض اليوم/i;
-    let badge = hero.badge || 'رعاية طبية متخصصة';
-    let title = [hero.title, hero.titleHighlight].filter(Boolean).join(' ').trim() || 'ابتسامة أجمل تبدأ من هنا';
-    let slogan = hero.subtitle || 'مجمع متخصص في طب وجراحة الأسنان بأحدث التقنيات وأعلى معايير الجودة والتعقيم';
-    let btnMain = hero.buttonMain || 'احجز موعدك الآن';
-    let btnSec = hero.buttonSecondary || 'اكتشف خدماتنا';
-    if (bad.test(badge)) badge = 'رعاية طبية متخصصة';
-    if (bad.test(title)) title = 'ابتسامة أجمل تبدأ من هنا';
-    if (bad.test(slogan)) slogan = 'مجمع متخصص في طب وجراحة الأسنان بأحدث التقنيات وأعلى معايير الجودة والتعقيم';
-    if (bad.test(btnMain)) btnMain = 'احجز موعدك الآن';
-    if (bad.test(btnSec)) btnSec = 'اكتشف خدماتنا';
-    setText('ndBannerBadge', badge);
-    setText('ndBannerTitle', title);
-    setText('ndBannerSlogan', slogan);
-    setText('heroBtnMain', btnMain);
-    setText('heroBtnSecondary', btnSec);
+    setText('ndBannerBadge', hero.badge || 'رعاية طبية متخصصة');
+    setText('ndBannerTitle', [hero.title, hero.titleHighlight].filter(Boolean).join(' ').trim() || 'ابتسامة أجمل تبدأ من هنا');
+    setText('ndBannerSlogan', hero.subtitle || 'مجمع متخصص في طب وجراحة الأسنان بأحدث التقنيات');
+    setText('heroBtnMain', hero.buttonMain || 'احجز موعدك الآن');
+    setText('heroBtnSecondary', hero.buttonSecondary || 'اكتشف خدماتنا');
     markEditable('ndBannerBadge', 'hero.badge');
     markEditable('ndBannerTitle', 'hero.title');
     markEditable('ndBannerSlogan', 'hero.subtitle');
@@ -376,7 +348,6 @@ function renderSite(data) {
       [/تنظيف|جير|تلميع/, 'clean'],
       [/زراع/, 'tooth']
     ];
-    /* مضبوط 100% على ملفات الصور الحقيقية في service-icons أو الروت */
     const PHOTO_BY_NAME = [
       [/تلبيسة تاج|تاج للأطفال/, 'braces-child.jpg'],
       [/حافظة مسافة/, 'braces-kids-treat.jpg'],
@@ -399,16 +370,7 @@ function renderSite(data) {
     };
     const photoFor = (name, idx) => {
       const found = PHOTO_BY_NAME.find(([re]) => re.test(name || ''));
-      const file = found ? found[1] : [
-        'smile-white.jpg',
-        'braces-metal.jpg',
-        'whitening-laser.jpg',
-        'aligner-kit.jpg',
-        'xray.jpg',
-        'dental-model.jpg',
-        'braces-child.jpg'
-      ][idx % 7];
-      // جرّب المسار داخل المجلد ثم الجذر
+      const file = found? found[1] : ['smile-white.jpg','braces-metal.jpg','whitening-laser.jpg','aligner-kit.jpg','xray.jpg','dental-model.jpg','braces-child.jpg'][idx % 7];
       return 'service-icons/' + file;
     };
     const categoryIcon = (cat, ci) => {
@@ -544,9 +506,7 @@ function renderSite(data) {
     }
     const emailEl = document.getElementById('contactEmail');
     if (emailEl) {
-      emailEl.innerHTML = clinic.email
-       ? `بريد: <a href="mailto:${clinic.email}" data-edit="clinic.email" data-edit-type="text">${clinic.email}</a>`
-        : '';
+      emailEl.innerHTML = clinic.email? `بريد: <a href="mailto:${clinic.email}" data-edit="clinic.email" data-edit-type="text">${clinic.email}</a>` : '';
     }
 
     const mapBtn = document.getElementById('mapBtn');
@@ -574,15 +534,11 @@ function renderSite(data) {
 
     const footerPhoneEl = document.getElementById('footerPhone');
     if (footerPhoneEl) {
-      footerPhoneEl.innerHTML = clinic.phone
-       ? `جوال: <a href="tel:${clinic.phone}" data-edit="clinic.phone" data-edit-type="text">${clinic.phone}</a>`
-        : '';
+      footerPhoneEl.innerHTML = clinic.phone? `جوال: <a href="tel:${clinic.phone}" data-edit="clinic.phone" data-edit-type="text">${clinic.phone}</a>` : '';
     }
     const footerEmailEl = document.getElementById('footerEmail');
     if (footerEmailEl) {
-      footerEmailEl.innerHTML = clinic.email
-       ? `بريد: <a href="mailto:${clinic.email}" data-edit="clinic.email" data-edit-type="text">${clinic.email}</a>`
-        : '';
+      footerEmailEl.innerHTML = clinic.email? `بريد: <a href="mailto:${clinic.email}" data-edit="clinic.email" data-edit-type="text">${clinic.email}</a>` : '';
     }
   });
 
@@ -608,9 +564,7 @@ function renderSite(data) {
       { url: clinic.twitter, icon: 'twitter', name: 'تويتر', path: 'clinic.twitter' }
     ];
     const list = socials.filter(s => s.url);
-    socialLinks.innerHTML = list
-     .map(s => `<a href="${s.url}" target="_blank" rel="noopener" aria-label="${s.name}" title="${s.name}"${editAttr(s.path)}>${(window.ndIconHtml? window.ndIconHtml(s.icon) : "")}</a>`)
-     .join('');
+    socialLinks.innerHTML = list.map(s => `<a href="${s.url}" target="_blank" rel="noopener" aria-label="${s.name}" title="${s.name}"${editAttr(s.path)}>${(window.ndIconHtml? window.ndIconHtml(s.icon) : "")}</a>`).join('');
     const block = document.querySelector('.social-block');
     if (block) block.style.display = list.length? '' : 'none';
   });
@@ -648,19 +602,16 @@ window.getOverrideValue = (path) => getDeep(siteData || {}, path);
   if (bookingFormEl) bookingFormEl.addEventListener('submit', function (e) {
     e.preventDefault();
     if (!siteData) return;
-
     const name = document.getElementById('name').value.trim();
     const phone = document.getElementById('phone').value.trim();
     const service = document.getElementById('service').value;
     const dateEl = document.getElementById('date');
     const date = dateEl? dateEl.value : '';
-
     let message = `طلب حجز موعد جديد\n\n`;
     message += `الاسم: ${name}\n`;
     message += `الجوال: ${phone}\n`;
     message += `الخدمة: ${service}\n`;
     if (date) message += `اليوم المفضل: ${date}\n`;
-
     const waUrl = `https://wa.me/${siteData.clinic.whatsapp}?text=${encodeURIComponent(message)}`;
     window.open(waUrl, '_blank');
   });
@@ -669,17 +620,13 @@ window.getOverrideValue = (path) => getDeep(siteData || {}, path);
   if (reviewFormEl) reviewFormEl.addEventListener('submit', function (e) {
     e.preventDefault();
     if (!siteData) return;
-
     const name = document.getElementById('reviewName').value.trim();
     const text = document.getElementById('reviewText').value.trim();
-
     let message = `تعليق جديد من موقع المجمع\n\n`;
     message += `الاسم: ${name}\n`;
     message += `التعليق: ${text}\n`;
-
     const waUrl = `https://wa.me/${siteData.clinic.whatsapp}?text=${encodeURIComponent(message)}`;
     window.open(waUrl, '_blank');
-
     const rn = document.getElementById('reviewName');
     const rt = document.getElementById('reviewText');
     if (rn) rn.value = '';
@@ -701,21 +648,17 @@ if (menuToggle && navLinks) {
     const isOpen = navLinks.classList.toggle('open');
     menuToggle.setAttribute('aria-expanded', isOpen? 'true' : 'false');
   });
-
   navLinks.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', closeMobileMenu);
   });
-
   document.addEventListener('click', (e) => {
     if (!navLinks.classList.contains('open')) return;
     if (navLinks.contains(e.target) || menuToggle.contains(e.target)) return;
     closeMobileMenu();
   });
-
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeMobileMenu();
   });
-
   window.addEventListener('resize', () => {
     if (window.innerWidth > 900) closeMobileMenu();
   });
@@ -725,21 +668,15 @@ function initNavSpy() {
   if (!navLinks) return;
   const links = Array.from(navLinks.querySelectorAll('.nav-link'));
   if (!links.length) return;
-
-  const targets = links
-   .map(link => {
+  const targets = links.map(link => {
       const id = (link.getAttribute('href') || '').replace('#', '');
       const section = id? document.getElementById(id) : null;
       return section? { link, section } : null;
-    })
-   .filter(Boolean);
-
+    }).filter(Boolean);
   if (!targets.length) return;
-
   const setActive = (link) => {
     links.forEach(l => l.classList.toggle('active', l === link));
   };
-
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
@@ -747,7 +684,6 @@ function initNavSpy() {
       if (match) setActive(match.link);
     });
   }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
-
   targets.forEach(t => observer.observe(t.section));
 }
 
@@ -773,16 +709,7 @@ function initScrollReveal() {
       }
     });
   }, { threshold: 0.12 });
-
   document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
 }
-
-/* تم إزالة موسيقى اليوم الوطني — الموقع الآن هوية طبية احترافية */
-(function hideNationalMusicUI() {
-  const audio = document.getElementById('nationalAudio');
-  const btn = document.getElementById('ndMusicBtn');
-  if (audio) { try { audio.pause(); audio.removeAttribute('src'); } catch (e) {} }
-  if (btn) btn.style.display = 'none';
-})();
 
 loadContent();
