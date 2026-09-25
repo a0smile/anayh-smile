@@ -3072,3 +3072,153 @@ body {
   border-radius: 2px;
   margin: 4px 0;
 }
+
+/* ============================================================
+   FORCE CLEAN SERVICE CARDS - 25 Sep 2026 FINAL
+   Removes ALL frames, backgrounds, pills from service cards
+   ============================================================ */
+
+.price-list,
+#servicesGrid,
+.price-category,
+.service-cards,
+.service-card-wrap,
+.service-card {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-width: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.service-cards {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 30px 16px !important;
+  padding: 12px 6px !important;
+  margin: 0 auto !important;
+  max-width: 100% !important;
+}
+
+.service-card-wrap {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 0 !important;
+}
+
+.service-card {
+  padding: 0 !important;
+  gap: 0 !important;
+  min-height: 0 !important;
+  width: 100% !important;
+}
+
+.service-card:hover,
+.service-card-wrap:hover .service-card {
+  transform: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Icon only keeps nice look */
+.service-card-icon {
+  width: 54px !important;
+  height: 54px !important;
+  margin: 0 auto 6px !important;
+  border-radius: 14px !important;
+  background: linear-gradient(145deg, #F4EFFF, #C4B0F0, #A78BEA) !important;
+  border: 2px solid #fff !important;
+  box-shadow: 0 0 0 2px #8F6ADB, 0 4px 12px rgba(127,83,209,0.25) !important;
+  overflow: hidden !important;
+}
+
+/* Service name - lower + clear */
+.service-card-name {
+  font-size: 0.82rem !important;
+  font-weight: 900 !important;
+  color: #3B1E6D !important;
+  line-height: 1.4 !important;
+  margin: 10px 0 6px 0 !important;
+  padding: 0 4px !important;
+  text-align: center !important;
+  -webkit-line-clamp: 3 !important;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  min-height: auto !important;
+  background: transparent !important;
+}
+
+/* Prices - pure text only */
+.service-card-prices {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin: 0 !important;
+  background: transparent !important;
+}
+
+.price-old,
+.price-now,
+.service-card-prices .price-old,
+.service-card-prices .price-now {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  display: inline !important;
+}
+
+.price-label {
+  display: none !important;
+}
+
+.price-old .price-value {
+  font-size: 0.6rem !important;
+  font-weight: 600 !important;
+  color: #8A6BB0 !important;
+  text-decoration: line-through !important;
+  background: none !important;
+}
+
+.price-now .price-value {
+  font-size: 0.95rem !important;
+  font-weight: 900 !important;
+  color: #3B1E6D !important;
+  background: none !important;
+}
+
+/* Button outside + purple */
+.service-card-wrap .price-wa-btn,
+a.price-wa-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 5px !important;
+  background: linear-gradient(135deg, #7F53D1, #4A2A85) !important;
+  color: #fff !important;
+  font-size: 0.75rem !important;
+  font-weight: 800 !important;
+  padding: 9px 18px !important;
+  border-radius: 50px !important;
+  box-shadow: 0 4px 14px rgba(127,83,209,0.35) !important;
+  border: none !important;
+  width: auto !important;
+  max-width: 150px !important;
+  margin-top: 4px !important;
+  text-decoration: none !important;
+}
+
+/* Kill any remaining green buttons or frames */
+.service-card-wrap .price-wa-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 18px rgba(127,83,209,0.45) !important;
+}
