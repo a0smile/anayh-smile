@@ -1,4 +1,4 @@
-const CACHE_NAME = 'smile-care-v22';
+const CACHE_NAME = 'smile-care-v24-prices';
 const ASSETS = [
   './',
   './index.html',
@@ -51,7 +51,7 @@ self.addEventListener('fetch', (event) => {
     || path.includes('/service-icons/');
 
   if (isStatic) {
-    // الكاش أولاً للملفات الثابتة = أسرع
+    // Ø§ÙÙØ§Ø´ Ø£ÙÙØ§Ù ÙÙÙÙÙØ§Øª Ø§ÙØ«Ø§Ø¨ØªØ© = Ø£Ø³Ø±Ø¹
     event.respondWith(
       caches.match(event.request).then((cached) => {
         const fetched = fetch(event.request)
@@ -69,7 +69,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // HTML وباقي الطلبات: الشبكة أولاً
+  // HTML ÙØ¨Ø§ÙÙ Ø§ÙØ·ÙØ¨Ø§Øª: Ø§ÙØ´Ø¨ÙØ© Ø£ÙÙØ§Ù
   event.respondWith(
     fetch(event.request)
       .then((res) => {
