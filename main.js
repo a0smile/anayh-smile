@@ -36,11 +36,39 @@ function applyOverrides(data) {
 }
 window.applyOverrides = applyOverrides;
 
+/* مسح تعديلات محلية قديمة فيها نصوص اليوم الوطني */
+function purgeNationalDayOverrides() {
+  try {
+    const raw = localStorage.getItem(OVERRIDES_KEY);
+    if (!raw) return;
+    const ov = JSON.parse(raw);
+    if (!ov || typeof ov !== 'object') return;
+    const bad = /وطني|دام عزك|عزنا بطبعنا|نحلم ونحقق|اليوم الوطني|عرض اليوم|احجز عرض اليوم/i;
+    let changed = false;
+    Object.keys(ov).forEach((k) => {
+      const v = ov[k];
+      if (typeof v === 'string' && bad.test(v)) {
+        delete ov[k];
+        changed = true;
+      }
+    });
+    ['nationalDay', 'announcement', 'hero.badge', 'hero.title', 'hero.titleHighlight',
+     'hero.subtitle', 'hero.buttonMain', 'hero.buttonSecondary', 'booking.title',
+     'sections.nationalDayBadge', 'sections.nationalDayTitle', 'sections.reviewBoxTitle',
+     'sections.support2'].forEach((k) => {
+      if (k in ov) { delete ov[k]; changed = true; }
+    });
+    if (changed) localStorage.setItem(OVERRIDES_KEY, JSON.stringify(ov));
+  } catch (e) {}
+}
+
 async function loadContent() {
   try {
-    const response = await fetch('content.json', { cache: 'no-cache' });
+    purgeNationalDayOverrides();
+    const response = await fetch('content.json?v=25', { cache: 'no-cache' });
     let data = await response.json();
     siteData = applyOverrides(data);
+    if (siteData.nationalDay) siteData.nationalDay.enabled = false;
     renderSite(siteData);
 
     if (siteData) {
@@ -247,8 +275,12 @@ function renderSite(data) {
       bar.style.display = '';
       const t1 = document.getElementById('announcementText');
       const t2 = document.getElementById('announcementText2');
-      if (t1) t1.textContent = data.announcement;
-      if (t2) t2.textContent = data.announcement;
+      let ann = String(data.announcement || '');
+      if (/وطني|دام عزك|عزنا بطبعنا|اليوم الوطني/i.test(ann)) {
+        ann = 'أهلاً وسهلاً بكم في مجمعكم عناية الابتسامة الطبي — ابتسامتكم سر ثقتكم، ونحن هنا لنحافظ عليها — احجز موعدك الآن بسهولة عبر الواتساب';
+      }
+      if (t1) t1.textContent = ann;
+      if (t2) t2.textContent = ann;
       bar.setAttribute('data-edit', 'announcement');
       bar.setAttribute('data-edit-type', 'text');
       bar.setAttribute('data-edit-label', 'نص الشريط المتحرك');
@@ -275,12 +307,22 @@ function renderSite(data) {
   });
 
   safeRender('hero', () => {
-    const title = [hero.title, hero.titleHighlight].filter(Boolean).join(' ').trim();
-    setText('ndBannerBadge', hero.badge);
+    const bad = /وطني|دام عزك|عزنا بطبعنا|اليوم الوطني|عرض اليوم/i;
+    let badge = hero.badge || 'رعاية طبية متخصصة';
+    let title = [hero.title, hero.titleHighlight].filter(Boolean).join(' ').trim() || 'ابتسامة أجمل تبدأ من هنا';
+    let slogan = hero.subtitle || 'مجمع متخصص في طب وجراحة الأسنان بأحدث التقنيات وأعلى معايير الجودة والتعقيم';
+    let btnMain = hero.buttonMain || 'احجز موعدك الآن';
+    let btnSec = hero.buttonSecondary || 'اكتشف خدماتنا';
+    if (bad.test(badge)) badge = 'رعاية طبية متخصصة';
+    if (bad.test(title)) title = 'ابتسامة أجمل تبدأ من هنا';
+    if (bad.test(slogan)) slogan = 'مجمع متخصص في طب وجراحة الأسنان بأحدث التقنيات وأعلى معايير الجودة والتعقيم';
+    if (bad.test(btnMain)) btnMain = 'احجز موعدك الآن';
+    if (bad.test(btnSec)) btnSec = 'اكتشف خدماتنا';
+    setText('ndBannerBadge', badge);
     setText('ndBannerTitle', title);
-    setText('ndBannerSlogan', hero.subtitle);
-    setText('heroBtnMain', hero.buttonMain);
-    setText('heroBtnSecondary', hero.buttonSecondary);
+    setText('ndBannerSlogan', slogan);
+    setText('heroBtnMain', btnMain);
+    setText('heroBtnSecondary', btnSec);
     markEditable('ndBannerBadge', 'hero.badge');
     markEditable('ndBannerTitle', 'hero.title');
     markEditable('ndBannerSlogan', 'hero.subtitle');
@@ -366,6 +408,7 @@ function renderSite(data) {
         'dental-model.jpg',
         'braces-child.jpg'
       ][idx % 7];
+      // جرّب المسار داخل المجلد ثم الجذر
       return 'service-icons/' + file;
     };
     const categoryIcon = (cat, ci) => {
@@ -387,7 +430,7 @@ function renderSite(data) {
             const photo = photoFor(item.name || '', ii);
             return `<article class="service-card">
               <div class="service-card-icon"${editAttr(base + '.icon')}>
-                <img class="service-card-photo" src="${photo}" alt="${item.name || ''}" loading="lazy" decoding="async" width="128" height="128" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <img class="service-card-photo" src="${photo}" alt="${item.name || ''}" loading="lazy" decoding="async" width="128" height="128" onerror="if(!this.dataset.tried){this.dataset.tried=1;this.src=this.src.replace('service-icons/','');}else{this.style.display='none';if(this.nextElementSibling)this.nextElementSibling.style.display='flex';}">
                 <span class="service-fallback-icon" style="display:none; width:100%; height:100%; align-items:center; justify-content:center;">${window.ndIconHtml? window.ndIconHtml(icon) : ''}</span>
               </div>
               <h4 class="service-card-name"${editAttr(base + '.name')}>${item.name}</h4>
