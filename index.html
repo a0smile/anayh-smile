@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="مجمع عناية الابتسامة الطبي - اليوم الوطني السعودي 96">
-  <title>مجمع عناية الابتسامة الطبي - اليوم الوطني السعودي 96</title>
-  <meta name="theme-color" content="#12854A">
+  <meta name="description" content="مجمع عناية الابتسامة الطبي - لطب وجراحة الأسنان في حفر الباطن">
+  <title>مجمع عناية الابتسامة الطبي</title>
+  <meta name="theme-color" content="#0D7A94">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/svg+xml" href="icon.svg">
   <link rel="apple-touch-icon" href="icon-192.png">
@@ -15,28 +15,115 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;800;900&family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=22">
+  <link rel="stylesheet" href="style.css?v=24">
 </head>
 <body>
 
-<!-- شاشة الدخول الفخمة - تخلي الصوت يشتغل 100% في الجوال والكمبيوتر -->
-<div id="entryOverlay" style="position:fixed;inset:0;z-index:99999;background:radial-gradient(120% 120% at 50% 0%, #1a8c55 0%, #0d4a2b 100%);display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(2px);">
-  <div style="width:100%;max-width:430px;background:linear-gradient(145deg,#ffffff 0%,#f7f7f7 100%);border-radius:26px;padding:38px 26px 28px;text-align:center;box-shadow:0 30px 70px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,1);border:2px solid rgba(18,133,74,0.15);position:relative;overflow:hidden;animation:popIn 0.6s ease;">
-    <div style="position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#12854A,#FFD700,#12854A);"></div>
-    <div style="position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:radial-gradient(circle, rgba(18,133,74,0.12) 0%, transparent 70%);border-radius:50%;"></div>
-    <div style="font-size:54px;margin-bottom:12px;">💐</div>
-    <h1 style="font-family:'Cairo',sans-serif;font-size:27px;font-weight:900;color:#0d4a2b;line-height:1.5;margin:0 0 8px 0;">أهلاً وسهلاً بكم في<br>مجمع عناية الابتسامة الطبي</h1>
-    <p style="font-family:'Tajawal',sans-serif;font-size:17px;font-weight:800;color:#12854A;margin:0 0 18px 0;letter-spacing:0.5px;">طب وجراحة الأسنان</p>
-    <div style="background:linear-gradient(135deg,#fff8e1 0%,#ffecb3 100%);border-radius:14px;padding:12px;margin-bottom:24px;border:1px solid #ffe082;">
-      <p style="font-family:'Cairo',sans-serif;font-size:22px;font-weight:900;color:#000;margin:0;">✨ نورتونا ✨</p>
+<!-- شاشة دخول فخمة ملكية — خلفية سوداء لامعة + إطار ذهبي -->
+<div id="entryOverlay" style="position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:18px;background:#000;
+background-image:
+  radial-gradient(ellipse 90% 60% at 50% -10%, rgba(201,162,77,0.22) 0%, transparent 55%),
+  radial-gradient(ellipse 70% 50% at 50% 110%, rgba(201,162,77,0.12) 0%, transparent 50%),
+  linear-gradient(180deg, #0a0a0a 0%, #000 40%, #050505 100%);
+overflow:hidden;">
+  <!-- لمعان خفيف متحرك -->
+  <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg, transparent 40%, rgba(255,215,120,0.04) 50%, transparent 60%);animation:shineSweep 4s ease-in-out infinite;"></div>
+
+  <div style="width:100%;max-width:400px;position:relative;animation:popIn 0.65s cubic-bezier(0.22,1,0.36,1);">
+    <!-- إطار ذهبي مزدوج مزخرف -->
+    <div style="
+      background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 50%, #151515 100%);
+      border-radius: 28px;
+      padding: 3px;
+      box-shadow:
+        0 0 0 1px #C9A24D,
+        0 0 0 4px #1a1508,
+        0 0 0 5px #E8D9AE,
+        0 0 0 8px #0a0800,
+        0 0 0 9px rgba(201,162,77,0.5),
+        0 25px 60px rgba(0,0,0,0.85),
+        0 0 80px rgba(201,162,77,0.15);
+    ">
+      <div style="
+        background: linear-gradient(165deg, #141414 0%, #0a0a0a 45%, #111 100%);
+        border-radius: 25px;
+        padding: 36px 24px 28px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(201,162,77,0.25);
+      ">
+        <!-- زخرفة علوية ذهبية -->
+        <div style="position:absolute;top:0;left:12%;right:12%;height:2px;background:linear-gradient(90deg,transparent,#C9A24D,#F5E6B8,#C9A24D,transparent);opacity:0.9;"></div>
+        <div style="position:absolute;top:6px;left:20%;right:20%;height:1px;background:linear-gradient(90deg,transparent,rgba(232,217,174,0.5),transparent);"></div>
+
+        <!-- أيقونة سن فاخرة -->
+        <div style="margin:8px auto 16px;width:72px;height:72px;display:flex;align-items:center;justify-content:center;
+          background:radial-gradient(circle at 40% 30%, #F5EBCF 0%, #C9A24D 45%, #9E7C2F 100%);
+          border-radius:50%;
+          box-shadow:0 6px 20px rgba(201,162,77,0.45), inset 0 2px 4px rgba(255,255,255,0.35), 0 0 0 3px rgba(201,162,77,0.3);">
+          <span style="font-size:38px;line-height:1;filter:drop-shadow(0 2px 3px rgba(0,0,0,0.35));">🦷</span>
+        </div>
+
+        <!-- العنوان الذهبي اللامع -->
+        <h1 style="font-family:'Cairo',sans-serif;font-size:22px;font-weight:900;line-height:1.55;margin:0 0 6px 0;
+          background:linear-gradient(180deg, #FFF8E0 0%, #F5E6B8 25%, #C9A24D 55%, #E8D9AE 80%, #9E7C2F 100%);
+          -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+          filter:drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+          letter-spacing:0.02em;">
+          أهلاً وسهلاً بكم في<br>مجمع عناية الابتسامة الطبي
+        </h1>
+
+        <p style="font-family:'Tajawal',sans-serif;font-size:15px;font-weight:800;margin:0 0 18px 0;
+          color:#E8D9AE;letter-spacing:0.04em;text-shadow:0 1px 3px rgba(0,0,0,0.5);">
+          طب وجراحة الأسنان
+        </p>
+
+        <!-- شارة نورتونا -->
+        <div style="
+          margin:0 auto 22px;display:inline-block;
+          padding:10px 28px;border-radius:50px;
+          background:linear-gradient(135deg, rgba(201,162,77,0.2) 0%, rgba(158,124,47,0.15) 100%);
+          border:1.5px solid rgba(201,162,77,0.55);
+          box-shadow:inset 0 1px 0 rgba(255,248,220,0.15), 0 4px 12px rgba(0,0,0,0.3);
+        ">
+          <p style="font-family:'Cairo',sans-serif;font-size:17px;font-weight:900;margin:0;
+            background:linear-gradient(180deg,#FFF8E0,#C9A24D);
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+            ✨ نورتونا ✨
+          </p>
+        </div>
+
+        <!-- زر الدخول الذهبي -->
+        <button id="enterSiteBtn" type="button" style="
+          width:100%;border:none;cursor:pointer;
+          font-family:'Cairo',sans-serif;font-size:17px;font-weight:900;
+          padding:16px 20px;border-radius:16px;
+          color:#1a1200;
+          background:linear-gradient(180deg, #F5EBCF 0%, #E8D9AE 30%, #C9A24D 70%, #9E7C2F 100%);
+          box-shadow:
+            0 6px 0 #6B5220,
+            0 10px 28px rgba(201,162,77,0.4),
+            inset 0 1px 0 rgba(255,255,255,0.5);
+          transition:transform 0.2s, box-shadow 0.2s;
+          display:flex;align-items:center;justify-content:center;gap:8px;
+        " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+          <span>للدخول إلى الموقع اضغط هنا</span>
+        </button>
+
+        <!-- زخرفة سفلية -->
+        <div style="margin-top:18px;height:1px;background:linear-gradient(90deg,transparent,rgba(201,162,77,0.4),transparent);"></div>
+        <p style="margin:10px 0 0;font-family:'Tajawal',sans-serif;font-size:11px;color:rgba(232,217,174,0.45);font-weight:600;">
+          رعاية طبية متخصصة · حفر الباطن
+        </p>
+      </div>
     </div>
-    <button id="enterSiteBtn" style="width:100%;background:linear-gradient(135deg,#12854A 0%,#0a5c33 100%);color:#fff;border:none;border-radius:16px;padding:18px 20px;font-family:'Cairo',sans-serif;font-size:21px;font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(18,133,74,0.45), inset 0 1px 0 rgba(255,255,255,0.35);transition:all 0.25s;display:flex;align-items:center;justify-content:center;gap:12px;">
-      <span>للدخول الى الموقع اضغط هنا</span><span style="font-size:26px;">💐</span>
-    </button>
-    <p style="font-family:'Tajawal',sans-serif;font-size:13px;color:#777;margin-top:16px;">🇸🇦 دام عزك يا وطن - اليوم الوطني 96</p>
   </div>
 </div>
-<style>@keyframes popIn{0%{transform:scale(0.85);opacity:0}100%{transform:scale(1);opacity:1}}</style>
+<style>
+@keyframes popIn{0%{transform:scale(0.88);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes shineSweep{0%,100%{opacity:0.3;transform:translateX(-30%)}50%{opacity:0.7;transform:translateX(30%)}}
+</style>
 
   <header class="header" id="header">
     <nav class="nav container">
@@ -54,8 +141,8 @@
         <li><a href="#doctors" class="nav-link">الأطباء</a></li>
         <li><a href="#reviews" class="nav-link">التعليقات</a></li>
         <li><a href="#booking" class="nav-link">الحجز</a></li>
-        <li><a href="#faq">الأسئلة الشائعة</a>
-        <a href="#contact" class="nav-link">تواصل معنا</a></li>
+        <li><a href="#faq" class="nav-link">الأسئلة الشائعة</a></li>
+        <li><a href="#contact" class="nav-link">تواصل معنا</a></li>
       </ul>
       <button class="nav-toggle" id="navToggle" type="button" aria-label="القائمة" aria-controls="navLinks" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -66,55 +153,46 @@
   <main>
     <section class="nd-banner-wrap" id="hero">
       <div class="nd-banner">
-        <img class="nd-banner-img" id="ndBlendImage" src="hero-blend.jpg" decoding="async" fetchpriority="high" alt="مجمع عناية الابتسامة الطبي — اليوم الوطني السعودي 96">
-        <img class="nd-flag-real nd-flag-left" src="https://flagcdn.com/w320/sa.png" alt="" onerror="this.style.display='none'">
-        <img class="nd-flag-real nd-flag-right" src="https://flagcdn.com/w320/sa.png" alt="" onerror="this.style.display='none'">
-        <div class="nd-balloons-fx" aria-hidden="true">
-          <span class="nd-balloon green b1"></span>
-          <span class="nd-balloon white b2"></span>
-          <span class="nd-balloon green b3"></span>
-          <span class="nd-balloon white b4"></span>
-          <span class="nd-balloon green b5"></span>
-        </div>
+        <img class="nd-banner-img" id="ndBlendImage" src="hero-blend.jpg" decoding="async" fetchpriority="high" alt="مجمع عناية الابتسامة الطبي">
         <div class="nd-banner-overlay"></div>
-        <div class="nd-luxury-light"></div>
       </div>
     </section>
 
     <div class="announcement-bar" id="announcementBar">
       <div class="announcement-track">
-        <span class="announcement-text"><span id="announcementText">⚔️ دام عزك يا وطن ⚔️ — ابتسامتكم تاج فخرنا وهوية وطننا — عروض اليوم الوطني السعودي 96 بمجمع عناية الابتسامة الطبي — خصومات حصرية على كافة الخدمات</span></span>
-        <span class="announcement-text" aria-hidden="true"><span id="announcementText2">⚔️ دام عزك يا وطن ⚔️ — ابتسامتكم تاج فخرنا وهوية وطننا — عروض اليوم الوطني السعودي 96 بمجمع عناية الابتسامة الطبي — خصومات حصرية على كافة الخدمات</span></span>
+        <span class="announcement-text"><span id="announcementText">أهلاً وسهلاً بكم في مجمعكم عناية الابتسامة الطبي — ابتسامتكم سر ثقتكم، ونحن هنا لنحافظ عليها — احجز موعدك الآن بسهولة عبر الواتساب</span></span>
+        <span class="announcement-text" aria-hidden="true"><span id="announcementText2">أهلاً وسهلاً بكم في مجمعكم عناية الابتسامة الطبي — ابتسامتكم سر ثقتكم، ونحن هنا لنحافظ عليها — احجز موعدك الآن بسهولة عبر الواتساب</span></span>
       </div>
     </div>
 
-    <section class="nd-greeting-section" id="nationalDay">
+    <!-- قسم التهنئة مخفي — لا يُعرض -->
+    <section class="nd-greeting-section" id="nationalDay" style="display:none!important" hidden>
       <div class="nd-greeting">
-        <span class="nd-badge" id="nationalDayBadge">🇸🇦 اليوم الوطني السعودي 96 🇸🇦</span>
-        <h2 class="nd-greeting-title" id="nationalDayTitle">تهنئة باليوم الوطني السعودي 96</h2>
-        <p class="nd-greeting-text" id="nationalDayGreeting">يسر مجمع عناية الابتسامة الطبي ونيابةً عن منسوبيه أن يرفع أصدق التهاني وأسمى التبريكات إلى قيادتنا الرشيدة والشعب السعودي النبيل بمناسبة اليوم الوطني السعودي الـ 96.</p>
-        <p class="nd-greeting-text" id="nationalDayGreeting2">نسأل الله أن يديم على مملكتنا الغالية نعمة الأمن والأمان والاستقرار، ويجعل راية التوحيد دائماً شامخة خفاقة بالعز والتمكين والريادة.</p>
-        <p class="nd-greeting-text nd-greeting-wish" id="nationalDayGreeting3">وكل عام وأنتم بعز وفخر وأمان</p>
-        <p class="nd-greeting-closing" id="nationalDayClosing">⚔️ دام عزك يا وطن ⚔️</p>
+        <span class="nd-badge" id="nationalDayBadge"></span>
+        <h2 class="nd-greeting-title" id="nationalDayTitle"></h2>
+        <p class="nd-greeting-text" id="nationalDayGreeting"></p>
+        <p class="nd-greeting-text" id="nationalDayGreeting2"></p>
+        <p class="nd-greeting-text nd-greeting-wish" id="nationalDayGreeting3"></p>
+        <p class="nd-greeting-closing" id="nationalDayClosing"></p>
       </div>
     </section>
 
     <section class="hero-cta-section" id="heroCta">
-      <span class="nd-badge" id="ndBannerBadge">🇸🇦 عزنا بطبعنا 🇸🇦</span>
-      <h2 class="hero-cta-title" id="ndBannerTitle">عروض اليوم الوطني السعودي 96</h2>
-      <p class="hero-cta-sub" id="ndBannerSlogan">دام عزك يا وطن — ابتسامة أجمل .. لوطن أعظم</p>
+      <span class="nd-badge" id="ndBannerBadge">رعاية طبية متخصصة</span>
+      <h2 class="hero-cta-title" id="ndBannerTitle">ابتسامة أجمل تبدأ من هنا</h2>
+      <p class="hero-cta-sub" id="ndBannerSlogan">مجمع متخصص في طب وجراحة الأسنان بأحدث التقنيات وأعلى معايير الجودة والتعقيم</p>
       <div class="hero-cta-actions">
-        <a href="#booking" class="btn btn-primary" id="heroBtnMain">احجز عرض اليوم الوطني</a>
-        <a href="#services" class="btn btn-outline" id="heroBtnSecondary">اكتشف الأسعار</a>
+        <a href="#booking" class="btn btn-primary" id="heroBtnMain">احجز موعدك الآن</a>
+        <a href="#services" class="btn btn-outline" id="heroBtnSecondary">اكتشف خدماتنا</a>
       </div>
     </section>
 
     <section class="section" id="services">
       <div class="container">
-        <div class="section-head" id="servicesSectionHead" hidden>
-          <span class="section-badge" id="servicesBadge"></span>
-          <h2 class="section-title" id="servicesTitle"></h2>
-          <p class="section-subtitle" id="servicesSubtitle"></p>
+        <div class="section-head" id="servicesSectionHead">
+          <span class="section-badge" id="servicesBadge">خدماتنا</span>
+          <h2 class="section-title" id="servicesTitle">أسعار وخدمات المجمع</h2>
+          <p class="section-subtitle" id="servicesSubtitle">أسعار واضحة وشفافة — احجز الخدمة التي تناسبك مباشرة عبر الواتساب</p>
         </div>
         <div class="price-note" hidden style="display:none!important"></div>
         <div class="price-list" id="servicesGrid"></div>
@@ -128,7 +206,7 @@
     <section class="section section-alt" id="about">
       <div class="container">
         <div class="section-head" style="text-align: center; margin-bottom: 30px;">
-          <h2 id="featuresBadge" style="font-size: 32px; font-weight: 900; color: #000000 !important; background: none !important; padding: 0 !important; border-radius: 0 !important; display: block; margin: 0 auto 10px auto;">رؤيتنا وقيمنا</h2>
+          <h2 id="featuresBadge" style="font-size: 28px; font-weight: 900; color: #063A4A !important; background: none !important; padding: 0 !important; border-radius: 0 !important; display: block; margin: 0 auto 10px auto;">رؤيتنا وقيمنا</h2>
           <h2 class="section-title" id="featuresTitle" style="display: none !important;"></h2>
           <p class="section-subtitle" id="featuresSubtitle" style="display: none !important;"></p>
         </div>
@@ -136,15 +214,15 @@
       </div>
     </section>
 
-    <section class="section" id="tips" style="background-color: #e5dacb !important; padding: 60px 0;">
+    <section class="section" id="tips" style="background-color: #E8F4F7 !important; padding: 50px 0;">
       <div class="container">
         <div class="section-head" style="text-align: center; margin-bottom: 30px;">
-          <h2 id="tipsBadge" style="font-size: 32px; font-weight: 900; color: #000000 !important; background: none !important; padding: 0 !important; border-radius: 0 !important; display: block; margin: 0 auto 10px auto;">ثقافة طبية</h2>
+          <h2 id="tipsBadge" style="font-size: 28px; font-weight: 900; color: #063A4A !important; background: none !important; padding: 0 !important; border-radius: 0 !important; display: block; margin: 0 auto 10px auto;">ثقافة طبية</h2>
           <h2 class="section-title" id="tipsTitle" style="display: none !important;"></h2>
           <p class="section-subtitle" id="tipsSubtitle" style="display: none !important;"></p>
         </div>
-        <div class="daily-tips-box" style="background-color: #ffffff; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
-          <h3 id="dailyTipsTitle">عادات يومية لأسنان قوية | اليوم الوطني السعودي 96</h3>
+        <div class="daily-tips-box" style="display:none!important">
+          <h3 id="dailyTipsTitle"></h3>
           <ul class="daily-tips-list" id="dailyTipsList"></ul>
         </div>
         <div class="tips-grid" id="tipsGrid"></div>
@@ -154,7 +232,7 @@
     <section class="section section-alt" id="doctors">
       <div class="container">
         <div class="section-head">
-          <span class="section-badge" id="doctorsBadge">كفاءاتنا الوطنية</span>
+          <span class="section-badge" id="doctorsBadge">كفاءاتنا</span>
           <h2 class="section-title" id="doctorsTitle">أطباؤنا الأخصائيون</h2>
           <p class="section-subtitle" id="doctorsSubtitle">نخبة من الأطباء المرخصين والمعتمدين من الهيئة السعودية للتخصصات الصحية</p>
         </div>
@@ -165,13 +243,13 @@
     <section class="section section-booking" id="booking">
       <div class="container">
         <div class="booking-card">
-          <h2 class="section-title" id="bookingTitle">احجز موعدك لليوم الوطني السعودي 96</h2>
+          <h2 class="section-title" id="bookingTitle">احجز موعدك الآن</h2>
           <p class="booking-subtitle" id="bookingSubtitle">املأ النموذج وسيتواصل معك فريق المجمع عبر الواتساب فوراً لتأكيد حجزك.</p>
           <div class="booking-support">
-            <span class="check-icon" aria-hidden="true">✓</span><span id="support1">تواصل فوري ومباشر من موظف الاستقبال خلال دقائق معدودة من طلبك</span>
+            <span class="check-icon" aria-hidden="true">✓</span><span id="support1">تواصل فوري ومباشر من موظف الاستقبال خلال دقائق معدودة</span>
           </div>
           <div class="booking-support">
-            <span class="check-icon" aria-hidden="true">✓</span><span id="support2">الكشف الطبي والاستشارة مجانية فخراً بالوطن 🇸🇦</span>
+            <span class="check-icon" aria-hidden="true">✓</span><span id="support2">الكشف الطبي والاستشارة والتقييم الأولي مجاني</span>
           </div>
           <form class="booking-form" id="bookingForm">
             <div class="form-group">
@@ -200,14 +278,14 @@
     <section class="section" id="reviews">
       <div class="container">
         <div class="section-head" style="text-align: center; margin-bottom: 30px;">
-          <h2 id="reviewsBadge" style="font-size: 32px; font-weight: 900; color: #000000 !important; background: none !important; padding: 0 !important; border-radius: 0 !important; display: block; margin: 0 auto 10px auto;">آراء وتجارب متميزة</h2>
-          <h2 class="section-title" id="reviewsTitle" style="font-size: 24px; font-weight: 900; color: #000000 !important; background: linear-gradient(135deg, #fff3cc 0%, #ffe699 100%) !important; padding: 12px 24px; border-radius: 8px; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-top: 5px;">ابتسامات سعيدة نصنعها بتميز وإتقان تلبي تطلعاتكم</h2>
-          <p class="section-subtitle" id="reviewsSubtitle">تجارب حقيقية موثقة من زبائن مجمع عناية الابتسامة الأعزاء في حفر الباطن</p>
+          <h2 id="reviewsBadge" style="font-size: 28px; font-weight: 900; color: #063A4A !important; background: none !important; padding: 0 !important; border-radius: 0 !important; display: block; margin: 0 auto 10px auto;">آراء وتجارب</h2>
+          <h2 class="section-title" id="reviewsTitle" style="font-size: 22px; font-weight: 900; color: #063A4A !important; margin-top: 8px;">ابتسامات سعيدة نصنعها بتميز وإتقان</h2>
+          <p class="section-subtitle" id="reviewsSubtitle">تجارب حقيقية موثقة من زبائن مجمع عناية الابتسامة في حفر الباطن</p>
         </div>
         <div class="testimonials-grid" id="testimonialsGrid"></div>
         <div class="review-box">
-          <h3 id="reviewBoxTitle">🇸🇦 شاركنا تجربتك لليوم الوطني</h3>
-          <p id="reviewBoxText">رأيك فخر لنا ووسام! اكتب تعليقك وسنضيفه فوراً في واجهة الموقع بعد مراجعته.</p>
+          <h3 id="reviewBoxTitle">شاركنا تجربتك</h3>
+          <p id="reviewBoxText">رأيك يهمنا! اكتب تعليقك وسنضيفه في الموقع بعد مراجعته.</p>
           <form class="review-form" id="reviewForm">
             <div class="form-group">
               <label for="reviewName">اسمك</label>
@@ -226,7 +304,7 @@
     <section class="section section-faq" id="faq">
       <div class="container">
         <div class="section-head" style="text-align: center; margin-bottom: 30px;">
-          <h2 class="section-title" style="font-size: 32px; font-weight: 900; color: #000000 !important; margin: 0 auto;">الأسئلة الشائعة</h2>
+          <h2 class="section-title" style="font-size: 28px; font-weight: 900; color: #063A4A !important; margin: 0 auto;">الأسئلة الشائعة</h2>
           <p class="section-subtitle">إجابات رسمية وواضحة لأكثر الاستفسارات تكراراً</p>
         </div>
         <div class="faq-list" id="faqList"></div>
@@ -236,13 +314,13 @@
     <section class="section section-contact" id="contact">
       <div class="container">
         <div class="section-head" style="text-align: center; margin-bottom: 30px;">
-          <h2 id="contactBadge" style="font-size: 32px; font-weight: 900; color: #000000 !important; background: none !important; padding: 0 !important; border-radius: 0 !important; display: block; margin: 0 auto 10px auto;">اتصل بنا</h2>
-          <h2 class="section-title" id="contactTitle">موقعنا في حفر الباطن وأوقات الدوام الرسمي</h2>
+          <h2 id="contactBadge" style="font-size: 28px; font-weight: 900; color: #063A4A !important; background: none !important; padding: 0 !important; border-radius: 0 !important; display: block; margin: 0 auto 10px auto;">اتصل بنا</h2>
+          <h2 class="section-title" id="contactTitle">موقعنا في حفر الباطن وأوقات الدوام</h2>
           <p class="section-subtitle">نحن في خدمتكم — تواصلوا معنا عبر أي وسيلة تناسبكم</p>
         </div>
         <div class="contact-grid">
           <div class="contact-card">
-            <h3 class="contact-card-title">📞 <span id="contactPhoneTitle">أرقام التواصل وحجز العروض</span></h3>
+            <h3 class="contact-card-title">📞 <span id="contactPhoneTitle">أرقام التواصل والحجز</span></h3>
             <p class="contact-line" id="contactPhone"></p>
             <p class="contact-line" id="contactEmail"></p>
             <a class="btn btn-primary btn-sm" id="whatsappBtn" href="#" target="_blank" rel="noopener">تواصل عبر واتساب</a>
@@ -280,7 +358,7 @@
 
   <footer class="footer" id="footer">
     <div class="footer-bottom footer-simple">
-      <p>© 2026 مجمع عناية الابتسامة الطبي — جميع الحقوق محفوظة</p>
+      <p>© <span id="currentYear">2026</span> مجمع عناية الابتسامة الطبي — جميع الحقوق محفوظة</p>
     </div>
   </footer>
 
@@ -298,51 +376,22 @@
   <button type="button" class="admin-entry-btn" id="adminEntryBtn" title="دخول المالك" aria-label="دخول المالك">🔒</button>
   <input type="file" id="adminFileInput" accept="image/*" hidden>
 
-  <audio id="nationalAudio" src="national-day.mp3" preload="auto" loop playsinline webkit-playsinline></audio>
-  <div id="fireworksContainer" class="fireworks-container" aria-hidden="true"></div>
-
-  <button type="button" class="nd-music-btn" id="ndMusicBtn" title="تشغيل نشيد اليوم الوطني" aria-label="تشغيل نشيد اليوم الوطني">
-    <span class="nd-music-icon" id="ndMusicIcon">🎵</span>
-  </button>
-
   <script>
-  // تشغيل الصوت 100% عند الضغط على زر الدخول
   (function(){
     const enterBtn = document.getElementById('enterSiteBtn');
     const overlay = document.getElementById('entryOverlay');
-    const audio = document.getElementById('nationalAudio');
-    const musicBtnIcon = document.getElementById('ndMusicIcon');
-    
-    function startAudio(){
-      if(!audio) return;
-      audio.muted = false;
-      audio.volume = 0.45;
-      audio.play().then(()=>{ if(musicBtnIcon) musicBtnIcon.textContent='🔊'; }).catch(()=>{});
-    }
-
+    if (!enterBtn || !overlay) return;
     enterBtn.addEventListener('click', function(){
-      startAudio();
-      overlay.style.transition = 'all 0.7s cubic-bezier(0.4,0,0.2,1)';
+      overlay.style.transition = 'all 0.5s ease';
       overlay.style.opacity = '0';
-      overlay.style.transform = 'scale(1.15)';
       overlay.style.pointerEvents = 'none';
-      setTimeout(()=>{ overlay.remove(); }, 700);
-      enterBtn.style.transform = 'scale(0.95)';
+      setTimeout(function(){ overlay.remove(); }, 500);
     });
-
-    // زر الصوت الجانبي
-    const ndBtn = document.getElementById('ndMusicBtn');
-    if(ndBtn){
-      ndBtn.addEventListener('click', function(){
-        if(audio.paused){ startAudio(); } 
-        else { audio.pause(); if(musicBtnIcon) musicBtnIcon.textContent='🎵'; }
-      });
-    }
   })();
   </script>
 
-  <script src="icons.js?v=22" defer></script>
-  <script src="main.js?v=22" defer></script>
-  <script src="admin.js?v=22" defer></script>
+  <script src="icons.js?v=24" defer></script>
+  <script src="main.js?v=24" defer></script>
+  <script src="admin.js?v=24" defer></script>
 </body>
 </html>
