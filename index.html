@@ -5,17 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="مجمع عناية الابتسامة الطبي - لطب وجراحة الأسنان في حفر الباطن">
   <title>مجمع عناية الابتسامة الطبي</title>
-  <meta name="theme-color" content="#0D7A94">
+  <meta name="theme-color" content="#3B1E6D">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/svg+xml" href="icon.svg">
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link rel="preload" as="image" href="hero-blend.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="service-card-bg.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;800;900&family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=25">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=27">
 </head>
 <body>
 
@@ -94,6 +95,23 @@ overflow:hidden;">
           </p>
         </div>
 
+        <!-- زر إضافة التطبيق للهاتف -->
+        <p style="font-family:'Cairo',sans-serif;font-size:15px;font-weight:900;color:#E8D9AE;margin:0 0 8px 0;letter-spacing:0.02em;">
+          لإضافة التطبيق إلى الهاتف اضغط هنا
+        </p>
+        <button id="installAppBtn" type="button" style="
+          width:100%;border:1.5px solid rgba(201,162,77,0.7);cursor:pointer;
+          font-family:'Cairo',sans-serif;font-size:16px;font-weight:900;
+          padding:13px 18px;border-radius:14px;margin-bottom:12px;
+          color:#F5EBCF;
+          background:linear-gradient(135deg, rgba(201,162,77,0.25) 0%, rgba(158,124,47,0.15) 100%);
+          box-shadow:inset 0 1px 0 rgba(255,248,220,0.12), 0 4px 14px rgba(0,0,0,0.35);
+          display:flex;align-items:center;justify-content:center;gap:8px;
+        ">
+          <span>📲 تثبيت تطبيق المجمع على هاتفي</span>
+        </button>
+        <p id="installAppHint" style="display:none;font-family:'Tajawal',sans-serif;font-size:12px;color:rgba(232,217,174,0.7);margin:0 0 12px 0;line-height:1.5;"></p>
+
         <!-- زر الدخول الذهبي -->
         <button id="enterSiteBtn" type="button" style="
           width:100%;border:none;cursor:pointer;
@@ -154,6 +172,7 @@ overflow:hidden;">
     <section class="nd-banner-wrap" id="hero">
       <div class="nd-banner">
         <img class="nd-banner-img" id="ndBlendImage" src="hero-blend.jpg" decoding="async" fetchpriority="high" alt="مجمع عناية الابتسامة الطبي">
+  <link rel="preload" as="image" href="service-card-bg.jpg">
         <div class="nd-banner-overlay"></div>
       </div>
     </section>
@@ -205,38 +224,44 @@ overflow:hidden;">
 
     <section class="section section-alt" id="about">
       <div class="container">
-        <div class="section-head" style="text-align: center; margin-bottom: 30px;">
-          <h2 id="featuresBadge" style="font-size: 28px; font-weight: 900; color: #063A4A !important; background: none !important; padding: 0 !important; border-radius: 0 !important; display: block; margin: 0 auto 10px auto;">رؤيتنا وقيمنا</h2>
-          <h2 class="section-title" id="featuresTitle" style="display: none !important;"></h2>
-          <p class="section-subtitle" id="featuresSubtitle" style="display: none !important;"></p>
-        </div>
-        <div class="features-grid" id="featuresGrid"></div>
+        <details class="section-fold">
+          <summary class="section-toggle" id="featuresBadge">رؤيتنا وقيمنا</summary>
+          <div class="section-fold-body">
+            <h2 class="section-title" id="featuresTitle" style="display:none"></h2>
+            <p class="section-subtitle" id="featuresSubtitle" style="display:none"></p>
+            <div class="features-grid" id="featuresGrid"></div>
+          </div>
+        </details>
       </div>
     </section>
 
-    <section class="section" id="tips" style="background-color: #E8F4F7 !important; padding: 50px 0;">
+    <section class="section" id="tips" style="background-color: #E8F4F7 !important; padding: 40px 0;">
       <div class="container">
-        <div class="section-head" style="text-align: center; margin-bottom: 30px;">
-          <h2 id="tipsBadge" style="font-size: 28px; font-weight: 900; color: #063A4A !important; background: none !important; padding: 0 !important; border-radius: 0 !important; display: block; margin: 0 auto 10px auto;">ثقافة طبية</h2>
-          <h2 class="section-title" id="tipsTitle" style="display: none !important;"></h2>
-          <p class="section-subtitle" id="tipsSubtitle" style="display: none !important;"></p>
-        </div>
-        <div class="daily-tips-box" style="display:none!important">
-          <h3 id="dailyTipsTitle"></h3>
-          <ul class="daily-tips-list" id="dailyTipsList"></ul>
-        </div>
-        <div class="tips-grid" id="tipsGrid"></div>
+        <details class="section-fold">
+          <summary class="section-toggle" id="tipsBadge">ثقافة طبية</summary>
+          <div class="section-fold-body">
+            <h2 class="section-title" id="tipsTitle" style="display:none"></h2>
+            <p class="section-subtitle" id="tipsSubtitle" style="display:none"></p>
+            <div class="daily-tips-box" style="display:none!important">
+              <h3 id="dailyTipsTitle"></h3>
+              <ul class="daily-tips-list" id="dailyTipsList"></ul>
+            </div>
+            <div class="tips-grid" id="tipsGrid"></div>
+          </div>
+        </details>
       </div>
     </section>
 
     <section class="section section-alt" id="doctors">
       <div class="container">
-        <div class="section-head">
-          <span class="section-badge" id="doctorsBadge">كفاءاتنا</span>
-          <h2 class="section-title" id="doctorsTitle">أطباؤنا الأخصائيون</h2>
-          <p class="section-subtitle" id="doctorsSubtitle">نخبة من الأطباء المرخصين والمعتمدين من الهيئة السعودية للتخصصات الصحية</p>
-        </div>
-        <div class="doctors-grid" id="doctorsGrid"></div>
+        <details class="section-fold">
+          <summary class="section-toggle" id="doctorsBadge">أطباؤنا الأخصائيون</summary>
+          <div class="section-fold-body">
+            <h2 class="section-title" id="doctorsTitle" style="display:none"></h2>
+            <p class="section-subtitle" id="doctorsSubtitle">نخبة من الأطباء المرخصين والمعتمدين من الهيئة السعودية للتخصصات الصحية</p>
+            <div class="doctors-grid" id="doctorsGrid"></div>
+          </div>
+        </details>
       </div>
     </section>
 
@@ -277,37 +302,41 @@ overflow:hidden;">
 
     <section class="section" id="reviews">
       <div class="container">
-        <div class="section-head" style="text-align: center; margin-bottom: 30px;">
-          <h2 id="reviewsBadge" style="font-size: 28px; font-weight: 900; color: #063A4A !important; background: none !important; padding: 0 !important; border-radius: 0 !important; display: block; margin: 0 auto 10px auto;">آراء وتجارب</h2>
-          <h2 class="section-title" id="reviewsTitle" style="font-size: 22px; font-weight: 900; color: #063A4A !important; margin-top: 8px;">ابتسامات سعيدة نصنعها بتميز وإتقان</h2>
-          <p class="section-subtitle" id="reviewsSubtitle">تجارب حقيقية موثقة من زبائن مجمع عناية الابتسامة في حفر الباطن</p>
-        </div>
-        <div class="testimonials-grid" id="testimonialsGrid"></div>
-        <div class="review-box">
-          <h3 id="reviewBoxTitle">شاركنا تجربتك</h3>
-          <p id="reviewBoxText">رأيك يهمنا! اكتب تعليقك وسنضيفه في الموقع بعد مراجعته.</p>
-          <form class="review-form" id="reviewForm">
-            <div class="form-group">
-              <label for="reviewName">اسمك</label>
-              <input type="text" id="reviewName" name="reviewName" placeholder="اسمك الكريم" required>
+        <details class="section-fold">
+          <summary class="section-toggle" id="reviewsBadge">آراء وتجارب</summary>
+          <div class="section-fold-body">
+            <h2 class="section-title" id="reviewsTitle">ابتسامات سعيدة نصنعها بتميز وإتقان</h2>
+            <p class="section-subtitle" id="reviewsSubtitle">تجارب حقيقية موثقة من زبائن مجمع عناية الابتسامة في حفر الباطن</p>
+            <div class="testimonials-grid" id="testimonialsGrid"></div>
+            <div class="review-box">
+              <h3 id="reviewBoxTitle">شاركنا تجربتك</h3>
+              <p id="reviewBoxText">رأيك يهمنا! اكتب تعليقك وسنضيفه في الموقع بعد مراجعته.</p>
+              <form class="review-form" id="reviewForm">
+                <div class="form-group">
+                  <label for="reviewName">اسمك</label>
+                  <input type="text" id="reviewName" name="reviewName" placeholder="اسمك الكريم" required>
+                </div>
+                <div class="form-group">
+                  <label for="reviewText">تعليقك</label>
+                  <textarea id="reviewText" name="reviewText" rows="3" placeholder="اكتب تجربتك معنا..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" id="reviewSubmitBtn">إرسال التعليق عبر واتساب</button>
+              </form>
             </div>
-            <div class="form-group">
-              <label for="reviewText">تعليقك</label>
-              <textarea id="reviewText" name="reviewText" rows="3" placeholder="اكتب تجربتك معنا..." required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block" id="reviewSubmitBtn">إرسال التعليق عبر واتساب</button>
-          </form>
-        </div>
+          </div>
+        </details>
       </div>
     </section>
 
     <section class="section section-faq" id="faq">
       <div class="container">
-        <div class="section-head" style="text-align: center; margin-bottom: 30px;">
-          <h2 class="section-title" style="font-size: 28px; font-weight: 900; color: #063A4A !important; margin: 0 auto;">الأسئلة الشائعة</h2>
-          <p class="section-subtitle">إجابات رسمية وواضحة لأكثر الاستفسارات تكراراً</p>
-        </div>
-        <div class="faq-list" id="faqList"></div>
+        <details class="section-fold">
+          <summary class="section-toggle">الأسئلة الشائعة</summary>
+          <div class="section-fold-body">
+            <p class="section-subtitle">إجابات رسمية وواضحة لأكثر الاستفسارات تكراراً</p>
+            <div class="faq-list" id="faqList"></div>
+          </div>
+        </details>
       </div>
     </section>
 
@@ -378,20 +407,94 @@ overflow:hidden;">
 
   <script>
   (function(){
+    /* دخول الموقع */
     const enterBtn = document.getElementById('enterSiteBtn');
     const overlay = document.getElementById('entryOverlay');
-    if (!enterBtn || !overlay) return;
-    enterBtn.addEventListener('click', function(){
-      overlay.style.transition = 'all 0.5s ease';
-      overlay.style.opacity = '0';
-      overlay.style.pointerEvents = 'none';
-      setTimeout(function(){ overlay.remove(); }, 500);
+    if (enterBtn && overlay) {
+      enterBtn.addEventListener('click', function(){
+        overlay.style.transition = 'all 0.5s ease';
+        overlay.style.opacity = '0';
+        overlay.style.pointerEvents = 'none';
+        setTimeout(function(){ overlay.remove(); }, 500);
+      });
+    }
+
+    /* تسجيل Service Worker لتفعيل PWA */
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function(){
+        navigator.serviceWorker.register('./sw.js').catch(function(){});
+      });
+    }
+
+    /* تثبيت التطبيق — ربط حقيقي بـ beforeinstallprompt */
+    var deferredPrompt = null;
+    var installBtn = document.getElementById('installAppBtn');
+    var installHint = document.getElementById('installAppHint');
+
+    function isStandalone() {
+      return window.matchMedia('(display-mode: standalone)').matches
+        || window.navigator.standalone === true;
+    }
+
+    function showHint(msg) {
+      if (!installHint) return;
+      installHint.style.display = 'block';
+      installHint.textContent = msg;
+    }
+
+    if (isStandalone()) {
+      if (installBtn) installBtn.style.display = 'none';
+      showHint('التطبيق مثبت مسبقاً على جهازك ✓');
+    }
+
+    window.addEventListener('beforeinstallprompt', function(e) {
+      e.preventDefault();
+      deferredPrompt = e;
+      if (installBtn) {
+        installBtn.style.opacity = '1';
+        installBtn.style.pointerEvents = 'auto';
+      }
     });
+
+    window.addEventListener('appinstalled', function() {
+      deferredPrompt = null;
+      if (installBtn) installBtn.style.display = 'none';
+      showHint('تم تثبيت التطبيق بنجاح على هاتفك ✓');
+    });
+
+    if (installBtn) {
+      installBtn.addEventListener('click', async function() {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          try {
+            var choice = await deferredPrompt.userChoice;
+            if (choice && choice.outcome === 'accepted') {
+              showHint('جاري التثبيت… افتح التطبيق من شاشتك الرئيسية');
+            } else {
+              showHint('تم إلغاء التثبيت. يمكنك المحاولة لاحقاً');
+            }
+          } catch (err) {}
+          deferredPrompt = null;
+          return;
+        }
+        /* إن لم يظهر نافذة التثبيت التلقائية — إرشادات حسب النظام */
+        var ua = navigator.userAgent || '';
+        var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        var isAndroid = /Android/i.test(ua);
+        if (isIOS) {
+          showHint('على الآيفون: اضغط زر المشاركة ⎙ ثم «إضافة إلى الشاشة الرئيسية»');
+        } else if (isAndroid) {
+          showHint('على أندرويد: من قائمة المتصفح ⋮ اختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية»');
+        } else {
+          showHint('من قائمة المتصفح اختر «تثبيت التطبيق» أو «Install app»');
+        }
+      });
+    }
   })();
   </script>
 
-  <script src="icons.js?v=25" defer></script>
-  <script src="main.js?v=25" defer></script>
-  <script src="admin.js?v=25" defer></script>
+  <script src="icons.js?v=26" defer></script>
+  <script src="main.js?v=26" defer></script>
+  <script src="admin.js?v=26" defer></script>
 </body>
 </html>

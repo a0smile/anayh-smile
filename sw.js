@@ -1,4 +1,4 @@
-const CACHE_NAME = 'smile-care-v25-clean';
+const CACHE_NAME = 'smile-care-v27-purple';
 const ASSETS = [
   './',
   './index.html',
@@ -9,6 +9,7 @@ const ASSETS = [
   './content.json',
   './manifest.json',
   './hero-blend.jpg',
+  './service-card-bg.jpg',
   './national-day.mp3',
   './service-icons/braces-metal.jpg',
   './service-icons/braces-pink.jpg',
@@ -51,7 +52,7 @@ self.addEventListener('fetch', (event) => {
     || path.includes('/service-icons/');
 
   if (isStatic) {
-    // Ø§ÙÙØ§Ø´ Ø£ÙÙØ§Ù ÙÙÙÙÙØ§Øª Ø§ÙØ«Ø§Ø¨ØªØ© = Ø£Ø³Ø±Ø¹
+    // الكاش أولاً للملفات الثابتة = أسرع
     event.respondWith(
       caches.match(event.request).then((cached) => {
         const fetched = fetch(event.request)
@@ -69,7 +70,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // HTML ÙØ¨Ø§ÙÙ Ø§ÙØ·ÙØ¨Ø§Øª: Ø§ÙØ´Ø¨ÙØ© Ø£ÙÙØ§Ù
+  // HTML وباقي الطلبات: الشبكة أولاً
   event.respondWith(
     fetch(event.request)
       .then((res) => {

@@ -1,40 +1,42 @@
 /* ============================================================
    مجمع عناية الابتسامة الطبي — ملف التصميم
-   هوية طبية احترافية: أزرق طبي فاتح + أبيض نظيف
+   هوية بنفسجية فاخرة: أبيض + Pastel Lavender + Deep Purple
    ============================================================ */
 
 :root {
-  --green-900: #063A4A;
-  --green-800: #0A5A6E;
-  --green-700: #0D7A94;
-  --green-600: #1290AD;
-  --green-500: #1AA8C4;
-  --green-400: #3BC0D8;
-  --green-300: #6DD4E4;
-  --green-200: #A8E8F0;
-  --green-100: #D4F4F8;
-  --green-50:  #EEF9FB;
-  --gold: #5BA3B8;
-  --gold-dark: #3A7A8C;
-  --gold-light: #B8DCE6;
-  --gold-50: #F0F8FA;
-  --bg: #F4F9FB;
+  --green-900: #3B1E6D;
+  --green-800: #4A2A85;
+  --green-700: #7F53D1;
+  --green-600: #8F6ADB;
+  --green-500: #A78BEA;
+  --green-400: #C4B0F0;
+  --green-300: #D9CBF5;
+  --green-200: #E8DFF8;
+  --green-100: #F4EFFF;
+  --green-50:  #FAF7FF;
+  --gold: #9B7AE8;
+  --gold-dark: #6B3FB8;
+  --gold-light: #D4C4F5;
+  --gold-50: #F4EFFF;
+  --bg: #FFFFFF;
   --surface: #FFFFFF;
-  --surface-alt: #E8F4F7;
-  --line: #C5E4EC;
-  --line-strong: #9BCFD9;
-  --text: #0A2A32;
-  --text-mid: #2A5A68;
-  --text-light: #5A8A96;
-  --shadow-sm: 0 2px 10px rgba(6, 58, 74, 0.07);
-  --shadow: 0 6px 20px rgba(6, 58, 74, 0.1);
-  --shadow-lg: 0 14px 36px rgba(6, 58, 74, 0.14);
-  --shadow-3d: 0 8px 0 rgba(6, 58, 74, 0.12), 0 12px 24px rgba(6, 58, 74, 0.15);
+  --surface-alt: #F4EFFF;
+  --line: #E0D4F5;
+  --line-strong: #C4B0F0;
+  --text: #3B1E6D;
+  --text-mid: #5A3A8A;
+  --text-light: #8A6BB0;
+  --shadow-sm: 0 2px 10px rgba(59, 30, 109, 0.08);
+  --shadow: 0 6px 20px rgba(59, 30, 109, 0.12);
+  --shadow-lg: 0 14px 36px rgba(59, 30, 109, 0.16);
+  --shadow-3d: 0 8px 0 rgba(59, 30, 109, 0.14), 0 12px 24px rgba(59, 30, 109, 0.18);
   --radius: 18px;
   --radius-sm: 14px;
   --radius-xs: 10px;
-  --font-body: 'Cairo', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'IBM Plex Sans Arabic', 'Segoe UI', system-ui, sans-serif;
   --maxw: 1080px;
+  --btn-action: #7F53D1;
+  --card-bg: #F4EFFF;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -215,7 +217,7 @@ button { font-family: inherit; }
 .nd-banner {
   position: relative;
   width: 100%;
-  height: 380px;
+  height: 200px;
   overflow: hidden;
   background: var(--green-900);
   box-shadow: 0 8px 32px rgba(6, 58, 74, 0.25);
@@ -1450,7 +1452,7 @@ button { font-family: inherit; }
   .testimonials-grid,
   .contact-grid { grid-template-columns: 1fr; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .nd-banner { height: 280px; }
+  .nd-banner { height: 160px; }
   .service-cards { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
   .service-card { padding: 8px 6px 10px !important; }
   .service-card-icon { width: 48px !important; height: 48px !important; margin-bottom: 4px !important; }
@@ -2506,4 +2508,243 @@ img {
   .service-card-icon { width: 44px !important; height: 44px !important; }
   .service-card-name { font-size: 0.74rem !important; }
   .price-now .price-value { font-size: 0.88rem !important; }
+}
+
+/* ===== أقسام قابلة للطي: زر فخم ===== */
+.section-fold {
+  max-width: 760px;
+  margin: 0 auto 12px;
+}
+.section-fold > summary.section-toggle {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-radius: 50px;
+  font-family: 'Cairo', sans-serif;
+  font-weight: 900;
+  font-size: 1.05rem;
+  color: #fff;
+  background: linear-gradient(135deg, #0D7A94 0%, #0A5A6E 55%, #063A4A 100%);
+  box-shadow: 0 6px 0 #042830, 0 12px 24px rgba(6,58,74,0.25);
+  border: none;
+  user-select: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-align: center;
+}
+.section-fold > summary.section-toggle::-webkit-details-marker { display: none; }
+.section-fold > summary.section-toggle::after {
+  content: '+';
+  font-size: 1.3rem;
+  font-weight: 700;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s;
+}
+.section-fold[open] > summary.section-toggle::after {
+  content: '−';
+  transform: none;
+}
+.section-fold > summary.section-toggle:active {
+  transform: translateY(2px);
+  box-shadow: 0 3px 0 #042830, 0 6px 14px rgba(6,58,74,0.2);
+}
+.section-fold-body {
+  margin-top: 16px;
+  animation: foldIn 0.3s ease;
+}
+@keyframes foldIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* بانر أصغر وثابت */
+.nd-banner-wrap { margin-bottom: 0; }
+.nd-banner {
+  height: 200px !important;
+  max-height: 220px;
+}
+.nd-banner-img {
+  object-fit: cover !important;
+  object-position: center center !important;
+}
+@media (max-width: 640px) {
+  .nd-banner { height: 150px !important; max-height: 160px; }
+  .section-fold > summary.section-toggle { font-size: 0.95rem; padding: 12px 18px; }
+}
+
+/* ============================================================
+   بطاقات الخدمات — شكل الإطار البنفسجي المزخرف من الصورة
+   ============================================================ */
+.service-cards {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 10px !important;
+  align-items: stretch;
+}
+
+.service-card {
+  position: relative !important;
+  background-color: #F4EFFF !important;
+  background-image: url('service-card-bg.jpg') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  border: none !important;
+  border-radius: 18px !important;
+  padding: 12px 10px 14px !important;
+  box-shadow:
+    0 4px 0 rgba(59, 30, 109, 0.18),
+    0 10px 22px rgba(59, 30, 109, 0.12) !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  min-height: 0 !important;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(244,239,255,0.55) 0%, rgba(255,255,255,0.82) 45%, rgba(244,239,255,0.75) 100%);
+  pointer-events: none;
+  border-radius: 18px;
+  z-index: 0;
+}
+
+.service-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.service-card:hover {
+  transform: translateY(-3px) !important;
+  box-shadow:
+    0 6px 0 rgba(59, 30, 109, 0.2),
+    0 16px 28px rgba(59, 30, 109, 0.18) !important;
+}
+
+/* إخفاء أيقونة الصورة داخل البطاقة — الشكل من الخلفية */
+.service-card-icon {
+  display: none !important;
+}
+
+.service-card-name {
+  font-family: 'IBM Plex Sans Arabic', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 0.82rem !important;
+  color: #3B1E6D !important;
+  line-height: 1.35 !important;
+  margin: 4px 0 8px !important;
+  padding: 0 4px !important;
+}
+
+.service-card-prices {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 5px !important;
+  margin-bottom: 8px !important;
+  width: 100%;
+}
+
+.price-old {
+  font-family: 'IBM Plex Sans Arabic', sans-serif !important;
+  font-size: 0.72rem !important;
+  font-weight: 500 !important;
+  color: #8A6BB0 !important;
+  text-decoration: line-through !important;
+  background: rgba(255,255,255,0.7) !important;
+  border: 1px solid rgba(59,30,109,0.12) !important;
+  border-radius: 20px !important;
+  padding: 2px 10px !important;
+}
+
+.price-new {
+  font-family: 'IBM Plex Sans Arabic', sans-serif !important;
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  background: linear-gradient(135deg, #7F53D1 0%, #5A3A8A 100%) !important;
+  border: none !important;
+  border-radius: 20px !important;
+  padding: 4px 14px !important;
+  box-shadow: 0 3px 0 #3B1E6D, 0 4px 10px rgba(127,83,209,0.35) !important;
+}
+
+.service-card .price-wa-btn {
+  font-family: 'IBM Plex Sans Arabic', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 0.75rem !important;
+  background: #7F53D1 !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 50px !important;
+  padding: 6px 14px !important;
+  box-shadow: 0 3px 0 #4A2A85 !important;
+  margin-top: auto !important;
+}
+
+.service-card .price-wa-btn:hover {
+  background: #6B3FB8 !important;
+}
+
+/* نصوص عامة بنفسجي */
+body { background: #FFFFFF !important; color: #3B1E6D !important; }
+.section-title, .section-badge, .hero-cta-title, .nd-badge,
+.price-cat-title, h1, h2, h3 {
+  color: #3B1E6D !important;
+}
+.section-subtitle, .hero-cta-sub { color: #5A3A8A !important; }
+
+.btn-primary, .btn.btn-primary {
+  background: linear-gradient(135deg, #7F53D1 0%, #5A3A8A 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 0 #3B1E6D, 0 8px 18px rgba(127,83,209,0.3) !important;
+}
+
+.btn-outline {
+  border-color: #7F53D1 !important;
+  color: #3B1E6D !important;
+}
+
+.section-fold > summary.section-toggle {
+  background: linear-gradient(135deg, #7F53D1 0%, #5A3A8A 55%, #3B1E6D 100%) !important;
+  box-shadow: 0 6px 0 #2A1548, 0 12px 24px rgba(59,30,109,0.25) !important;
+}
+
+.announcement-bar {
+  background: linear-gradient(90deg, #3B1E6D, #7F53D1, #3B1E6D) !important;
+}
+
+.header { background: rgba(255,255,255,0.96) !important; border-bottom-color: #E0D4F5 !important; }
+.logo-name, .logo-tagline { color: #3B1E6D !important; }
+
+.features-grid .feature-card,
+.tips-grid .tip-card,
+.faq-item {
+  background: #F4EFFF !important;
+  border-color: #E0D4F5 !important;
+  color: #3B1E6D !important;
+}
+
+.wa-float { background: #25D366 !important; }
+
+@media (max-width: 640px) {
+  .service-cards { gap: 8px !important; }
+  .service-card { padding: 10px 6px 12px !important; border-radius: 14px !important; }
+  .service-card-name { font-size: 0.72rem !important; }
+  .price-old { font-size: 0.65rem !important; }
+  .price-new { font-size: 0.78rem !important; padding: 3px 10px !important; }
+  .service-card .price-wa-btn { font-size: 0.68rem !important; padding: 5px 10px !important; }
 }
