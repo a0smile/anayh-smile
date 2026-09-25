@@ -229,7 +229,15 @@ function renderSite(data) {
     }
 
     const logoNd = document.getElementById('logoNationalDay');
-    if (logoNd) logoNd.textContent = `${nd.badge || ''}`.trim() || `اليوم الوطني السعودي ${nd.year || ''}`;
+    if (logoNd) {
+      logoNd.textContent = '';
+      logoNd.style.display = 'none';
+    }
+    // إخفاء عناصر اليوم الوطني عند التعطيل
+    ['ndFlagImage','ndEmblemImage','nationalDay','landmarksSection'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el && !nd.enabled) el.style.display = 'none';
+    });
   });
 
   safeRender('announcement', () => {
@@ -315,31 +323,30 @@ function renderSite(data) {
     if (!servicesGrid) return;
     const ICON_BY_NAME = [
       [/ابتسامة|هوليود|زيركون|إيماكس|ايمكس|بورسلان|تركيب/, 'veneer'],
-      [/تقويم|مثبت|شد/, 'braces'],
+      [/كاش|مقدم|تقويم|مثبت|شد/, 'braces'],
       [/تبييض|ليزر/, 'laser'],
-      [/عصب|جذور/, 'root'],
+      [/عصب/, 'root'],
+      [/جذور/, 'root'],
       [/خلع|ضرس|قلع/, 'extract'],
       [/حشو/, 'filling'],
       [/فلورايد/, 'fluoride'],
-      [/أطفال|طفال|تاج|حافظة/, 'crown'],
+      [/أطفال|طفال|تاج|حافظة|تلبيسة/, 'crown'],
       [/تنظيف|جير|تلميع/, 'clean'],
       [/زراع/, 'tooth']
     ];
-    /* مضبوط 100% على ملفاتك الحقيقية الموجودة في الروت */
+    /* مضبوط 100% على ملفات الصور الحقيقية في service-icons أو الروت */
     const PHOTO_BY_NAME = [
-      [/أطفال|طفال|تاج أسنان الأطفال/, 'braces-child.jpg'],
+      [/تلبيسة تاج|تاج للأطفال/, 'braces-child.jpg'],
       [/حافظة مسافة/, 'braces-kids-treat.jpg'],
       [/تقويم الزينة|زينة/, 'braces-pink.jpg'],
-      [/تقويم شفاف|شفاف/, 'aligner-wear.jpg'],
-      [/مثبت تقويم شفاف/, 'aligner-kit.jpg'],
       [/مثبت تقويم/, 'aligner-kit.jpg'],
-      [/مقدم تقويم|شد تقويم|تقويم.*فك/, 'braces-metal.jpg'],
+      [/كاش فك|مقدم تقويم|شد تقويم/, 'braces-metal.jpg'],
       [/تقويم/, 'braces-close.jpg'],
-      [/تبييض|ليزر|تنظيف وتبييض/, 'whitening-laser.jpg'],
-      [/تنظيف.*جير|تلميع|فلورايد/, 'whitening-laser.jpg'],
-      [/ابتسامة|هوليود|زيركون|إيماكس|بورسلان|تركيب/, 'smile-white.jpg'],
+      [/تبييض|ليزر/, 'whitening-laser.jpg'],
+      [/تنظيف|جير|تلميع|فلورايد/, 'whitening-laser.jpg'],
+      [/ابتسامة|زيركون|إيماكس|بورسلان|تركيب/, 'smile-white.jpg'],
       [/حشو/, 'smile-white.jpg'],
-      [/عصب|جذور|خلع الجذور/, 'xray.jpg'],
+      [/عصب|جذور/, 'xray.jpg'],
       [/خلع ضرس العقل|ضرس العقل/, 'dental-model.jpg'],
       [/خلع|قلع/, 'dental-model.jpg'],
       [/استشارة|تقييم/, 'xray.jpg']
@@ -350,8 +357,7 @@ function renderSite(data) {
     };
     const photoFor = (name, idx) => {
       const found = PHOTO_BY_NAME.find(([re]) => re.test(name || ''));
-      if (found) return found[1];
-      const fallback = [
+      const file = found ? found[1] : [
         'smile-white.jpg',
         'braces-metal.jpg',
         'whitening-laser.jpg',
@@ -359,8 +365,8 @@ function renderSite(data) {
         'xray.jpg',
         'dental-model.jpg',
         'braces-child.jpg'
-      ];
-      return fallback[idx % fallback.length];
+      ][idx % 7];
+      return 'service-icons/' + file;
     };
     const categoryIcon = (cat, ci) => {
       if (cat.icon && cat.icon!== 'flag') return cat.icon;
@@ -726,94 +732,12 @@ function initScrollReveal() {
   document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
 }
 
-(function initNationalMusic() {
+/* تم إزالة موسيقى اليوم الوطني — الموقع الآن هوية طبية احترافية */
+(function hideNationalMusicUI() {
   const audio = document.getElementById('nationalAudio');
   const btn = document.getElementById('ndMusicBtn');
-  const icon = document.getElementById('ndMusicIcon');
-  if (!audio ||!btn) return;
-
-  audio.src = 'national-day.mp3';
-  audio.setAttribute('playsinline', '');
-  audio.setAttribute('webkit-playsinline', '');
-  audio.loop = true;
-  audio.preload = 'auto';
-  audio.volume = 0.6;
-  try { audio.load(); } catch (e) {}
-
-  let started = false;
-
-  function setPlayingUI(playing) {
-    btn.classList.toggle('playing',!!playing);
-    if (icon) icon.textContent = playing? '🔊' : '🎵';
-    btn.setAttribute('aria-label', playing? 'إيقاف النشيد' : 'تشغيل نشيد اليوم الوطني');
-    btn.title = playing? 'إيقاف النشيد' : 'تشغيل نشيد اليوم الوطني';
-  }
-
-  function playMusic() {
-    try {
-      audio.muted = false;
-      const p = audio.play();
-      if (p && typeof p.then === 'function') {
-        p.then(() => {
-          started = true;
-          setPlayingUI(true);
-        }).catch(() => {
-          audio.muted = true;
-          audio.play().then(() => {
-            started = true;
-            setPlayingUI(true);
-            setTimeout(() => {
-              audio.muted = false;
-            }, 200);
-          }).catch(() => setPlayingUI(false));
-        });
-      } else {
-        started = true;
-        setPlayingUI(true);
-      }
-    } catch (e) {
-      setPlayingUI(false);
-    }
-  }
-
-  function pauseMusic() {
-    try { audio.pause(); } catch (e) {}
-    setPlayingUI(false);
-  }
-
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (audio.paused) playMusic();
-    else pauseMusic();
-  });
-
-  audio.addEventListener('ended', () => setPlayingUI(false));
-  audio.addEventListener('pause', () => {
-    if (!audio.ended) setPlayingUI(false);
-  });
-  audio.addEventListener('play', () => setPlayingUI(true));
-
-  const tryAuto = () => {
-    if (!started) playMusic();
-  };
-  tryAuto();
-  setTimeout(tryAuto, 400);
-  setTimeout(tryAuto, 1200);
-
-  const unlock = () => {
-    if (!audio.paused) return;
-    playMusic();
-  };
-  document.addEventListener('click', unlock, { passive: true });
-  document.addEventListener('touchstart', unlock, { passive: true });
-  document.addEventListener('keydown', unlock, { passive: true });
-
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible' && started && audio.paused) {
-      playMusic();
-    }
-  });
+  if (audio) { try { audio.pause(); audio.removeAttribute('src'); } catch (e) {} }
+  if (btn) btn.style.display = 'none';
 })();
 
 loadContent();
