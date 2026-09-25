@@ -428,17 +428,19 @@ function renderSite(data) {
             const base = `serviceCategories.${ci}.items.${ii}`;
             const icon = iconFor(item.name || '', ii);
             const photo = photoFor(item.name || '', ii);
-            return `<article class="service-card">
-              <div class="service-card-icon"${editAttr(base + '.icon')}>
-                <img class="service-card-photo" src="${photo}" alt="${item.name || ''}" loading="lazy" decoding="async" width="128" height="128" onerror="if(!this.dataset.tried){this.dataset.tried=1;this.src=this.src.replace('service-icons/','');}else{this.style.display='none';if(this.nextElementSibling)this.nextElementSibling.style.display='flex';}">
-                <span class="service-fallback-icon" style="display:none; width:100%; height:100%; align-items:center; justify-content:center;">${window.ndIconHtml? window.ndIconHtml(icon) : ''}</span>
+            return `<article class="service-card-wrap">
+              <div class="service-card">
+                <div class="service-card-icon"${editAttr(base + '.icon')}>
+                  <img class="service-card-photo" src="${photo}" alt="${item.name || ''}" loading="lazy" decoding="async" width="128" height="128" onerror="if(!this.dataset.tried){this.dataset.tried=1;this.src=this.src.replace('service-icons/','');}else{this.style.display='none';if(this.nextElementSibling)this.nextElementSibling.style.display='flex';}">
+                  <span class="service-fallback-icon" style="display:none; width:100%; height:100%; align-items:center; justify-content:center;">${window.ndIconHtml? window.ndIconHtml(icon) : ''}</span>
+                </div>
+                <h4 class="service-card-name"${editAttr(base + '.name')}>${item.name}</h4>
+                <div class="service-card-prices">
+                  ${item.oldPrice? `<span class="price-old"><span class="price-label">قبل</span><span class="price-value"${editAttr(base + '.oldPrice')}>${item.oldPrice} ريال</span></span>` : ''}
+                  <span class="price-now"><span class="price-label">بعد</span><span class="price-value"${editAttr(base + '.price')}>${item.price} ريال</span></span>
+                </div>
               </div>
-              <h4 class="service-card-name"${editAttr(base + '.name')}>${item.name}</h4>
-              <div class="service-card-prices">
-                ${item.oldPrice? `<span class="price-old"><span class="price-label">قبل</span><span class="price-value"${editAttr(base + '.oldPrice')}>${item.oldPrice} ريال</span></span>` : ''}
-                <span class="price-now"><span class="price-label">بعد</span><span class="price-value"${editAttr(base + '.price')}>${item.price} ريال</span></span>
-              </div>
-              <a class="price-wa-btn" href="https://wa.me/${clinic.whatsapp}?text=${waMsg}" target="_blank" rel="noopener">${(window.ndIconHtml? window.ndIconHtml('whatsapp') : '')} اطلبها</a>
+              <a class="price-wa-btn" href="https://wa.me/${clinic.whatsapp}?text=${waMsg}" target="_blank" rel="noopener">${(window.ndIconHtml? window.ndIconHtml('whatsapp') : '')} اطلبها الآن</a>
             </article>`;
           }).join('')}
         </div>
