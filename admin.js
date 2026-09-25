@@ -13,9 +13,9 @@ window.adminActive = false;
     width: 52px!important;
     height: 52px!important;
     border-radius: 50%!important;
-    background: #0a5c36!important;
+    background: #0A5A6E!important;
     color: #fff!important;
-    border: 2px solid #ffd700!important;
+    border: 2px solid #3BC0D8!important;
     box-shadow: 0 4px 12px rgba(0,0,0,0.25)!important;
     font-size: 22px!important;
     display: flex!important;
@@ -29,14 +29,14 @@ window.adminActive = false;
     left: 0!important;
     right: 0!important;
     z-index: 99998!important;
-    background: rgba(10,61,42,0.97)!important;
+    background: rgba(6,58,74,0.97)!important;
     backdrop-filter: blur(8px);
     padding: 10px 12px!important;
     display: flex!important;
     gap: 8px!important;
     justify-content: center!important;
     flex-wrap: wrap!important;
-    border-top: 2px solid #ffd700!important;
+    border-top: 2px solid #3BC0D8!important;
   }
   #adminToolbar[hidden]{ display: none!important; }
   body:not(.admin-mode).admin-edit-bar,
