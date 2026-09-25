@@ -436,11 +436,11 @@ function renderSite(data) {
                 </div>
                 <h4 class="service-card-name"${editAttr(base + '.name')}>${item.name}</h4>
                 <div class="service-card-prices">
-                  ${item.oldPrice? `<span class="price-old"><span class="price-label">قبل</span><span class="price-value"${editAttr(base + '.oldPrice')}>${item.oldPrice} ريال</span></span>` : ''}
-                  <span class="price-now"><span class="price-label">بعد</span><span class="price-value"${editAttr(base + '.price')}>${item.price} ريال</span></span>
+                  ${item.oldPrice? `<span class="price-old"><span class="price-value"${editAttr(base + '.oldPrice')}>${item.oldPrice} ريال</span></span>` : ''}
+                  <span class="price-now"><span class="price-value"${editAttr(base + '.price')}>${item.price} ريال</span></span>
                 </div>
               </div>
-              <a class="price-wa-btn" href="https://wa.me/${clinic.whatsapp}?text=${waMsg}" target="_blank" rel="noopener">${(window.ndIconHtml? window.ndIconHtml('whatsapp') : '')} اطلبها الآن</a>
+              <a class="price-wa-btn" href="https://wa.me/${clinic.whatsapp}?text=${waMsg}" target="_blank" rel="noopener">${(window.ndIconHtml? window.ndIconHtml('whatsapp') : '')} اطلبها</a>
             </article>`;
           }).join('')}
         </div>
