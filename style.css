@@ -632,6 +632,115 @@ button { font-family: inherit; cursor: pointer; }
   color: var(--text-mid);
 }
 
+/* ========== بطاقات الخدمة - إصلاح نهائي بصورتك البنفسجية ========== */
+.service-cards {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 12px !important;
+  max-width: 720px !important;
+  margin: 0 auto !important;
+  padding: 10px !important;
+}
+.service-card-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.service-card {
+  position: relative !important;
+  background-color: #F4EFFF !important;
+  background-image: url('service-card-bg.jpg') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  border: 2px solid #8F6ADB !important;
+  border-radius: 18px !important;
+  padding: 16px 10px 14px !important;
+  min-height: 140px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  box-shadow: 0 4px 0 rgba(59, 30, 109, 0.15), 0 10px 20px rgba(59, 30, 109, 0.12) !important;
+  overflow: hidden !important;
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.85) 60%, rgba(244,239,255,0.7) 100%);
+  border-radius: 16px;
+  z-index: 0;
+  pointer-events: none;
+}
+.service-card > * {
+  position: relative;
+  z-index: 1;
+}
+/* إخفاء المربع الفاضي نهائياً */
+.service-card-icon,
+.service-card-photo,
+.service-card-wrap .service-card-icon,
+.service-card .service-fallback-icon {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+.service-card-name {
+  font-size: 0.8rem !important;
+  font-weight: 900 !important;
+  color: #3B1E6D !important;
+  line-height: 1.35 !important;
+  margin: 6px 0 !important;
+  padding: 4px 8px !important;
+  background: rgba(255,255,255,0.85);
+  border-radius: 12px;
+}
+.service-card-prices {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  margin-top: 6px !important;
+}
+.price-old .price-value {
+  font-size: 0.7rem !important;
+  color: #8A6BB0 !important;
+  text-decoration: line-through !important;
+  background: rgba(255,255,255,0.8);
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+.price-now .price-value {
+  font-size: 0.92rem !important;
+  font-weight: 900 !important;
+  color: #fff !important;
+  background: linear-gradient(135deg, #7F53D1, #4A2A85) !important;
+  padding: 4px 12px !important;
+  border-radius: 20px !important;
+  box-shadow: 0 2px 6px rgba(59,30,109,0.25);
+}
+.price-label { display: none !important; }
+.service-card-wrap .price-wa-btn {
+  font-size: 0.72rem !important;
+  padding: 7px 14px !important;
+  border-radius: 50px !important;
+  background: #25D366 !important;
+  color: #fff !important;
+  font-weight: 800 !important;
+  box-shadow: 0 3px 8px rgba(37,211,102,0.3);
+  width: 100% !important;
+  max-width: 140px !important;
+  text-align: center !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
 .booking-card {
   max-width: 520px;
   margin: 0 auto;
@@ -749,8 +858,6 @@ button { font-family: inherit; cursor: pointer; }
 @media (max-width: 900px) {
   .nav-links { display: none !important; }
   .nav-toggle { display: flex !important; }
-
-  /* القائمة تغطي الشاشة كاملة بشكل سلس */
   .nav-links.open {
     display: flex !important;
     flex-direction: column !important;
@@ -774,12 +881,10 @@ button { font-family: inherit; cursor: pointer; }
     list-style: none !important;
     animation: menuSlideIn 0.3s var(--ease-out);
   }
-
   @keyframes menuSlideIn {
     from { opacity: 0; transform: translateY(-12px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-
   .nav-links.open li {
     display: block !important;
     width: 100% !important;
@@ -794,12 +899,10 @@ button { font-family: inherit; cursor: pointer; }
   .nav-links.open li:nth-child(6) { animation-delay: 0.2s; }
   .nav-links.open li:nth-child(7) { animation-delay: 0.23s; }
   .nav-links.open li:nth-child(8) { animation-delay: 0.26s; }
-
   @keyframes menuItemIn {
     from { opacity: 0; transform: translateX(12px); }
     to   { opacity: 1; transform: translateX(0); }
   }
-
   .nav-links.open a {
     display: flex !important;
     align-items: center !important;
@@ -827,7 +930,6 @@ button { font-family: inherit; cursor: pointer; }
     border-color: var(--purple-400) !important;
     color: var(--purple-800) !important;
   }
-
   .features-grid, .tips-grid, .doctors-grid,
   .testimonials-grid, .contact-grid { grid-template-columns: 1fr 1fr; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -836,13 +938,11 @@ button { font-family: inherit; cursor: pointer; }
 @media (max-width: 640px) {
   .features-grid, .tips-grid, .doctors-grid,
   .testimonials-grid, .contact-grid { grid-template-columns: 1fr; }
-
-  .service-cards { gap: 12px !important; }
-  .service-card { padding: 12px 8px 10px !important; border-radius: 16px !important; }
-  .service-card-name { font-size: 0.66rem !important; }
-  .price-now .price-value { font-size: 0.78rem !important; }
-  .service-card-wrap .price-wa-btn { font-size: 0.65rem !important; padding: 6px 12px !important; }
-
+  .service-cards { gap: 10px !important; padding: 8px !important; }
+  .service-card { padding: 14px 8px 12px !important; border-radius: 16px !important; min-height: 130px !important; }
+  .service-card-name { font-size: 0.74rem !important; }
+  .price-now .price-value { font-size: 0.85rem !important; }
+  .service-card-wrap .price-wa-btn { font-size: 0.68rem !important; padding: 6px 12px !important; }
   .hero-cta-actions { flex-direction: column; }
   .hero-cta-actions .btn {
     width: 100%;
@@ -850,18 +950,15 @@ button { font-family: inherit; cursor: pointer; }
     margin: 0 auto;
     min-height: 48px;
   }
-
   input, select, textarea { font-size: 16px !important; }
-
-  /* تقليل الحركة على اللمس */
   .service-card-wrap:hover .service-card,
   .feature-card:hover,
   .tip-card:hover { transform: none !important; }
 }
 
 @media (max-width: 380px) {
-  .service-card-name { font-size: 0.62rem !important; }
-  .service-card-wrap .price-wa-btn { font-size: 0.6rem !important; }
+  .service-card-name { font-size: 0.68rem !important; }
+  .service-card-wrap .price-wa-btn { font-size: 0.64rem !important; }
 }
 
 /* مساحة آمنة للآيفون */
