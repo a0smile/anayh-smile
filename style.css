@@ -930,6 +930,94 @@ button { font-family: inherit; cursor: pointer; }
     border-color: var(--purple-400) !important;
     color: var(--purple-800) !important;
   }
+
+  /* ========== الأيقونة الاحترافية 3D - الاسم عريض وسط والسعر مرتب ========== */
+  .service-cards {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 28px 10px !important;
+    max-width: 720px !important;
+    margin: 0 auto !important;
+    padding: 10px !important;
+  }
+  .service-card-wrap {
+    position: relative !important;
+    overflow: visible !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 10px !important;
+    perspective: 800px;
+  }
+  .service-card {
+    background-image: url('service-card-bg.jpg') !important;
+    background-size: 100% 100% !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 20px !important;
+    min-height: 200px !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 72px 10px 14px !important;
+    overflow: visible !important;
+    box-shadow: 0 5px 0 #8F6ADB, 0 12px 22px rgba(59,30,109,0.18) !important;
+    transition: transform 0.25s ease !important;
+  }
+  .service-card-icon, .service-card-photo { display: none !important; }
+  .service-card-name {
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.92rem !important;
+    font-weight: 900 !important;
+    color: #2A1A4A !important;
+    text-align: center !important;
+    line-height: 1.35 !important;
+    margin: 0 auto 8px !important;
+    max-width: 90% !important;
+    text-wrap: balance !important;
+  }
+  .service-card-prices {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    width: 100% !important;
+  }
+  .price-old {
+    background: rgba(255,255,255,0.92) !important;
+    border: 1px solid rgba(59,30,109,0.12) !important;
+    padding: 3px 10px !important;
+    border-radius: 50px !important;
+  }
+  .price-old .price-value {
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    color: #8A7AA8 !important;
+    text-decoration: line-through !important;
+  }
+  .price-old .price-label { display: inline !important; font-size: 0.58rem !important; color: #8A7AA8 !important; }
+  .price-now {
+    background: linear-gradient(135deg, #7F53D1 0%, #4A2A85 100%) !important;
+    padding: 6px 16px !important;
+    border-radius: 50px !important;
+    box-shadow: 0 3px 0 #3B1E6D, 0 6px 12px rgba(127,83,209,0.35) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+  }
+  .price-now .price-value {
+    font-size: 1.05rem !important;
+    font-weight: 900 !important;
+    color: #fff !important;
+  }
+  .price-now .price-label { display: inline !important; font-size: 0.6rem !important; color: #E8DFF8 !important; }
+
   .features-grid, .tips-grid, .doctors-grid,
   .testimonials-grid, .contact-grid { grid-template-columns: 1fr 1fr; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -938,11 +1026,15 @@ button { font-family: inherit; cursor: pointer; }
 @media (max-width: 640px) {
   .features-grid, .tips-grid, .doctors-grid,
   .testimonials-grid, .contact-grid { grid-template-columns: 1fr; }
-  .service-cards { gap: 10px !important; padding: 8px !important; }
-  .service-card { padding: 14px 8px 12px !important; border-radius: 16px !important; min-height: 130px !important; }
-  .service-card-name { font-size: 0.74rem !important; }
-  .price-now .price-value { font-size: 0.85rem !important; }
-  .service-card-wrap .price-wa-btn { font-size: 0.68rem !important; padding: 6px 12px !important; }
+  
+  /* بطاقات الجوال - محاذاة وسط احترافية */
+  .service-cards { gap: 26px 8px !important; padding: 12px 6px !important; }
+  .service-card { min-height: 185px !important; padding: 70px 8px 12px !important; border-radius: 18px !important; }
+  .service-card-name { font-size: 0.82rem !important; font-weight: 900 !important; }
+  .price-old .price-value { font-size: 0.68rem !important; }
+  .price-now .price-value { font-size: 0.92rem !important; }
+  .service-card-wrap .price-wa-btn { font-size: 0.68rem !important; padding: 6px 14px !important; border-radius: 50px !important; }
+  
   .hero-cta-actions { flex-direction: column; }
   .hero-cta-actions .btn {
     width: 100%;
@@ -951,13 +1043,13 @@ button { font-family: inherit; cursor: pointer; }
     min-height: 48px;
   }
   input, select, textarea { font-size: 16px !important; }
-  .service-card-wrap:hover .service-card,
-  .feature-card:hover,
-  .tip-card:hover { transform: none !important; }
+  .feature-card:hover, .tip-card:hover { transform: none !important; }
+  .service-card-wrap:hover .service-card { transform: none !important; }
 }
 
 @media (max-width: 380px) {
-  .service-card-name { font-size: 0.68rem !important; }
+  .service-card-name { font-size: 0.76rem !important; }
+  .price-now .price-value { font-size: 0.86rem !important; }
   .service-card-wrap .price-wa-btn { font-size: 0.64rem !important; }
 }
 
