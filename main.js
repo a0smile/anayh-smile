@@ -259,11 +259,16 @@ function renderSite(data) {
       const bar = document.getElementById('announcementBar');
       if (!bar) return;
       bar.style.display = '';
-      const t1 = document.getElementById('announcementText');
-      const t2 = document.getElementById('announcementText2');
+      const track = bar.querySelector('.announcement-track');
       let ann = String(data.announcement || '');
-      if (t1) t1.textContent = ann;
-      if (t2) t2.textContent = ann;
+      if (track) {
+        track.innerHTML = `
+          <span class="announcement-text"><span id="announcementText">${ann}</span></span>
+          <span class="announcement-spacer" aria-hidden="true"></span>
+          <span class="announcement-text" aria-hidden="true"><span id="announcementText2">${ann}</span></span>
+          <span class="announcement-spacer" aria-hidden="true"></span>
+        `;
+      }
       bar.setAttribute('data-edit', 'announcement');
       bar.setAttribute('data-edit-type', 'text');
       bar.setAttribute('data-edit-label', 'نص الشريط المتحرك');
@@ -335,74 +340,44 @@ function renderSite(data) {
   safeRender('services', () => {
     const servicesGrid = document.getElementById('servicesGrid');
     if (!servicesGrid) return;
-    const ICON_BY_NAME = [
-      [/ابتسامة|هوليود|زيركون|إيماكس|ايمكس|بورسلان|تركيب/, 'veneer'],
-      [/كاش|مقدم|تقويم|مثبت|شد/, 'braces'],
-      [/تبييض|ليزر/, 'laser'],
-      [/عصب/, 'root'],
-      [/جذور/, 'root'],
-      [/خلع|ضرس|قلع/, 'extract'],
-      [/حشو/, 'filling'],
-      [/فلورايد/, 'fluoride'],
-      [/أطفال|طفال|تاج|حافظة|تلبيسة/, 'crown'],
-      [/تنظيف|جير|تلميع/, 'clean'],
-      [/زراع/, 'tooth']
-    ];
-    const PHOTO_BY_NAME = [
-      [/تلبيسة تاج|تاج للأطفال/, 'braces-child.jpg'],
-      [/حافظة مسافة/, 'braces-kids-treat.jpg'],
-      [/تقويم الزينة|زينة/, 'braces-pink.jpg'],
-      [/مثبت تقويم/, 'aligner-kit.jpg'],
-      [/كاش فك|مقدم تقويم|شد تقويم/, 'braces-metal.jpg'],
-      [/تقويم/, 'braces-close.jpg'],
-      [/تبييض|ليزر/, 'whitening-laser.jpg'],
-      [/تنظيف|جير|تلميع|فلورايد/, 'whitening-laser.jpg'],
-      [/ابتسامة|زيركون|إيماكس|بورسلان|تركيب/, 'smile-white.jpg'],
-      [/حشو/, 'smile-white.jpg'],
-      [/عصب|جذور/, 'xray.jpg'],
-      [/خلع ضرس العقل|ضرس العقل/, 'dental-model.jpg'],
-      [/خلع|قلع/, 'dental-model.jpg'],
-      [/استشارة|تقييم/, 'xray.jpg']
-    ];
-    const iconFor = (name, idx) => {
-      const found = ICON_BY_NAME.find(([re]) => re.test(name));
-      return found? found[1] : ['tooth', 'clean', 'brush'][idx % 3];
-    };
-    const photoFor = (name, idx) => {
-      const found = PHOTO_BY_NAME.find(([re]) => re.test(name || ''));
-      const file = found? found[1] : ['smile-white.jpg','braces-metal.jpg','whitening-laser.jpg','aligner-kit.jpg','xray.jpg','dental-model.jpg','braces-child.jpg'][idx % 7];
-      return 'service-icons/' + file;
-    };
-    const categoryIcon = (cat, ci) => {
-      if (cat.icon && cat.icon!== 'flag') return cat.icon;
-      return iconFor(cat.title || '', ci);
-    };
+    const clinic = data.clinic || {};
 
     servicesGrid.innerHTML = (data.serviceCategories || []).map((cat, ci) => `
       <div class="price-category">
-        ${cat.title? `<h3 class="price-cat-title">
-          <span class="price-cat-icon"${editAttr(`serviceCategories.${ci}.icon`)}>${(window.ndIconHtml? window.ndIconHtml(categoryIcon(cat, ci)) : "")}</span>
+        ${cat.title ? `<h3 class="price-cat-title">
+          <span class="price-cat-icon"${editAttr(`serviceCategories.${ci}.icon`)}>${(window.ndIconHtml ? window.ndIconHtml(cat.icon || 'tooth') : '')}</span>
           <span${editAttr(`serviceCategories.${ci}.title`)}>${cat.title}</span>
         </h3>` : ''}
         <div class="service-cards">
           ${cat.items.map((item, ii) => {
-            const waMsg = encodeURIComponent(`مرحباً، أرغب بالاستفسار عن خدمة: ${item.name}`);
             const base = `serviceCategories.${ci}.items.${ii}`;
-            const icon = iconFor(item.name || '', ii);
-            const photo = photoFor(item.name || '', ii);
+            const waMsg = encodeURIComponent(
+              `السلام عليكم ورحمة الله وبركاته. أما اخترت خدمة (${item.name}) هل أقدر أجيكم الآن؟`
+            );
             return `<article class="service-card-wrap">
               <div class="service-card">
-                <div class="service-card-icon"${editAttr(base + '.icon')}>
-                  <img class="service-card-photo" src="${photo}" alt="${item.name || ''}" loading="lazy" decoding="async" width="128" height="128" onerror="if(!this.dataset.tried){this.dataset.tried=1;this.src=this.src.replace('service-icons/','');}else{this.style.display='none';if(this.nextElementSibling)this.nextElementSibling.style.display='flex';}">
-                  <span class="service-fallback-icon" style="display:none; width:100%; height:100%; align-items:center; justify-content:center;">${window.ndIconHtml? window.ndIconHtml(icon) : ''}</span>
+                <div class="service-card-inner">
+                  <h4 class="service-card-name"${editAttr(base + '.name')}>${item.name}</h4>
+                  <div class="service-card-prices">
+                    ${item.oldPrice != null ? `
+                      <span class="price-old">
+                        <span class="price-label">قبل</span>
+                        <span class="price-value"${editAttr(base + '.oldPrice')}>${item.oldPrice} ريال</span>
+                      </span>` : '<span class="price-old"></span>'}
+                    <span class="price-now">
+                      <span class="price-label">بعد</span>
+                      <span class="price-value"${editAttr(base + '.price')}>${item.price} ريال</span>
+                    </span>
+                  </div>
                 </div>
-                <h4 class="service-card-name"${editAttr(base + '.name')}>${item.name}</h4>
-                <div class="service-card-prices">
-                  ${item.oldPrice? `<span class="price-old"><span class="price-value"${editAttr(base + '.oldPrice')}>${item.oldPrice} ريال</span></span>` : ''}
-                  <span class="price-now"><span class="price-value"${editAttr(base + '.price')}>${item.price} ريال</span></span>
-                </div>
+                <a class="price-wa-btn"
+                   href="https://wa.me/${clinic.whatsapp}?text=${waMsg}"
+                   target="_blank"
+                   rel="noopener"
+                   aria-label="اطلب خدمة ${item.name}">
+                  اطلبها
+                </a>
               </div>
-              <a class="price-wa-btn" href="https://wa.me/${clinic.whatsapp}?text=${waMsg}" target="_blank" rel="noopener">${(window.ndIconHtml? window.ndIconHtml('whatsapp') : '')} اطلبها</a>
             </article>`;
           }).join('')}
         </div>
