@@ -1,6 +1,6 @@
 /* ============================================
    أيقونات SVG فخمة 3D ملكية — تدرجات بنفسجية فاخرة ثلاثية الأبعاد
-   مجمع عناية الابتسامة الطبي — اليوم الوطني 96
+   مجمع عناية الابتسامة الطبي
    ============================================ */
 window.ND_ICONS = {
   tooth: '<svg viewBox="0 0 48 48" fill="none"><defs><linearGradient id="gTooth" x1="12%" y1="8%" x2="88%" y2="92%"><stop offset="0%" stop-color="#C4B0F0"/><stop offset="45%" stop-color="#8F6ADB"/><stop offset="100%" stop-color="#4A2A85"/></linearGradient><filter id="s3d"><feDropShadow dx="0" dy="2.2" stdDeviation="1.6" flood-color="#000" flood-opacity="0.28"/></filter></defs><path d="M14 6c3 0 5 2 10 2s7-2 10-2c4 0 6 3 6 8 0 5-2 9-3 14-1 4-2 8-4 8s-3-3-4-7c-.6-2.6-1.6-5-5-5s-4.4 2.4-5 5c-1 4-2 7-4 7s-3-4-4-8c-1-5-3-9-3-14 0-5 2-8 6-8z" fill="url(#gTooth)" stroke="#3B1E6D" stroke-width="1.7" filter="url(#s3d)"/></svg>',
