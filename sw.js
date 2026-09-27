@@ -1,4 +1,4 @@
-const CACHE_NAME = 'smile-care-v27-purple';
+const CACHE_NAME = 'smile-care-v28-purple';
 const ASSETS = [
   './',
   './index.html',
@@ -10,7 +10,9 @@ const ASSETS = [
   './manifest.json',
   './hero-blend.jpg',
   './service-card-bg.jpg',
-  './national-day.mp3',
+  './icon.svg',
+  './icon-192.png',
+  './icon-512.png',
   './service-icons/braces-metal.jpg',
   './service-icons/braces-pink.jpg',
   './service-icons/braces-close.jpg',
@@ -44,15 +46,15 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
+
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
 
   const path = url.pathname;
-  const isStatic = /\.(css|js|jpg|jpeg|png|webp|svg|mp3|woff2?|json)$/i.test(path)
+  const isStatic = /\.(css|js|jpg|jpeg|png|webp|svg|woff2?|json)$/i.test(path)
     || path.includes('/service-icons/');
 
   if (isStatic) {
-    // الكاش أولاً للملفات الثابتة = أسرع
     event.respondWith(
       caches.match(event.request).then((cached) => {
         const fetched = fetch(event.request)
@@ -70,7 +72,6 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // HTML وباقي الطلبات: الشبكة أولاً
   event.respondWith(
     fetch(event.request)
       .then((res) => {
@@ -80,6 +81,12 @@ self.addEventListener('fetch', (event) => {
         }
         return res;
       })
-      .catch(() => caches.match(event.request))
+      .catch(() => caches.match(event.request).then((cached) => cached || caches.match('./index.html')))
   );
+});
+
+self.addEventListener('message', (event) => {
+  if (event.data === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });
