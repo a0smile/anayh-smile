@@ -2,7 +2,7 @@ const ADMIN_SESSION_KEY = 'smile_admin_active';
 var adminActive = false;
 window.adminActive = false;
 
-/* ===== إصلاح واجهة زر دخول المالك - يكون يمين صغير ومخفي عن الزوار ===== */
+/* ===== واجهة زر دخول المالك + شريط الأدوات + إشعارات ===== */
 (function fixAdminUIStyle(){
   const css = `
   #adminEntryBtn{
@@ -13,10 +13,10 @@ window.adminActive = false;
     width: 52px!important;
     height: 52px!important;
     border-radius: 50%!important;
-    background: #0A5A6E!important;
+    background: #3B1E6D!important;
     color: #fff!important;
-    border: 2px solid #3BC0D8!important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25)!important;
+    border: 2px solid #8F6ADB!important;
+    box-shadow: 0 4px 14px rgba(59,30,109,0.35)!important;
     font-size: 22px!important;
     display: flex!important;
     align-items: center!important;
@@ -29,25 +29,81 @@ window.adminActive = false;
     left: 0!important;
     right: 0!important;
     z-index: 99998!important;
-    background: rgba(6,58,74,0.97)!important;
+    background: rgba(59,30,109,0.97)!important;
     backdrop-filter: blur(8px);
     padding: 10px 12px!important;
     display: flex!important;
     gap: 8px!important;
     justify-content: center!important;
     flex-wrap: wrap!important;
-    border-top: 2px solid #3BC0D8!important;
+    border-top: 2px solid #8F6ADB!important;
   }
   #adminToolbar[hidden]{ display: none!important; }
   body:not(.admin-mode).admin-edit-bar,
   body:not(.admin-mode).edit-btn{ display: none!important; }
+
+  .admin-edit-bar{
+    position: absolute!important;
+    top: 4px!important;
+    left: 4px!important;
+    z-index: 9990!important;
+    display: flex!important;
+    gap: 4px!important;
+    flex-wrap: wrap!important;
+    background: rgba(255,255,255,0.95)!important;
+    border: 1px solid #C4B0F0!important;
+    border-radius: 10px!important;
+    padding: 3px!important;
+    box-shadow: 0 4px 12px rgba(59,30,109,0.2)!important;
+  }
+  .admin-op-btn{
+    border: none!important;
+    font-family: inherit!important;
+    font-size: 0.68rem!important;
+    font-weight: 800!important;
+    padding: 4px 8px!important;
+    border-radius: 8px!important;
+    cursor: pointer!important;
+    color: #fff!important;
+    line-height: 1.2!important;
+  }
+  .op-edit{ background: #7F53D1!important; }
+  .op-add{ background: #25D366!important; }
+  .op-del{ background: #ef4444!important; }
+  .op-save{ background: #3B1E6D!important; }
+
+  #smileToast{
+    position: fixed!important;
+    top: 20px!important;
+    left: 50%!important;
+    transform: translateX(-50%) translateY(-20px)!important;
+    background: #3B1E6D!important;
+    color: #fff!important;
+    font-family: inherit!important;
+    font-weight: 800!important;
+    font-size: 0.9rem!important;
+    padding: 12px 22px!important;
+    border-radius: 50px!important;
+    box-shadow: 0 8px 24px rgba(59,30,109,0.35)!important;
+    z-index: 999999!important;
+    opacity: 0!important;
+    pointer-events: none!important;
+    transition: opacity 0.3s ease, transform 0.3s ease!important;
+    max-width: 90vw!important;
+    text-align: center!important;
+  }
+  #smileToast.show{
+    opacity: 1!important;
+    transform: translateX(-50%) translateY(0)!important;
+  }
+  #smileToast.success{ background: #128C7E!important; }
+  #smileToast.error{ background: #c0392b!important; }
   `;
   const st = document.createElement('style');
   st.textContent = css;
   document.head.appendChild(st);
 })();
 
-/* كود الدخول من جهة الخادم فقط — لا تغيّر كلمة المرور هنا */
 async function verifyAdminCode(code) {
   try {
     const res = await fetch('/api/admin-login', {
@@ -66,12 +122,12 @@ async function verifyAdminCode(code) {
 
 async function enterAdminMode() {
   if (adminActive) return;
-  const code = prompt(' أدخل كود المالك لتفعيل وضع التعديل:');
+  const code = prompt('أدخل كود المالك لتفعيل وضع التعديل:');
   if (code === null) return;
 
   const ok = await verifyAdminCode(code);
   if (!ok) {
-    alert('الكود غير صحيح. فقط مالك الموقع يستطيع التعديل.');
+    showSavedToast('الكود غير صحيح — فقط المالك يستطيع التعديل', 'error');
     return;
   }
 
@@ -91,7 +147,7 @@ async function enterAdminMode() {
     window.activateClinicImageManagement();
   }
   notifyAdminChanged();
-  showSavedToast('تم تفعيل وضع المالك');
+  showSavedToast('تم تفعيل وضع المالك ✓', 'success');
 }
 
 function exitAdminMode() {
@@ -107,27 +163,26 @@ function exitAdminMode() {
   if (entry) entry.style.display = 'flex';
   removeEditButtons();
   notifyAdminChanged();
-  showSavedToast('تم الخروج من وضع المالك');
+  showSavedToast('تم الخروج من وضع المالك', 'success');
 }
 
 function notifyAdminChanged() {
   document.dispatchEvent(new CustomEvent('adminModeChanged'));
 }
 
-/* حفظ تلقائي إلى content.json عبر Cloudflare + GitHub */
 let lastAdminCode = sessionStorage.getItem('smile_admin_code') || '';
 
 async function persistToServer(actionLabel) {
   const data = window.getSiteData && window.getSiteData();
   if (!data) {
-    showSavedToast((actionLabel || 'تم الحفظ') + ' محلياً ✓');
+    showSavedToast((actionLabel || 'تم الحفظ') + ' محلياً ✓', 'success');
     return;
   }
 
   if (!lastAdminCode) {
-    const code = prompt('أدخل كود المالك مرة واحدة لربط الحفظ التلقائي بالملف:');
+    const code = prompt('أدخل كود المالك مرة واحدة لربط الحفظ التلقائي:');
     if (!code) {
-      showSavedToast((actionLabel || 'تم') + ' محلياً — لم يُرسل للملف');
+      showSavedToast((actionLabel || 'تم') + ' محلياً — لم يُرسل للملف', 'error');
       return;
     }
     lastAdminCode = code;
@@ -145,27 +200,27 @@ async function persistToServer(actionLabel) {
     if (res.status === 401) {
       lastAdminCode = '';
       sessionStorage.removeItem('smile_admin_code');
-      showSavedToast('رمز غير صحيح — الحفظ محلي فقط');
+      showSavedToast('رمز غير صحيح — الحفظ محلي فقط', 'error');
       return;
     }
 
     if (result && result.ok && result.remote) {
-      showSavedToast((actionLabel || 'تم الحفظ') + ' ✓ وتم إرساله إلى الملف بنجاح');
+      showSavedToast((actionLabel || 'تم الحفظ') + ' ✓ وتم إرساله بنجاح', 'success');
       return;
     }
 
     if (result && result.ok && result.remote === false) {
-      showSavedToast((actionLabel || 'تم الحفظ') + ' محلياً ✓ (فعّل GitHub في Cloudflare للإرسال التلقائي)');
+      showSavedToast((actionLabel || 'تم الحفظ') + ' محلياً ✓', 'success');
       return;
     }
 
-    showSavedToast((actionLabel || 'تم الحفظ') + ' محلياً ✓');
+    showSavedToast((actionLabel || 'تم الحفظ') + ' محلياً ✓', 'success');
   } catch (e) {
-    showSavedToast((actionLabel || 'تم الحفظ') + ' محلياً ✓');
+    showSavedToast((actionLabel || 'تم الحفظ') + ' محلياً ✓', 'success');
   }
 }
 
-function showSavedToast(msg) {
+function showSavedToast(msg, type) {
   let toast = document.getElementById('smileToast');
   if (!toast) {
     toast = document.createElement('div');
@@ -173,8 +228,11 @@ function showSavedToast(msg) {
     document.body.appendChild(toast);
   }
   toast.textContent = msg || 'تم الحفظ بنجاح ✓';
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 1800);
+  toast.className = 'show' + (type === 'error' ? ' error' : type === 'success' ? ' success' : '');
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => {
+    toast.classList.remove('show', 'success', 'error');
+  }, 2200);
 }
 
 function pathParts(path) {
@@ -186,12 +244,8 @@ function parentArrayPath(path) {
   if (parts.length < 2) return null;
   const last = parts[parts.length - 1];
   const prev = parts[parts.length - 2];
-  if (/^\d+$/.test(last)) {
-    return parts.slice(0, -1).join('.');
-  }
-  if (/^\d+$/.test(prev) && parts.length >= 3) {
-    return parts.slice(0, -2).join('.');
-  }
+  if (/^\d+$/.test(last)) return parts.slice(0, -1).join('.');
+  if (/^\d+$/.test(prev) && parts.length >= 3) return parts.slice(0, -2).join('.');
   return null;
 }
 
@@ -216,7 +270,6 @@ function attachEditButtons() {
 
     const path = el.dataset.edit || '';
     const type = el.dataset.editType || 'text';
-    const label = el.dataset.editLabel || path;
 
     const mk = (txt, cls, fn) => {
       const b = document.createElement('button');
@@ -245,7 +298,7 @@ function attachEditButtons() {
       persistToServer('تم الحفظ بنجاح');
     }));
 
-    const host = (type === 'image')? el : (el.parentElement || el);
+    const host = (type === 'image') ? el : (el.parentElement || el);
     if (getComputedStyle(host).position === 'static') {
       host.style.position = 'relative';
     }
@@ -270,7 +323,7 @@ function handleEdit(el) {
   const current = window.getOverrideValue(path);
 
   if (type === 'list') {
-    const arr = Array.isArray(current)? current : [];
+    const arr = Array.isArray(current) ? current : [];
     const value = prompt(
       'تعديل: ' + label + '\n\nكل بند في سطر مستقل:\n(احذف سطراً للحذف · أضف سطراً للإضافة)',
       arr.join('\n')
@@ -283,7 +336,7 @@ function handleEdit(el) {
     return;
   }
 
-  const value = prompt('تعديل: ' + label + '\n\nالقيمة الحالية:', current!= null? String(current) : '');
+  const value = prompt('تعديل: ' + label + '\n\nالقيمة الحالية:', current != null ? String(current) : '');
   if (value === null) return;
 
   let finalValue = value;
@@ -301,9 +354,9 @@ function handleAdd(el) {
 
   if (type === 'list') {
     const current = window.getOverrideValue(path);
-    const arr = Array.isArray(current)? current.slice() : [];
+    const arr = Array.isArray(current) ? current.slice() : [];
     const value = prompt('إضافة عنصر جديد إلى: ' + label);
-    if (value === null ||!String(value).trim()) return;
+    if (value === null || !String(value).trim()) return;
     arr.push(String(value).trim());
     window.saveOverride(path, arr);
     rerender();
@@ -313,20 +366,20 @@ function handleAdd(el) {
 
   const arrPath = parentArrayPath(path);
   if (!arrPath) {
-    alert('لا يمكن الإضافة على هذا الحقل مباشرة.');
+    showSavedToast('لا يمكن الإضافة على هذا الحقل مباشرة', 'error');
     return;
   }
 
   const arr = window.getOverrideValue(arrPath);
   if (!Array.isArray(arr)) {
-    alert('هذا القسم ليس قائمة قابلة للإضافة.');
+    showSavedToast('هذا القسم ليس قائمة قابلة للإضافة', 'error');
     return;
   }
 
   let template = {};
   if (arrPath === 'doctors') {
     const name = prompt('اسم الطبيب الجديد:');
-    if (name === null ||!name.trim()) return;
+    if (name === null || !name.trim()) return;
     template = {
       name: name.trim(),
       specialty: prompt('التخصص:') || 'طب أسنان',
@@ -335,7 +388,7 @@ function handleAdd(el) {
     };
   } else if (arrPath === 'reviews') {
     const name = prompt('اسم صاحب التعليق:');
-    if (name === null ||!name.trim()) return;
+    if (name === null || !name.trim()) return;
     template = {
       name: name.trim(),
       text: prompt('نص التعليق:') || '',
@@ -343,7 +396,7 @@ function handleAdd(el) {
     };
   } else if (arrPath === 'features' || arrPath === 'tips') {
     const title = prompt('عنوان العنصر الجديد:');
-    if (title === null ||!title.trim()) return;
+    if (title === null || !title.trim()) return;
     template = {
       title: title.trim(),
       description: prompt('الوصف:') || '',
@@ -351,7 +404,7 @@ function handleAdd(el) {
     };
   } else if (arrPath.includes('serviceCategories') && arrPath.endsWith('items')) {
     const name = prompt('اسم الخدمة الجديدة:');
-    if (name === null ||!name.trim()) return;
+    if (name === null || !name.trim()) return;
     template = {
       name: name.trim(),
       price: Number(prompt('السعر بعد الخصم:') || 0),
@@ -375,7 +428,7 @@ function handleDelete(el) {
   const arrPath = parentArrayPath(path);
   const idx = itemIndexFromPath(path);
   if (!arrPath || idx < 0) {
-    alert('لا يمكن حذف هذا العنصر.');
+    showSavedToast('لا يمكن حذف هذا العنصر', 'error');
     return;
   }
   if (!confirm('هل تريد حذف هذا العنصر نهائياً من الموقع؟')) return;
@@ -388,7 +441,6 @@ function handleDelete(el) {
   persistToServer('تم الحذف بنجاح');
 }
 
-/* ===== رفع الصور ===== */
 const fileInput = document.getElementById('adminFileInput');
 let pendingImagePath = null;
 
@@ -402,9 +454,9 @@ function openImageUploader(path) {
 if (fileInput) {
   fileInput.addEventListener('change', () => {
     const file = fileInput.files && fileInput.files[0];
-    if (!file ||!pendingImagePath) return;
+    if (!file || !pendingImagePath) return;
     if (!file.type.startsWith('image/')) {
-      alert('الرجاء اختيار ملف صورة صحيح.');
+      showSavedToast('الرجاء اختيار ملف صورة صحيح', 'error');
       return;
     }
     const reader = new FileReader();
@@ -412,7 +464,7 @@ if (fileInput) {
       window.saveOverride(pendingImagePath, reader.result);
       pendingImagePath = null;
       rerender();
-      persistToServer('تم التعديل بنجاح');
+      persistToServer('تم رفع الصورة بنجاح');
     };
     reader.readAsDataURL(file);
   });
@@ -437,13 +489,13 @@ function downloadUpdatedJson() {
   a.download = 'content.json';
   a.click();
   URL.revokeObjectURL(a.href);
-  showSavedToast('تم تحميل content.json');
-  alert('تم تحميل content.json بالتعديلات.\nارفعها على استضافتك حتى تظهر للزوار كلهم.');
+  showSavedToast('تم تحميل content.json ✓', 'success');
 }
 
 function resetOverrides() {
   if (!confirm('هل تريد التراجع عن كل التعديلات المحفوظة في هذا المتصفح؟')) return;
-  localStorage.removeItem(window.OVERRIDES_KEY || 'smile_content_overrides');
+  localStorage.removeItem(window.OVERRIDES_KEY || 'smile_overrides');
+  showSavedToast('تم التراجع عن التعديلات', 'success');
   location.reload();
 }
 
@@ -461,7 +513,6 @@ if (exitBtnEl) exitBtnEl.addEventListener('click', exitAdminMode);
 if (downloadBtnEl) downloadBtnEl.addEventListener('click', downloadUpdatedJson);
 if (resetBtnEl) resetBtnEl.addEventListener('click', resetOverrides);
 
-/* ===== استعادة الجلسة + إخفاء الشريط عن الزوار ===== */
 (function restoreSessionSecure(){
   const isAdmin = sessionStorage.getItem(ADMIN_SESSION_KEY) === '1';
   const tb = document.getElementById('adminToolbar');
@@ -493,7 +544,7 @@ document.addEventListener('siteRendered', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
   const tb = document.getElementById('adminToolbar');
-  if (sessionStorage.getItem(ADMIN_SESSION_KEY)!== '1' && tb) {
+  if (sessionStorage.getItem(ADMIN_SESSION_KEY) !== '1' && tb) {
     tb.hidden = true;
   }
   if (adminActive) setTimeout(attachEditButtons, 80);
