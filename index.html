@@ -12,11 +12,32 @@
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link rel="preload" as="image" href="hero-blend.jpg" fetchpriority="high">
-  <link rel="preload" as="image" href="service-card-bg.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=99">
+
+  <!-- إصلاح وحماية للموقع من الانكماش على شاشات الجوال دون المساس بالتصميم الأصلي للكمبيوتر -->
+  <style>
+    @media (max-width: 768px) {
+      html, body {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow-x: hidden !important;
+        display: block !important;
+      }
+      #entryOverlay {
+        padding: 12px !important;
+      }
+      #entryOverlay > div {
+        max-width: 100% !important;
+        width: 92% !important;
+        margin: 0 auto !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
