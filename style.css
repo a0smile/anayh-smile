@@ -337,8 +337,8 @@
 /* المسافة الفارغة ≈ 30 سم (≈ 1130px على شاشات عادية) */
 .announcement-spacer {
   display: inline-block !important;
-  width: 30cm !important;                 /* 30 سنتيمتر حقيقية */
-  min-width: 30cm !important;
+  width: 120px !important;
+  min-width: 120px !important;
   flex-shrink: 0 !important;
   height: 1px !important;
 }
@@ -351,7 +351,7 @@
 @media (max-width: 640px) {
   .announcement-track { animation-duration: 38s !important; }
   .announcement-text { font-size: 13px !important; }
-  .announcement-spacer { width: 22cm !important; min-width: 22cm !important; }
+    .announcement-spacer { width: 80px !important; min-width: 80px !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
