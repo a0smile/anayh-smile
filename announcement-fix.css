@@ -1,0 +1,64 @@
+/* ============================================================
+   إصلاح الشريط المتحرك
+   - حركة بسيطة وخفيفة
+   - مسافة فارغة ≈ 30 سم بين نهاية الرسالة وظهورها مرة أخرى
+   ============================================================ */
+
+.announcement-bar {
+  position: relative !important;
+  z-index: 60 !important;
+  background: #3B1E6D !important;
+  border-top: 3px solid #8F6ADB !important;
+  border-bottom: 3px solid #8F6ADB !important;
+  overflow: hidden !important;
+  height: 42px !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
+}
+
+.announcement-track {
+  display: flex !important;
+  width: max-content !important;
+  white-space: nowrap !important;
+  animation: marqueeSmooth 45s linear infinite !important;
+  will-change: transform;
+}
+
+.announcement-text {
+  display: inline-block !important;
+  color: #ffffff !important;
+  font-family: 'IBM Plex Sans Arabic', 'Cairo', 'Tajawal', sans-serif !important;
+  font-size: 14.5px !important;
+  font-weight: 900 !important;
+  padding: 0 0 0 0 !important;          /* المسافة تُدار عبر spacer */
+  line-height: 42px !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
+
+/* المسافة الفارغة ≈ 30 سم (≈ 1130px على شاشات عادية) */
+.announcement-spacer {
+  display: inline-block !important;
+  width: 30cm !important;                 /* 30 سنتيمتر حقيقية */
+  min-width: 30cm !important;
+  flex-shrink: 0 !important;
+  height: 1px !important;
+}
+
+@keyframes marqueeSmooth {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 640px) {
+  .announcement-track { animation-duration: 38s !important; }
+  .announcement-text { font-size: 13px !important; }
+  .announcement-spacer { width: 22cm !important; min-width: 22cm !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .announcement-track { animation: none !important; }
+}

@@ -1,0 +1,81 @@
+═══════════════════════════════════════════════════════════════
+  تعليمات تطبيق التعديلات — مجمع عناية الابتسامة الطبي
+  البطاقات داخل الأيقونة + الشريط المتحرك
+═══════════════════════════════════════════════════════════════
+
+①  ملف content.json
+   استبدل الملف الحالي بالكامل بـ content.json المرفق.
+   (الأسعار مضبوطة بفرق 160–195 ريال بين قبل وبعد، ولا يوجد أي نص يوم وطني)
+
+②  ملف style.css
+   أضف في نهاية الملف (أو استبدل قسم بطاقات الخدمات) محتوى:
+   → style-cards-fix.css
+   → announcement-fix.css
+
+③  ملف main.js
+   ابحث عن الدالة:  safeRender('services', () => { ... });
+   واستبدل محتواها بالكامل بمحتوى الملف: main-services-fix.js
+
+   أيضاً عدّل جزء الشريط المتحرك داخل safeRender('announcement' ...) ليصبح:
+
+   safeRender('announcement', () => {
+     if (data.announcement) {
+       const bar = document.getElementById('announcementBar');
+       if (!bar) return;
+       bar.style.display = '';
+       const track = bar.querySelector('.announcement-track');
+       if (track) {
+         const ann = String(data.announcement || '');
+         track.innerHTML = `
+           <span class="announcement-text"><span id="announcementText">${ann}</span></span>
+           <span class="announcement-spacer" aria-hidden="true"></span>
+           <span class="announcement-text" aria-hidden="true"><span id="announcementText2">${ann}</span></span>
+           <span class="announcement-spacer" aria-hidden="true"></span>
+         `;
+       }
+       bar.setAttribute('data-edit', 'announcement');
+       bar.setAttribute('data-edit-type', 'text');
+       bar.setAttribute('data-edit-label', 'نص الشريط المتحرك');
+     } else {
+       const bar = document.getElementById('announcementBar');
+       if (bar) bar.style.display = 'none';
+     }
+   });
+
+④  ملف index.html (الشريط المتحرك)
+   ابحث عن:
+   <div class="announcement-bar" id="announcementBar">
+     <div class="announcement-track">
+       ...
+     </div>
+   </div>
+
+   واستبدله بـ:
+
+   <div class="announcement-bar" id="announcementBar">
+     <div class="announcement-track">
+       <span class="announcement-text"><span id="announcementText">أهلاً وسهلاً بكم في مجمعكم عناية الابتسامة الطبي — ابتسامتكم سر ثقتكم، ونحن هنا لنحافظ عليها — احجز موعدك الآن بسهولة عبر الواتساب</span></span>
+       <span class="announcement-spacer" aria-hidden="true"></span>
+       <span class="announcement-text" aria-hidden="true"><span id="announcementText2">أهلاً وسهلاً بكم في مجمعكم عناية الابتسامة الطبي — ابتسامتكم سر ثقتكم، ونحن هنا لنحافظ عليها — احجز موعدك الآن بسهولة عبر الواتساب</span></span>
+       <span class="announcement-spacer" aria-hidden="true"></span>
+     </div>
+   </div>
+
+⑤  تأكد أن صورة الخلفية موجودة:
+   service-card-bg.jpg   (نفس تصميم الأيقونة البنفسجية)
+
+⑥  بعد الرفع:
+   - امسح الكاش (Ctrl+F5 أو من لوحة Cloudflare)
+   - افتح الموقع على الجوال وتأكد أن النصوص داخل المربعات
+   - اضغط «اطلبها» وتأكد أن رسالة الواتساب تظهر بالشكل المطلوب
+
+═══════════════════════════════════════════════════════════════
+  ملخص ما تم ضبطه
+═══════════════════════════════════════════════════════════════
+✓ المربع العلوي = اسم الخدمة (خط عريض 900، لا يخرج من المربع)
+✓ المربعين المتوسطين = قبل (مشطوب) | بعد
+✓ المربع السفلي = زر أخضر «اطلبها» → واتساب برسالة جاهزة
+✓ فرق السعر 160–195 ريال
+✓ الشريط المتحرك بمسافة 30 سم فارغة بين التكرار
+✓ حذف كل ما يتعلق باليوم الوطني
+✓ بدون أخطاء مسارات أو خطوط

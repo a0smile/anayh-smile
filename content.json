@@ -24,22 +24,10 @@
     "image2": "hero-blend.jpg"
   },
   "stats": [
-    {
-      "number": "12+",
-      "label": "سنة خبرة"
-    },
-    {
-      "number": "322+",
-      "label": "ابتسامة سعيدة"
-    },
-    {
-      "number": "15",
-      "label": "طبيباً متخصصاً"
-    },
-    {
-      "number": "98%",
-      "label": "رضا المراجعين"
-    }
+    { "number": "12+", "label": "سنة خبرة" },
+    { "number": "322+", "label": "ابتسامة سعيدة" },
+    { "number": "15", "label": "طبيباً متخصصاً" },
+    { "number": "98%", "label": "رضا المراجعين" }
   ],
   "services": [
     {
@@ -309,12 +297,6 @@
     "support1": "تواصل فوري ومباشر من موظف الاستقبال خلال دقائق معدودة",
     "support2": "الكشف الطبي والاستشارة والتقييم الأولي مجاني",
     "footerDesc": "مجمع عناية الابتسامة الطبي بحفر الباطن — رعاية طبية متخصصة لطب وجراحة الأسنان.",
-    "nationalDayBadge": "",
-    "nationalDayTitle": "",
-    "nationalDaySubtitle": "",
-    "landmarksBadge": "",
-    "landmarksTitle": "",
-    "landmarksSubtitle": "",
     "contactAddressTitle": "موقع المجمع بفرع حفر الباطن",
     "contactPhoneTitle": "أرقام التواصل والحجز",
     "contactHoursTitle": "ساعات العمل الرسمية"
@@ -324,136 +306,32 @@
       "title": "",
       "icon": "tooth",
       "items": [
-        {
-          "name": "تنظيف الأسنان وإزالة الجير",
-          "oldPrice": 230,
-          "price": 50
-        },
-        {
-          "name": "تنظيف الأسنان مع التلميع",
-          "oldPrice": 266,
-          "price": 96
-        },
-        {
-          "name": "تبييض وتنظيف الأسنان بالليزر",
-          "oldPrice": 586,
-          "price": 396
-        },
-        {
-          "name": "علاج العصب (يبدأ من)",
-          "oldPrice": 471,
-          "price": 296
-        },
-        {
-          "name": "الخلع العادي",
-          "oldPrice": 281,
-          "price": 96
-        },
-        {
-          "name": "خلع الجذور",
-          "oldPrice": 356,
-          "price": 196
-        },
-        {
-          "name": "خلع ضرس العقل",
-          "oldPrice": 591,
-          "price": 396
-        },
-        {
-          "name": "حشوات الأسنان العادي",
-          "oldPrice": 271,
-          "price": 96
-        },
-        {
-          "name": "حشوات الأسنان التجميلي",
-          "oldPrice": 276,
-          "price": 96
-        },
-        {
-          "name": "مقدم تقويم فك واحد",
-          "oldPrice": 481,
-          "price": 296
-        },
-        {
-          "name": "مقدم تقويم فكين",
-          "oldPrice": 686,
-          "price": 496
-        },
-        {
-          "name": "كاش فك واحد لمدة سنة",
-          "oldPrice": 1666,
-          "price": 1496
-        },
-        {
-          "name": "كاش فكين لمدة سنة",
-          "oldPrice": 2676,
-          "price": 2496
-        },
-        {
-          "name": "شد تقويم فك",
-          "oldPrice": 271,
-          "price": 96
-        },
-        {
-          "name": "شد تقويم فكين",
-          "oldPrice": 381,
-          "price": 196
-        },
-        {
-          "name": "مثبت تقويم فك واحد",
-          "oldPrice": 356,
-          "price": 196
-        },
-        {
-          "name": "مثبت تقويم فكين",
-          "oldPrice": 591,
-          "price": 396
-        },
-        {
-          "name": "تقويم الزينة الفكين",
-          "oldPrice": 366,
-          "price": 196
-        },
-        {
-          "name": "ابتسامة زيركون 16 سن",
-          "oldPrice": 6176,
-          "price": 5996
-        },
-        {
-          "name": "ابتسامة إيماكس VIP 16 سن",
-          "oldPrice": 7186,
-          "price": 6996
-        },
-        {
-          "name": "حافظة مسافة للأطفال",
-          "oldPrice": 371,
-          "price": 196
-        },
-        {
-          "name": "تلبيسة تاج للأطفال",
-          "oldPrice": 365,
-          "price": 180
-        },
-        {
-          "name": "تطبيق الفلورايد للفكين",
-          "oldPrice": 256,
-          "price": 96
-        },
-        {
-          "name": "تركيبات بورسلان (Porcelain) للسن",
-          "oldPrice": 586,
-          "price": 396
-        },
-        {
-          "name": "تركيبات إيماكس (Emax) للسن",
-          "oldPrice": 571,
-          "price": 396
-        },
-        {
-          "name": "تركيبات زيركون (Zircon) للسن",
-          "oldPrice": 581,
-          "price": 396
-        }
+        { "name": "تنظيف الأسنان وإزالة الجير", "oldPrice": 230, "price": 50 },
+        { "name": "تنظيف الأسنان مع التلميع", "oldPrice": 266, "price": 96 },
+        { "name": "تبييض وتنظيف الأسنان بالليزر", "oldPrice": 586, "price": 396 },
+        { "name": "علاج العصب (يبدأ من)", "oldPrice": 471, "price": 296 },
+        { "name": "الخلع العادي", "oldPrice": 281, "price": 96 },
+        { "name": "خلع الجذور", "oldPrice": 356, "price": 196 },
+        { "name": "خلع ضرس العقل", "oldPrice": 591, "price": 396 },
+        { "name": "حشوات الأسنان العادي", "oldPrice": 271, "price": 96 },
+        { "name": "حشوات الأسنان التجميلي", "oldPrice": 276, "price": 96 },
+        { "name": "مقدم تقويم فك واحد", "oldPrice": 481, "price": 296 },
+        { "name": "مقدم تقويم فكين", "oldPrice": 686, "price": 496 },
+        { "name": "كاش فك واحد لمدة سنة", "oldPrice": 1666, "price": 1496 },
+        { "name": "كاش فكين لمدة سنة", "oldPrice": 2676, "price": 2496 },
+        { "name": "شد تقويم فك", "oldPrice": 271, "price": 96 },
+        { "name": "شد تقويم فكين", "oldPrice": 381, "price": 196 },
+        { "name": "مثبت تقويم فك واحد", "oldPrice": 356, "price": 196 },
+        { "name": "مثبت تقويم فكين", "oldPrice": 591, "price": 396 },
+        { "name": "تقويم الزينة الفكين", "oldPrice": 366, "price": 196 },
+        { "name": "ابتسامة زيركون 16 سن", "oldPrice": 6176, "price": 5996 },
+        { "name": "ابتسامة إيماكس VIP 16 سن", "oldPrice": 7186, "price": 6996 },
+        { "name": "حافظة مسافة للأطفال", "oldPrice": 371, "price": 196 },
+        { "name": "تلبيسة تاج للأطفال", "oldPrice": 365, "price": 180 },
+        { "name": "تطبيق الفلورايد للفكين", "oldPrice": 256, "price": 96 },
+        { "name": "تركيبات بورسلان (Porcelain) للسن", "oldPrice": 586, "price": 396 },
+        { "name": "تركيبات إيماكس (Emax) للسن", "oldPrice": 571, "price": 396 },
+        { "name": "تركيبات زيركون (Zircon) للسن", "oldPrice": 581, "price": 396 }
       ]
     }
   ],
