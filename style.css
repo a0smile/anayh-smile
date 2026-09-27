@@ -5,6 +5,21 @@
    المربع 4: زر اطلبها → واتساب
    ============================================================ */
 
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
 /* الشبكة */
 .service-cards {
   display: grid !important;
@@ -338,7 +353,7 @@
 .announcement-spacer {
   display: inline-block !important;
   width: 120px !important;
-min-width: 120px !important;
+ min-width: 120px !important;
   flex-shrink: 0 !important;
   height: 1px !important;
 }
