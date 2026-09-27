@@ -25,10 +25,18 @@
     }
     .catalog-title { font-size: 2rem; font-weight: 900; color: #3B1E6D; margin-bottom: 8px; }
     .catalog-subtitle { color: #8A6BB0; font-size: 1.05rem; }
-    .catalog-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
     .catalog-item {
-      position: relative; border-radius: 18px; overflow: hidden; background: #fff;
-      box-shadow: 0 10px 28px rgba(59,30,109,.12); border: 2px solid #E0D4F5;
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 10px 28px rgba(59,30,109,.12);
+      border: 2px solid #E0D4F5;
       transition: transform .3s ease, box-shadow .3s ease;
     }
     .catalog-item:hover { transform: translateY(-5px); box-shadow: 0 18px 40px rgba(59,30,109,.2); border-color: #7F53D1; }
@@ -52,14 +60,20 @@
       color: #8A6BB0; background: #FAF7FF;
       border: 2px dashed #C4B0F0; border-radius: 18px; font-size: 1.05rem;
     }
-    .catalog-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+    .catalog-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 12px; flex-wrap: wrap; margin-bottom: 24px;
+    }
     .catalog-bar-btn {
       border: 1.5px solid #7F53D1; color: #7F53D1;
       background: #fff; font-family: inherit; font-weight: 800; font-size: .9rem;
       padding: 9px 18px; border-radius: 30px; cursor: pointer; transition: all .2s ease;
     }
     .catalog-bar-btn:hover { background: #7F53D1; color: #fff; }
-    .catalog-tools { position: absolute; top: 10px; left: 10px; right: 10px; z-index: 5; display: none; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
+    .catalog-tools {
+      position: absolute; top: 10px; left: 10px; right: 10px; z-index: 5;
+      display: none; gap: 8px; justify-content: flex-end; flex-wrap: wrap;
+    }
     body.admin-mode .catalog-tools { display: flex; }
     .catalog-tools button {
       border: none; font-family: inherit; font-size: .72rem; font-weight: 800;
@@ -67,21 +81,31 @@
       box-shadow: 0 3px 10px rgba(0,0,0,.25); transition: transform .15s ease;
     }
     .catalog-tools button:hover { transform: scale(1.07); }
-    .ctool-img { background: #f59e0b; } .ctool-del { background: #ef4444; color: #fff; }
-    .ctool-shape { background: #8b5cf6; color: #fff; } .ctool-size { background: #7F53D1; color: #fff; }
-    .shape-circle { border-radius: 50% !important; } .shape-round { border-radius: 28px; }
+    .ctool-img { background: #f59e0b; }
+    .ctool-del { background: #ef4444; color: #fff; }
+    .ctool-shape { background: #8b5cf6; color: #fff; }
+    .ctool-size { background: #7F53D1; color: #fff; }
+    .shape-circle { border-radius: 50% !important; }
+    .shape-round { border-radius: 28px; }
     @media (max-width: 1000px) { .catalog-grid { grid-template-columns: repeat(3,1fr); } }
     @media (max-width: 768px) { .catalog-grid { grid-template-columns: repeat(2,1fr); } .catalog-title{font-size:1.6rem;} }
     @media (max-width: 480px) { .catalog-grid { grid-template-columns: 1fr; } }
 
-    /* ===== الشريط الفخم النهائي - لا يتعارض مع style.css ===== */
+    /* ===== الشريط الفخم البيضاوي الطافي - ما يغطي الصور - 100% ===== */
     .announcement-bar {
-      position: relative; height: 46px; display: flex; align-items: center; justify-content: center;
+      position: relative;
+      height: 46px;
+      width: calc(100% - 32px);
+      margin: 10px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       overflow: hidden;
       background: linear-gradient(90deg, #2A1650 0%, #4A2D8A 25%, #6D4DC1 50%, #4A2D8A 75%, #2A1650 100%);
       background-size: 200% 100%;
-      border-bottom: 2px solid #FFD700;
-      box-shadow: 0 6px 20px rgba(42,22,80,.5), inset 0 1px 1px rgba(255,255,255,.2);
+      border-radius: 50px;
+      border: 2px solid #FFD700;
+      box-shadow: 0 8px 22px rgba(42,22,80,.4), inset 0 1px 1px rgba(255,255,255,.2);
       animation: gradientShift 8s linear infinite;
       isolation: isolate;
     }
@@ -92,7 +116,8 @@
     }
     .announcement-track {
       display: flex; align-items: center; white-space: nowrap;
-      position: relative; z-index: 2; will-change: transform;
+      position: relative; z-index: 2;
+      will-change: transform;
     }
     .announcement-text {
       font-weight: 800; font-size: 15px; color: #fff;
@@ -102,36 +127,33 @@
     .announcement-text::before { content: '✨'; animation: sparkle 1.5s infinite; }
     .announcement-spacer { width: 90px; min-width: 90px; position: relative; flex-shrink: 0; }
     .announcement-spacer::after {
-      content: '•'; position: absolute; left:50%; top:50%; transform: translate(-50%,-50%);
-      color:#FFD700; font-size:22px; text-shadow: 0 0 10px #FFD700;
+      content: '•'; position: absolute; left:50%; top:50%;
+      transform: translate(-50%,-50%); color:#FFD700; font-size:22px;
+      text-shadow: 0 0 10px #FFD700;
     }
     .tooth-fixed {
-      position: absolute; top: -10px; right: 18px; z-index: 10;
-      font-size: 26px; background: #fff; width: 42px; height: 42px;
+      position: absolute; top: -6px; right: -6px; z-index: 10;
+      font-size: 22px; background: #fff; width: 36px; height: 36px;
       border-radius: 50%; display: flex; align-items: center; justify-content: center;
       box-shadow: 0 4px 10px rgba(0,0,0,.3); border: 2px solid #FFD700;
       animation: toothBounce 2s ease-in-out infinite;
     }
     .teeth-particles { position:absolute; inset:0; pointer-events:none; z-index:3; overflow:hidden; }
     .tooth { position:absolute; bottom:-20px; font-size:18px; animation: toothFly 4s linear forwards; }
-
     @keyframes scrollLeftToRight { 0%{transform:translateX(-110%)} 100%{transform:translateX(110%)} }
     @keyframes gradientShift { 0%{background-position:0% 0%} 100%{background-position:200% 0%} }
     @keyframes shine { 0%{left:-100%} 100%{left:200%} }
     @keyframes sparkle { 0%,100%{transform:scale(1)} 50%{transform:scale(1.3) rotate(15deg)} }
     @keyframes toothBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
     @keyframes toothFly { 0%{transform:translateY(0) translateX(0) rotate(0) scale(.5); opacity:0} 15%{opacity:1} 100%{transform:translateY(-70px) translateX(30px) rotate(360deg) scale(1.2); opacity:0} }
-    @keyframes typing { from{width:0} to{width:100%} }
-    @keyframes blink { 50%{border-color:transparent} }
     @keyframes pulseGold { 0%,100%{transform:scale(1); color:#fff} 50%{transform:scale(1.12); color:#FFD700; text-shadow:0 0 15px #FFD700} }
     @keyframes fadeInOut { 0%{opacity:1} 50%{opacity:0; transform:scale(.92)} 100%{opacity:1; transform:scale(1)} }
-    .announcement-bar:hover .announcement-track, .announcement-bar:hover::before { animation-play-state: paused !important; }
   </style>
 </head>
 <body>
   <div class="announcement-bar" id="announcementBar">
     <div class="teeth-particles" id="teethParticles"></div>
-    <div class="tooth-fixed" aria-hidden="true">🦷</div>
+    <div class="tooth-fixed">🦷</div>
     <div class="announcement-track" id="announcementTrack">
       <span class="announcement-text" id="announcementText">أهلاً وسهلاً بكم في مجمعكم عناية الابتسامة الطبي — ابتسامتكم سر ثقتكم، ونحن هنا لنحافظ عليها</span>
       <span class="announcement-spacer" aria-hidden="true"></span>
@@ -202,83 +224,65 @@
   <script src="catalog.js?v=26"></script>
   <script src="admin.js?v=26"></script>
   <script>
-  // === نظام الحركات الخمسة الاحترافي + أسنان ضاحكة - لا يتعارض مع أي ملف ===
+  // ===== نظام الشريط 5 حركات + سن ضاحك - آمن 100% =====
   (function(){
     const bar = document.getElementById('announcementBar');
     const track = document.getElementById('announcementTrack');
     const text = document.getElementById('announcementText');
     const particles = document.getElementById('teethParticles');
     if(!bar || !track || !text) return;
-
     let phase = 0;
     const originalText = text.textContent;
-
     function runPhase(){
-      track.style.animation = 'none';
-      text.style.animation = 'none';
-      text.style.width = 'auto';
-      text.style.borderRight = 'none';
-      track.style.transform = 'translateX(0)';
-      text.style.transform = 'scale(1)';
-      text.style.opacity = '1';
-      text.style.color = '#fff';
-      track.offsetHeight; // reflow
-
-      if(phase === 0){ // 1- ظهور كامل 3 ثواني مع لمعة
-        track.style.transform = 'translateX(0)';
-        track.style.justifyContent = 'center';
-        bar.style.filter = 'brightness(1.15)';
-        setTimeout(()=>{ phase=1; runPhase(); }, 3000);
-      }
-      else if(phase === 1){ // 2- انزلاق من اليسار لليمين - تشوف أهلا أول
-        bar.style.filter = 'brightness(1)';
-        track.style.justifyContent = 'flex-start';
-        track.style.animation = 'scrollLeftToRight 12s linear forwards';
-        setTimeout(()=>{ phase=2; runPhase(); }, 12000);
-      }
-      else if(phase === 2){ // 3- كتابة حرف حرف
-        text.textContent = '';
-        let i = 0;
-        text.style.borderRight = '2px solid #FFD700';
-        text.style.overflow = 'hidden';
-        text.style.whiteSpace = 'nowrap';
-        track.style.transform = 'translateX(0)';
-        track.style.justifyContent = 'center';
-        const typer = setInterval(()=>{
-          text.textContent = originalText.slice(0, i+1);
-          i++;
-          if(i >= originalText.length){
-            clearInterval(typer);
-            text.style.borderRight = 'none';
-            setTimeout(()=>{ phase=3; runPhase(); }, 1000);
+      track.style.animation='none'; text.style.animation='none';
+      text.style.width='auto'; text.style.borderRight='none';
+      track.style.transform='translateX(0)'; text.style.transform='scale(1)';
+      text.style.opacity='1'; text.style.color='#fff';
+      track.offsetHeight;
+      if(phase===0){
+        track.style.justifyContent='center';
+        bar.style.filter='brightness(1.15)';
+        setTimeout(()=>{phase=1;runPhase()},3000);
+      } else if(phase===1){
+        bar.style.filter='brightness(1)';
+        track.style.justifyContent='flex-start';
+        track.style.animation='scrollLeftToRight 12s linear forwards';
+        setTimeout(()=>{phase=2;runPhase()},12000);
+      } else if(phase===2){
+        text.textContent=''; let i=0;
+        text.style.borderRight='2px solid #FFD700';
+        text.style.overflow='hidden'; text.style.whiteSpace='nowrap';
+        track.style.justifyContent='center';
+        const typer=setInterval(()=>{
+          text.textContent=originalText.slice(0,i+1); i++;
+          if(i>=originalText.length){
+            clearInterval(typer); text.style.borderRight='none';
+            setTimeout(()=>{phase=3;runPhase()},1000);
           }
-        }, 55);
-      }
-      else if(phase === 3){ // 4- نبض ذهبي
-        text.textContent = originalText;
-        track.style.justifyContent = 'center';
-        text.style.animation = 'pulseGold 0.6s ease-in-out 3';
-        setTimeout(()=>{ phase=4; runPhase(); }, 2000);
-      }
-      else if(phase === 4){ // 5- تلاشي وعودة
-        track.style.animation = 'fadeInOut 2.5s ease-in-out forwards';
-        setTimeout(()=>{ phase=0; runPhase(); }, 2500);
+        },55);
+      } else if(phase===3){
+        text.textContent=originalText;
+        track.style.justifyContent='center';
+        text.style.animation='pulseGold .6s ease-in-out 3';
+        setTimeout(()=>{phase=4;runPhase()},2000);
+      } else if(phase===4){
+        track.style.animation='fadeInOut 2.5s ease-in-out forwards';
+        setTimeout(()=>{phase=0;runPhase()},2500);
       }
     }
     runPhase();
-
     function createTooth(){
       if(!particles) return;
-      const el = document.createElement('span');
-      el.className = 'tooth';
-      el.textContent = ['🦷','😁','🦷'][Math.floor(Math.random()*3)];
-      el.style.left = Math.random()*90 + 2 + '%';
-      el.style.fontSize = (Math.random()*6+16)+'px';
-      el.style.animationDuration = (Math.random()*1+2.8)+'s';
+      const el=document.createElement('span');
+      el.className='tooth';
+      el.textContent=['🦷','😁','🦷'][Math.floor(Math.random()*3)];
+      el.style.left=Math.random()*90+2+'%';
+      el.style.fontSize=(Math.random()*6+16)+'px';
+      el.style.animationDuration=(Math.random()*1+2.8)+'s';
       particles.appendChild(el);
-      setTimeout(()=> el.remove(), 4000);
+      setTimeout(()=>el.remove(),4000);
     }
-    setInterval(createTooth, 700);
+    setInterval(createTooth,700);
   })();
   </script>
 </body>
