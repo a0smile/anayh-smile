@@ -2,26 +2,25 @@ const ADMIN_SESSION_KEY = 'smile_admin_active';
 var adminActive = false;
 window.adminActive = false;
 
-/* ===== واجهة زر دخول المالك + شريط الأدوات + إشعارات ===== */
+/* ===== واجهة زر دخول المالك (مخفي تماماً) + شريط الأدوات + إشعارات ===== */
 (function fixAdminUIStyle(){
   const css = `
   #adminEntryBtn{
     position: fixed!important;
-    bottom: 20px!important;
-    right: 20px!important;
+    bottom: 6px!important;
+    right: 6px!important;
     z-index: 99999!important;
-    width: 52px!important;
-    height: 52px!important;
+    width: 24px!important;
+    height: 24px!important;
     border-radius: 50%!important;
-    background: #3B1E6D!important;
-    color: #fff!important;
-    border: 2px solid #8F6ADB!important;
-    box-shadow: 0 4px 14px rgba(59,30,109,0.35)!important;
-    font-size: 22px!important;
-    display: flex!important;
-    align-items: center!important;
-    justify-content: center!important;
-    cursor: pointer!important;
+    background: transparent!important;
+    color: transparent!important;
+    border: none!important;
+    box-shadow: none!important;
+    font-size: 0!important;
+    opacity: 0!important;
+    cursor: default!important;
+    display: block!important;
   }
   #adminToolbar{
     position: fixed!important;
@@ -160,7 +159,10 @@ function exitAdminMode() {
   const tb = document.getElementById('adminToolbar');
   if (tb) tb.hidden = true;
   const entry = document.getElementById('adminEntryBtn');
-  if (entry) entry.style.display = 'flex';
+  if (entry) {
+    entry.style.display = 'block';
+    entry.style.opacity = '0';
+  }
   removeEditButtons();
   notifyAdminChanged();
   showSavedToast('تم الخروج من وضع المالك', 'success');
@@ -505,8 +507,8 @@ const downloadBtnEl = document.getElementById('adminDownloadBtn');
 const resetBtnEl = document.getElementById('adminResetBtn');
 
 if (entryBtnEl) {
-  entryBtnEl.textContent = '🔒';
-  entryBtnEl.title = 'دخول المالك';
+  entryBtnEl.textContent = '';
+  entryBtnEl.title = '';
   entryBtnEl.addEventListener('click', enterAdminMode);
 }
 if (exitBtnEl) exitBtnEl.addEventListener('click', exitAdminMode);
@@ -529,7 +531,10 @@ if (resetBtnEl) resetBtnEl.addEventListener('click', resetOverrides);
     window.adminActive = false;
     document.body.classList.remove('admin-mode');
     if (tb) tb.hidden = true;
-    if (entry) entry.style.display = 'flex';
+    if (entry) {
+      entry.style.display = 'block';
+      entry.style.opacity = '0';
+    }
     removeEditButtons();
   }
 })();
