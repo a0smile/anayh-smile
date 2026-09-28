@@ -172,8 +172,8 @@ async function enterAdminMode() {
   if (tb) tb.hidden = false;
   const entry = document.getElementById('adminEntryBtn');
   if (entry) entry.style.display = 'none';
-  attachEditButtons();
   if (typeof renderCatalog === 'function') renderCatalog();
+  attachEditButtons();
   if (typeof window.activateClinicImageManagement === 'function') {
     window.activateClinicImageManagement();
   }
@@ -253,6 +253,8 @@ async function persistToServer(actionLabel) {
     showSavedToast((actionLabel || 'تم الحفظ') + ' محلياً ✓', 'success');
   }
 }
+
+window.persistToServer = persistToServer;
 
 function showSavedToast(msg, type) {
   let toast = document.getElementById('smileToast');
