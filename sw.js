@@ -1,4 +1,4 @@
-const CACHE_NAME = 'smile-care-v31-purple';
+const CACHE_NAME = 'smile-care-v32-purple';
 const ASSETS = [
   './',
   './index.html',
@@ -8,6 +8,8 @@ const ASSETS = [
   './admin.js',
   './content.json',
   './manifest.json',
+  './catalog.html',
+  './catalog.js',
   './hero-blend.jpg',
   './service-card-bg.jpg',
   './icon.svg',

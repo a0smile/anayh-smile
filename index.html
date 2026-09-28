@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=101">
+  <link rel="stylesheet" href="style.css?v=102">
 </head>
 <body>
 
@@ -155,6 +155,8 @@ overflow:hidden;">
       <ul class="nav-links" id="navLinks">
         <li><a href="#hero" class="nav-link">الرئيسية</a></li>
         <li><a href="#services" class="nav-link">الخدمات والأسعار</a></li>
+        <li><a href="#offers" class="nav-link">العروض</a></li>
+        <li><a href="catalog.html">المعرض</a></li>
         <li><a href="#about" class="nav-link">نبذة عنا</a></li>
         <li><a href="#doctors" class="nav-link">الأطباء</a></li>
         <li><a href="#reviews" class="nav-link">التعليقات</a></li>
@@ -217,6 +219,17 @@ overflow:hidden;">
         </div>
         <div class="price-note" hidden style="display:none!important"></div>
         <div class="price-list" id="servicesGrid"></div>
+      </div>
+    </section>
+
+    <section class="section section-offers" id="offers">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-badge" id="offersBadge" data-edit="catalog.badge" data-edit-label="شارة قسم العروض">لمحة من إبداعنا</span>
+          <h2 class="section-title" id="offersTitle" data-edit="catalog.title" data-edit-label="عنوان قسم العروض">عروض عناية الابتسامة الحالية</h2>
+          <p class="section-subtitle" id="offersSubtitle" data-edit="catalog.subtitle" data-edit-label="وصف قسم العروض">تصميمات وحالات حقيقية من داخل مجمعنا — بلمسة فخمة تليق بابتسامتك</p>
+        </div>
+        <div class="offers-grid" id="offersGrid"></div>
       </div>
     </section>
 
@@ -401,11 +414,13 @@ overflow:hidden;">
   <div class="admin-toolbar" id="adminToolbar" hidden>
     <span class="admin-toolbar-title">🔒 وضع المالك</span>
     <button type="button" id="adminDownloadBtn" class="admin-btn">تحميل content.json</button>
+    <button type="button" id="adminGalleryBtn" class="admin-btn">🖼️ المعرض</button>
     <button type="button" id="adminResetBtn" class="admin-btn">التراجع عن التعديلات</button>
     <button type="button" id="adminExitBtn" class="admin-btn">إنهاء وضع التعديل</button>
   </div>
   <button type="button" class="admin-entry-btn" id="adminEntryBtn" title="دخول المالك" aria-label="دخول المالك">🔒</button>
   <input type="file" id="adminFileInput" accept="image/*" hidden>
+  <input type="file" id="catalogFileInput" accept="image/*" hidden>
 
   <script>
   (function(){
@@ -495,8 +510,9 @@ overflow:hidden;">
   })();
   </script>
 
-  <script src="icons.js?v=28" defer></script>
-  <script src="main.js?v=28" defer></script>
-  <script src="admin.js?v=28" defer></script>
+  <script src="icons.js?v=29" defer></script>
+  <script src="main.js?v=29" defer></script>
+  <script src="catalog.js?v=29" defer></script>
+  <script src="admin.js?v=29" defer></script>
 </body>
 </html>

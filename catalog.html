@@ -12,10 +12,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=101">
+  <link rel="stylesheet" href="style.css?v=102">
   <style>
+    /* أنماط خاصة بصفحة المعرض فقط — البطاقات والأدوات تأتي من style.css */
     .catalog-page { padding: 100px 0 60px; min-height: 80vh; }
-    .catalog-head { text-align: center; margin-bottom: 36px; }
+    .catalog-head { text-align: center; margin-bottom: 30px; }
     .catalog-badge {
       display: inline-block;
       background: linear-gradient(135deg, #7F53D1, #3B1E6D);
@@ -25,43 +26,6 @@
     }
     .catalog-title { font-size: 2rem; font-weight: 900; color: #3B1E6D; margin-bottom: 8px; }
     .catalog-subtitle { color: #8A6BB0; font-size: 1.05rem; }
-    .catalog-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 22px;
-    }
-    .catalog-item {
-      position: relative;
-      border-radius: 18px;
-      overflow: hidden;
-      background: #fff;
-      box-shadow: 0 10px 28px rgba(59,30,109,.12);
-      border: 2px solid #E0D4F5;
-      transition: transform .3s ease, box-shadow .3s ease;
-      justify-self: center;
-    }
-    .catalog-item:hover { transform: translateY(-5px); box-shadow: 0 18px 40px rgba(59,30,109,.2); border-color: #7F53D1; }
-    .catalog-img-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #F4EFFF; }
-    .catalog-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
-    .catalog-item:hover .catalog-img { transform: scale(1.05); }
-    .catalog-placeholder {
-      width: 100%; height: 100%; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 10px; color: #8A6BB0;
-      background: linear-gradient(135deg, #F4EFFF, #E8DFF8);
-    }
-    .catalog-placeholder-icon { font-size: 2.5rem; opacity: .6; }
-    .catalog-caption {
-      position: absolute; bottom: 0; right: 0; left: 0;
-      padding: 22px 14px 12px;
-      background: linear-gradient(transparent, rgba(59,30,109,.88));
-      color: #fff; font-weight: 800; font-size: 0.95rem; text-align: right;
-    }
-    .catalog-empty {
-      grid-column: 1 / -1; text-align: center; padding: 60px 20px;
-      color: #8A6BB0; background: #FAF7FF;
-      border: 2px dashed #C4B0F0; border-radius: 18px; font-size: 1.05rem;
-    }
-    .catalog-empty-hint { font-size: .9rem; color: #999; margin-top: 6px; }
     .catalog-bar {
       display: flex; justify-content: space-between; align-items: center;
       gap: 12px; flex-wrap: wrap; margin-bottom: 24px;
@@ -72,33 +36,7 @@
       padding: 9px 18px; border-radius: 30px; cursor: pointer; transition: all .2s ease;
     }
     .catalog-bar-btn:hover { background: #7F53D1; color: #fff; }
-    .catalog-tools {
-      position: absolute; top: 10px; left: 10px; right: 10px; z-index: 5;
-      display: none; gap: 6px; justify-content: flex-end; flex-wrap: wrap;
-    }
-    body.admin-mode .catalog-tools { display: flex; }
-    .catalog-tools button {
-      border: none; font-family: inherit; font-size: .72rem; font-weight: 800;
-      padding: 5px 10px; border-radius: 16px; cursor: pointer; color: #1f2937;
-      box-shadow: 0 3px 10px rgba(0,0,0,.25); transition: transform .15s ease;
-    }
-    .catalog-tools button:hover { transform: scale(1.07); }
-    .catalog-tools button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
-    .ctool-img { background: #f59e0b; }
-    .ctool-del { background: #ef4444; color: #fff; }
-    .ctool-shape { background: #8b5cf6; color: #fff; }
-    .ctool-size { background: #7F53D1; color: #fff; }
-    .ctool-cap { background: #14b8a6; color: #fff; }
-
-    /* الأشكال: تُطبَّق على حاوية الصورة حتى تُقصّ فعلاً */
-    .catalog-img-wrap.catalog-shape-round { border-radius: 22px; }
-    .catalog-img-wrap.catalog-shape-circle {
-      aspect-ratio: 1 / 1;
-      border-radius: 50%;
-    }
-    @media (max-width: 1000px) { .catalog-grid { grid-template-columns: repeat(3,1fr); } }
-    @media (max-width: 768px) { .catalog-grid { grid-template-columns: repeat(2,1fr); } .catalog-title{font-size:1.6rem;} }
-    @media (max-width: 480px) { .catalog-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { .catalog-title { font-size: 1.6rem; } }
   </style>
 </head>
 <body>
@@ -124,6 +62,7 @@
         <li><a href="index.html#hero">الرئيسية</a></li>
         <li><a href="index.html#services">الخدمات</a></li>
         <li><a href="index.html#services">الأسعار</a></li>
+        <li><a href="index.html#offers">العروض</a></li>
         <li><a href="index.html#doctors">الأطباء</a></li>
         <li><a href="index.html#booking">الحجز</a></li>
         <li><a href="index.html#contact">تواصل</a></li>
@@ -169,8 +108,8 @@
   <button type="button" class="admin-entry-btn" id="adminEntryBtn" title="دخول المالك">🔒</button>
   <input type="file" id="catalogFileInput" accept="image/*" hidden>
 
-  <script src="main.js?v=28"></script>
-  <script src="catalog.js?v=28"></script>
-  <script src="admin.js?v=28"></script>
+  <script src="main.js?v=29"></script>
+  <script src="catalog.js?v=29"></script>
+  <script src="admin.js?v=29"></script>
 </body>
 </html>

@@ -65,7 +65,7 @@ function purgeNationalDayOverrides() {
 async function loadContent() {
   try {
     purgeNationalDayOverrides();
-    const response = await fetch('content.json?v=25', { cache: 'no-cache' });
+    const response = await fetch('content.json?v=26', { cache: 'no-cache' });
     let data = await response.json();
     siteData = applyOverrides(data);
     renderSite(siteData);

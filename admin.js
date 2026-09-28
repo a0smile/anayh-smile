@@ -539,6 +539,7 @@ const entryBtnEl = document.getElementById('adminEntryBtn');
 const exitBtnEl = document.getElementById('adminExitBtn');
 const downloadBtnEl = document.getElementById('adminDownloadBtn');
 const resetBtnEl = document.getElementById('adminResetBtn');
+const galleryBtnEl = document.getElementById('adminGalleryBtn');
 
 if (entryBtnEl) {
   entryBtnEl.textContent = '🔒';
@@ -548,6 +549,12 @@ if (entryBtnEl) {
 if (exitBtnEl) exitBtnEl.addEventListener('click', exitAdminMode);
 if (downloadBtnEl) downloadBtnEl.addEventListener('click', downloadUpdatedJson);
 if (resetBtnEl) resetBtnEl.addEventListener('click', resetOverrides);
+if (galleryBtnEl) {
+  galleryBtnEl.addEventListener('click', () => {
+    if (window.adminActive) sessionStorage.setItem(ADMIN_SESSION_KEY, '1');
+    location.href = 'catalog.html';
+  });
+}
 
 (function restoreSessionSecure(){
   const isAdmin = sessionStorage.getItem(ADMIN_SESSION_KEY) === '1';
