@@ -155,6 +155,26 @@ function ndStars(count) {
   for (let i = 0; i < n; i++) html += ndStar();
   return html;
 }
+
+/* يصغّر خط اسم الخدمة تدريجياً حتى يدخل كامل داخل المربع دون فائض */
+function fitServiceCardNames() {
+  document.querySelectorAll('.service-card-name').forEach(el => {
+    const box = el.parentElement;
+    if (!box) return;
+    const maxW = box.clientWidth - 4;
+    const maxH = box.clientHeight - 4;
+    if (maxW <= 0 || maxH <= 0) return;
+    let size = parseFloat(getComputedStyle(el).fontSize) || 14;
+    const min = 8;
+    el.style.fontSize = size + 'px';
+    let guard = 0;
+    while ((el.scrollWidth > maxW + 1 || el.scrollHeight > maxH + 1) && size > min && guard < 40) {
+      size -= 0.5;
+      el.style.fontSize = size + 'px';
+      guard++;
+    }
+  });
+}
 function renderDataIcons() {
   document.querySelectorAll('.nd-icon[data-icon]').forEach((el) => {
     el.innerHTML = window.ndIconHtml? window.ndIconHtml(el.getAttribute('data-icon')) : '';
@@ -354,18 +374,18 @@ function renderSite(data) {
             const waMsg = encodeURIComponent(
               `السلام عليكم ورحمة الله وبركاته. أما اخترت خدمة (${item.name}) هل أقدر أجيكم الآن؟`
             );
+            const hasOld = item.oldPrice != null && item.oldPrice !== '';
             return `<article class="service-card-wrap">
               <div class="service-card">
                 <div class="service-card-inner">
                   <h4 class="service-card-name"${editAttr(base + '.name')}>${item.name}</h4>
                   <div class="service-card-prices">
-                    ${item.oldPrice != null ? `
-                      <span class="price-old">
-                        <span class="price-label">قبل</span>
-                        <span class="price-value"${editAttr(base + '.oldPrice')}>${item.oldPrice} ريال</span>
-                      </span>` : '<span class="price-old"></span>'}
-                    <span class="price-now">
-                      <span class="price-label">بعد</span>
+                    <span class="price-cell price-old">
+                      <span class="price-label">سابقاً</span>
+                      <span class="price-value"${editAttr(base + '.oldPrice')}>${hasOld ? item.oldPrice + ' ريال' : '—'}</span>
+                    </span>
+                    <span class="price-cell price-now">
+                      <span class="price-label">الآن</span>
                       <span class="price-value"${editAttr(base + '.price')}>${item.price} ريال</span>
                     </span>
                   </div>
@@ -374,8 +394,8 @@ function renderSite(data) {
                    href="https://wa.me/${clinic.whatsapp}?text=${waMsg}"
                    target="_blank"
                    rel="noopener"
-                   aria-label="اطلب خدمة ${item.name}">
-                  اطلبها
+                   aria-label="لطلب خدمة ${item.name}">
+                  لطلب الخدمة
                 </a>
               </div>
             </article>`;
@@ -383,6 +403,11 @@ function renderSite(data) {
         </div>
       </div>
     `).join('');
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(fitServiceCardNames);
+    }
+    requestAnimationFrame(fitServiceCardNames);
   });
 
   safeRender('dailyTips', () => {
@@ -688,3 +713,9 @@ function initScrollReveal() {
 }
 
 loadContent();
+
+let _fitTimer = null;
+window.addEventListener('resize', () => {
+  clearTimeout(_fitTimer);
+  _fitTimer = setTimeout(fitServiceCardNames, 150);
+});
