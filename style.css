@@ -767,32 +767,35 @@ body {
 /* المربع 1 — اسم الخدمة (المنطقة العلوية الكبيرة) */
 .service-card-name {
   position: absolute !important;
-  top: 28% !important;
-  left: 10% !important;
-  right: 10% !important;
-  height: 18% !important;
+  top: 27.5% !important;
+  left: 9% !important;
+  right: 9% !important;
+  height: 19% !important;
   margin: 0 !important;
-  padding: 4px 6px !important;
+  padding: 3px 5px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
   font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif !important;
-  font-size: clamp(0.68rem, 2.6vw, 0.82rem) !important;
+  font-size: clamp(0.72rem, 2.9vw, 0.92rem) !important;
   font-weight: 900 !important;
+  letter-spacing: 0 !important;
   color: #2A1548 !important;
-  line-height: 1.25 !important;
+  line-height: 1.28 !important;
   overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  -webkit-line-clamp: 2 !important;
-  display: -webkit-box !important;
-  -webkit-box-orient: vertical !important;
   word-break: break-word !important;
+  overflow-wrap: anywhere !important;
   background: transparent !important;
   border: none !important;
   border-radius: 0 !important;
   pointer-events: auto !important;
 }
+.service-card-name::first-line { line-height: 1.28 !important; }
+.service-card-name { text-shadow: 0 1px 2px rgba(255,255,255,0.75), 0 0 6px rgba(255,255,255,0.45) !important; }
+.price-now .price-value { text-shadow: 0 1px 2px rgba(255,255,255,0.6) !important; }
+.price-old .price-value { text-shadow: 0 1px 2px rgba(255,255,255,0.55) !important; }
+.price-label { text-shadow: 0 1px 1px rgba(255,255,255,0.6) !important; }
 
 /* المربعين 2 و 3 — الأسعار جنب بعض */
 .service-card-prices {
@@ -814,7 +817,8 @@ body {
 }
 
 .price-old,
-.price-now {
+.price-now,
+.price-cell {
   flex: 1 1 0 !important;
   display: flex !important;
   flex-direction: column !important;
@@ -831,51 +835,56 @@ body {
 
 .price-label {
   display: block !important;
-  font-size: clamp(0.48rem, 1.8vw, 0.58rem) !important;
-  font-weight: 800 !important;
+  font-size: clamp(0.5rem, 1.9vw, 0.6rem) !important;
+  font-weight: 900 !important;
   color: #5A3A8A !important;
   line-height: 1.1 !important;
   margin-bottom: 1px !important;
+  text-align: center !important;
+  letter-spacing: 0.2px !important;
 }
 
 .price-old .price-value {
-  font-size: clamp(0.62rem, 2.2vw, 0.74rem) !important;
-  font-weight: 700 !important;
-  color: #8A6BB0 !important;
+  font-size: clamp(0.6rem, 2.2vw, 0.72rem) !important;
+  font-weight: 800 !important;
+  color: #7A5AA8 !important;
   text-decoration: line-through !important;
-  text-decoration-thickness: 1.5px !important;
+  text-decoration-color: #C0392B !important;
+  text-decoration-thickness: 2px !important;
   line-height: 1.15 !important;
+  text-align: center !important;
 }
 
 .price-now .price-value {
-  font-size: clamp(0.72rem, 2.6vw, 0.88rem) !important;
+  font-size: clamp(0.74rem, 2.7vw, 0.9rem) !important;
   font-weight: 900 !important;
   color: #3B1E6D !important;
   line-height: 1.15 !important;
+  text-align: center !important;
 }
 
-/* المربع 4 — زر اطلبها (أسفل البطاقة) */
+/* المربع 4 — زر لطلب الخدمة (أسفل البطاقة) */
 .service-card-wrap .price-wa-btn {
   position: absolute !important;
-  bottom: 7% !important;
-  left: 12% !important;
-  right: 12% !important;
+  bottom: 6.5% !important;
+  left: 11% !important;
+  right: 11% !important;
   height: 11% !important;
-  min-height: 28px !important;
+  min-height: 30px !important;
   margin: 0 !important;
   padding: 0 8px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   gap: 4px !important;
-  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%) !important;
+  background: linear-gradient(135deg, #8F6ADB 0%, #5A3A8A 55%, #3B1E6D 100%) !important;
   color: #fff !important;
   font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif !important;
-  font-size: clamp(0.62rem, 2.3vw, 0.74rem) !important;
+  font-size: clamp(0.64rem, 2.4vw, 0.78rem) !important;
   font-weight: 900 !important;
   border: none !important;
   border-radius: 50px !important;
-  box-shadow: 0 2px 8px rgba(18, 140, 126, 0.35) !important;
+  box-shadow: 0 2px 8px rgba(59, 30, 109, 0.45) !important;
   text-decoration: none !important;
   width: auto !important;
   max-width: none !important;
@@ -886,7 +895,7 @@ body {
 
 .service-card-wrap .price-wa-btn:hover {
   transform: translateY(-1px) scale(1.03) !important;
-  box-shadow: 0 4px 12px rgba(18, 140, 126, 0.45) !important;
+  box-shadow: 0 4px 12px rgba(59, 30, 109, 0.55) !important;
 }
 
 .service-card-wrap .price-wa-btn:active {
@@ -910,45 +919,45 @@ body {
     border-radius: 16px !important;
   }
   .service-card-name {
-    top: 27.5% !important;
-    left: 9% !important;
-    right: 9% !important;
-    height: 19% !important;
-    font-size: clamp(0.64rem, 3.2vw, 0.78rem) !important;
+    top: 27% !important;
+    left: 8% !important;
+    right: 8% !important;
+    height: 19.5% !important;
+    font-size: clamp(0.72rem, 3.4vw, 0.86rem) !important;
   }
   .service-card-prices {
     top: 50% !important;
-    left: 10% !important;
-    right: 10% !important;
+    left: 9% !important;
+    right: 9% !important;
     height: 15% !important;
   }
   .price-label {
-    font-size: clamp(0.46rem, 2.2vw, 0.56rem) !important;
+    font-size: clamp(0.5rem, 2.3vw, 0.6rem) !important;
   }
   .price-old .price-value {
     font-size: clamp(0.58rem, 2.6vw, 0.70rem) !important;
   }
   .price-now .price-value {
-    font-size: clamp(0.68rem, 3vw, 0.84rem) !important;
+    font-size: clamp(0.7rem, 3vw, 0.86rem) !important;
   }
   .service-card-wrap .price-wa-btn {
-    bottom: 6.5% !important;
-    left: 11% !important;
-    right: 11% !important;
+    bottom: 6% !important;
+    left: 10% !important;
+    right: 10% !important;
     height: 12% !important;
-    font-size: clamp(0.58rem, 2.8vw, 0.70rem) !important;
+    font-size: clamp(0.62rem, 2.9vw, 0.74rem) !important;
   }
 }
 
 @media (max-width: 380px) {
   .service-card-name {
-    font-size: 0.62rem !important;
+    font-size: 0.7rem !important;
   }
   .price-now .price-value {
     font-size: 0.68rem !important;
   }
   .service-card-wrap .price-wa-btn {
-    font-size: 0.56rem !important;
+    font-size: 0.6rem !important;
   }
 }
 
@@ -1024,3 +1033,202 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .announcement-track { animation: none !important; }
 }
+
+/* ============================================================
+   إصلاحات شاملة — أيقونات SVG، الآراء، الأسئلة الشائعة، النصوص
+   ============================================================ */
+
+/* ---- 1) ضبط أحجام كل الأيقونات (السبب الحقيقي لاختفاء الآراء) ---- */
+.nd-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 1.15em !important;
+  height: 1.15em !important;
+  line-height: 0 !important;
+  flex: 0 0 auto !important;
+  overflow: hidden !important;
+  vertical-align: middle !important;
+}
+.nd-icon svg {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+}
+.social-links a .nd-icon { width: 26px !important; height: 26px !important; }
+.price-cat-icon .nd-icon { width: 1.5rem !important; height: 1.5rem !important; }
+.testimonial-stars .nd-icon { width: 1.05rem !important; height: 1.05rem !important; }
+
+/* ---- 2) الآراء والتجارب (تظهر الآن بتنسيق وخطوط عريضة) ---- */
+.testimonials-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+  max-width: 1000px !important;
+  margin: 18px auto 22px !important;
+}
+.testimonial-card {
+  background: var(--surface) !important;
+  border: 2px solid var(--purple-200) !important;
+  border-radius: var(--radius-sm) !important;
+  box-shadow: var(--shadow-sm) !important;
+  padding: 18px 14px !important;
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 8px !important;
+  overflow: hidden !important;
+}
+.testimonial-stars {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2px !important;
+  width: auto !important;
+  height: auto !important;
+  line-height: 1 !important;
+}
+.testimonial-text {
+  font-size: 0.86rem !important;
+  font-weight: 600 !important;
+  color: var(--text-mid) !important;
+  line-height: 1.7 !important;
+  text-align: center !important;
+  margin: 0 !important;
+}
+.testimonial-name {
+  font-size: 0.9rem !important;
+  font-weight: 900 !important;
+  color: var(--purple-900) !important;
+  text-align: center !important;
+  margin: 0 !important;
+}
+.review-box {
+  max-width: 560px !important;
+  margin: 10px auto 0 !important;
+  background: var(--purple-50) !important;
+  border: 2px solid var(--purple-200) !important;
+  border-radius: var(--radius) !important;
+  padding: 20px 18px !important;
+  text-align: center !important;
+}
+.review-box h3 {
+  font-size: 1.05rem !important;
+  font-weight: 900 !important;
+  color: var(--purple-900) !important;
+  margin: 0 0 8px !important;
+  text-align: center !important;
+}
+.review-box p {
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  color: var(--text-mid) !important;
+  margin: 0 0 12px !important;
+  text-align: center !important;
+}
+.review-form { text-align: right !important; }
+.review-form .form-group label { text-align: right !important; }
+.review-form .btn { width: 100% !important; }
+
+/* ---- 3) الأسئلة الشائعة ---- */
+.section-faq .section-fold-body { max-width: 760px; margin: 16px auto 0; }
+.faq-list { display: flex !important; flex-direction: column !important; gap: 10px !important; }
+.faq-item {
+  background: var(--surface) !important;
+  border: 2px solid var(--purple-200) !important;
+  border-radius: var(--radius-sm) !important;
+  box-shadow: var(--shadow-sm) !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+}
+.faq-item[open] { border-color: var(--purple-500) !important; }
+.faq-q {
+  list-style: none !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+  padding: 14px 16px !important;
+  text-align: right !important;
+  background: var(--purple-50) !important;
+  transition: background 0.2s !important;
+}
+.faq-q::-webkit-details-marker { display: none !important; }
+.faq-q:hover { background: var(--purple-100) !important; }
+.faq-q-text {
+  font-size: 0.92rem !important;
+  font-weight: 900 !important;
+  color: var(--purple-900) !important;
+  text-align: right !important;
+  flex: 1 1 auto !important;
+}
+.faq-icon {
+  flex: 0 0 auto !important;
+  width: 26px !important;
+  height: 26px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+  background: var(--purple-700) !important;
+  color: #fff !important;
+  font-size: 1.1rem !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+}
+.faq-item[open] .faq-icon { transform: rotate(45deg) !important; }
+.faq-a {
+  padding: 12px 16px 16px !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  color: var(--text-mid) !important;
+  line-height: 1.8 !important;
+  text-align: right !important;
+  background: var(--surface) !important;
+}
+
+/* ---- 4) احتياط ظهور العناصر (لو تعذّر IntersectionObserver) ---- */
+.reveal { opacity: 1; }
+
+/* ---- 5) توحيد النصوص: محاذاة وسط + خطوط عريضة للأقسام الرئيسية ---- */
+.section-title, .section-subtitle, .section-badge,
+.hero-cta-title, .hero-cta-sub, .nd-greeting-title,
+.social-title, .payment-banner-text, .contact-card-title {
+  text-align: center !important;
+}
+.section-title { font-weight: 900 !important; }
+.section-subtitle { font-weight: 700 !important; }
+.contact-line, .hours-list li { font-weight: 700 !important; text-align: center !important; }
+.hours-list { list-style: none !important; padding: 0 !important; text-align: center !important; }
+.contact-card { text-align: center !important; display: flex !important; flex-direction: column !important; align-items: center !important; }
+
+/* ---- 6) أيقونات التواصل الاجتماعي: ألوان حقيقية داخل الحلقات ---- */
+.social-links a {
+  background: #fff !important;
+  border: 2px solid var(--purple-300) !important;
+}
+.social-links a:hover { border-color: var(--purple-600) !important; background: #fff !important; }
+
+/* ---- 7) استجابة الجوال للآراء والأسئلة ---- */
+@media (max-width: 860px) {
+  .testimonials-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
+@media (max-width: 560px) {
+  .testimonials-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+  .testimonial-card { padding: 16px 12px !important; }
+}
+
+/* ---- 8) زر دخول المالك مرئي (كان مخفياً تماماً) ---- */
+#adminEntryBtn {
+  opacity: 1 !important;
+  color: #fff !important;
+  font-size: 17px !important;
+  background: rgba(59, 30, 109, 0.85) !important;
+  border: 2px solid rgba(255, 255, 255, 0.6) !important;
+  box-shadow: 0 2px 8px rgba(59, 30, 109, 0.35) !important;
+  cursor: pointer !important;
+}
+#adminEntryBtn:hover { background: var(--purple-700) !important; }
