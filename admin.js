@@ -7,21 +7,31 @@ window.adminActive = false;
   const css = `
   #adminEntryBtn{
     position: fixed!important;
-    bottom: 6px!important;
-    right: 6px!important;
+    bottom: 14px!important;
+    right: 14px!important;
     z-index: 99999!important;
-    width: 24px!important;
-    height: 24px!important;
+    width: 46px!important;
+    height: 46px!important;
     border-radius: 50%!important;
-    background: transparent!important;
-    color: transparent!important;
-    border: none!important;
-    box-shadow: none!important;
-    font-size: 0!important;
-    opacity: 0!important;
-    cursor: default!important;
-    display: block!important;
+    background: linear-gradient(135deg,#7F53D1 0%,#3B1E6D 100%)!important;
+    color: #fff!important;
+    border: 2px solid rgba(255,255,255,0.65)!important;
+    box-shadow: 0 6px 16px rgba(59,30,109,0.4)!important;
+    font-size: 20px!important;
+    line-height: 1!important;
+    opacity: 1!important;
+    cursor: pointer!important;
+    display: flex!important;
+    align-items: center!important;
+    justify-content: center!important;
+    padding: 0!important;
+    transition: transform .2s ease, box-shadow .2s ease;
   }
+  #adminEntryBtn:hover{
+    transform: translateY(-2px) scale(1.05)!important;
+    box-shadow: 0 8px 20px rgba(59,30,109,0.5)!important;
+  }
+  #adminEntryBtn:active{ transform: scale(0.96)!important; }
   #adminToolbar{
     position: fixed!important;
     bottom: 0!important;
@@ -103,6 +113,12 @@ window.adminActive = false;
   document.head.appendChild(st);
 })();
 
+async function sha256Hex(text) {
+  const buf = new TextEncoder().encode(text);
+  const digest = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
 async function verifyAdminCode(code) {
   try {
     const res = await fetch('/api/admin-login', {
@@ -110,11 +126,27 @@ async function verifyAdminCode(code) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ code })
     });
-    if (!res.ok) return false;
-    const data = await res.json();
-    return data && data.ok === true;
+    if (res.ok) {
+      const data = await res.json();
+      return data && data.ok === true;
+    }
   } catch (e) {
-    console.error('تعذر التحقق من كود المالك', e);
+    /* لا يوجد سيرفر (استضافة ثابتة) — ننتقل للتحقق المحلي */
+  }
+
+  /* تحقق محلي: أول استخدام على هذا الجهاز يعتمد الكود ويُخزّن بصمته فقط.
+     الحفظ في content.json يبقى بحاجة لسيرفر، لذا لا يمكن للزوار الكتابة عن بُعد. */
+  try {
+    const KEY = 'smile_owner_hash';
+    const hash = await sha256Hex(code);
+    const stored = localStorage.getItem(KEY);
+    if (!stored) {
+      localStorage.setItem(KEY, hash);
+      return true;
+    }
+    return stored === hash;
+  } catch (e) {
+    console.error('تعذر التحقق المحلي من كود المالك', e);
     return false;
   }
 }
@@ -160,8 +192,8 @@ function exitAdminMode() {
   if (tb) tb.hidden = true;
   const entry = document.getElementById('adminEntryBtn');
   if (entry) {
-    entry.style.display = 'block';
-    entry.style.opacity = '0';
+    entry.style.display = 'flex';
+    entry.style.opacity = '1';
   }
   removeEditButtons();
   notifyAdminChanged();
@@ -507,8 +539,8 @@ const downloadBtnEl = document.getElementById('adminDownloadBtn');
 const resetBtnEl = document.getElementById('adminResetBtn');
 
 if (entryBtnEl) {
-  entryBtnEl.textContent = '';
-  entryBtnEl.title = '';
+  entryBtnEl.textContent = '🔒';
+  entryBtnEl.title = 'دخول المالك';
   entryBtnEl.addEventListener('click', enterAdminMode);
 }
 if (exitBtnEl) exitBtnEl.addEventListener('click', exitAdminMode);
@@ -532,8 +564,8 @@ if (resetBtnEl) resetBtnEl.addEventListener('click', resetOverrides);
     document.body.classList.remove('admin-mode');
     if (tb) tb.hidden = true;
     if (entry) {
-      entry.style.display = 'block';
-      entry.style.opacity = '0';
+      entry.style.display = 'flex';
+      entry.style.opacity = '1';
     }
     removeEditButtons();
   }
