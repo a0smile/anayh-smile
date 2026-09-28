@@ -2,160 +2,127 @@
  * POST /api/save-content
  * Body: { code: string, content: object }
  *
- * يحفظ content.json تلقائياً في مستودع GitHub (إن وُجدت الأسرار)
- * الأسرار المطلوبة في Cloudflare Pages → Settings → Environment variables:
- *   ADMIN_PASSWORD   (موجود مسبقاً)
- *   GITHUB_TOKEN     (Personal Access Token بصلاحية contents:write)
- *   GITHUB_REPO      (مثال: username/smile-care)
- *   GITHUB_BRANCH    (اختياري، افتراضي main)
- *   GITHUB_PATH      (اختياري، افتراضي content.json)
+ * يحفظ content.json في مستودع GitHub عبر GitHub Contents API.
+ *
+ * متغيرات البيئة المطلوبة (Cloudflare Pages → Settings → Environment variables):
+ *   ADMIN_PASSWORD   كلمة سر لوحة المالك (مطلوبة)
+ *   GITHUB_TOKEN     Personal Access Token بصلاحية contents:write
+ *   GITHUB_REPO      مثال: a0smile/anayh-smile
+ *   GITHUB_BRANCH    اختياري، افتراضي main
+ *   GITHUB_PATH      اختياري، افتراضي content.json
+ *
+ * ملاحظة: هذه الدالة تعمل فقط على منصّة تدعم Functions
+ * (Cloudflare Pages / Netlify). GitHub Pages لا ينفّذها.
  */
+
+const CORS = {
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type'
+};
+
+// نجيب متغيّر البيئة من env إن وُجد، وإلا من process.env (يغطي Netlify وبيئات Node)
+function readEnv(context, key) {
+  if (context && context.env && context.env[key] != null) return String(context.env[key]).trim();
+  return String(process.env[key] || '').trim();
+}
+
+function json(body, status) {
+  return new Response(JSON.stringify(body), { status, headers: CORS });
+}
+
+// مقارنة بزمن ثابت لتقليل خطر هجوم التوقيت
+function safeEqual(a, b) {
+  if (typeof a !== 'string' || typeof b !== 'string') return false;
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
+}
+
+function encodeBase64(text) {
+  const bytes = new TextEncoder().encode(text);
+  let binary = '';
+  const CHUNK = 0x8000;
+  for (let i = 0; i < bytes.length; i += CHUNK) {
+    binary += String.fromCharCode.apply(null, bytes.subarray(i, i + CHUNK));
+  }
+  return btoa(binary);
+}
+
 export async function onRequest(context) {
-  const headers = {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type'
-  };
+  const request = context.request;
 
-  if (context.request.method === 'OPTIONS') {
-    return new Response('', { status: 204, headers });
-  }
+  if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: CORS });
+  if (request.method !== 'POST') return json({ ok: false, message: 'method' }, 405);
 
-  if (context.request.method !== 'POST') {
-    return new Response(JSON.stringify({ ok: false, message: 'method' }), {
-      status: 405,
-      headers
-    });
-  }
-
-  const adminPass = context.env.ADMIN_PASSWORD || '';
-  if (!adminPass) {
-    return new Response(
-      JSON.stringify({ ok: false, message: 'not configured' }),
-      { status: 500, headers }
-    );
-  }
+  const adminPass = readEnv(context, 'ADMIN_PASSWORD');
+  if (!adminPass) return json({ ok: false, message: 'not configured' }, 500);
 
   let body;
   try {
-    body = await context.request.json();
+    body = await request.json();
   } catch (e) {
-    return new Response(JSON.stringify({ ok: false, message: 'bad json' }), {
-      status: 400,
-      headers
-    });
+    return json({ ok: false, message: 'bad json' }, 400);
   }
 
   const code = body && typeof body.code === 'string' ? body.code : '';
-  if (code !== adminPass) {
-    return new Response(JSON.stringify({ ok: false, message: 'unauthorized' }), {
-      status: 401,
-      headers
-    });
-  }
+  if (!safeEqual(code, adminPass)) return json({ ok: false, message: 'unauthorized' }, 401);
 
   const content = body && body.content;
-  if (!content || typeof content !== 'object') {
-    return new Response(JSON.stringify({ ok: false, message: 'no content' }), {
-      status: 400,
-      headers
-    });
-  }
+  if (!content || typeof content !== 'object') return json({ ok: false, message: 'no content' }, 400);
 
-  const token = context.env.GITHUB_TOKEN || '';
-  const repo = context.env.GITHUB_REPO || '';
-  const branch = context.env.GITHUB_BRANCH || 'main';
-  const path = context.env.GITHUB_PATH || 'content.json';
+  const token = readEnv(context, 'GITHUB_TOKEN');
+  const repo = readEnv(context, 'GITHUB_REPO');
+  const branch = readEnv(context, 'GITHUB_BRANCH') || 'main';
+  const path = readEnv(context, 'GITHUB_PATH') || 'content.json';
 
-  // بدون GitHub: نحفظ محلياً فقط ونخبر المستخدم
   if (!token || !repo) {
-    return new Response(
-      JSON.stringify({
-        ok: true,
-        remote: false,
-        message:
-          'saved-local-only: أضف GITHUB_TOKEN و GITHUB_REPO في Cloudflare ليتم التحديث التلقائي للملف'
-      }),
-      { status: 200, headers }
-    );
+    return json({ ok: true, remote: false, message: 'saved-local-only: أضف GITHUB_TOKEN و GITHUB_REPO لتفعيل الحفظ التلقائي' }, 200);
   }
 
   try {
-    const fileUrl =
-      'https://api.github.com/repos/' + repo + '/contents/' + path + '?ref=' + encodeURIComponent(branch);
+    // رابط ثابت مقيّد بالمستودع لتفادي إرسال الرمز لأي مضيف آخر
+    const base = 'https://api.github.com/repos/' + repo + '/contents/' + path + '?ref=' + encodeURIComponent(branch);
+    const authHeaders = {
+      Authorization: 'Bearer ' + token,
+      Accept: 'application/vnd.github+json',
+      'User-Agent': 'anayh-smile-admin'
+    };
 
-    // جلب الـ sha الحالي إن وُجد
     let sha = null;
-    const getRes = await fetch(fileUrl, {
-      headers: {
-        Authorization: 'Bearer ' + token,
-        Accept: 'application/vnd.github+json',
-        'User-Agent': 'smile-care-admin'
-      }
-    });
+    const getRes = await fetch(base, { headers: authHeaders });
     if (getRes.ok) {
       const fileData = await getRes.json();
-      sha = fileData.sha || null;
+      sha = fileData && fileData.sha ? fileData.sha : null;
     }
 
-    const jsonText = JSON.stringify(content, null, 2);
-    // base64 بدون Buffer (Workers)
-    const bytes = new TextEncoder().encode(jsonText);
-    let binary = '';
-    for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
-    const contentB64 = btoa(binary);
-
-    const putBody = {
+    const payload = {
       message: 'تحديث محتوى الموقع من لوحة المالك',
-      content: contentB64,
+      content: encodeBase64(JSON.stringify(content, null, 2)),
       branch
     };
-    if (sha) putBody.sha = sha;
+    if (sha) payload.sha = sha;
 
     const putRes = await fetch(
       'https://api.github.com/repos/' + repo + '/contents/' + path,
       {
         method: 'PUT',
-        headers: {
-          Authorization: 'Bearer ' + token,
-          Accept: 'application/vnd.github+json',
-          'Content-Type': 'application/json',
-          'User-Agent': 'smile-care-admin'
-        },
-        body: JSON.stringify(putBody)
+        headers: Object.assign({ 'Content-Type': 'application/json' }, authHeaders),
+        body: JSON.stringify(payload)
       }
     );
 
     if (!putRes.ok) {
-      const errText = await putRes.text();
-      return new Response(
-        JSON.stringify({
-          ok: false,
-          remote: false,
-          message: 'github error',
-          detail: errText.slice(0, 300)
-        }),
-        { status: 502, headers }
-      );
+      const detail = await putRes.text();
+      console.error('github save failed', putRes.status, detail.slice(0, 300));
+      return json({ ok: false, remote: false, message: 'github error' }, 502);
     }
 
-    return new Response(
-      JSON.stringify({
-        ok: true,
-        remote: true,
-        message: 'تم الحفظ وإرساله إلى content.json بنجاح'
-      }),
-      { status: 200, headers }
-    );
+    return json({ ok: true, remote: true, message: 'تم الحفظ وإرساله بنجاح' }, 200);
   } catch (e) {
-    return new Response(
-      JSON.stringify({
-        ok: false,
-        message: 'exception',
-        detail: String(e && e.message ? e.message : e)
-      }),
-      { status: 500, headers }
-    );
+    console.error('save-content exception', e);
+    return json({ ok: false, message: 'exception' }, 500);
   }
 }
