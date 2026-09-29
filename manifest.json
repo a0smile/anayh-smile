@@ -1,15 +1,21 @@
 {
   "name": "مجمع عناية الابتسامة الطبي",
   "short_name": "عناية الابتسامة",
-  "description": "مجمع عناية الابتسامة الطبي لطب وجراحة الأسنان - احجز موعدك بسهولة",
+  "id": "./",
+  "description": "مجمع عناية الابتسامة الطبي — طب وجراحة الأسنان وحجز المواعيد والخدمات الطبية.",
   "lang": "ar",
   "dir": "rtl",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#FFFFFF",
+  "background_color": "#F8F3EC",
   "theme_color": "#3B1E6D",
+  "categories": [
+    "health",
+    "medical",
+    "lifestyle"
+  ],
   "icons": [
     {
       "src": "icon-192.png",
