@@ -36,7 +36,7 @@ function applyOverrides(data) {
 }
 window.applyOverrides = applyOverrides;
 
-/* مسح تعديلات محلية قديمة فيها نصوص اليوم الوطني */
+/* مسح تعديلات محلية قديمة فيها نصوص اليوم الوطني فقط */
 function purgeNationalDayOverrides() {
   try {
     const raw = localStorage.getItem(OVERRIDES_KEY);
@@ -52,10 +52,7 @@ function purgeNationalDayOverrides() {
         changed = true;
       }
     });
-    ['nationalDay', 'announcement', 'hero.badge', 'hero.title', 'hero.titleHighlight',
-     'hero.subtitle', 'hero.buttonMain', 'hero.buttonSecondary', 'booking.title',
-     'sections.nationalDayBadge', 'sections.nationalDayTitle', 'sections.reviewBoxTitle',
-     'sections.support2'].forEach((k) => {
+    ['nationalDay'].forEach((k) => {
       if (k in ov) { delete ov[k]; changed = true; }
     });
     if (changed) localStorage.setItem(OVERRIDES_KEY, JSON.stringify(ov));
@@ -239,15 +236,27 @@ function renderSite(data) {
 
     if (nd.blendImage) {
       const b = document.getElementById('ndBlendImage');
-      if (b) b.src = nd.blendImage;
+      if (b) {
+        b.src = nd.blendImage;
+        b.setAttribute('data-edit', 'nationalDay.blendImage');
+        b.setAttribute('data-edit-type', 'image');
+      }
     }
     if (nd.flagImage) {
       const f = document.getElementById('ndFlagImage');
-      if (f) f.src = nd.flagImage;
+      if (f) {
+        f.src = nd.flagImage;
+        f.setAttribute('data-edit', 'nationalDay.flagImage');
+        f.setAttribute('data-edit-type', 'image');
+      }
     }
     if (nd.emblemImage) {
       const e = document.getElementById('ndEmblemImage');
-      if (e) e.src = nd.emblemImage;
+      if (e) {
+        e.src = nd.emblemImage;
+        e.setAttribute('data-edit', 'nationalDay.emblemImage');
+        e.setAttribute('data-edit-type', 'image');
+      }
     }
 
     setText('nationalDayBadge', nd.badge || sections.nationalDayBadge);
@@ -312,6 +321,7 @@ function renderSite(data) {
     markEditable('logoTagline', 'clinic.tagline');
     markEditable('footerName', 'clinic.name');
     markEditable('footerTagline', 'clinic.tagline');
+    markEditable('footerNameBottom', 'clinic.name');
   });
 
   safeRender('hero', () => {
@@ -372,7 +382,7 @@ function renderSite(data) {
           ${cat.items.map((item, ii) => {
             const base = `serviceCategories.${ci}.items.${ii}`;
             const waMsg = encodeURIComponent(
-              `السلام عليكم ورحمة الله وبركاته. أما اخترت خدمة (${item.name}) هل أقدر أجيكم الآن؟`
+              `السلام عليكم ورحمة الله وبركاته. اخترت خدمة (${item.name}) هل أقدر أجيكم الآن؟`
             );
             const hasOld = item.oldPrice != null && item.oldPrice !== '';
             return `<article class="service-card-wrap">
@@ -485,7 +495,7 @@ function renderSite(data) {
     if (!list) return;
     const items = data.faq || [];
     list.innerHTML = items.map((item, i) => `
-      <details class="faq-item"${editAttr('faq.' + i + '.q')}>
+      <details class="faq-item">
         <summary class="faq-q">
           <span class="faq-q-text"${editAttr('faq.' + i + '.q')}>${item.q}</span>
           <span class="faq-icon" aria-hidden="true">+</span>
@@ -548,9 +558,15 @@ function renderSite(data) {
     hoursList.innerHTML = workingHours.map((h, i) => `
       <li>
         <span${editAttr(`workingHours.${i}.days`)}>${h.days}</span>
-        <span class="${h.open? 'open' : 'closed'}"${editAttr(`workingHours.${i}.time`)}>${h.time}</span>
+        <span class="${h.open? 'open' : 'closed'}"${editAttr(`workingHours.${i}.time`)} data-edit-open="${`workingHours.${i}.open`}">${h.time}</span>
       </li>
     `).join('');
+    hoursList.querySelectorAll('[data-edit-open]').forEach(el => {
+      el.setAttribute('data-edit', el.getAttribute('data-edit-open'));
+      el.setAttribute('data-edit-type', 'boolean');
+      el.setAttribute('data-edit-label', 'حالة الدوام');
+      el.removeAttribute('data-edit-open');
+    });
   });
 
   safeRender('social', () => {
