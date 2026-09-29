@@ -22,6 +22,9 @@ const CORS = {
   'Access-Control-Allow-Headers': 'Content-Type'
 };
 
+const MAX_REQUEST_BYTES = 1024 * 1024;
+const MAX_CONTENT_BYTES = 900 * 1024;
+
 // نجيب متغيّر البيئة من env إن وُجد، وإلا من process.env (يغطي Netlify وبيئات Node)
 function readEnv(context, key) {
   if (context && context.env && context.env[key] != null) return String(context.env[key]).trim();
@@ -51,6 +54,18 @@ function encodeBase64(text) {
   return btoa(binary);
 }
 
+function isValidRepo(repo) {
+  return /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(repo);
+}
+
+function isValidBranch(branch) {
+  return branch.length > 0 && branch.length <= 255 && !/[\r\n]/.test(branch);
+}
+
+function isValidPath(path) {
+  return path.length > 0 && path.length <= 500 && !/[\r\n]/.test(path);
+}
+
 export async function onRequest(context) {
   const request = context.request;
 
@@ -59,6 +74,11 @@ export async function onRequest(context) {
 
   const adminPass = readEnv(context, 'ADMIN_PASSWORD');
   if (!adminPass) return json({ ok: false, message: 'not configured' }, 500);
+
+  const contentLength = Number(request.headers.get('content-length') || 0);
+  if (contentLength > MAX_REQUEST_BYTES) {
+    return json({ ok: false, message: 'request too large' }, 413);
+  }
 
   let body;
   try {
@@ -71,7 +91,20 @@ export async function onRequest(context) {
   if (!safeEqual(code, adminPass)) return json({ ok: false, message: 'unauthorized' }, 401);
 
   const content = body && body.content;
-  if (!content || typeof content !== 'object') return json({ ok: false, message: 'no content' }, 400);
+  if (!content || typeof content !== 'object' || Array.isArray(content)) {
+    return json({ ok: false, message: 'no content' }, 400);
+  }
+
+  let contentJson;
+  try {
+    contentJson = JSON.stringify(content, null, 2);
+  } catch (e) {
+    return json({ ok: false, message: 'invalid content' }, 400);
+  }
+
+  if (new TextEncoder().encode(contentJson).length > MAX_CONTENT_BYTES) {
+    return json({ ok: false, message: 'content too large' }, 413);
+  }
 
   const token = readEnv(context, 'GITHUB_TOKEN');
   const repo = readEnv(context, 'GITHUB_REPO');
@@ -80,6 +113,10 @@ export async function onRequest(context) {
 
   if (!token || !repo) {
     return json({ ok: true, remote: false, message: 'saved-local-only: أضف GITHUB_TOKEN و GITHUB_REPO لتفعيل الحفظ التلقائي' }, 200);
+  }
+
+  if (!isValidRepo(repo) || !isValidBranch(branch) || !isValidPath(path)) {
+    return json({ ok: false, remote: false, message: 'invalid github configuration' }, 500);
   }
 
   try {
@@ -96,11 +133,15 @@ export async function onRequest(context) {
     if (getRes.ok) {
       const fileData = await getRes.json();
       sha = fileData && fileData.sha ? fileData.sha : null;
+    } else if (getRes.status !== 404) {
+      const detail = await getRes.text();
+      console.error('github file lookup failed', getRes.status, detail.slice(0, 300));
+      return json({ ok: false, remote: false, message: 'github lookup error' }, 502);
     }
 
     const payload = {
       message: 'تحديث محتوى الموقع من لوحة المالك',
-      content: encodeBase64(JSON.stringify(content, null, 2)),
+      content: encodeBase64(contentJson),
       branch
     };
     if (sha) payload.sha = sha;
