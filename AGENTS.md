@@ -1,26 +1,72 @@
 # AGENTS.md
 
 ## المشروع
-موقع ثابت (HTML/CSS/JS) لمجمع عناية الابتسامة الطبي. لا يوجد نظام بناء ولا اعتماديات npm — الملفات تُقدَّم مباشرة.
+
+موقع ثابت (HTML/CSS/JS) لمجمع عناية الابتسامة الطبي.
+
+- لا يوجد نظام Build.
+- لا توجد اعتماديات npm مطلوبة.
+- الملفات تُقدَّم مباشرة من الخادم.
+- يجب الحفاظ على البنية الحالية والمسارات وأسماء الملفات.
+- لا تتم إضافة إطار عمل أو مكتبات خارجية إلا بطلب صريح.
 
 ## الملفات الأساسية
-- `index.html` — الصفحة الرئيسية (أقسام: hero, services, offers, stats, about, tips, doctors, booking, reviews, faq, contact).
+
+- `index.html` — الصفحة الرئيسية، وتشمل أقسام:
+  `hero`, `services`, `offers`, `stats`, `about`, `tips`, `doctors`, `booking`, `reviews`, `faq`, `contact`.
+
 - `catalog.html` — صفحة المعرض/العروض المستقلة.
-- `catalog.js` — يرسم المعرض في الصفحتين (`#offersGrid` في الرئيسية، `#catalogGrid` في صفحة المعرض) عبر `renderAllCatalogs()`.
-- `main.js` — تحميل `content.json`، تعبئة العناصر ذات `data-edit`، وبثّ حدث `siteRendered`.
-- `admin.js` — وضع المالك (دخول بمفتاح، تعديل، تحميل JSON).
-- `content.json` — مصدر المحتوى. قسم `catalog` يحتوي `badge`/`title`/`subtitle`/`items`.
-- `sw.js` — service worker؛ **يجب** رفع `CACHE_NAME` وإضافة أي ملف جديد إلى `ASSETS` عند كل تغيير.
 
-## قواعد مهمة
-- أي تعديل على CSS/JS يستلزم رفع رقم الإصدار `?v=` في `index.html` و`catalog.html` (كلاهما) لتجاوز الكاش.
-- أدوات المالك في `catalog.js` تُبنى داخل DOM فقط عند `window.adminActive` — لا تُبنى إطلاقاً للزوار (لا تخفِها بـ CSS فقط).
-- تعديلات المالك تُحفظ في `overrides` بالذاكرة/التخزين ثم تُصدَّر عبر `content.json`؛ لا كتابة مباشرة على الملف من المتصفح.
-- لا توجد اختبارات آلية. التحقق يتم يدوياً عبر متصفح فعلي.
+- `catalog.js` — مسؤول عن رسم المعرض في:
+  - `#offersGrid` داخل الصفحة الرئيسية.
+  - `#catalogGrid` داخل صفحة المعرض.
+  - يستخدم `renderAllCatalogs()` لتحديث المعارض.
 
-## أوامر مفيدة
-```bash
-node --check catalog.js main.js admin.js   # فحص الصياغة
-python3 -m http.server 8099 --bind 127.0.0.1   # خادم محلي للمعاينة
-python3 -c "import json;json.load(open('content.json'))"   # فحص JSON
-```
+- `main.js` — مسؤول عن:
+  - تحميل `content.json`.
+  - تعبئة العناصر التي تحتوي على `data-edit`.
+  - بث حدث `siteRendered`.
+
+- `admin.js` — مسؤول عن وضع المالك:
+  - الدخول بمفتاح المالك.
+  - التعديل.
+  - تحميل/تصدير بيانات المحتوى.
+
+- `content.json` — مصدر المحتوى الرئيسي.
+  يحتوي قسم `catalog` على:
+  - `badge`
+  - `title`
+  - `subtitle`
+  - `items`
+
+- `icons.js` — يحتوي على أيقونات SVG المستخدمة في الموقع.
+
+- `style.css` — التنسيقات الرئيسية للموقع.
+
+- `sw.js` — Service Worker الخاص بالكاش والعمل دون اتصال.
+
+## قواعد التطوير المهمة
+
+### 1. الحفاظ على البنية الحالية
+
+- لا تغيّر المسارات الحالية.
+- لا تغيّر أسماء الـIDs المستخدمة من JavaScript.
+- لا تغيّر أسماء الملفات إلا بطلب صريح.
+- لا تحذف وظيفة أو زر أو قسم موجود إلا بطلب صريح.
+- لا تضف اعتماديات npm أو نظام Build جديد.
+- لا تغيّر طريقة تحميل البيانات الحالية دون حاجة مباشرة.
+
+### 2. إصدارات الملفات والكاش
+
+عند تعديل أي ملف CSS أو JavaScript:
+
+- يجب رفع رقم `?v=` الخاص بالملف في:
+  - `index.html`
+  - `catalog.html`
+
+مثال:
+
+```html
+<script src="icons.js?v=30" defer></script>
+<script src="main.js?v=30" defer></script>
+<script src="catalog.js?v=30" defer></script>
