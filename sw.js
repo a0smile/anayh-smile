@@ -1,4 +1,5 @@
-const CACHE_NAME = 'smile-care-v32-purple';
+const CACHE_NAME = 'smile-care-v33-purple';
+
 const ASSETS = [
   './',
   './index.html',
@@ -28,21 +29,53 @@ const ASSETS = [
   './service-icons/dental-model.jpg'
 ];
 
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) =>
-      Promise.allSettled(ASSETS.map((u) => cache.add(u).catch(() => null)))
-    )
+const STATIC_PATTERN = /\.(css|js|jpg|jpeg|png|webp|svg|woff2?|json)$/i;
+
+async function cacheAssets() {
+  const cache = await caches.open(CACHE_NAME);
+
+  await Promise.allSettled(
+    ASSETS.map(async (url) => {
+      try {
+        await cache.add(url);
+      } catch {
+        // ملف غير متاح أثناء التثبيت لا يمنع تثبيت Service Worker بالكامل.
+      }
+    })
   );
+}
+
+async function updateCachedResponse(request) {
+  try {
+    const response = await fetch(request);
+
+    if (response && response.ok) {
+      const cache = await caches.open(CACHE_NAME);
+      await cache.put(request, response.clone());
+    }
+
+    return response;
+  } catch {
+    return null;
+  }
+}
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(cacheAssets());
   self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
+      Promise.all(
+        keys
+          .filter((key) => key !== CACHE_NAME)
+          .map((key) => caches.delete(key))
+      )
     )
   );
+
   self.clients.claim();
 });
 
@@ -50,40 +83,47 @@ self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
   const url = new URL(event.request.url);
+
   if (url.origin !== self.location.origin) return;
 
   const path = url.pathname;
-  const isStatic = /\.(css|js|jpg|jpeg|png|webp|svg|woff2?|json)$/i.test(path)
-    || path.includes('/service-icons/');
+
+  const isStatic =
+    STATIC_PATTERN.test(path) ||
+    path.includes('/service-icons/');
 
   if (isStatic) {
     event.respondWith(
-      caches.match(event.request).then((cached) => {
-        const fetched = fetch(event.request)
-          .then((res) => {
-            if (res && res.ok) {
-              const clone = res.clone();
-              caches.open(CACHE_NAME).then((c) => c.put(event.request, clone));
-            }
-            return res;
-          })
-          .catch(() => cached);
-        return cached || fetched;
+      caches.match(event.request).then(async (cached) => {
+        const fresh = await updateCachedResponse(event.request);
+
+        return cached || fresh || Response.error();
       })
     );
+
     return;
   }
 
   event.respondWith(
     fetch(event.request)
-      .then((res) => {
-        if (res && res.ok) {
-          const clone = res.clone();
-          caches.open(CACHE_NAME).then((c) => c.put(event.request, clone));
+      .then(async (response) => {
+        if (response && response.ok) {
+          const cache = await caches.open(CACHE_NAME);
+          await cache.put(event.request, response.clone());
         }
-        return res;
+
+        return response;
       })
-      .catch(() => caches.match(event.request).then((cached) => cached || caches.match('./index.html')))
+      .catch(async () => {
+        const cached = await caches.match(event.request);
+
+        if (cached) return cached;
+
+        return (
+          (await caches.match('./index.html')) ||
+          Response.error()
+        );
+      })
   );
 });
 
