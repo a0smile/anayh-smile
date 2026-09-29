@@ -1036,14 +1036,13 @@ button {
   left: 8% !important;
   right: 8% !important;
   z-index: 3 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+  display: grid !important;
+  place-items: center !important;
   min-width: 0 !important;
   min-height: 18% !important;
   max-height: 21% !important;
   margin: 0 !important;
-  padding: 8px 9px !important;
+  padding: 7px 8px !important;
   border: 2px solid #8060B8 !important;
   border-radius: 14px !important;
   background:
@@ -1054,15 +1053,17 @@ button {
     ) !important;
   color: #3B1E6D !important;
   font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif !important;
-  font-size: clamp(0.68rem, 2.7vw, 0.9rem) !important;
+  font-size: clamp(0.64rem, 2.5vw, 0.86rem) !important;
   font-weight: 900 !important;
-  line-height: 1.25 !important;
+  line-height: 1.18 !important;
   text-align: center !important;
   white-space: normal !important;
   overflow: hidden !important;
-  overflow-wrap: anywhere !important;
+  overflow-wrap: break-word !important;
   word-break: normal !important;
-  text-overflow: ellipsis !important;
+  text-overflow: clip !important;
+  -webkit-line-clamp: 2 !important;
+  line-clamp: 2 !important;
   box-shadow:
     0 2px 0 rgba(255, 255, 255, 0.95) inset,
     0 0 0 2px rgba(201, 162, 77, 0.18),
@@ -1904,8 +1905,8 @@ body.admin-mode .catalog-tools {
   padding: 0 !important;
   overflow: hidden !important;
   background: #4A2A85 !important;
-  border-top: 1px solid rgba(201, 162, 77, 0.85) !important;
-  border-bottom: 1px solid rgba(201, 162, 77, 0.85) !important;
+  border-top: 1px solid rgba(201, 162, 77, 0.8) !important;
+  border-bottom: 1px solid rgba(201, 162, 77, 0.8) !important;
   white-space: nowrap !important;
   direction: ltr !important;
 }
@@ -1958,11 +1959,7 @@ body.admin-mode .catalog-tools {
   }
 
   100% {
-    transform: translate3d(
-      calc(-50%),
-      0,
-      0
-    );
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -2155,7 +2152,9 @@ body.admin-mode .catalog-tools {
     transform: none !important;
   }
 
-  /* بطاقات الخدمات */
+  /* ==========================================================
+     بطاقات الخدمات
+     ========================================================== */
   .service-cards {
     grid-template-columns: repeat(
       2,
@@ -2182,14 +2181,20 @@ body.admin-mode .catalog-tools {
     right: 8% !important;
     min-height: 18% !important;
     max-height: 21% !important;
-    padding: 7px 5px !important;
+    padding: 6px 5px !important;
     border-radius: 11px !important;
     font-size: clamp(
-      0.64rem,
-      3.2vw,
-      0.84rem
+      0.60rem,
+      3vw,
+      0.80rem
     ) !important;
-    line-height: 1.22 !important;
+    line-height: 1.16 !important;
+    overflow: hidden !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+    text-overflow: clip !important;
+    -webkit-line-clamp: 2 !important;
+    line-clamp: 2 !important;
   }
 
   .service-card-prices {
@@ -2258,7 +2263,9 @@ body.admin-mode .catalog-tools {
     ) !important;
   }
 
-  /* شريط الإعلان */
+  /* ==========================================================
+     شريط الإعلان
+     ========================================================== */
   .announcement-bar {
     height: 42px !important;
   }
@@ -2307,8 +2314,10 @@ body.admin-mode .catalog-tools {
   .service-card-name {
     top: 20% !important;
     padding: 6px 4px !important;
-    font-size: 0.62rem !important;
-    line-height: 1.2 !important;
+    font-size: 0.58rem !important;
+    line-height: 1.14 !important;
+    -webkit-line-clamp: 2 !important;
+    line-clamp: 2 !important;
   }
 
   .service-card-prices {
