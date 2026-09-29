@@ -7,24 +7,49 @@ let lastAdminCode = sessionStorage.getItem('smile_admin_code') || '';
 let pendingImagePath = null;
 
 /* =========================================================
-   ADMIN UI — مخفية بالكامل عن الزوار
+   ADMIN UI
    ========================================================= */
 (function injectAdminUIStyle() {
   const css = `
     #adminEntryBtn {
       position: fixed!important;
-      width: 1px!important;
-      height: 1px!important;
-      min-width: 1px!important;
-      min-height: 1px!important;
+      right: 18px!important;
+      bottom: 18px!important;
+      width: 48px!important;
+      height: 48px!important;
+      min-width: 48px!important;
+      min-height: 48px!important;
       padding: 0!important;
       margin: 0!important;
-      border: 0!important;
-      opacity: 0!important;
-      visibility: hidden!important;
-      pointer-events: none!important;
+      border: 1px solid rgba(218,180,82,.85)!important;
+      border-radius: 50%!important;
+      opacity: 1!important;
+      visibility: visible!important;
+      pointer-events: auto!important;
       overflow: hidden!important;
-      z-index: -1!important;
+      z-index: 99997!important;
+      display: flex!important;
+      align-items: center!important;
+      justify-content: center!important;
+      background: linear-gradient(135deg,#241438,#3B1E6D)!important;
+      color: #fff!important;
+      box-shadow: 0 10px 28px rgba(59,30,109,.35)!important;
+      cursor: pointer!important;
+      font-size: 22px!important;
+      line-height: 1!important;
+    }
+
+    #adminEntryBtn:hover {
+      transform: translateY(-2px)!important;
+      filter: brightness(1.08)!important;
+    }
+
+    #adminEntryBtn:active {
+      transform: translateY(0)!important;
+    }
+
+    body.admin-mode #adminEntryBtn {
+      display: none!important;
     }
 
     #adminToolbar {
@@ -318,6 +343,15 @@ let pendingImagePath = null;
     }
 
     @media (max-width: 720px) {
+      #adminEntryBtn {
+        right: 14px!important;
+        bottom: 14px!important;
+        width: 46px!important;
+        height: 46px!important;
+        min-width: 46px!important;
+        min-height: 46px!important;
+      }
+
       .admin-manager-tools {
         grid-template-columns: 1fr 1fr!important;
       }
@@ -447,6 +481,14 @@ function exitAdminMode() {
 
   const tb = document.getElementById('adminToolbar');
   if (tb) tb.hidden = true;
+
+  const entry = document.getElementById('adminEntryBtn');
+  if (entry) {
+    entry.style.display = 'flex';
+    entry.style.visibility = 'visible';
+    entry.style.opacity = '1';
+    entry.style.pointerEvents = 'auto';
+  }
 
   removeEditButtons();
   closeAdminManager();
@@ -2103,24 +2145,10 @@ function closeAdminManager() {
 }
 
 /* =========================================================
-   ADMIN ENTRY — لا يظهر للزوار
+   ADMIN ENTRY
    الاختصار: Ctrl/Cmd + Shift + A
    ========================================================= */
 function bindHiddenAdminEntry() {
-  const entry =
-    document.getElementById(
-      'adminEntryBtn'
-    );
-
-  if (entry) {
-    entry.textContent = '';
-    entry.title = '';
-    entry.setAttribute(
-      'aria-hidden',
-      'true'
-    );
-  }
-
   if (
     document.documentElement.dataset
       .adminShortcutBound === '1'
@@ -2197,8 +2225,6 @@ function bindExistingAdminButtons() {
     entryBtnEl.dataset.adminBound !== '1'
   ) {
     entryBtnEl.dataset.adminBound = '1';
-
-    entryBtnEl.textContent = '';
 
     entryBtnEl.addEventListener(
       'click',
@@ -2396,8 +2422,10 @@ function restoreAdminSession() {
   }
 
   if (entry) {
-    entry.style.display =
-      'none';
+    entry.style.display = 'flex';
+    entry.style.visibility = 'visible';
+    entry.style.opacity = '1';
+    entry.style.pointerEvents = 'auto';
   }
 
   removeEditButtons();
