@@ -652,25 +652,10 @@ button { font-family: inherit; cursor: pointer; }
 
 /* ============================================================
    إصلاح بطاقات الخدمات داخل الأيقونة البنفسجية
-   المربع 1: اسم الخدمة
-   المربعين 2-3: قبل | بعد
-   المربع 4: زر اطلبها → واتساب
+   المربع 1: اسم الخدمة (ذهبي ناصع عريض)
+   المربعين 2-3: سابقاً (مع X أحمر) | الآن (أبيض ناصع)
+   المربع 4: زر لطلب الخدمة (ذهبي ناصع كبير)
    ============================================================ */
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 16px;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  overflow-x: hidden;
-}
 
 /* الشبكة */
 .service-cards {
@@ -764,53 +749,52 @@ body {
   pointer-events: none !important;
 }
 
-/* المربع 1 — اسم الخدمة (المنطقة العلوية الكبيرة) */
+/* المربع 1 — اسم الخدمة (ذهبي ناصع عريض + تصغير للنصوص الطويلة) */
 .service-card-name {
   position: absolute !important;
-  top: 27.5% !important;
+  top: 26% !important;
   left: 9% !important;
   right: 9% !important;
-  height: 19% !important;
+  height: 17% !important;
   margin: 0 !important;
-  padding: 3px 5px !important;
+  padding: 2px 4px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
   font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif !important;
-  font-size: clamp(0.72rem, 2.9vw, 0.92rem) !important;
+  font-size: clamp(0.68rem, 2.7vw, 0.90rem) !important;
   font-weight: 900 !important;
   letter-spacing: 0 !important;
-  color: #2A1548 !important;
-  line-height: 1.28 !important;
+  color: #FFD700 !important;                 /* ذهبي ناصع */
+  text-shadow: 0 1px 3px rgba(0,0,0,0.55), 0 0 8px rgba(255,215,0,0.35) !important;
+  line-height: 1.22 !important;
   overflow: hidden !important;
   word-break: break-word !important;
   overflow-wrap: anywhere !important;
+  -webkit-line-clamp: 2 !important;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
   background: transparent !important;
   border: none !important;
   border-radius: 0 !important;
   pointer-events: auto !important;
 }
-.service-card-name::first-line { line-height: 1.28 !important; }
-.service-card-name { text-shadow: 0 1px 2px rgba(255,255,255,0.75), 0 0 6px rgba(255,255,255,0.45) !important; }
-.price-now .price-value { text-shadow: 0 1px 2px rgba(255,255,255,0.6) !important; }
-.price-old .price-value { text-shadow: 0 1px 2px rgba(255,255,255,0.55) !important; }
-.price-label { text-shadow: 0 1px 1px rgba(255,255,255,0.6) !important; }
 
 /* المربعين 2 و 3 — الأسعار جنب بعض */
 .service-card-prices {
   position: absolute !important;
-  top: 50% !important;
-  left: 11% !important;
-  right: 11% !important;
-  height: 14% !important;
+  top: 48% !important;
+  left: 10% !important;
+  right: 10% !important;
+  height: 16% !important;
   margin: 0 !important;
   padding: 0 !important;
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
   justify-content: space-between !important;
-  gap: 6% !important;
+  gap: 5% !important;
   background: transparent !important;
   border: none !important;
   pointer-events: auto !important;
@@ -826,7 +810,7 @@ body {
   justify-content: center !important;
   height: 100% !important;
   margin: 0 !important;
-  padding: 2px 4px !important;
+  padding: 2px 3px !important;
   background: transparent !important;
   border: none !important;
   border-radius: 0 !important;
@@ -835,41 +819,61 @@ body {
 
 .price-label {
   display: block !important;
-  font-size: clamp(0.5rem, 1.9vw, 0.6rem) !important;
+  font-size: clamp(0.48rem, 1.9vw, 0.58rem) !important;
   font-weight: 900 !important;
-  color: #5A3A8A !important;
+  color: #FFFFFF !important;                 /* أبيض ناصع */
   line-height: 1.1 !important;
-  margin-bottom: 1px !important;
+  margin-bottom: 2px !important;
   text-align: center !important;
-  letter-spacing: 0.2px !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.45) !important;
 }
 
+/* السعر القديم — خط أحمر + علامة X حمراء */
 .price-old .price-value {
-  font-size: clamp(0.6rem, 2.2vw, 0.72rem) !important;
+  position: relative !important;
+  font-size: clamp(0.60rem, 2.3vw, 0.76rem) !important;
   font-weight: 800 !important;
-  color: #7A5AA8 !important;
+  color: #FFFFFF !important;                 /* أبيض ناصع */
   text-decoration: line-through !important;
-  text-decoration-color: #C0392B !important;
-  text-decoration-thickness: 2px !important;
+  text-decoration-color: #E53935 !important;
+  text-decoration-thickness: 2.2px !important;
   line-height: 1.15 !important;
   text-align: center !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4) !important;
 }
 
-.price-now .price-value {
-  font-size: clamp(0.74rem, 2.7vw, 0.9rem) !important;
+.price-old .price-value::after {
+  content: "✕" !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  color: #E53935 !important;                 /* X أحمر */
+  font-size: 1.25em !important;
   font-weight: 900 !important;
-  color: #3B1E6D !important;
-  line-height: 1.15 !important;
-  text-align: center !important;
+  text-decoration: none !important;
+  text-shadow: 0 0 4px rgba(0,0,0,0.55) !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
 }
 
-/* المربع 4 — زر لطلب الخدمة (أسفل البطاقة) */
+/* السعر الجديد — أبيض ناصع */
+.price-now .price-value {
+  font-size: clamp(0.72rem, 2.7vw, 0.92rem) !important;
+  font-weight: 900 !important;
+  color: #FFFFFF !important;                 /* أبيض ناصع */
+  line-height: 1.15 !important;
+  text-align: center !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4) !important;
+}
+
+/* المربع 4 — زر لطلب الخدمة (ذهبي ناصع كبير عريض) */
 .service-card-wrap .price-wa-btn {
   position: absolute !important;
   bottom: 6.5% !important;
   left: 11% !important;
   right: 11% !important;
-  height: 11% !important;
+  height: 12% !important;
   min-height: 30px !important;
   margin: 0 !important;
   padding: 0 8px !important;
@@ -877,32 +881,39 @@ body {
   align-items: center !important;
   justify-content: center !important;
   gap: 4px !important;
-  background: linear-gradient(135deg, #8F6ADB 0%, #5A3A8A 55%, #3B1E6D 100%) !important;
-  color: #fff !important;
+  background: linear-gradient(180deg, #FFE58A 0%, #FFD700 35%, #E6B800 70%, #C9A227 100%) !important;
+  color: #2A1A00 !important;
   font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif !important;
-  font-size: clamp(0.64rem, 2.4vw, 0.78rem) !important;
+  font-size: clamp(0.66rem, 2.5vw, 0.82rem) !important;
   font-weight: 900 !important;
   border: none !important;
   border-radius: 50px !important;
-  box-shadow: 0 2px 8px rgba(59, 30, 109, 0.45) !important;
+  box-shadow:
+    0 3px 0 #8B6914,
+    0 5px 14px rgba(201, 162, 39, 0.5),
+    inset 0 1px 0 rgba(255,255,255,0.55) !important;
   text-decoration: none !important;
   width: auto !important;
   max-width: none !important;
   z-index: 5 !important;
   pointer-events: auto !important;
   transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.35) !important;
 }
 
 .service-card-wrap .price-wa-btn:hover {
-  transform: translateY(-1px) scale(1.03) !important;
-  box-shadow: 0 4px 12px rgba(59, 30, 109, 0.55) !important;
+  transform: translateY(-2px) scale(1.03) !important;
+  box-shadow:
+    0 5px 0 #8B6914,
+    0 8px 18px rgba(201, 162, 39, 0.6),
+    inset 0 1px 0 rgba(255,255,255,0.55) !important;
 }
 
 .service-card-wrap .price-wa-btn:active {
   transform: scale(0.97) !important;
 }
 
-/* إخفاء أيقونة واتساب داخل الزر إن وجدت (نص فقط أنظف) */
+/* إخفاء أيقونة واتساب داخل الزر */
 .service-card-wrap .price-wa-btn .nd-icon,
 .service-card-wrap .price-wa-btn svg {
   display: none !important;
@@ -919,45 +930,45 @@ body {
     border-radius: 16px !important;
   }
   .service-card-name {
-    top: 27% !important;
+    top: 25.5% !important;
     left: 8% !important;
     right: 8% !important;
-    height: 19.5% !important;
-    font-size: clamp(0.72rem, 3.4vw, 0.86rem) !important;
+    height: 17.5% !important;
+    font-size: clamp(0.66rem, 3.3vw, 0.84rem) !important;
   }
   .service-card-prices {
-    top: 50% !important;
+    top: 47.5% !important;
     left: 9% !important;
     right: 9% !important;
-    height: 15% !important;
+    height: 17% !important;
   }
   .price-label {
-    font-size: clamp(0.5rem, 2.3vw, 0.6rem) !important;
+    font-size: clamp(0.46rem, 2.3vw, 0.56rem) !important;
   }
   .price-old .price-value {
-    font-size: clamp(0.58rem, 2.6vw, 0.70rem) !important;
+    font-size: clamp(0.58rem, 2.7vw, 0.72rem) !important;
   }
   .price-now .price-value {
-    font-size: clamp(0.7rem, 3vw, 0.86rem) !important;
+    font-size: clamp(0.70rem, 3.1vw, 0.88rem) !important;
   }
   .service-card-wrap .price-wa-btn {
     bottom: 6% !important;
     left: 10% !important;
     right: 10% !important;
-    height: 12% !important;
-    font-size: clamp(0.62rem, 2.9vw, 0.74rem) !important;
+    height: 13% !important;
+    font-size: clamp(0.62rem, 2.9vw, 0.78rem) !important;
   }
 }
 
 @media (max-width: 380px) {
   .service-card-name {
-    font-size: 0.7rem !important;
+    font-size: 0.64rem !important;
   }
   .price-now .price-value {
     font-size: 0.68rem !important;
   }
   .service-card-wrap .price-wa-btn {
-    font-size: 0.6rem !important;
+    font-size: 0.58rem !important;
   }
 }
 
@@ -969,6 +980,7 @@ body {
     animation: none !important;
   }
 }
+
 /* ============================================================
    إصلاح الشريط المتحرك
    - حركة بسيطة وخفيفة
@@ -1358,4 +1370,3 @@ body.admin-mode .catalog-tools { display: flex; }
   .offers-grid, .catalog-grid { gap: 18px; }
   .catalog-item { max-width: 100%; }
 }
-
