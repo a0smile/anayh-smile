@@ -35,6 +35,7 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 /* ============================================================
    RESET
    ============================================================ */
@@ -45,12 +46,14 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 72px;
   -webkit-text-size-adjust: 100%;
   overflow-x: hidden;
 }
+
 body {
   font-family: var(--font-body);
   color: var(--text);
@@ -62,27 +65,33 @@ body {
   -webkit-tap-highlight-color: rgba(127, 83, 209, 0.12);
   touch-action: manipulation;
 }
+
 img {
   max-width: 100%;
   display: block;
 }
+
 a {
   text-decoration: none;
   color: inherit;
 }
+
 ul {
   list-style: none;
 }
+
 button {
   font-family: inherit;
   cursor: pointer;
 }
+
 input,
 select,
 textarea,
 button {
   font: inherit;
 }
+
 /* ============================================================
    CONTAINER
    ============================================================ */
@@ -92,6 +101,7 @@ button {
   margin: 0 auto;
   padding: 0 14px;
 }
+
 /* ============================================================
    الأزرار
    ============================================================ */
@@ -112,16 +122,20 @@ button {
     background 0.25s var(--ease),
     border-color 0.25s var(--ease);
 }
+
 .btn:hover {
   transform: translateY(-2px);
 }
+
 .btn:active {
   transform: translateY(0) scale(0.98);
 }
+
 .btn:focus-visible {
   outline: 3px solid rgba(167, 139, 234, 0.45);
   outline-offset: 3px;
 }
+
 .btn-primary {
   background: linear-gradient(
     135deg,
@@ -131,18 +145,22 @@ button {
   color: #fff;
   box-shadow: 0 6px 16px rgba(127, 83, 209, 0.3);
 }
+
 .btn-primary:hover {
   box-shadow: 0 10px 24px rgba(127, 83, 209, 0.4);
 }
+
 .btn-outline {
   background: transparent;
   color: var(--purple-800);
   border: 1.8px solid var(--purple-700);
 }
+
 .btn-outline:hover {
   background: var(--purple-700);
   color: #fff;
 }
+
 /* ============================================================
    الترويسة
    ============================================================ */
@@ -157,9 +175,11 @@ button {
   box-shadow: var(--shadow-sm);
   transition: box-shadow 0.3s var(--ease);
 }
+
 .header.scrolled {
   box-shadow: var(--shadow);
 }
+
 .nav {
   display: flex;
   align-items: center;
@@ -170,6 +190,7 @@ button {
   margin: 0 auto;
   position: relative;
 }
+
 .logo {
   display: flex;
   align-items: center;
@@ -177,30 +198,36 @@ button {
   flex-shrink: 0;
   z-index: 560;
 }
+
 .logo-icon img {
   border-radius: 10px;
 }
+
 .logo-text {
   display: flex;
   flex-direction: column;
   text-align: right;
 }
+
 .logo-name {
   font-size: 0.9rem;
   font-weight: 900;
   color: var(--purple-900);
   line-height: 1.2;
 }
+
 .logo-tagline {
   font-size: 0.66rem;
   font-weight: 600;
   color: var(--text-light);
 }
+
 .nav-links {
   display: flex;
   align-items: center;
   gap: 2px;
 }
+
 .nav-links a {
   display: flex;
   align-items: center;
@@ -217,14 +244,17 @@ button {
     color 0.2s var(--ease),
     transform 0.2s var(--ease);
 }
+
 .nav-links a:hover {
   background: var(--purple-50);
   color: var(--purple-700);
 }
+
 .nav-links a.active {
   background: var(--purple-700);
   color: #fff;
 }
+
 /* ============================================================
    زر القائمة
    ============================================================ */
@@ -247,9 +277,11 @@ button {
     border-color 0.2s,
     transform 0.2s;
 }
+
 .nav-toggle:active {
   transform: scale(0.94);
 }
+
 .nav-toggle span {
   display: block;
   width: 20px;
@@ -261,19 +293,24 @@ button {
     transform 0.3s var(--ease),
     opacity 0.2s;
 }
+
 .nav-toggle[aria-expanded="true"] {
   background: var(--purple-50) !important;
   border-color: var(--purple-500) !important;
 }
+
 .nav-toggle[aria-expanded="true"] span:nth-child(1) {
   transform: translateY(7.5px) rotate(45deg);
 }
+
 .nav-toggle[aria-expanded="true"] span:nth-child(2) {
   opacity: 0;
 }
+
 .nav-toggle[aria-expanded="true"] span:nth-child(3) {
   transform: translateY(-7.5px) rotate(-45deg);
 }
+
 /* ============================================================
    البانر
    ============================================================ */
@@ -281,6 +318,7 @@ button {
   position: relative;
   margin-bottom: 0;
 }
+
 .nd-banner {
   position: relative;
   width: 100%;
@@ -288,6 +326,7 @@ button {
   overflow: visible !important;
   background: var(--purple-900);
 }
+
 .nd-banner-img {
   width: 100% !important;
   height: auto !important;
@@ -295,6 +334,7 @@ button {
   object-fit: contain !important;
   object-position: center center !important;
 }
+
 .nd-banner-overlay {
   position: absolute;
   inset: 0;
@@ -306,49 +346,58 @@ button {
     );
   pointer-events: none;
 }
+
 .nd-banner-content {
   display: none !important;
 }
+
 /* ============================================================
    الأقسام العامة
    ============================================================ */
 .nd-greeting-section {
   display: none !important;
 }
+
 .hero-cta-section {
   max-width: 680px;
   margin: 0 auto 10px;
   padding: 12px 14px;
   text-align: center;
 }
+
 .hero-cta-title {
   margin-bottom: 4px;
   font-size: 1.05rem;
   font-weight: 900;
   color: var(--purple-900);
 }
+
 .hero-cta-sub {
   margin-bottom: 12px;
   font-size: 0.78rem;
   font-weight: 700;
   color: var(--text-mid);
 }
+
 .hero-cta-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
 }
-/* إصلاح محدد الأزرار */
+
 .hero-cta-actions .btn {
   flex: 0 0 auto;
 }
+
 .section {
   padding: 28px 0;
 }
+
 .section-alt {
   background: var(--surface-alt);
 }
+
 .section-head {
   display: flex;
   flex-direction: column;
@@ -358,6 +407,7 @@ button {
   margin: 0 auto 16px;
   text-align: center;
 }
+
 .section-badge {
   display: inline-block;
   padding: 5px 16px;
@@ -371,16 +421,19 @@ button {
   font-size: 0.74rem;
   font-weight: 900;
 }
+
 .section-title {
   font-size: 1.32rem;
   font-weight: 900;
   color: var(--purple-900);
 }
+
 .section-subtitle {
   color: var(--text-light);
   font-size: 0.8rem;
   font-weight: 500;
 }
+
 /* ============================================================
    بطاقات الخدمات — القائمة
    ============================================================ */
@@ -391,12 +444,14 @@ button {
   max-width: 960px;
   margin: 0 auto;
 }
+
 .price-category {
   background: transparent;
   border: none;
   box-shadow: none;
   outline: none;
 }
+
 .price-cat-title {
   display: flex;
   align-items: center;
@@ -414,6 +469,7 @@ button {
   font-size: 0.9rem;
   font-weight: 900;
 }
+
 /* ============================================================
    أزرار الأقسام القابلة للطي
    ============================================================ */
@@ -421,6 +477,7 @@ button {
   max-width: 760px;
   margin: 0 auto 12px;
 }
+
 .section-fold > summary.section-toggle {
   display: flex;
   align-items: center;
@@ -451,15 +508,18 @@ button {
     transform 0.2s var(--ease),
     box-shadow 0.2s var(--ease);
 }
+
 .section-fold > summary.section-toggle:active {
   transform: translateY(2px);
   box-shadow:
     0 3px 0 #2A1548,
     0 6px 14px rgba(59, 30, 109, 0.2) !important;
 }
+
 .section-fold > summary.section-toggle::-webkit-details-marker {
   display: none;
 }
+
 .section-fold > summary.section-toggle::after {
   content: '+';
   display: flex;
@@ -473,24 +533,29 @@ button {
   font-weight: 700;
   transition: transform 0.3s var(--ease);
 }
+
 .section-fold[open] > summary.section-toggle::after {
   content: '−';
   transform: rotate(180deg);
 }
+
 .section-fold-body {
   margin-top: 16px;
   animation: foldIn 0.35s var(--ease-out);
 }
+
 @keyframes foldIn {
   from {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
 /* ============================================================
    الإحصائيات
    ============================================================ */
@@ -506,16 +571,19 @@ button {
   background: var(--surface);
   box-shadow: var(--shadow);
 }
+
 .stat-number {
   font-size: 1.55rem;
   font-weight: 900;
   color: var(--purple-700);
 }
+
 .stat-label {
   color: var(--text-light);
   font-size: 0.72rem;
   font-weight: 700;
 }
+
 /* ============================================================
    البطاقات العامة
    ============================================================ */
@@ -530,6 +598,7 @@ button {
   max-width: 1000px;
   margin: 0 auto;
 }
+
 .feature-card,
 .tip-card,
 .doctor-card,
@@ -545,6 +614,7 @@ button {
     transform 0.3s var(--ease),
     box-shadow 0.3s var(--ease);
 }
+
 .feature-card:hover,
 .tip-card:hover,
 .doctor-card:hover,
@@ -553,6 +623,7 @@ button {
   transform: translateY(-4px);
   box-shadow: var(--shadow);
 }
+
 .feature-card h3,
 .tip-card h3,
 .doctor-card h3,
@@ -561,12 +632,14 @@ button {
   font-weight: 900;
   color: var(--purple-900);
 }
+
 .feature-card p,
 .tip-card p,
 .testimonial-text {
   font-size: 0.78rem;
   color: var(--text-mid);
 }
+
 /* ============================================================
    الحجز والنماذج
    ============================================================ */
@@ -581,6 +654,7 @@ button {
   box-shadow: var(--shadow);
   text-align: center;
 }
+
 .booking-form {
   display: flex;
   flex-direction: column;
@@ -588,16 +662,19 @@ button {
   margin-top: 12px;
   text-align: right;
 }
+
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
+
 .form-group label {
   color: var(--purple-900);
   font-size: 0.8rem;
   font-weight: 800;
 }
+
 .form-group input,
 .form-group select,
 .form-group textarea {
@@ -615,6 +692,7 @@ button {
     box-shadow 0.2s,
     background 0.2s;
 }
+
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
@@ -623,10 +701,12 @@ button {
   background: #fff;
   box-shadow: 0 0 0 3px rgba(127, 83, 209, 0.18);
 }
+
 .form-group textarea {
   min-height: 110px;
   resize: vertical;
 }
+
 /* ============================================================
    الخريطة
    ============================================================ */
@@ -638,12 +718,14 @@ button {
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
 }
+
 .map-frame {
   display: block;
   width: 100%;
   height: 280px;
   border: 0;
 }
+
 /* ============================================================
    التواصل الاجتماعي
    ============================================================ */
@@ -663,17 +745,20 @@ button {
     var(--purple-700)
   );
 }
+
 .social-title {
   color: var(--gold-light);
   font-size: 0.95rem;
   font-weight: 900;
 }
+
 .social-links {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
 }
+
 .social-links a {
   display: flex;
   align-items: center;
@@ -690,12 +775,14 @@ button {
     border-color 0.25s,
     color 0.25s;
 }
+
 .social-links a:hover {
   border-color: var(--purple-600);
   background: #fff !important;
   color: var(--purple-700);
   transform: translateY(-3px) scale(1.08);
 }
+
 /* ============================================================
    FOOTER
    ============================================================ */
@@ -705,6 +792,7 @@ button {
   background: var(--purple-900);
   color: #fff;
 }
+
 .footer-content {
   display: flex;
   flex-direction: column;
@@ -713,11 +801,13 @@ button {
   max-width: 860px;
   margin: 0 auto;
 }
+
 .footer-brand h2 {
   color: #fff;
   font-size: 1rem;
   font-weight: 900;
 }
+
 .footer-bottom {
   margin-top: 14px;
   padding-top: 12px;
@@ -726,6 +816,7 @@ button {
   font-size: 0.72rem;
   text-align: center;
 }
+
 /* ============================================================
    واتساب
    ============================================================ */
@@ -745,12 +836,15 @@ button {
   box-shadow: 0 6px 20px rgba(18, 140, 126, 0.45);
   transition: transform 0.25s var(--ease);
 }
+
 .whatsapp-float:hover {
   transform: scale(1.1);
 }
+
 .whatsapp-float:active {
   transform: scale(0.94);
 }
+
 /* ============================================================
    بطاقات الخدمات — التصميم الملكي
    ============================================================ */
@@ -763,49 +857,61 @@ button {
   padding: 10px 6px !important;
   background: transparent !important;
 }
+
 .service-card-wrap {
   position: relative;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   gap: 0 !important;
+  min-width: 0 !important;
   background: transparent !important;
   border: none !important;
   opacity: 0;
   transform: translateY(14px);
   animation: cardFadeUp 0.5s var(--ease-out) forwards;
 }
+
 .service-card-wrap:nth-child(1) {
   animation-delay: 0.04s;
 }
+
 .service-card-wrap:nth-child(2) {
   animation-delay: 0.08s;
 }
+
 .service-card-wrap:nth-child(3) {
   animation-delay: 0.12s;
 }
+
 .service-card-wrap:nth-child(4) {
   animation-delay: 0.16s;
 }
+
 .service-card-wrap:nth-child(5) {
   animation-delay: 0.2s;
 }
+
 .service-card-wrap:nth-child(6) {
   animation-delay: 0.24s;
 }
+
 .service-card-wrap:nth-child(n + 7) {
   animation-delay: 0.28s;
 }
+
 @keyframes cardFadeUp {
   from {
     opacity: 0;
     transform: translateY(14px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
 .service-card {
   position: relative !important;
   display: flex !important;
@@ -814,6 +920,7 @@ button {
   justify-content: flex-start !important;
   width: 100% !important;
   max-width: 300px !important;
+  min-width: 0 !important;
   min-height: 0 !important;
   aspect-ratio: 0.72 / 1 !important;
   margin: 0 auto !important;
@@ -845,6 +952,7 @@ button {
     box-shadow 0.3s var(--ease),
     border-color 0.3s var(--ease) !important;
 }
+
 .service-card::before {
   content: "";
   position: absolute !important;
@@ -854,6 +962,7 @@ button {
   border-radius: 17px !important;
   pointer-events: none;
 }
+
 .service-card::after {
   content: "";
   position: absolute !important;
@@ -874,6 +983,7 @@ button {
   box-shadow: 0 0 10px rgba(201, 162, 77, 0.55) !important;
   pointer-events: none;
 }
+
 .service-card:hover {
   transform: translateY(-5px) !important;
   border-color: rgba(127, 83, 209, 0.75) !important;
@@ -883,6 +993,7 @@ button {
     0 10px 0 rgba(74, 42, 133, 0.14),
     0 22px 40px rgba(59, 30, 109, 0.24) !important;
 }
+
 /* ============================================================
    إخفاء الصور الاحتياطية داخل بطاقة الخدمة
    ============================================================ */
@@ -899,6 +1010,7 @@ button {
   opacity: 0 !important;
   pointer-events: none !important;
 }
+
 /* ============================================================
    محتوى بطاقة الخدمة
    ============================================================ */
@@ -910,24 +1022,28 @@ button {
   flex-direction: column !important;
   align-items: center !important;
   justify-content: flex-start !important;
+  min-width: 0 !important;
   padding: 0 !important;
   pointer-events: none !important;
 }
+
 /* ============================================================
    اسم الخدمة
    ============================================================ */
 .service-card-name {
   position: absolute !important;
-  top: 22% !important;
+  top: 20% !important;
   left: 8% !important;
   right: 8% !important;
   z-index: 3 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  min-width: 0 !important;
   min-height: 18% !important;
+  max-height: 21% !important;
   margin: 0 !important;
-  padding: 10px 9px !important;
+  padding: 8px 9px !important;
   border: 2px solid #8060B8 !important;
   border-radius: 14px !important;
   background:
@@ -938,19 +1054,22 @@ button {
     ) !important;
   color: #3B1E6D !important;
   font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif !important;
-  font-size: clamp(0.72rem, 2.8vw, 0.92rem) !important;
+  font-size: clamp(0.68rem, 2.7vw, 0.9rem) !important;
   font-weight: 900 !important;
-  line-height: 1.3 !important;
+  line-height: 1.25 !important;
   text-align: center !important;
+  white-space: normal !important;
+  overflow: hidden !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+  text-overflow: ellipsis !important;
   box-shadow:
     0 2px 0 rgba(255, 255, 255, 0.95) inset,
     0 0 0 2px rgba(201, 162, 77, 0.18),
     0 5px 12px rgba(59, 30, 109, 0.13) !important;
-  overflow: hidden !important;
-  overflow-wrap: anywhere !important;
-  word-break: normal !important;
   pointer-events: auto !important;
 }
+
 .service-card-name::before {
   content: "";
   position: absolute;
@@ -968,6 +1087,7 @@ button {
     );
   pointer-events: none;
 }
+
 /* ============================================================
    أسعار الخدمة
    ============================================================ */
@@ -981,6 +1101,7 @@ button {
   flex-direction: row !important;
   align-items: stretch !important;
   justify-content: space-between !important;
+  min-width: 0 !important;
   height: auto !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -989,9 +1110,11 @@ button {
   border: none !important;
   pointer-events: auto !important;
 }
+
 .price-old,
 .price-now,
 .price-cell {
+  position: relative !important;
   flex: 1 1 0 !important;
   min-width: 0 !important;
   min-height: 62px !important;
@@ -1015,9 +1138,34 @@ button {
     0 0 0 2px rgba(127, 83, 209, 0.08),
     0 5px 12px rgba(59, 30, 109, 0.12) !important;
   overflow: hidden !important;
+  text-align: center !important;
 }
+
+.price-old {
+  border-color: rgba(185, 64, 74, 0.58) !important;
+  background:
+    linear-gradient(
+      145deg,
+      #FFFFFF 0%,
+      #FFF5F4 50%,
+      #F8E5E4 100%
+    ) !important;
+}
+
+.price-now {
+  border-color: #C39A50 !important;
+  background:
+    linear-gradient(
+      145deg,
+      #FFFFFF 0%,
+      #FFF9E9 48%,
+      #F3E1B7 100%
+    ) !important;
+}
+
 .price-label {
   display: block !important;
+  max-width: 100% !important;
   margin-bottom: 4px !important;
   color: #6B3FB8 !important;
   font-size: clamp(0.54rem, 1.9vw, 0.66rem) !important;
@@ -1025,11 +1173,17 @@ button {
   line-height: 1.15 !important;
   text-align: center !important;
   white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
+
+.price-old .price-value,
 .price-old.price-value {
-  position: relative !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
   color: #17151D !important;
-  font-size: clamp(0.64rem, 2.3vw, 0.8rem) !important;
+  font-size: clamp(0.62rem, 2.3vw, 0.8rem) !important;
   font-weight: 900 !important;
   line-height: 1.15 !important;
   text-align: center !important;
@@ -1038,36 +1192,54 @@ button {
   text-decoration-thickness: 2px !important;
   white-space: nowrap !important;
 }
-.price-old.price-value::after {
+
+.price-old::after {
   content: "✕" !important;
   position: absolute !important;
-  top: 50% !important;
-  left: 50% !important;
-  z-index: 2 !important;
-  transform: translate(-50%, -50%) !important;
+  top: 4px !important;
+  left: 6px !important;
+  z-index: 4 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.9) !important;
   color: #D73545 !important;
-  font-size: 1.05em !important;
+  font-size: 0.72rem !important;
   font-weight: 900 !important;
+  line-height: 1 !important;
   text-decoration: none !important;
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 1px 4px rgba(215, 53, 69, 0.18) !important;
   pointer-events: none !important;
 }
+
+.price-old.price-value::after {
+  content: none !important;
+}
+
+.price-now .price-value,
 .price-now.price-value {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
   color: #17151D !important;
-  font-size: clamp(0.74rem, 2.7vw, 0.96rem) !important;
+  font-size: clamp(0.72rem, 2.7vw, 0.96rem) !important;
   font-weight: 900 !important;
   line-height: 1.15 !important;
   text-align: center !important;
   white-space: nowrap !important;
 }
+
 /* ============================================================
    زر طلب الخدمة
-   المحدد الصحيح: .price-wa-btn
    ============================================================ */
 .price-wa-btn {
   position: absolute !important;
-  top: 68% !important;
-  bottom: auto !important;
+  top: auto !important;
+  bottom: 7% !important;
   left: 10% !important;
   right: 10% !important;
   z-index: 5 !important;
@@ -1114,6 +1286,7 @@ button {
     box-shadow 0.22s var(--ease),
     filter 0.22s ease !important;
 }
+
 .price-wa-btn::before {
   content: "";
   position: absolute;
@@ -1126,6 +1299,7 @@ button {
   pointer-events: none;
   transition: left 0.55s ease;
 }
+
 .price-wa-btn:hover {
   transform: translateY(-2px) scale(1.025) !important;
   filter: brightness(1.04);
@@ -1135,9 +1309,11 @@ button {
     inset 0 1px 0 rgba(255, 255, 255, 0.9),
     inset 0 -2px 0 rgba(115, 74, 13, 0.18) !important;
 }
+
 .price-wa-btn:hover::before {
   left: 125%;
 }
+
 .price-wa-btn:active {
   transform: translateY(2px) scale(0.98) !important;
   box-shadow:
@@ -1145,10 +1321,12 @@ button {
     0 4px 10px rgba(187, 143, 44, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.75) !important;
 }
+
 .price-wa-btn.nd-icon,
 .price-wa-btn svg {
   display: none !important;
 }
+
 /* ============================================================
    الأيقونات
    ============================================================ */
@@ -1163,23 +1341,28 @@ button {
   vertical-align: middle !important;
   overflow: hidden !important;
 }
+
 .nd-icon svg {
   display: block !important;
   width: 100% !important;
   height: 100% !important;
 }
+
 .social-links a.nd-icon {
   width: 26px !important;
   height: 26px !important;
 }
+
 .price-cat-icon.nd-icon {
   width: 1.5rem !important;
   height: 1.5rem !important;
 }
+
 .testimonial-stars.nd-icon {
   width: 1.05rem !important;
   height: 1.05rem !important;
 }
+
 /* ============================================================
    التقييمات
    ============================================================ */
@@ -1190,6 +1373,7 @@ button {
   max-width: 1000px !important;
   margin: 18px auto 22px !important;
 }
+
 .testimonial-card {
   display: flex !important;
   flex-direction: column !important;
@@ -1203,6 +1387,7 @@ button {
   text-align: center !important;
   overflow: hidden !important;
 }
+
 .testimonial-stars {
   display: flex !important;
   flex-direction: row !important;
@@ -1213,6 +1398,7 @@ button {
   height: auto !important;
   line-height: 1 !important;
 }
+
 .testimonial-text {
   margin: 0 !important;
   color: var(--text-mid) !important;
@@ -1221,6 +1407,7 @@ button {
   line-height: 1.7 !important;
   text-align: center !important;
 }
+
 .testimonial-name {
   margin: 0 !important;
   color: var(--purple-900) !important;
@@ -1228,6 +1415,7 @@ button {
   font-weight: 900 !important;
   text-align: center !important;
 }
+
 /* ============================================================
    صندوق إضافة تقييم
    ============================================================ */
@@ -1240,6 +1428,7 @@ button {
   background: var(--purple-50) !important;
   text-align: center !important;
 }
+
 .review-box h3 {
   margin: 0 0 8px !important;
   color: var(--purple-900) !important;
@@ -1247,6 +1436,7 @@ button {
   font-weight: 900 !important;
   text-align: center !important;
 }
+
 .review-box p {
   margin: 0 0 12px !important;
   color: var(--text-mid) !important;
@@ -1254,19 +1444,23 @@ button {
   font-weight: 600 !important;
   text-align: center !important;
 }
+
 .review-form {
   text-align: right !important;
 }
-/* المحددات المصححة */
+
 .review-form .form-group {
   text-align: right !important;
 }
+
 .review-form .form-group label {
   text-align: right !important;
 }
+
 .review-form .btn {
   width: 100% !important;
 }
+
 /* ============================================================
    الأسئلة الشائعة
    ============================================================ */
@@ -1274,11 +1468,13 @@ button {
   max-width: 760px;
   margin: 16px auto 0;
 }
+
 .faq-list {
   display: flex !important;
   flex-direction: column !important;
   gap: 10px !important;
 }
+
 .faq-item {
   padding: 0 !important;
   overflow: hidden !important;
@@ -1287,9 +1483,11 @@ button {
   background: var(--surface) !important;
   box-shadow: var(--shadow-sm) !important;
 }
+
 .faq-item[open] {
   border-color: var(--purple-500) !important;
 }
+
 .faq-q {
   display: flex !important;
   align-items: center !important;
@@ -1303,12 +1501,15 @@ button {
   list-style: none !important;
   transition: background 0.2s !important;
 }
+
 .faq-q::-webkit-details-marker {
   display: none !important;
 }
+
 .faq-q:hover {
   background: var(--purple-100) !important;
 }
+
 .faq-q-text {
   flex: 1 1 auto !important;
   color: var(--purple-900) !important;
@@ -1316,6 +1517,7 @@ button {
   font-weight: 900 !important;
   text-align: right !important;
 }
+
 .faq-icon {
   flex: 0 0 auto !important;
   display: inline-flex !important;
@@ -1331,10 +1533,11 @@ button {
   line-height: 1 !important;
   transition: transform 0.25s var(--ease) !important;
 }
-/* المحدد المصحح */
+
 .faq-item[open] .faq-icon {
   transform: rotate(45deg) !important;
 }
+
 .faq-a {
   padding: 12px 16px 16px !important;
   background: var(--surface) !important;
@@ -1344,12 +1547,14 @@ button {
   line-height: 1.8 !important;
   text-align: right !important;
 }
+
 /* ============================================================
    النصوص العامة
    ============================================================ */
 .reveal {
   opacity: 1;
 }
+
 .section-title,
 .section-subtitle,
 .section-badge,
@@ -1361,28 +1566,34 @@ button {
 .contact-card-title {
   text-align: center !important;
 }
+
 .section-title {
   font-weight: 900 !important;
 }
+
 .section-subtitle {
   font-weight: 700 !important;
 }
+
 .contact-line,
 .hours-list li {
   font-weight: 700 !important;
   text-align: center !important;
 }
+
 .hours-list {
   padding: 0 !important;
   list-style: none !important;
   text-align: center !important;
 }
+
 .contact-card {
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   text-align: center !important;
 }
+
 /* ============================================================
    دخول الإدارة
    ============================================================ */
@@ -1400,10 +1611,12 @@ button {
     transform 0.2s var(--ease),
     background 0.2s var(--ease);
 }
+
 #adminEntryBtn:hover {
   background: var(--purple-700) !important;
   transform: translateY(-2px);
 }
+
 /* ============================================================
    العروض والكتالوج
    ============================================================ */
@@ -1415,6 +1628,7 @@ button {
       #F3ECFF 100%
     );
 }
+
 .offers-grid,
 .catalog-grid {
   display: grid;
@@ -1428,9 +1642,11 @@ button {
   max-width: 1180px;
   margin: 0 auto;
 }
+
 .catalog-grid {
   padding-top: 6px;
 }
+
 .catalog-item {
   position: relative;
   width: 100%;
@@ -1450,6 +1666,7 @@ button {
     box-shadow 0.35s ease,
     border-color 0.35s ease;
 }
+
 .catalog-item::after {
   content: "";
   position: absolute;
@@ -1458,11 +1675,13 @@ button {
   border-radius: 17px;
   pointer-events: none;
 }
+
 .catalog-item:hover {
   transform: translateY(-7px);
   border-color: #7F53D1;
   box-shadow: 0 24px 52px rgba(59, 30, 109, 0.26);
 }
+
 .catalog-img-wrap {
   position: relative;
   width: 100%;
@@ -1471,13 +1690,16 @@ button {
   border-radius: 14px;
   background: #F4EFFF;
 }
+
 .catalog-shape-round.catalog-img-wrap {
   border-radius: 24px;
 }
+
 .catalog-shape-circle.catalog-img-wrap {
   aspect-ratio: 1 / 1;
   border-radius: 50%;
 }
+
 .catalog-img {
   display: block;
   width: 100%;
@@ -1485,9 +1707,11 @@ button {
   object-fit: cover;
   transition: transform 0.6s ease;
 }
+
 .catalog-item:hover .catalog-img {
   transform: scale(1.06);
 }
+
 .catalog-placeholder {
   display: flex;
   flex-direction: column;
@@ -1504,10 +1728,12 @@ button {
       #E8DFF8
     );
 }
+
 .catalog-placeholder-icon {
   font-size: 2.5rem;
   opacity: 0.6;
 }
+
 .catalog-caption {
   position: absolute;
   right: 0;
@@ -1524,6 +1750,7 @@ button {
   font-weight: 800;
   text-align: center;
 }
+
 .catalog-empty {
   grid-column: 1 / -1;
   width: 100%;
@@ -1536,12 +1763,14 @@ button {
   font-weight: 800;
   text-align: center;
 }
+
 .catalog-empty-hint {
   margin-top: 8px;
   color: #999;
   font-size: 0.9rem;
   font-weight: 600;
 }
+
 .catalog-add-card {
   display: flex;
   flex-direction: column;
@@ -1569,15 +1798,18 @@ button {
     box-shadow 0.25s ease,
     border-color 0.25s ease;
 }
+
 .catalog-add-card:hover {
   transform: translateY(-5px);
   border-color: #7F53D1;
   box-shadow: 0 16px 34px rgba(127, 83, 209, 0.22);
 }
+
 .catalog-add-plus {
   font-size: 2.4rem;
   line-height: 1;
 }
+
 /* ============================================================
    أدوات الكتالوج
    ============================================================ */
@@ -1592,9 +1824,11 @@ button {
   justify-content: center;
   gap: 6px;
 }
+
 body.admin-mode .catalog-tools {
   display: flex;
 }
+
 .catalog-tools button {
   padding: 6px 11px;
   border: none;
@@ -1609,45 +1843,55 @@ body.admin-mode .catalog-tools {
     transform 0.15s ease,
     opacity 0.2s ease;
 }
+
 .catalog-tools button:hover {
   transform: scale(1.07);
 }
+
 .catalog-tools button:disabled {
   opacity: 0.4;
   cursor: default;
   transform: none;
 }
+
 .catalog-tools button:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 2px;
 }
+
 .ctool-img {
   background: #f59e0b;
 }
+
 .ctool-cap {
   background: #14b8a6;
   color: #fff;
 }
+
 .ctool-order {
   background: #3B1E6D;
   color: #fff;
 }
+
 .ctool-del {
   background: #ef4444;
   color: #fff;
 }
+
 .ctool-shape {
   background: #8b5cf6;
   color: #fff;
 }
+
 .ctool-size {
   background: #7F53D1;
   color: #fff;
 }
+
 /* ============================================================
    شريط الإعلان المتحرك
-   يبدأ من بداية الرسالة ويعرضها كاملة حتى النهاية
-   ثم يعيد الحركة من البداية
+   يبدأ من بداية الرسالة من اليسار
+   ثم تنتقل الرسالة كاملة وتكرر بسلاسة
    ============================================================ */
 .announcement-bar {
   position: relative !important;
@@ -1659,12 +1903,13 @@ body.admin-mode .catalog-tools {
   margin: 0 !important;
   padding: 0 !important;
   overflow: hidden !important;
-  background: #3B1E6D !important;
-  border-top: 3px solid #8F6ADB !important;
-  border-bottom: 3px solid #8F6ADB !important;
+  background: #4A2A85 !important;
+  border-top: 1px solid rgba(201, 162, 77, 0.85) !important;
+  border-bottom: 1px solid rgba(201, 162, 77, 0.85) !important;
   white-space: nowrap !important;
   direction: ltr !important;
 }
+
 .announcement-track {
   display: flex !important;
   align-items: center !important;
@@ -1672,19 +1917,16 @@ body.admin-mode .catalog-tools {
   min-width: max-content !important;
   white-space: nowrap !important;
   direction: ltr !important;
-  /*
-   * يبدأ خارج الشاشة من اليمين.
-   * ينتهي بعد خروج كامل محتوى الرسالة من اليسار.
-   * عند انتهاء الدورة يعود للبداية ويكرر.
-   */
-  animation: marqueeFullMessage 42s linear infinite !important;
+  transform: translate3d(0, 0, 0) !important;
+  animation: marqueeFromLeft 32s linear infinite !important;
   will-change: transform;
 }
+
 .announcement-text {
   display: inline-block !important;
   flex: 0 0 auto !important;
   padding: 0 !important;
-  color: #fff !important;
+  color: #FFFFFF !important;
   font-family:
     'IBM Plex Sans Arabic',
     'Cairo',
@@ -1695,8 +1937,13 @@ body.admin-mode .catalog-tools {
   line-height: 42px !important;
   white-space: nowrap !important;
   direction: rtl !important;
-  unicode-bidi: plaintext !important;
+  unicode-bidi: isolate !important;
+  text-align: center !important;
+  text-shadow:
+    0 0 2px rgba(255, 255, 255, 0.95),
+    0 1px 7px rgba(255, 255, 255, 0.16) !important;
 }
+
 .announcement-spacer {
   display: inline-block !important;
   flex: 0 0 auto !important;
@@ -1704,23 +1951,21 @@ body.admin-mode .catalog-tools {
   min-width: 120px !important;
   height: 1px !important;
 }
-/*
- * translateX يبدأ من يمين الشاشة.
- * 100% هنا تعني عرض الـtrack نفسه، لذلك يتم إخراج
- * الرسالة كاملة من اليسار قبل بداية الدورة التالية.
- */
-@keyframes marqueeFullMessage {
+
+@keyframes marqueeFromLeft {
   0% {
-    transform: translate3d(100vw, 0, 0);
+    transform: translate3d(0, 0, 0);
   }
+
   100% {
     transform: translate3d(
-      calc(-100% - 100vw),
+      calc(-50%),
       0,
       0
     );
   }
 }
+
 /* ============================================================
    الاستجابة للجوال
    ============================================================ */
@@ -1728,9 +1973,11 @@ body.admin-mode .catalog-tools {
   .nav-links {
     display: none !important;
   }
+
   .nav-toggle {
     display: flex !important;
   }
+
   .nav-links.open {
     position: fixed !important;
     top: 0 !important;
@@ -1757,16 +2004,19 @@ body.admin-mode .catalog-tools {
     list-style: none !important;
     animation: menuSlideIn 0.3s var(--ease-out);
   }
+
   @keyframes menuSlideIn {
     from {
       opacity: 0;
       transform: translateY(-12px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
+
   .nav-links.open li {
     display: block !important;
     width: 100% !important;
@@ -1775,40 +2025,51 @@ body.admin-mode .catalog-tools {
       menuItemIn 0.35s var(--ease-out)
       forwards;
   }
+
   .nav-links.open li:nth-child(1) {
     animation-delay: 0.05s;
   }
+
   .nav-links.open li:nth-child(2) {
     animation-delay: 0.08s;
   }
+
   .nav-links.open li:nth-child(3) {
     animation-delay: 0.11s;
   }
+
   .nav-links.open li:nth-child(4) {
     animation-delay: 0.14s;
   }
+
   .nav-links.open li:nth-child(5) {
     animation-delay: 0.17s;
   }
+
   .nav-links.open li:nth-child(6) {
     animation-delay: 0.2s;
   }
+
   .nav-links.open li:nth-child(7) {
     animation-delay: 0.23s;
   }
+
   .nav-links.open li:nth-child(8) {
     animation-delay: 0.26s;
   }
+
   @keyframes menuItemIn {
     from {
       opacity: 0;
       transform: translateX(12px);
     }
+
     to {
       opacity: 1;
       transform: translateX(0);
     }
   }
+
   .nav-links.open a {
     display: flex !important;
     align-items: center !important;
@@ -1828,17 +2089,20 @@ body.admin-mode .catalog-tools {
       border-color 0.2s,
       transform 0.15s !important;
   }
+
   .nav-links.open a:active {
     background: var(--purple-50) !important;
     border-color: var(--purple-400) !important;
     color: var(--purple-800) !important;
     transform: scale(0.98);
   }
+
   .nav-links.open a.active {
     background: var(--purple-50) !important;
     border-color: var(--purple-400) !important;
     color: var(--purple-800) !important;
   }
+
   .features-grid,
   .tips-grid,
   .doctors-grid,
@@ -1846,14 +2110,17 @@ body.admin-mode .catalog-tools {
   .contact-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
   .catalog-tools button {
     font-size: 0.68rem;
     padding: 5px 9px;
   }
 }
+
 /* ============================================================
    الجوال الصغير
    ============================================================ */
@@ -1864,26 +2131,30 @@ body.admin-mode .catalog-tools {
   .contact-grid {
     grid-template-columns: 1fr;
   }
+
   .hero-cta-actions {
     flex-direction: column;
     align-items: center;
   }
-  /* إصلاح محدد الأزرار */
+
   .hero-cta-actions .btn {
     width: 100%;
     max-width: 280px;
     min-height: 48px;
     margin: 0 auto;
   }
+
   input,
   select,
   textarea {
     font-size: 16px !important;
   }
+
   .feature-card:hover,
   .tip-card:hover {
     transform: none !important;
   }
+
   /* بطاقات الخدمات */
   .service-cards {
     grid-template-columns: repeat(
@@ -1893,34 +2164,41 @@ body.admin-mode .catalog-tools {
     gap: 20px 8px !important;
     padding: 7px 4px !important;
   }
+
   .service-card {
     max-width: 100% !important;
     aspect-ratio: 0.70 / 1 !important;
     border-radius: 18px !important;
   }
+
   .service-card::before {
     inset: 6px !important;
     border-radius: 14px !important;
   }
+
   .service-card-name {
-    top: 21% !important;
+    top: 20% !important;
     left: 8% !important;
     right: 8% !important;
     min-height: 18% !important;
-    padding: 8px 5px !important;
+    max-height: 21% !important;
+    padding: 7px 5px !important;
     border-radius: 11px !important;
     font-size: clamp(
-      0.66rem,
-      3.3vw,
-      0.86rem
+      0.64rem,
+      3.2vw,
+      0.84rem
     ) !important;
+    line-height: 1.22 !important;
   }
+
   .service-card-prices {
     top: 46% !important;
     left: 8% !important;
     right: 8% !important;
     gap: 6% !important;
   }
+
   .price-old,
   .price-now,
   .price-cell {
@@ -1928,6 +2206,7 @@ body.admin-mode .catalog-tools {
     padding: 7px 3px !important;
     border-radius: 10px !important;
   }
+
   .price-label {
     margin-bottom: 3px !important;
     font-size: clamp(
@@ -1936,23 +2215,36 @@ body.admin-mode .catalog-tools {
       0.60rem
     ) !important;
   }
+
+  .price-old .price-value,
   .price-old.price-value {
     font-size: clamp(
-      0.58rem,
-      2.3vw,
+      0.56rem,
+      2.25vw,
       0.72rem
     ) !important;
   }
+
+  .price-now .price-value,
   .price-now.price-value {
     font-size: clamp(
-      0.66rem,
-      2.6vw,
+      0.64rem,
+      2.55vw,
       0.82rem
     ) !important;
   }
+
+  .price-old::after {
+    top: 3px !important;
+    left: 4px !important;
+    width: 16px !important;
+    height: 16px !important;
+    font-size: 0.64rem !important;
+  }
+
   .price-wa-btn {
-    top: 69% !important;
-    bottom: auto !important;
+    top: auto !important;
+    bottom: 7% !important;
     left: 10% !important;
     right: 10% !important;
     height: 13% !important;
@@ -1965,36 +2257,45 @@ body.admin-mode .catalog-tools {
       0.78rem
     ) !important;
   }
+
   /* شريط الإعلان */
   .announcement-bar {
     height: 42px !important;
   }
+
   .announcement-track {
-    animation-duration: 38s !important;
+    animation-duration: 30s !important;
   }
+
   .announcement-text {
     font-size: 13px !important;
     line-height: 42px !important;
   }
+
   .announcement-spacer {
     width: 120px !important;
     min-width: 120px !important;
   }
+
   .testimonials-grid {
     grid-template-columns: 1fr !important;
     gap: 12px !important;
   }
+
   .testimonial-card {
     padding: 16px 12px !important;
   }
+
   .offers-grid,
   .catalog-grid {
     gap: 18px;
   }
+
   .catalog-item {
     max-width: 100%;
   }
 }
+
 /* ============================================================
    أجهزة صغيرة جدًا
    ============================================================ */
@@ -2002,36 +2303,56 @@ body.admin-mode .catalog-tools {
   .service-card {
     border-radius: 16px !important;
   }
+
   .service-card-name {
-    top: 21% !important;
-    padding: 7px 4px !important;
-    font-size: 0.64rem !important;
+    top: 20% !important;
+    padding: 6px 4px !important;
+    font-size: 0.62rem !important;
+    line-height: 1.2 !important;
   }
+
   .service-card-prices {
     top: 46% !important;
     gap: 5% !important;
   }
+
   .price-old,
   .price-now,
   .price-cell {
     min-height: 50px !important;
     padding: 6px 2px !important;
   }
+
   .price-label {
     font-size: 0.46rem !important;
   }
+
+  .price-old .price-value,
   .price-old.price-value {
+    font-size: 0.54rem !important;
+  }
+
+  .price-now .price-value,
+  .price-now.price-value {
+    font-size: 0.64rem !important;
+  }
+
+  .price-old::after {
+    top: 3px !important;
+    left: 3px !important;
+    width: 14px !important;
+    height: 14px !important;
     font-size: 0.56rem !important;
   }
-  .price-now.price-value {
-    font-size: 0.66rem !important;
-  }
+
   .price-wa-btn {
-    top: 69% !important;
+    top: auto !important;
+    bottom: 7% !important;
     height: 13% !important;
     font-size: 0.58rem !important;
   }
 }
+
 /* ============================================================
    الكتالوج للجوال
    ============================================================ */
@@ -2040,10 +2361,12 @@ body.admin-mode .catalog-tools {
   .catalog-grid {
     gap: 18px;
   }
+
   .catalog-item {
     max-width: 100%;
   }
 }
+
 /* ============================================================
    الآيفون والمساحات الآمنة
    ============================================================ */
@@ -2051,6 +2374,7 @@ body.admin-mode .catalog-tools {
   .header {
     padding-top: env(safe-area-inset-top);
   }
+
   .whatsapp-float {
     bottom:
       calc(
@@ -2064,14 +2388,7 @@ body.admin-mode .catalog-tools {
       ) !important;
   }
 }
-/* ============================================================
-   الشريط المتحرك — الجوال
-   ============================================================ */
-@media (max-width: 640px) {
-  .announcement-track {
-    animation-duration: 38s !important;
-  }
-}
+
 /* ============================================================
    تقليل الحركة
    ============================================================ */
@@ -2084,14 +2401,17 @@ body.admin-mode .catalog-tools {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
   .service-card-wrap {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
   }
+
   .price-wa-btn::before {
     display: none !important;
   }
+
   .announcement-track {
     animation: none !important;
     transform: translate3d(0, 0, 0) !important;
