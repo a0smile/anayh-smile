@@ -829,13 +829,19 @@ button { font-family: inherit; cursor: pointer; }
   text-align: center!important;
 }
 
+/* --- الأسعار قبل (تعديل النص ليكون أسود لامع وعريض) --- */
+.price-old.price-value {
+  color: #0B0C10!important; /* أسود غني ولامع */
+  font-weight: 900!important; /* عريض جداً */
+}
+
 .price-old.price-value::after {
   content: "✕"!important;
   position: absolute!important;
   top: 50%!important;
   left: 50%!important;
   transform: translate(-50%, -50%)!important;
-  color: #E53935!important;
+  color: #E53935!important; /* علامة x الحمراء المحذوفة */
   font-size: 1.2em!important;
   font-weight: 900!important;
   text-decoration: none!important;
@@ -843,18 +849,26 @@ button { font-family: inherit; cursor: pointer; }
   z-index: 2!important;
 }
 
+/* --- الأسعار الآن (تعديل النص ليكون أسود لامع وعريض) --- */
 .price-now.price-value {
   font-size: clamp(0.74rem, 2.7vw, 0.94rem)!important;
-  font-weight: 900!important;
-  color: #3B1E6D!important;
+  font-weight: 900!important; /* عريض جداً */
+  color: #0B0C10!important; /* تعديل من البنفسجي القديم إلى أسود غني ولامع */
   line-height: 1.15!important;
   text-align: center!important;
 }
 
-/* المربع 4 — زر لطلب الخدمة */
+/* --- المربع الرئيسي للكارت (تعديل الخلفية إلى البيج وتصغير الأبعاد) --- */
+.service-card {
+  background-color: #F5F5DC!important; /* لون بيج مريح */
+  max-width: 280px!important; /* تصغير المربع للحفاظ على الأبعاد المنسقة */
+  margin: 0 auto!important;
+}
+
+/* --- المربع 4 — زر لطلب الخدمة (ذهبي لامع بخط بنفسجي مطفي عريض) --- */
 .service-card-wrap.price-wa-btn {
   position: absolute!important;
-  bottom: 6.5%!important;
+  bottom: 4%!important; /* إنزال الزر لأسفل تماماً بعد الأسعار وقبل نهاية الكارت */
   left: 11%!important;
   right: 11%!important;
   height: 12%!important;
@@ -865,32 +879,40 @@ button { font-family: inherit; cursor: pointer; }
   align-items: center!important;
   justify-content: center!important;
   gap: 4px!important;
-  background: linear-gradient(180deg, #FFE58A 0%, #FFD700 35%, #E6B800 70%, #C9A227 100%)!important;
-  color: #2A1A00!important;
+  
+  /* خلفية ذهبي لامع حقيقي مع تأثير لمعان متدرج */
+  background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)!important;
+  
+  /* الخط: بنفسجي مطفي وعريض */
+  color: #4A2E80!important; 
   font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif!important;
   font-size: clamp(0.68rem, 2.5vw, 0.84rem)!important;
-  font-weight: 900!important;
+  font-weight: 900!important; /* عريض */
+  
   border: none!important;
-  border-radius: 50px!important;
+  border-radius: 8px!important; /* جعل الزر على شكل مربع زواياه ناعمة بدلاً من الدائري القديم */
+  
+  /* ظل ذهبي يعطي إيحاء باللمعان الخارجي */
   box-shadow:
-    0 3px 0 #8B6914,
-    0 5px 14px rgba(201, 162, 39, 0.5),
-    inset 0 1px 0 rgba(255,255,255,0.55)!important;
+    0 3px 0 #7A5813,
+    0 5px 14px rgba(187, 143, 44, 0.4),
+    inset 0 1px 0 rgba(255,255,255,0.4)!important;
   text-decoration: none!important;
   width: auto!important;
   max-width: none!important;
   z-index: 5!important;
   pointer-events: auto!important;
   transition: transform 0.2s ease, box-shadow 0.2s ease!important;
-  text-shadow: 0 1px 0 rgba(255,255,255,0.35)!important;
+  text-shadow: none!important; /* إزالة الظل القديم ليكون الخط البنفسجي المطفي واضحاً ونقياً */
 }
 
+/* تأثير التفاعل للزر */
 .service-card-wrap.price-wa-btn:hover {
   transform: translateY(-2px) scale(1.03)!important;
   box-shadow:
-    0 5px 0 #8B6914,
-    0 8px 18px rgba(201, 162, 39, 0.6),
-    inset 0 1px 0 rgba(255,255,255,0.55)!important;
+    0 5px 0 #7A5813,
+    0 8px 18px rgba(187, 143, 44, 0.6),
+    inset 0 1px 0 rgba(255,255,255,0.4)!important;
 }
 
 .service-card-wrap.price-wa-btn:active {
@@ -902,7 +924,7 @@ button { font-family: inherit; cursor: pointer; }
   display: none!important;
 }
 
-/* ========== الجوال ========== */
+/* ========== تنسيق الجوال ليكون متناسق وآمن 100% ========== */
 @media (max-width: 640px) {
  .service-cards {
     gap: 18px 8px!important;
@@ -911,20 +933,21 @@ button { font-family: inherit; cursor: pointer; }
  .service-card {
     aspect-ratio: 0.70 / 1!important;
     border-radius: 16px!important;
+    background-color: #F5F5DC!important; /* تأكيد اللون البيج في الجوال */
   }
  .service-card-name {
-    top: 27%!important;
+    top: 22%!important; /* رفع الاسم قليلاً لترك مساحة */
     left: 8%!important;
     right: 8%!important;
     font-size: clamp(0.68rem, 3.3vw, 0.86rem)!important;
   }
  .service-card-prices {
-    top: 50%!important;
+    top: 45%!important; /* رفع الأسعار لتكون متوسطة ومريحة للعين */
     left: 8%!important;
     right: 8%!important;
   }
  .service-card-wrap.price-wa-btn {
-    bottom: 6%!important;
+    bottom: 5%!important; /* الحفاظ على مكان الزر الذهبي في الأسفل تماماً على الجوال */
     left: 10%!important;
     right: 10%!important;
     height: 13%!important;
