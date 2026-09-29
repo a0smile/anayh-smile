@@ -48,17 +48,42 @@ window.ND_ICONS = {
 
 window.ndIcon = function (value) {
   const v = (value == null ? '' : String(value)).trim();
+
   return window.ND_ICONS[v] || v;
 };
 
 /* كل أيقونة تُرسم عدة مرات في الصفحة، وتدرّجاتها تحمل معرّفات ثابتة.
    تكرار المعرّف يدفع المتصفح لاستخدام أول تعريف فقط فتظهر الألوان خاطئة،
-   لذلك نمنح كل نسخة معرّفات فريدة. */
+   لذلك نمنح كل نسخة معرّفات فريدة مع حماية إضافية من تعارض المعرّفات. */
 let ndIconSeq = 0;
+
 window.ndIconHtml = function (value) {
   const raw = window.ndIcon(value);
+
+  if (!raw) {
+    return '';
+  }
+
   const seq = ++ndIconSeq;
-  const html = raw.replace(/id="([^"]+)"/g, (m, id) => `id="${id}_${seq}"`)
-                  .replace(/url\(#([^)]+)\)/g, (m, id) => `url(#${id}_${seq})`);
-  return `<span class="nd-icon">${html}</span>`;
+  const prefix = 'ndIcon_' + seq + '_';
+
+  const html = raw
+    .replace(
+      /\bid="([^"]+)"/g,
+      (match, id) => `id="${prefix}${id}"`
+    )
+    .replace(
+      /url\(#([^)]+)\)/g,
+      (match, id) => `url(#${prefix}${id})`
+    )
+    .replace(
+      /href="#([^"]+)"/g,
+      (match, id) => `href="#${prefix}${id}"`
+    )
+    .replace(
+      /xlink:href="#([^"]+)"/g,
+      (match, id) => `xlink:href="#${prefix}${id}"`
+    );
+
+  return `<span class="nd-icon" aria-hidden="true">${html}</span>`;
 };
