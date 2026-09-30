@@ -1065,8 +1065,7 @@ function renderSite(data) {
       animateCounters();
     }
   );
-  /* ===== بطاقات الخدمات والأسعار ===== */
-  safeRender(
+  /* ===== بطاقات الخدمات والأسعار ===== */safeRender(
     'services',
     () => {
       const servicesGrid =
@@ -1076,12 +1075,49 @@ function renderSite(data) {
       if (!servicesGrid) return;
       const clinicData =
         clinic || {};
+      const clinicName =
+        clinicData.name != null
+          ? String(clinicData.name)
+          : 'مجمع عناية الابتسامة الطبي';
       const categories =
         Array.isArray(
           data.serviceCategories
         )
           ? data.serviceCategories
           : [];
+
+      const toothSvg = `
+        <svg class="tooth-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="toothBody__ID__" x1="16" y1="10" x2="48" y2="56" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#FFFFFF"/>
+              <stop offset="35%" stop-color="#F8F4FF"/>
+              <stop offset="70%" stop-color="#EDE4FC"/>
+              <stop offset="100%" stop-color="#D4C4F5"/>
+            </linearGradient>
+            <linearGradient id="toothShade__ID__" x1="32" y1="20" x2="32" y2="56" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0"/>
+              <stop offset="100%" stop-color="#A78BEA" stop-opacity="0.18"/>
+            </linearGradient>
+            <radialGradient id="cornerShine__ID__" cx="28%" cy="22%" r="35%" gradientUnits="objectBoundingBox">
+              <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95"/>
+              <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.25"/>
+              <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <path d="M22 14 C18 14 15 18 15 24 C15 34 17 44 19 50 C20 53 22.5 55 25 54 C27 53 27.5 49 27.5 45 L27.5 38 L36.5 38 L36.5 45 C36.5 49 37 53 39 54 C41.5 55 44 53 45 50 C47 44 49 34 49 24 C49 18 46 14 42 14 C39 14 36.5 16 32 16 C27.5 16 25 14 22 14 Z" fill="url(#toothBody__ID__)" stroke="#C4B0F0" stroke-width="1.2"/>
+          <path d="M22 14 C18 14 15 18 15 24 C15 34 17 44 19 50 C20 53 22.5 55 25 54 C27 53 27.5 49 27.5 45 L27.5 38 L36.5 38 L36.5 45 C36.5 49 37 53 39 54 C41.5 55 44 53 45 50 C47 44 49 34 49 24 C49 18 46 14 42 14 C39 14 36.5 16 32 16 C27.5 16 25 14 22 14 Z" fill="url(#toothShade__ID__)"/>
+          <ellipse cx="24" cy="22" rx="9" ry="11" fill="url(#cornerShine__ID__)" transform="rotate(-18 24 22)"/>
+          <ellipse cx="26.5" cy="28" rx="2.2" ry="2.6" fill="#3B1E6D"/>
+          <circle cx="27.2" cy="27.2" r="0.7" fill="#fff" opacity="0.9"/>
+          <ellipse cx="37.5" cy="28" rx="2.2" ry="2.6" fill="#3B1E6D"/>
+          <circle cx="38.2" cy="27.2" r="0.7" fill="#fff" opacity="0.9"/>
+          <ellipse cx="22.5" cy="32.5" rx="3" ry="1.8" fill="#E8A0C0" opacity="0.45"/>
+          <ellipse cx="41.5" cy="32.5" rx="3" ry="1.8" fill="#E8A0C0" opacity="0.45"/>
+          <path d="M26 35.5 Q32 41 38 35.5" fill="none" stroke="#3B1E6D" stroke-width="2" stroke-linecap="round"/>
+          <path d="M40 18 Q43 20 42 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity="0.55"/>
+        </svg>`;
+
       servicesGrid.innerHTML =
         categories
           .map(
@@ -1191,91 +1227,83 @@ function renderSite(data) {
                               whatsapp
                                 ? `https://wa.me/${whatsapp}?text=${waMsg}`
                                 : '#';
+                            const uid =
+                              categoryIndex +
+                              '_' +
+                              itemIndex;
+                            const svg =
+                              toothSvg
+                                .replace(
+                                  /__ID__/g,
+                                  uid
+                                );
                             return `
-                              <article
-                                class="service-card-wrap"
-                              >
-                                <div class="service-card">
-                                  <div
-                                    class="service-card-inner"
-                                  >
-                                    <h4
-                                      class="service-card-name"
-                                      ${editAttr(
-                                        base +
-                                          '.name'
-                                      )}
-                                      title="${escapeAttr(
-                                        serviceName
-                                      )}"
-                                    >
-                                      ${escapeHtml(
-                                        serviceName
-                                      )}
-                                    </h4>
-                                    <div
-                                      class="service-card-prices"
-                                    >
-                                      <span
-                                        class="price-cell price-old"
-                                      >
-                                        <span
-                                          class="price-label"
-                                        >
-                                          سابقاً
-                                        </span>
-                                        <span
-                                          class="price-value"
-                                          ${editAttr(
-                                            base +
-                                              '.oldPrice'
-                                          )}
-                                        >
-                                          ${escapeHtml(
-                                            oldPrice
-                                          )}
-                                        </span>
+                              <article class="service-card-wrap">
+                                <div class="premium-card">
+                                  <svg class="corner-ornament tl" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                                    <path d="M1 17V8A7 7 0 0 1 8 1h9" stroke="#C9A24D" stroke-width="1.5" stroke-linecap="round"/>
+                                    <circle cx="3" cy="15" r="1.5" fill="#C9A24D"/>
+                                  </svg>
+                                  <svg class="corner-ornament tr" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                                    <path d="M1 17V8A7 7 0 0 1 8 1h9" stroke="#C9A24D" stroke-width="1.5" stroke-linecap="round"/>
+                                    <circle cx="3" cy="15" r="1.5" fill="#C9A24D"/>
+                                  </svg>
+                                  <div class="card-inner">
+                                    <div class="card-icon-wrap">
+                                      <div class="card-icon-glow"></div>
+                                      <span class="sparkle s1" aria-hidden="true">
+                                        <svg viewBox="0 0 16 16"><path d="M8 0L9.5 5.5L15 7L9.5 8.5L8 14L6.5 8.5L1 7L6.5 5.5Z" fill="#fff" opacity="0.9"/></svg>
                                       </span>
-                                      <span
-                                        class="price-cell price-now"
-                                      >
-                                        <span
-                                          class="price-label"
-                                        >
-                                          الآن
-                                        </span>
-                                        <span
-                                          class="price-value"
-                                          ${editAttr(
-                                            base +
-                                              '.price'
-                                          )}
-                                        >
-                                          ${escapeHtml(
-                                            servicePrice
-                                          )}
-                                        </span>
+                                      <span class="sparkle s2" aria-hidden="true">
+                                        <svg viewBox="0 0 16 16"><path d="M8 0L9.5 5.5L15 7L9.5 8.5L8 14L6.5 8.5L1 7L6.5 5.5Z" fill="#E8D9FF"/></svg>
                                       </span>
+                                      <span class="sparkle s3" aria-hidden="true">
+                                        <svg viewBox="0 0 16 16"><path d="M8 0L9.5 5.5L15 7L9.5 8.5L8 14L6.5 8.5L1 7L6.5 5.5Z" fill="#fff"/></svg>
+                                      </span>
+                                      <div class="shine-sweep" aria-hidden="true"></div>
+                                      ${svg}
                                     </div>
+                                    <p class="card-clinic">${escapeHtml(clinicName)}</p>
+                                    <h4
+                                      class="card-service service-card-name"
+                                      ${editAttr(base + '.name')}
+                                      title="${escapeAttr(serviceName)}"
+                                    >
+                                      ${escapeHtml(serviceName)}
+                                    </h4>
+                                    <div class="card-prices service-card-prices">
+                                      <div class="price-box old price-cell price-old">
+                                        <span class="label price-label">سابقاً</span>
+                                        <span
+                                          class="value price-value"
+                                          ${editAttr(base + '.oldPrice')}
+                                        >
+                                          ${escapeHtml(oldPrice)}
+                                        </span>
+                                      </div>
+                                      <div class="price-box price-cell price-now">
+                                        <span class="label price-label">الآن</span>
+                                        <span
+                                          class="value price-value"
+                                          ${editAttr(base + '.price')}
+                                        >
+                                          ${escapeHtml(servicePrice)}
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <a
+                                      class="card-btn price-wa-btn"
+                                      href="${escapeAttr(waHref)}"
+                                      ${
+                                        whatsapp
+                                          ? 'target="_blank" rel="noopener"'
+                                          : ''
+                                      }
+                                      aria-label="لطلب خدمة ${escapeAttr(serviceName)}"
+                                    >
+                                      <span>لطلب الخدمة</span>
+                                    </a>
                                   </div>
-                                  <a
-                                    class="price-wa-btn"
-                                    href="${escapeAttr(
-                                      waHref
-                                    )}"
-                                    ${
-                                      whatsapp
-                                        ? 'target="_blank" rel="noopener"'
-                                        : ''
-                                    }
-                                    aria-label="لطلب خدمة ${escapeAttr(
-                                      serviceName
-                                    )}"
-                                  >
-                                    <span>
-                                      لطلب الخدمة
-                                    </span>
-                                  </a>
                                 </div>
                               </article>
                             `;
@@ -1306,6 +1334,7 @@ function renderSite(data) {
       );
     }
   );
+
   /* ===== النصائح اليومية القديمة ===== */
   safeRender(
     'dailyTips',
