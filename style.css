@@ -2125,3 +2125,451 @@ body.admin-mode .catalog-tools {
     transform: none !important;
   }
 }
+
+/* ============================================================
+   بطاقات الخدمات الفاخرة — سن ضاحك + كود فقط بدون صورة خلفية
+   ============================================================ */
+
+.service-cards {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 22px 14px !important;
+  width: 100%;
+  max-width: 640px !important;
+  margin: 0 auto !important;
+  padding: 8px 6px !important;
+  background: transparent !important;
+}
+
+.service-card-wrap {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  min-width: 0;
+  opacity: 0;
+  transform: translateY(14px);
+  animation: cardFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.service-card-wrap:nth-child(1) { animation-delay: 0.04s; }
+.service-card-wrap:nth-child(2) { animation-delay: 0.08s; }
+.service-card-wrap:nth-child(3) { animation-delay: 0.12s; }
+.service-card-wrap:nth-child(4) { animation-delay: 0.16s; }
+.service-card-wrap:nth-child(5) { animation-delay: 0.20s; }
+.service-card-wrap:nth-child(6) { animation-delay: 0.24s; }
+.service-card-wrap:nth-child(n + 7) { animation-delay: 0.28s; }
+
+@keyframes cardFadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* إخفاء البطاقة القديمة المعتمدة على الصورة */
+.service-card {
+  display: none !important;
+}
+
+/* البطاقة الفاخرة */
+.premium-card {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 280px !important;
+  margin: 0 auto !important;
+  border-radius: 22px !important;
+  overflow: hidden !important;
+  background: linear-gradient(165deg, #4A2A85 0%, #3B1E6D 40%, #2A1548 100%) !important;
+  box-shadow:
+    0 4px 0 #1a0d30,
+    0 14px 32px rgba(59, 30, 109, 0.32),
+    0 0 0 1px rgba(201, 162, 77, 0.35) !important;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease !important;
+}
+
+.premium-card:hover {
+  transform: translateY(-6px) scale(1.02) !important;
+  box-shadow:
+    0 6px 0 #1a0d30,
+    0 24px 48px rgba(59, 30, 109, 0.4),
+    0 0 0 1px rgba(201, 162, 77, 0.5) !important;
+}
+
+.premium-card::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 5px !important;
+  border-radius: 17px !important;
+  border: 1.5px solid rgba(201, 162, 77, 0.55) !important;
+  pointer-events: none !important;
+  z-index: 3 !important;
+}
+
+.premium-card::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 42% !important;
+  background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 100%) !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
+}
+
+.premium-card .card-inner {
+  position: relative !important;
+  z-index: 4 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  padding: 16px 14px 14px !important;
+}
+
+/* أيقونة السن */
+.premium-card .card-icon-wrap {
+  position: relative !important;
+  width: 72px !important;
+  height: 72px !important;
+  margin-bottom: 6px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.premium-card .card-icon-glow {
+  position: absolute !important;
+  inset: -10px !important;
+  border-radius: 50% !important;
+  background: radial-gradient(circle, rgba(255,255,255,0.22) 0%, rgba(167,139,250,0.18) 40%, transparent 70%) !important;
+  animation: glowPulse 2.8s ease-in-out infinite !important;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+.premium-card .tooth-svg {
+  width: 64px !important;
+  height: 64px !important;
+  position: relative !important;
+  z-index: 1 !important;
+  filter: drop-shadow(0 5px 10px rgba(0,0,0,0.35)) !important;
+  animation: toothFloat 3.5s ease-in-out infinite !important;
+  transform-origin: center center !important;
+}
+
+@keyframes toothFloat {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-5px) rotate(2deg); }
+}
+
+.premium-card:hover .tooth-svg {
+  animation: toothBounce 0.6s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+@keyframes toothBounce {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.12) rotate(4deg); }
+  70% { transform: scale(0.96) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+.premium-card .shine-sweep {
+  position: absolute !important;
+  top: 8px !important;
+  left: 10px !important;
+  width: 20px !important;
+  height: 32px !important;
+  background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.55) 50%, transparent 70%) !important;
+  border-radius: 40% !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+  animation: shineMove 3.2s ease-in-out infinite !important;
+  opacity: 0 !important;
+}
+
+@keyframes shineMove {
+  0% { opacity: 0; transform: translateX(-8px) translateY(4px) skewX(-12deg); }
+  20% { opacity: 0.85; }
+  50% { opacity: 0.5; transform: translateX(16px) translateY(-6px) skewX(-12deg); }
+  80% { opacity: 0; }
+  100% { opacity: 0; transform: translateX(-8px) translateY(4px) skewX(-12deg); }
+}
+
+.premium-card .sparkle {
+  position: absolute !important;
+  width: 6px !important;
+  height: 6px !important;
+  z-index: 3 !important;
+  pointer-events: none !important;
+}
+
+.premium-card .sparkle svg {
+  width: 100% !important;
+  height: 100% !important;
+  animation: sparkleTwinkle 2s ease-in-out infinite !important;
+}
+
+.premium-card .sparkle.s1 { top: 4px !important; right: 6px !important; }
+.premium-card .sparkle.s2 { top: 20px !important; left: 2px !important; width: 5px !important; height: 5px !important; }
+.premium-card .sparkle.s2 svg { animation-delay: 0.7s !important; }
+.premium-card .sparkle.s3 { bottom: 12px !important; right: 2px !important; width: 4px !important; height: 4px !important; }
+.premium-card .sparkle.s3 svg { animation-delay: 1.3s !important; }
+
+@keyframes sparkleTwinkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.7) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.2) rotate(20deg); }
+}
+
+/* اسم المجمع */
+.premium-card .card-clinic {
+  font-size: 0.6rem !important;
+  font-weight: 700 !important;
+  color: rgba(245, 230, 184, 0.85) !important;
+  letter-spacing: 0.03em !important;
+  margin: 0 0 7px !important;
+  text-align: center !important;
+  line-height: 1.3 !important;
+}
+
+/* اسم الخدمة — محكم حول النص */
+.premium-card .card-service,
+.premium-card .service-card-name {
+  position: static !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  margin: 0 0 10px !important;
+  padding: 5px 8px !important;
+  text-align: center !important;
+  font-size: clamp(0.7rem, 2.3vw, 0.84rem) !important;
+  font-weight: 900 !important;
+  color: #2A1548 !important;
+  line-height: 1.25 !important;
+  background: linear-gradient(180deg, #FFFDF5 0%, #F5E6B8 100%) !important;
+  border: 1.5px solid #C9A24D !important;
+  border-radius: 9px !important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.65) inset,
+    0 2px 5px rgba(0,0,0,0.16) !important;
+  overflow: hidden !important;
+  display: block !important;
+}
+
+/* الأسعار */
+.premium-card .card-prices,
+.premium-card .service-card-prices {
+  position: static !important;
+  display: flex !important;
+  width: 100% !important;
+  gap: 8px !important;
+  margin: 0 0 12px !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+.premium-card .price-box,
+.premium-card .price-cell {
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  padding: 5px 4px !important;
+  background: linear-gradient(180deg, #FFFDF5 0%, #F5E6B8 100%) !important;
+  border: 1.5px solid #C9A24D !important;
+  border-radius: 8px !important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.65) inset,
+    0 2px 4px rgba(0,0,0,0.12) !important;
+}
+
+.premium-card .label,
+.premium-card .price-label {
+  display: block !important;
+  font-size: clamp(0.48rem, 1.6vw, 0.55rem) !important;
+  font-weight: 900 !important;
+  color: #6B4E96 !important;
+  line-height: 1.1 !important;
+  margin-bottom: 2px !important;
+  text-align: center !important;
+}
+
+.premium-card .value,
+.premium-card .price-value {
+  font-size: clamp(0.68rem, 2.3vw, 0.8rem) !important;
+  font-weight: 900 !important;
+  color: #1A1228 !important;
+  line-height: 1.15 !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  text-decoration: none !important;
+  position: static !important;
+}
+
+.premium-card .price-box.old .value,
+.premium-card .price-old .price-value {
+  text-decoration: line-through !important;
+  text-decoration-color: #E53935 !important;
+  text-decoration-thickness: 1.5px !important;
+  color: #4a3a5c !important;
+}
+
+.premium-card .price-old .price-value::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* زر الطلب */
+.premium-card .card-btn,
+.premium-card .price-wa-btn {
+  position: static !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  max-width: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  margin: 0 !important;
+  padding: 8px 10px !important;
+  border: 1px solid rgba(255, 230, 150, 0.5) !important;
+  border-radius: 9px !important;
+  cursor: pointer !important;
+  font-family: inherit !important;
+  font-size: clamp(0.7rem, 2.3vw, 0.8rem) !important;
+  font-weight: 900 !important;
+  color: #2A1548 !important;
+  text-decoration: none !important;
+  background: linear-gradient(
+    180deg,
+    #F8E9B0 0%,
+    #E8C84A 22%,
+    #D4A017 50%,
+    #C9A24D 75%,
+    #A67C1A 100%
+  ) !important;
+  box-shadow:
+    0 3px 0 #7A5813,
+    0 5px 12px rgba(166, 124, 26, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  letter-spacing: 0.02em !important;
+  line-height: 1.2 !important;
+  z-index: 5 !important;
+  pointer-events: auto !important;
+  text-shadow: none !important;
+}
+
+.premium-card .card-btn:hover,
+.premium-card .price-wa-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow:
+    0 5px 0 #7A5813,
+    0 8px 16px rgba(166, 124, 26, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
+}
+
+.premium-card .card-btn:active,
+.premium-card .price-wa-btn:active {
+  transform: translateY(1px) scale(0.98) !important;
+}
+
+.premium-card .price-wa-btn .nd-icon,
+.premium-card .price-wa-btn svg {
+  display: none !important;
+}
+
+/* زخارف الزوايا */
+.premium-card .corner-ornament {
+  position: absolute !important;
+  width: 16px !important;
+  height: 16px !important;
+  z-index: 5 !important;
+  opacity: 0.7 !important;
+  pointer-events: none !important;
+}
+
+.premium-card .corner-ornament.tl { top: 11px !important; right: 11px !important; }
+.premium-card .corner-ornament.tr { top: 11px !important; left: 11px !important; transform: scaleX(-1) !important; }
+
+@media (max-width: 720px) {
+  .service-cards {
+    gap: 16px 10px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .service-cards {
+    gap: 12px 8px !important;
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+  }
+
+  .premium-card {
+    border-radius: 18px !important;
+  }
+
+  .premium-card .card-inner {
+    padding: 12px 10px 12px !important;
+  }
+
+  .premium-card .card-icon-wrap {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  .premium-card .tooth-svg {
+    width: 54px !important;
+    height: 54px !important;
+  }
+
+  .premium-card .card-service,
+  .premium-card .service-card-name {
+    padding: 4px 6px !important;
+    font-size: clamp(0.62rem, 2.8vw, 0.74rem) !important;
+    border-radius: 7px !important;
+  }
+
+  .premium-card .price-box,
+  .premium-card .price-cell {
+    padding: 4px 3px !important;
+    border-radius: 6px !important;
+  }
+
+  .premium-card .card-btn,
+  .premium-card .price-wa-btn {
+    padding: 6px 8px !important;
+    font-size: clamp(0.62rem, 2.5vw, 0.72rem) !important;
+    border-radius: 7px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .premium-card .tooth-svg,
+  .premium-card .card-icon-glow,
+  .premium-card .shine-sweep,
+  .premium-card .sparkle svg {
+    animation: none !important;
+  }
+
+  .premium-card:hover {
+    transform: none !important;
+  }
+}
