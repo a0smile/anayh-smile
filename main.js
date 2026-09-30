@@ -3,134 +3,167 @@
    لا تحتاج تعديل هذا الملف — كل المحتوى في content.json
    وضع المالك (أزرار التعديل) في ملف admin.js
    ============================================ */
-
 let siteData = null;
-
 /* ===== مسارات قابلة للتعديل تُقرأ من localStorage (وضع المالك) ===== */
 const OVERRIDES_KEY = 'smile_overrides';
 window.OVERRIDES_KEY = OVERRIDES_KEY;
-
 function getOverrides() {
   try {
-    return JSON.parse(localStorage.getItem(OVERRIDES_KEY)) || {};
+    const raw = localStorage.getItem(OVERRIDES_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    return parsed &&
+      typeof parsed === 'object' &&
+      !Array.isArray(parsed)
+      ? parsed
+      : {};
   } catch {
     return {};
   }
 }
-
 function getDeep(obj, path) {
-  return path.split('.').reduce((o, k) => (o == null ? o : o[k]), obj);
+  if (!obj || !path) return undefined;
+  return String(path)
+    .split('.')
+    .reduce(
+      (value, key) =>
+        value == null ? value : value[key],
+      obj
+    );
 }
-
 function setDeep(obj, path, value) {
-  const keys = path.split('.');
+  if (!obj || !path) return;
+  const keys = String(path).split('.');
   let cur = obj;
-
   for (let i = 0; i < keys.length - 1; i++) {
-    if (cur[keys[i]] == null) {
-      cur[keys[i]] = /^\d+$/.test(keys[i + 1]) ? [] : {};
+    const key = keys[i];
+    const nextKey = keys[i + 1];
+    if (
+      cur[key] == null ||
+      typeof cur[key] !== 'object'
+    ) {
+      cur[key] = /^\d+$/.test(nextKey)
+        ? []
+        : {};
     }
-    cur = cur[keys[i]];
+    cur = cur[key];
   }
-
   cur[keys[keys.length - 1]] = value;
 }
-
 function applyOverrides(data) {
+  if (!data || typeof data !== 'object') {
+    return data;
+  }
   const overrides = getOverrides();
-
-  Object.entries(overrides).forEach(([path, value]) => {
-    setDeep(data, path, value);
-  });
-
+  Object.entries(overrides).forEach(
+    ([path, value]) => {
+      if (!path) return;
+      setDeep(data, path, value);
+    }
+  );
   return data;
 }
-
 window.applyOverrides = applyOverrides;
-
+/* ===== حماية النصوص عند إنشاء HTML ديناميكي ===== */
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+function escapeAttr(value) {
+  return escapeHtml(value);
+}
+/* ===== مساعدة روابط آمنة ===== */
+function normalizeUrl(value) {
+  if (!value) return '';
+  return String(value).trim();
+}
+function normalizeWhatsApp(value) {
+  if (!value) return '';
+  return String(value)
+    .replace(/[^\d]/g, '')
+    .trim();
+}
 /* ===== مسح تعديلات محلية قديمة فيها نصوص اليوم الوطني فقط ===== */
 function purgeNationalDayOverrides() {
   try {
     const raw = localStorage.getItem(OVERRIDES_KEY);
-
     if (!raw) return;
-
     const ov = JSON.parse(raw);
-
-    if (!ov || typeof ov !== 'object') return;
-
+    if (
+      !ov ||
+      typeof ov !== 'object' ||
+      Array.isArray(ov)
+    ) {
+      return;
+    }
     const bad =
       /وطني|دام عزك|عزنا بطبعنا|نحلم ونحقق|اليوم الوطني|عرض اليوم|احجز عرض اليوم/i;
-
     let changed = false;
-
-    Object.keys(ov).forEach((k) => {
-      const v = ov[k];
-
-      if (typeof v === 'string' && bad.test(v)) {
-        delete ov[k];
+    Object.keys(ov).forEach((key) => {
+      const value = ov[key];
+      if (
+        typeof value === 'string' &&
+        bad.test(value)
+      ) {
+        delete ov[key];
         changed = true;
       }
     });
-
-    if ('nationalDay' in ov) {
+    if (
+      Object.prototype.hasOwnProperty.call(
+        ov,
+        'nationalDay'
+      )
+    ) {
       delete ov.nationalDay;
       changed = true;
     }
-
     if (changed) {
       localStorage.setItem(
         OVERRIDES_KEY,
         JSON.stringify(ov)
       );
     }
-  } catch (e) {}
+  } catch (error) {
+    console.warn(
+      'تعذر تنظيف التعديلات المحلية القديمة.',
+      error
+    );
+  }
 }
-
 /* ===== تحميل المحتوى ===== */
 async function loadContent() {
   try {
     purgeNationalDayOverrides();
-
-    const response = await fetch('content.json?v=27', {
-      cache: 'no-cache'
-    });
-
+    const response = await fetch(
+      'content.json',
+      {
+        cache: 'no-store'
+      }
+    );
     if (!response.ok) {
-      throw new Error('HTTP ' + response.status);
+      throw new Error(
+        'HTTP ' + response.status
+      );
     }
-
     const data = await response.json();
-
-    siteData = applyOverrides(data);
-
-    renderSite(siteData);
-
-    if (siteData) {
-      if (siteData.heroImage1) {
-        const img1 = document.getElementById('heroImage1');
-        const ph1 = document.getElementById('heroImagePlaceholder');
-
-        if (img1 && ph1) {
-          img1.src = siteData.heroImage1;
-          img1.style.display = 'block';
-          ph1.style.display = 'none';
-        }
-      }
-
-      if (siteData.heroImage2) {
-        const img2 = document.getElementById('heroImage2');
-        const ph2 = document.getElementById('heroImagePlaceholder2');
-
-        if (img2 && ph2) {
-          img2.src = siteData.heroImage2;
-          img2.style.display = 'block';
-          ph2.style.display = 'none';
-        }
-      }
+    if (
+      !data ||
+      typeof data !== 'object'
+    ) {
+      throw new Error(
+        'محتوى content.json غير صالح.'
+      );
     }
-
-    document.dispatchEvent(new CustomEvent('siteRendered'));
+    siteData = applyOverrides(data);
+    renderSite(siteData);
+    document.dispatchEvent(
+      new CustomEvent('siteRendered')
+    );
   } catch (error) {
     console.error(
       'تعذر تحميل ملف المحتوى content.json',
@@ -138,1602 +171,1993 @@ async function loadContent() {
     );
   }
 }
-
+/* ===== النصوص ===== */
 function setText(id, text) {
   const el = document.getElementById(id);
-
-  if (el && text != null && text !== '') {
-    el.textContent = text;
-  }
+  if (!el || text == null) return;
+  el.textContent = String(text);
 }
-
 function editAttr(path) {
-  return ` data-edit="${path}" data-edit-type="text"`;
+  return (
+    ` data-edit="${escapeAttr(path)}"` +
+    ` data-edit-type="text"`
+  );
 }
-
 function markEditable(id, path) {
   const el = document.getElementById(id);
-
-  if (!el) return;
-
-  el.setAttribute('data-edit', path);
-  el.setAttribute('data-edit-type', 'text');
+  if (!el || !path) return;
+  el.setAttribute(
+    'data-edit',
+    path
+  );
+  el.setAttribute(
+    'data-edit-type',
+    'text'
+  );
 }
-
 function safeRender(name, fn) {
   try {
     fn();
-  } catch (e) {
+  } catch (error) {
     console.error(
       'خطأ أثناء عرض قسم: ' + name,
-      e
+      error
     );
   }
 }
-
 /* ===== عدادات الإحصائيات ===== */
 function animateCounters() {
   const els = document.querySelectorAll(
     '.count-up:not(.counted)'
   );
-
   if (!els.length) return;
-
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-
-        io.unobserve(entry.target);
-
-        entry.target.classList.add('counted');
-
-        const raw = String(
-          entry.target.dataset.target || ''
-        );
-
-        const match = raw.match(/^(\d+)([\s\S]*)$/);
-
-        if (!match) {
-          entry.target.textContent = raw;
-          return;
-        }
-
-        const end = +match[1];
-        const suffix = match[2];
-        const dur = 1300;
-        const t0 = performance.now();
-
-        const tick = (now) => {
-          const p = Math.min(
-            (now - t0) / dur,
-            1
-          );
-
-          const eased =
-            1 - Math.pow(1 - p, 3);
-
-          entry.target.textContent =
-            Math.round(end * eased) + suffix;
-
-          if (p < 1) {
-            requestAnimationFrame(tick);
+  if (
+    typeof IntersectionObserver ===
+    'undefined'
+  ) {
+    els.forEach((el) => {
+      el.classList.add('counted');
+      const raw = String(
+        el.dataset.target || ''
+      );
+      el.textContent = raw;
+    });
+    return;
+  }
+  const io =
+    new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
           }
-        };
-
-        requestAnimationFrame(tick);
-      });
-    },
-    {
-      threshold: 0.35
-    }
+          io.unobserve(entry.target);
+          entry.target.classList.add(
+            'counted'
+          );
+          const raw = String(
+            entry.target.dataset.target ||
+              ''
+          );
+          const match = raw.match(
+            /^(\d+)([\s\S]*)$/
+          );
+          if (!match) {
+            entry.target.textContent =
+              raw;
+            return;
+          }
+          const end = Number(match[1]);
+          const suffix = match[2];
+          const dur = 1300;
+          const t0 = performance.now();
+          const tick = (now) => {
+            const p = Math.min(
+              (now - t0) / dur,
+              1
+            );
+            const eased =
+              1 -
+              Math.pow(
+                1 - p,
+                3
+              );
+            entry.target.textContent =
+              Math.round(
+                end * eased
+              ) + suffix;
+            if (p < 1) {
+              requestAnimationFrame(
+                tick
+              );
+            }
+          };
+          requestAnimationFrame(tick);
+        });
+      },
+      {
+        threshold: 0.35
+      }
+    );
+  els.forEach((el) =>
+    io.observe(el)
   );
-
-  els.forEach((el) => io.observe(el));
 }
-
 /* ===== أيقونات ===== */
 function ndStar() {
   return window.ndIconHtml
     ? window.ndIconHtml('star')
     : '<span class="nd-icon"></span>';
 }
-
 function ndStars(count) {
   const n = Math.max(
     0,
-    Math.min(5, Number(count) || 5)
+    Math.min(
+      5,
+      Number(count) || 5
+    )
   );
-
   let html = '';
-
   for (let i = 0; i < n; i++) {
     html += ndStar();
   }
-
   return html;
 }
-
 /* ===== ضبط اسم الخدمة داخل البطاقة ===== */
 function fitServiceCardNames() {
   document
-    .querySelectorAll('.service-card-name')
+    .querySelectorAll(
+      '.service-card-name'
+    )
     .forEach((el) => {
-      const rect = el.getBoundingClientRect();
-
+      const rect =
+        el.getBoundingClientRect();
       if (
         rect.width <= 0 ||
         rect.height <= 0
       ) {
         return;
       }
-
       let size =
         parseFloat(
-          getComputedStyle(el).fontSize
+          getComputedStyle(el)
+            .fontSize
         ) || 14;
-
       const min = 8;
       const maxWidth =
-        Math.max(1, el.clientWidth - 8);
+        Math.max(
+          1,
+          el.clientWidth - 8
+        );
       const maxHeight =
-        Math.max(1, el.clientHeight - 8);
-
-      el.style.fontSize = size + 'px';
-
+        Math.max(
+          1,
+          el.clientHeight - 8
+        );
+      el.style.fontSize =
+        size + 'px';
       let guard = 0;
-
       while (
         (
-          el.scrollWidth > maxWidth ||
-          el.scrollHeight > maxHeight
+          el.scrollWidth >
+            maxWidth ||
+          el.scrollHeight >
+            maxHeight
         ) &&
         size > min &&
         guard < 40
       ) {
         size -= 0.5;
-        el.style.fontSize = size + 'px';
+        el.style.fontSize =
+          size + 'px';
         guard++;
       }
     });
 }
-
 function renderDataIcons() {
   document
-    .querySelectorAll('.nd-icon[data-icon]')
+    .querySelectorAll(
+      '.nd-icon[data-icon]'
+    )
     .forEach((el) => {
-      el.innerHTML = window.ndIconHtml
-        ? window.ndIconHtml(
-            el.getAttribute('data-icon')
-          )
-        : '';
+      el.innerHTML =
+        window.ndIconHtml
+          ? window.ndIconHtml(
+              el.getAttribute(
+                'data-icon'
+              )
+            )
+          : '';
     });
 }
-
 /* ===== عرض الموقع ===== */
 function renderSite(data) {
+  if (
+    !data ||
+    typeof data !== 'object'
+  ) {
+    return;
+  }
   renderDataIcons();
-
-  const {
-    clinic,
-    hero,
-    booking
-  } = data;
-
-  const sections = data.sections || {};
-
+  const clinic =
+    data.clinic &&
+    typeof data.clinic === 'object'
+      ? data.clinic
+      : {};
+  const hero =
+    data.hero &&
+    typeof data.hero === 'object'
+      ? data.hero
+      : {};
+  const booking =
+    data.booking &&
+    typeof data.booking === 'object'
+      ? data.booking
+      : {};
+  const sections =
+    data.sections &&
+    typeof data.sections === 'object'
+      ? data.sections
+      : {};
   const testimonials =
-    data.testimonials ||
-    data.reviews ||
-    [];
-
+    Array.isArray(data.testimonials)
+      ? data.testimonials
+      : Array.isArray(data.reviews)
+        ? data.reviews
+        : [];
   const workingHours =
-    data.workingHours || [];
-
+    Array.isArray(data.workingHours)
+      ? data.workingHours
+      : [];
   const bookingServices =
-    data.bookingServices || [];
-
+    Array.isArray(
+      data.bookingServices
+    )
+      ? data.bookingServices
+      : [];
   document.title =
     clinic.name ||
     document.title;
-
   /* ===== الأقسام ===== */
-  safeRender('sections', () => {
-    const pairs = [
-      ['servicesBadge', 'sections.servicesBadge'],
-      ['servicesTitle', 'sections.servicesTitle'],
-      ['servicesSubtitle', 'sections.servicesSubtitle'],
-      ['tipsBadge', 'sections.tipsBadge'],
-      ['tipsTitle', 'sections.tipsTitle'],
-      ['tipsSubtitle', 'sections.tipsSubtitle'],
-      ['dailyTipsTitle', 'sections.dailyTipsTitle'],
-      ['featuresBadge', 'sections.featuresBadge'],
-      ['featuresTitle', 'sections.featuresTitle'],
-      ['featuresSubtitle', 'sections.featuresSubtitle'],
-      ['doctorsBadge', 'sections.doctorsBadge'],
-      ['doctorsTitle', 'sections.doctorsTitle'],
-      ['doctorsSubtitle', 'sections.doctorsSubtitle'],
-      ['reviewsBadge', 'sections.reviewsBadge'],
-      ['reviewsTitle', 'sections.reviewsTitle'],
-      ['reviewsSubtitle', 'sections.reviewsSubtitle'],
-      ['reviewBoxTitle', 'sections.reviewBoxTitle'],
-      ['reviewBoxText', 'sections.reviewBoxText'],
-      ['reviewSubmitBtn', 'sections.reviewButton'],
-      ['contactBadge', 'sections.contactBadge'],
-      ['contactTitle', 'sections.contactTitle'],
-      ['contactAddressTitle', 'sections.contactAddressTitle'],
-      ['contactPhoneTitle', 'sections.contactPhoneTitle'],
-      ['contactHoursTitle', 'sections.contactHoursTitle'],
-      ['formNote', 'sections.formNote'],
-      ['support1', 'sections.support1'],
-      ['support2', 'sections.support2'],
-      ['footerDesc', 'sections.footerDesc']
-    ];
-
-    pairs.forEach(([id, path]) => {
-      setText(
-        id,
-        getDeep(
-          sections,
-          path
-            .split('.')
-            .slice(1)
-            .join('.')
-        )
+  safeRender(
+    'sections',
+    () => {
+      const pairs = [
+        [
+          'servicesBadge',
+          'sections.servicesBadge'
+        ],
+        [
+          'servicesTitle',
+          'sections.servicesTitle'
+        ],
+        [
+          'servicesSubtitle',
+          'sections.servicesSubtitle'
+        ],
+        [
+          'tipsBadge',
+          'sections.tipsBadge'
+        ],
+        [
+          'tipsTitle',
+          'sections.tipsTitle'
+        ],
+        [
+          'tipsSubtitle',
+          'sections.tipsSubtitle'
+        ],
+        [
+          'dailyTipsTitle',
+          'sections.dailyTipsTitle'
+        ],
+        [
+          'featuresBadge',
+          'sections.featuresBadge'
+        ],
+        [
+          'featuresTitle',
+          'sections.featuresTitle'
+        ],
+        [
+          'featuresSubtitle',
+          'sections.featuresSubtitle'
+        ],
+        [
+          'doctorsBadge',
+          'sections.doctorsBadge'
+        ],
+        [
+          'doctorsTitle',
+          'sections.doctorsTitle'
+        ],
+        [
+          'doctorsSubtitle',
+          'sections.doctorsSubtitle'
+        ],
+        [
+          'reviewsBadge',
+          'sections.reviewsBadge'
+        ],
+        [
+          'reviewsTitle',
+          'sections.reviewsTitle'
+        ],
+        [
+          'reviewsSubtitle',
+          'sections.reviewsSubtitle'
+        ],
+        [
+          'reviewBoxTitle',
+          'sections.reviewBoxTitle'
+        ],
+        [
+          'reviewBoxText',
+          'sections.reviewBoxText'
+        ],
+        [
+          'reviewSubmitBtn',
+          'sections.reviewButton'
+        ],
+        [
+          'contactBadge',
+          'sections.contactBadge'
+        ],
+        [
+          'contactTitle',
+          'sections.contactTitle'
+        ],
+        [
+          'contactAddressTitle',
+          'sections.contactAddressTitle'
+        ],
+        [
+          'contactPhoneTitle',
+          'sections.contactPhoneTitle'
+        ],
+        [
+          'contactHoursTitle',
+          'sections.contactHoursTitle'
+        ],
+        [
+          'formNote',
+          'sections.formNote'
+        ],
+        [
+          'support1',
+          'sections.support1'
+        ],
+        [
+          'support2',
+          'sections.support2'
+        ],
+        [
+          'footerDesc',
+          'sections.footerDesc'
+        ]
+      ];
+      pairs.forEach(
+        ([id, path]) => {
+          const relativePath =
+            path
+              .split('.')
+              .slice(1)
+              .join('.');
+          setText(
+            id,
+            getDeep(
+              sections,
+              relativePath
+            )
+          );
+          markEditable(
+            id,
+            path
+          );
+        }
       );
-
-      markEditable(id, path);
-    });
-
-    const noteEl =
-      document.getElementById(
-        'servicesNote'
-      );
-
-    if (noteEl) {
-      noteEl.innerHTML =
-        sections.servicesNote || '';
-
-      markEditable(
-        'servicesNote',
-        'sections.servicesNote'
-      );
+      const noteEl =
+        document.getElementById(
+          'servicesNote'
+        );
+      if (noteEl) {
+        noteEl.innerHTML =
+          String(
+            sections.servicesNote ||
+              ''
+          );
+        markEditable(
+          'servicesNote',
+          'sections.servicesNote'
+        );
+      }
     }
-  });
-
+  );
   /* ===== اليوم الوطني / البيانات القديمة ===== */
-  safeRender('nationalDay', () => {
-    const nd =
-      data.nationalDay || {};
-
-    const l =
-      data.landmarks || [];
-
-    const sectionData =
-      data.sections || {};
-
-    if (nd.blendImage) {
-      const b =
+  safeRender(
+    'nationalDay',
+    () => {
+      const nd =
+        data.nationalDay &&
+        typeof data.nationalDay ===
+          'object'
+          ? data.nationalDay
+          : {};
+      const landmarks =
+        Array.isArray(
+          data.landmarks
+        )
+          ? data.landmarks
+          : [];
+      const sectionData = sections;
+      const blend =
         document.getElementById(
           'ndBlendImage'
         );
-
-      if (b) {
-        b.src = nd.blendImage;
-
-        b.setAttribute(
+      if (blend) {
+        if (nd.blendImage) {
+          blend.src =
+            nd.blendImage;
+          blend.style.display =
+            '';
+        }
+        blend.setAttribute(
           'data-edit',
           'nationalDay.blendImage'
         );
-
-        b.setAttribute(
+        blend.setAttribute(
           'data-edit-type',
           'image'
         );
       }
-    }
-
-    if (nd.flagImage) {
-      const f =
+      const flag =
         document.getElementById(
           'ndFlagImage'
         );
-
-      if (f) {
-        f.src = nd.flagImage;
-
-        f.setAttribute(
+      if (flag) {
+        if (nd.flagImage) {
+          flag.src =
+            nd.flagImage;
+          flag.style.display =
+            '';
+        }
+        flag.setAttribute(
           'data-edit',
           'nationalDay.flagImage'
         );
-
-        f.setAttribute(
+        flag.setAttribute(
           'data-edit-type',
           'image'
         );
       }
-    }
-
-    if (nd.emblemImage) {
-      const e =
+      const emblem =
         document.getElementById(
           'ndEmblemImage'
         );
-
-      if (e) {
-        e.src = nd.emblemImage;
-
-        e.setAttribute(
+      if (emblem) {
+        if (nd.emblemImage) {
+          emblem.src =
+            nd.emblemImage;
+          emblem.style.display =
+            '';
+        }
+        emblem.setAttribute(
           'data-edit',
           'nationalDay.emblemImage'
         );
-
-        e.setAttribute(
+        emblem.setAttribute(
           'data-edit-type',
           'image'
         );
       }
-    }
-
-    setText(
-      'nationalDayBadge',
-      nd.badge ||
-        sectionData.nationalDayBadge
-    );
-
-    setText(
-      'nationalDayTitle',
-      nd.greetingTitle
-    );
-
-    setText(
-      'nationalDayGreeting',
-      nd.greeting
-    );
-
-    setText(
-      'nationalDayGreeting2',
-      nd.greeting2
-    );
-
-    setText(
-      'nationalDayGreeting3',
-      nd.greeting3 ||
-        'وكل عام وأنتم بعز وفخر وأمان'
-    );
-
-    setText(
-      'nationalDayClosing',
-      nd.closing
-    );
-
-    setText(
-      'landmarksBadge',
-      sectionData.landmarksBadge
-    );
-
-    setText(
-      'landmarksTitle',
-      sectionData.landmarksTitle
-    );
-
-    setText(
-      'landmarksSubtitle',
-      sectionData.landmarksSubtitle
-    );
-
-    const lg =
-      document.getElementById(
-        'landmarksGrid'
+      setText(
+        'nationalDayBadge',
+        nd.badge ||
+          sectionData.nationalDayBadge
       );
-
-    if (lg) {
-      lg.innerHTML =
-        l
-          .map(
-            (m, i) => `
-          <figure class="landmark-card reveal"${editAttr(
-            `landmarks.${i}.image`
-          )}>
-            <img
-              src="${m.image}"
-              alt="${m.title} — ${m.subtitle || ''}"
-              loading="lazy"
+      setText(
+        'nationalDayTitle',
+        nd.greetingTitle
+      );
+      setText(
+        'nationalDayGreeting',
+        nd.greeting
+      );
+      setText(
+        'nationalDayGreeting2',
+        nd.greeting2
+      );
+      setText(
+        'nationalDayGreeting3',
+        nd.greeting3 ||
+          'وكل عام وأنتم بعز وفخر وأمان'
+      );
+      setText(
+        'nationalDayClosing',
+        nd.closing
+      );
+      setText(
+        'landmarksBadge',
+        sectionData.landmarksBadge
+      );
+      setText(
+        'landmarksTitle',
+        sectionData.landmarksTitle
+      );
+      setText(
+        'landmarksSubtitle',
+        sectionData.landmarksSubtitle
+      );
+      const landmarksGrid =
+        document.getElementById(
+          'landmarksGrid'
+        );
+      if (landmarksGrid) {
+        landmarksGrid.innerHTML =
+          landmarks
+            .map(
+              (item, index) => {
+                const image =
+                  escapeAttr(
+                    item &&
+                      item.image
+                      ? item.image
+                      : ''
+                  );
+                const title =
+                  escapeHtml(
+                    item &&
+                      item.title
+                      ? item.title
+                      : ''
+                  );
+                const subtitle =
+                  escapeHtml(
+                    item &&
+                      item.subtitle
+                      ? item.subtitle
+                      : ''
+                  );
+                return `
+                  <figure
+                    class="landmark-card reveal"
+                    ${editAttr(
+                      `landmarks.${index}.image`
+                    )}
+                  >
+                    <img
+                      src="${image}"
+                      alt="${title} — ${subtitle}"
+                      loading="lazy"
+                    >
+                    <figcaption>
+                      <h3${editAttr(
+                        `landmarks.${index}.title`
+                      )}>
+                        ${title}
+                      </h3>
+                      <p${editAttr(
+                        `landmarks.${index}.subtitle`
+                      )}>
+                        ${subtitle}
+                      </p>
+                    </figcaption>
+                  </figure>
+                `;
+              }
+            )
+            .join('');
+      }
+    }
+  );
+  /* ===== الشريط المتحرك ===== */
+  safeRender(
+    'announcement',
+    () => {
+      const bar =
+        document.getElementById(
+          'announcementBar'
+        );
+      if (!bar) return;
+      if (
+        data.announcement != null &&
+        String(
+          data.announcement
+        ).trim() !== ''
+      ) {
+        bar.style.display = '';
+        const track =
+          bar.querySelector(
+            '.announcement-track'
+          );
+        const ann =
+          escapeHtml(
+            String(
+              data.announcement
+            )
+          );
+        if (track) {
+          track.innerHTML = `
+            <span class="announcement-text">
+              <span id="announcementText">
+                ${ann}
+              </span>
+            </span>
+            <span
+              class="announcement-spacer"
+              aria-hidden="true"
+            ></span>
+            <span
+              class="announcement-text"
+              aria-hidden="true"
             >
-            <figcaption>
-              <h3${editAttr(
-                `landmarks.${i}.title`
-              )}>${m.title}</h3>
-              <p${editAttr(
-                `landmarks.${i}.subtitle`
-              )}>${m.subtitle || ''}</p>
-            </figcaption>
-          </figure>
-        `
+              <span id="announcementText2">
+                ${ann}
+              </span>
+            </span>
+            <span
+              class="announcement-spacer"
+              aria-hidden="true"
+            ></span>
+          `;
+        }
+        bar.setAttribute(
+          'data-edit',
+          'announcement'
+        );
+        bar.setAttribute(
+          'data-edit-type',
+          'text'
+        );
+        bar.setAttribute(
+          'data-edit-label',
+          'نص الشريط المتحرك'
+        );
+      } else {
+        bar.style.display = 'none';
+      }
+    }
+  );
+  /* ===== هوية المجمع ===== */
+  safeRender(
+    'clinicIdentity',
+    () => {
+      setText(
+        'logoName',
+        clinic.name
+      );
+      setText(
+        'logoTagline',
+        clinic.tagline
+      );
+      setText(
+        'footerName',
+        clinic.name
+      );
+      setText(
+        'footerTagline',
+        clinic.tagline
+      );
+      setText(
+        'footerNameBottom',
+        clinic.name
+      );
+      markEditable(
+        'logoName',
+        'clinic.name'
+      );
+      markEditable(
+        'logoTagline',
+        'clinic.tagline'
+      );
+      markEditable(
+        'footerName',
+        'clinic.name'
+      );
+      markEditable(
+        'footerTagline',
+        'clinic.tagline'
+      );
+      markEditable(
+        'footerNameBottom',
+        'clinic.name'
+      );
+    }
+  );
+  /* ===== الهيرو ===== */
+  safeRender(
+    'hero',
+    () => {
+      const titleParts = [
+        hero.title,
+        hero.titleHighlight
+      ].filter(Boolean);
+      setText(
+        'ndBannerBadge',
+        hero.badge ||
+          'رعاية طبية متخصصة'
+      );
+      setText(
+        'ndBannerTitle',
+        titleParts
+          .join(' ')
+          .trim() ||
+          'ابتسامة أجمل تبدأ من هنا'
+      );
+      setText(
+        'ndBannerSlogan',
+        hero.subtitle ||
+          'مجمع متخصص في طب وجراحة الأسنان بأحدث التقنيات'
+      );
+      setText(
+        'heroBtnMain',
+        hero.buttonMain ||
+          'احجز موعدك الآن'
+      );
+      setText(
+        'heroBtnSecondary',
+        hero.buttonSecondary ||
+          'اكتشف خدماتنا'
+      );
+      markEditable(
+        'ndBannerBadge',
+        'hero.badge'
+      );
+      markEditable(
+        'ndBannerTitle',
+        'hero.title'
+      );
+      markEditable(
+        'ndBannerSlogan',
+        'hero.subtitle'
+      );
+      markEditable(
+        'heroBtnMain',
+        'hero.buttonMain'
+      );
+      markEditable(
+        'heroBtnSecondary',
+        'hero.buttonSecondary'
+      );
+    }
+  );
+  /* ===== صور الهيرو القديمة ===== */
+  safeRender(
+    'heroImages',
+    () => {
+      const imageSources = {
+        image:
+          hero.image ||
+          data.heroImage1 ||
+          '',
+        image2:
+          hero.image2 ||
+          data.heroImage2 ||
+          ''
+      };
+      [
+        'image',
+        'image2'
+      ].forEach(
+        (key, index) => {
+          const number =
+            index + 1;
+          const img =
+            document.getElementById(
+              'heroImage' +
+                number
+            );
+          const placeholder =
+            document.getElementById(
+              'heroImagePlaceholder' +
+                (
+                  index === 0
+                    ? ''
+                    : '2'
+                )
+            );
+          if (
+            !img ||
+            !placeholder
+          ) {
+            return;
+          }
+          const path =
+            'hero.' + key;
+          img.setAttribute(
+            'data-edit',
+            path
+          );
+          img.setAttribute(
+            'data-edit-type',
+            'image'
+          );
+          placeholder.setAttribute(
+            'data-edit',
+            path
+          );
+          placeholder.setAttribute(
+            'data-edit-type',
+            'image'
+          );
+          const image =
+            imageSources[key];
+          if (image) {
+            img.src = image;
+            img.style.display =
+              'block';
+            placeholder.style.display =
+              'none';
+          } else {
+            img.removeAttribute(
+              'src'
+            );
+            img.style.display =
+              'none';
+            placeholder.style.display =
+              '';
+          }
+        }
+      );
+    }
+  );
+  /* ===== الإحصائيات ===== */
+  safeRender(
+    'stats',
+    () => {
+      const statsGrid =
+        document.getElementById(
+          'statsGrid'
+        );
+      if (!statsGrid) return;
+      const stats =
+        Array.isArray(data.stats)
+          ? data.stats
+          : [];
+      statsGrid.innerHTML =
+        stats
+          .map(
+            (stat, index) => {
+              const number =
+                stat &&
+                stat.number != null
+                  ? String(
+                      stat.number
+                    )
+                  : '';
+              const label =
+                stat &&
+                stat.label != null
+                  ? String(
+                      stat.label
+                    )
+                  : '';
+              return `
+                <div class="stat-item reveal">
+                  <div
+                    class="stat-number count-up"
+                    data-target="${escapeAttr(
+                      number
+                    )}"
+                    ${editAttr(
+                      `stats.${index}.number`
+                    )}
+                  >
+                    ${escapeHtml(
+                      number
+                    )}
+                  </div>
+                  <div
+                    class="stat-label"
+                    ${editAttr(
+                      `stats.${index}.label`
+                    )}
+                  >
+                    ${escapeHtml(
+                      label
+                    )}
+                  </div>
+                </div>
+              `;
+            }
+          )
+          .join('');
+      animateCounters();
+    }
+  );
+  /* ===== بطاقات الخدمات والأسعار ===== */
+  safeRender(
+    'services',
+    () => {
+      const servicesGrid =
+        document.getElementById(
+          'servicesGrid'
+        );
+      if (!servicesGrid) return;
+      const clinicData =
+        clinic || {};
+      const categories =
+        Array.isArray(
+          data.serviceCategories
+        )
+          ? data.serviceCategories
+          : [];
+      servicesGrid.innerHTML =
+        categories
+          .map(
+            (category, categoryIndex) => {
+              const cat =
+                category &&
+                typeof category ===
+                  'object'
+                  ? category
+                  : {};
+              const items =
+                Array.isArray(
+                  cat.items
+                )
+                  ? cat.items
+                  : [];
+              const categoryTitle =
+                cat.title != null
+                  ? String(
+                      cat.title
+                    )
+                  : '';
+              const categoryIcon =
+                cat.icon ||
+                'tooth';
+              return `
+                <div class="price-category">
+                  ${
+                    categoryTitle
+                      ? `
+                    <h3 class="price-cat-title">
+                      <span
+                        class="price-cat-icon"
+                        ${editAttr(
+                          `serviceCategories.${categoryIndex}.icon`
+                        )}
+                      >
+                        ${
+                          window.ndIconHtml
+                            ? window.ndIconHtml(
+                                categoryIcon
+                              )
+                            : ''
+                        }
+                      </span>
+                      <span
+                        ${editAttr(
+                          `serviceCategories.${categoryIndex}.title`
+                        )}
+                      >
+                        ${escapeHtml(
+                          categoryTitle
+                        )}
+                      </span>
+                    </h3>
+                  `
+                      : ''
+                  }
+                  <div class="service-cards">
+                    ${
+                      items
+                        .map(
+                          (
+                            item,
+                            itemIndex
+                          ) => {
+                            const service =
+                              item &&
+                              typeof item ===
+                                'object'
+                                ? item
+                                : {};
+                            const base =
+                              `serviceCategories.${categoryIndex}.items.${itemIndex}`;
+                            const serviceName =
+                              service.name !=
+                              null
+                                ? String(
+                                    service.name
+                                  )
+                                : '';
+                            const servicePrice =
+                              service.price !=
+                                  null &&
+                              service.price !==
+                                ''
+                                ? `${service.price} ريال`
+                                : '—';
+                            const hasOldPrice =
+                              service.oldPrice !=
+                                  null &&
+                              service.oldPrice !==
+                                '';
+                            const oldPrice =
+                              hasOldPrice
+                                ? `${service.oldPrice} ريال`
+                                : '—';
+                            const whatsapp =
+                              normalizeWhatsApp(
+                                clinicData.whatsapp
+                              );
+                            const waMsg =
+                              encodeURIComponent(
+                                `السلام عليكم ورحمة الله وبركاته. أرغب بطلب خدمة (${serviceName}) من مجمع عناية الابتسامة الطبي.`
+                              );
+                            const waHref =
+                              whatsapp
+                                ? `https://wa.me/${whatsapp}?text=${waMsg}`
+                                : '#';
+                            return `
+                              <article
+                                class="service-card-wrap"
+                              >
+                                <div class="service-card">
+                                  <div
+                                    class="service-card-inner"
+                                  >
+                                    <h4
+                                      class="service-card-name"
+                                      ${editAttr(
+                                        base +
+                                          '.name'
+                                      )}
+                                      title="${escapeAttr(
+                                        serviceName
+                                      )}"
+                                    >
+                                      ${escapeHtml(
+                                        serviceName
+                                      )}
+                                    </h4>
+                                    <div
+                                      class="service-card-prices"
+                                    >
+                                      <span
+                                        class="price-cell price-old"
+                                      >
+                                        <span
+                                          class="price-label"
+                                        >
+                                          سابقاً
+                                        </span>
+                                        <span
+                                          class="price-value"
+                                          ${editAttr(
+                                            base +
+                                              '.oldPrice'
+                                          )}
+                                        >
+                                          ${escapeHtml(
+                                            oldPrice
+                                          )}
+                                        </span>
+                                      </span>
+                                      <span
+                                        class="price-cell price-now"
+                                      >
+                                        <span
+                                          class="price-label"
+                                        >
+                                          الآن
+                                        </span>
+                                        <span
+                                          class="price-value"
+                                          ${editAttr(
+                                            base +
+                                              '.price'
+                                          )}
+                                        >
+                                          ${escapeHtml(
+                                            servicePrice
+                                          )}
+                                        </span>
+                                      </span>
+                                    </div>
+                                  </div>
+                                  <a
+                                    class="price-wa-btn"
+                                    href="${escapeAttr(
+                                      waHref
+                                    )}"
+                                    ${
+                                      whatsapp
+                                        ? 'target="_blank" rel="noopener"'
+                                        : ''
+                                    }
+                                    aria-label="لطلب خدمة ${escapeAttr(
+                                      serviceName
+                                    )}"
+                                  >
+                                    <span>
+                                      لطلب الخدمة
+                                    </span>
+                                  </a>
+                                </div>
+                              </article>
+                            `;
+                          }
+                        )
+                        .join('')
+                    }
+                  </div>
+                </div>
+              `;
+            }
+          )
+          .join('');
+      if (
+        document.fonts &&
+        document.fonts.ready
+      ) {
+        document.fonts.ready.then(
+          () => {
+            requestAnimationFrame(
+              fitServiceCardNames
+            );
+          }
+        );
+      }
+      requestAnimationFrame(
+        fitServiceCardNames
+      );
+    }
+  );
+  /* ===== النصائح اليومية القديمة ===== */
+  safeRender(
+    'dailyTips',
+    () => {
+      const box =
+        document.querySelector(
+          '.daily-tips-box'
+        );
+      if (box) {
+        box.style.display =
+          'none';
+      }
+      const dailyTipsList =
+        document.getElementById(
+          'dailyTipsList'
+        );
+      if (dailyTipsList) {
+        dailyTipsList.innerHTML =
+          '';
+      }
+    }
+  );
+  /* ===== الثقافة الطبية ===== */
+  safeRender(
+    'tips',
+    () => {
+      const tipsGrid =
+        document.getElementById(
+          'tipsGrid'
+        );
+      if (!tipsGrid) return;
+      const tips =
+        Array.isArray(data.tips)
+          ? data.tips
+          : [];
+      tipsGrid.innerHTML =
+        tips
+          .map(
+            (tip, index) => {
+              const item =
+                tip &&
+                typeof tip ===
+                  'object'
+                  ? tip
+                  : {};
+              return `
+                <div class="tip-card tip-card-clean">
+                  <h3
+                    ${editAttr(
+                      `tips.${index}.title`
+                    )}
+                  >
+                    ${escapeHtml(
+                      item.title ||
+                        ''
+                    )}
+                  </h3>
+                  <p
+                    ${editAttr(
+                      `tips.${index}.description`
+                    )}
+                  >
+                    ${escapeHtml(
+                      item.description ||
+                        ''
+                    )}
+                  </p>
+                </div>
+              `;
+            }
           )
           .join('');
     }
-  });
-
-  /* ===== الشريط المتحرك ===== */
-  safeRender('announcement', () => {
-    const bar =
-      document.getElementById(
-        'announcementBar'
-      );
-
-    if (!bar) return;
-
-    if (data.announcement) {
-      bar.style.display = '';
-
-      const track =
-        bar.querySelector(
-          '.announcement-track'
-        );
-
-      const ann =
-        String(
-          data.announcement || ''
-        );
-
-      /*
-       * نسختان متطابقتان فقط لضمان أن
-       * نقطة نهاية الحركة تطابق بداية
-       * الرسالة التالية بدون انقطاع.
-       */
-      if (track) {
-        track.innerHTML = `
-          <span class="announcement-text">
-            <span id="announcementText">
-              ${ann}
-            </span>
-          </span>
-
-          <span
-            class="announcement-spacer"
-            aria-hidden="true"
-          ></span>
-
-          <span
-            class="announcement-text"
-            aria-hidden="true"
-          >
-            <span id="announcementText2">
-              ${ann}
-            </span>
-          </span>
-
-          <span
-            class="announcement-spacer"
-            aria-hidden="true"
-          ></span>
-        `;
-      }
-
-      bar.setAttribute(
-        'data-edit',
-        'announcement'
-      );
-
-      bar.setAttribute(
-        'data-edit-type',
-        'text'
-      );
-
-      bar.setAttribute(
-        'data-edit-label',
-        'نص الشريط المتحرك'
-      );
-    } else {
-      bar.style.display = 'none';
-    }
-  });
-
-  /* ===== هوية المجمع ===== */
-  safeRender('clinicIdentity', () => {
-    setText(
-      'logoName',
-      clinic.name
-    );
-
-    setText(
-      'logoTagline',
-      clinic.tagline
-    );
-
-    setText(
-      'footerName',
-      clinic.name
-    );
-
-    setText(
-      'footerTagline',
-      clinic.tagline
-    );
-
-    setText(
-      'footerNameBottom',
-      clinic.name
-    );
-
-    markEditable(
-      'logoName',
-      'clinic.name'
-    );
-
-    markEditable(
-      'logoTagline',
-      'clinic.tagline'
-    );
-
-    markEditable(
-      'footerName',
-      'clinic.name'
-    );
-
-    markEditable(
-      'footerTagline',
-      'clinic.tagline'
-    );
-
-    markEditable(
-      'footerNameBottom',
-      'clinic.name'
-    );
-  });
-
-  /* ===== الهيرو ===== */
-  safeRender('hero', () => {
-    setText(
-      'ndBannerBadge',
-      hero.badge ||
-        'رعاية طبية متخصصة'
-    );
-
-    setText(
-      'ndBannerTitle',
-      [
-        hero.title,
-        hero.titleHighlight
-      ]
-        .filter(Boolean)
-        .join(' ')
-        .trim() ||
-        'ابتسامة أجمل تبدأ من هنا'
-    );
-
-    setText(
-      'ndBannerSlogan',
-      hero.subtitle ||
-        'مجمع متخصص في طب وجراحة الأسنان بأحدث التقنيات'
-    );
-
-    setText(
-      'heroBtnMain',
-      hero.buttonMain ||
-        'احجز موعدك الآن'
-    );
-
-    setText(
-      'heroBtnSecondary',
-      hero.buttonSecondary ||
-        'اكتشف خدماتنا'
-    );
-
-    markEditable(
-      'ndBannerBadge',
-      'hero.badge'
-    );
-
-    markEditable(
-      'ndBannerTitle',
-      'hero.title'
-    );
-
-    markEditable(
-      'ndBannerSlogan',
-      'hero.subtitle'
-    );
-
-    markEditable(
-      'heroBtnMain',
-      'hero.buttonMain'
-    );
-
-    markEditable(
-      'heroBtnSecondary',
-      'hero.buttonSecondary'
-    );
-  });
-
-  /* ===== صور الهيرو القديمة ===== */
-  safeRender('heroImages', () => {
-    ['image', 'image2'].forEach(
-      (key, idx) => {
-        const num = idx + 1;
-
-        const img =
-          document.getElementById(
-            'heroImage' + num
-          );
-
-        const placeholder =
-          document.getElementById(
-            'heroImagePlaceholder' +
-              (idx === 0 ? '' : '2')
-          );
-
-        if (!img || !placeholder) {
-          return;
-        }
-
-        img.setAttribute(
-          'data-edit',
-          'hero.' + key
-        );
-
-        img.setAttribute(
-          'data-edit-type',
-          'image'
-        );
-
-        placeholder.setAttribute(
-          'data-edit',
-          'hero.' + key
-        );
-
-        placeholder.setAttribute(
-          'data-edit-type',
-          'image'
-        );
-
-        if (hero[key]) {
-          img.src = hero[key];
-          img.style.display = 'block';
-          placeholder.style.display = 'none';
-        }
-      }
-    );
-  });
-
-  /* ===== الإحصائيات ===== */
-  safeRender('stats', () => {
-    const statsGrid =
-      document.getElementById(
-        'statsGrid'
-      );
-
-    if (!statsGrid) return;
-
-    statsGrid.innerHTML =
-      (data.stats || [])
-        .map(
-          (s, i) => `
-          <div class="stat-item reveal">
-            <div
-              class="stat-number count-up"
-              data-target="${s.number}"
-              ${editAttr(
-                `stats.${i}.number`
-              )}
-            >${s.number}</div>
-
-            <div
-              class="stat-label"
-              ${editAttr(
-                `stats.${i}.label`
-              )}
-            >${s.label}</div>
-          </div>
-        `
-        )
-        .join('');
-
-    animateCounters();
-  });
-
-  /* ===== بطاقات الخدمات والأسعار ===== */
-  safeRender('services', () => {
-    const servicesGrid =
-      document.getElementById(
-        'servicesGrid'
-      );
-
-    if (!servicesGrid) return;
-
-    const clinicData =
-      data.clinic || {};
-
-    servicesGrid.innerHTML =
-      (data.serviceCategories || [])
-        .map(
-          (cat, ci) => `
-          <div class="price-category">
-
-            ${
-              cat.title
-                ? `
-              <h3 class="price-cat-title">
-
-                <span
-                  class="price-cat-icon"
-                  ${editAttr(
-                    `serviceCategories.${ci}.icon`
-                  )}
-                >
-                  ${
-                    window.ndIconHtml
-                      ? window.ndIconHtml(
-                          cat.icon ||
-                            'tooth'
-                        )
-                      : ''
-                  }
-                </span>
-
-                <span
-                  ${editAttr(
-                    `serviceCategories.${ci}.title`
-                  )}
-                >
-                  ${cat.title}
-                </span>
-
-              </h3>
-            `
-                : ''
-            }
-
-            <div class="service-cards">
-              ${
-                Array.isArray(cat.items)
-                  ? cat.items
-                  : []
-              }
-              ${
-                Array.isArray(cat.items)
-                  ? cat.items
-                      .map(
-                        (item, ii) => {
-                          const base =
-                            `serviceCategories.${ci}.items.${ii}`;
-
-                          const serviceName =
-                            String(
-                              item.name || ''
-                            );
-
-                          const servicePrice =
-                            item.price != null &&
-                            item.price !== ''
-                              ? `${item.price} ريال`
-                              : '—';
-
-                          const hasOld =
-                            item.oldPrice != null &&
-                            item.oldPrice !== '';
-
-                          const oldPrice =
-                            hasOld
-                              ? `${item.oldPrice} ريال`
-                              : '—';
-
-                          const waMsg =
-                            encodeURIComponent(
-                              `السلام عليكم ورحمة الله وبركاته. أرغب بطلب خدمة (${serviceName}) من مجمع عناية الابتسامة الطبي.`
-                            );
-
-                          return `
-                    <article
-                      class="service-card-wrap"
-                    >
-
-                      <div class="service-card">
-
-                        <div
-                          class="service-card-inner"
-                        >
-
-                          <h4
-                            class="service-card-name"
-                            ${editAttr(
-                              base +
-                                '.name'
-                            )}
-                            title="${serviceName}"
-                          >
-                            ${serviceName}
-                          </h4>
-
-                          <div
-                            class="service-card-prices"
-                          >
-
-                            <span
-                              class="price-cell price-old"
-                            >
-                              <span
-                                class="price-label"
-                              >
-                                سابقاً
-                              </span>
-
-                              <span
-                                class="price-value"
-                                ${editAttr(
-                                  base +
-                                    '.oldPrice'
-                                )}
-                              >
-                                ${oldPrice}
-                              </span>
-                            </span>
-
-                            <span
-                              class="price-cell price-now"
-                            >
-                              <span
-                                class="price-label"
-                              >
-                                الآن
-                              </span>
-
-                              <span
-                                class="price-value"
-                                ${editAttr(
-                                  base +
-                                    '.price'
-                                )}
-                              >
-                                ${servicePrice}
-                              </span>
-                            </span>
-
-                          </div>
-
-                        </div>
-
-                        <a
-                          class="price-wa-btn"
-                          href="https://wa.me/${clinicData.whatsapp}?text=${waMsg}"
-                          target="_blank"
-                          rel="noopener"
-                          aria-label="لطلب خدمة ${serviceName}"
-                        >
-                          <span>
-                            لطلب الخدمة
-                          </span>
-                        </a>
-
-                      </div>
-
-                    </article>
-                  `;
-                        }
-                      )
-                      .join('')
-                  : ''
-              }
-            </div>
-
-          </div>
-        `
-        )
-        .join('');
-
-    if (
-      document.fonts &&
-      document.fonts.ready
-    ) {
-      document.fonts.ready.then(
-        () => {
-          requestAnimationFrame(
-            fitServiceCardNames
-          );
-        }
-      );
-    }
-
-    requestAnimationFrame(
-      fitServiceCardNames
-    );
-  });
-
-  /* ===== النصائح اليومية القديمة ===== */
-  safeRender('dailyTips', () => {
-    const box =
-      document.querySelector(
-        '.daily-tips-box'
-      );
-
-    if (box) {
-      box.style.display = 'none';
-    }
-
-    const dailyTipsList =
-      document.getElementById(
-        'dailyTipsList'
-      );
-
-    if (dailyTipsList) {
-      dailyTipsList.innerHTML = '';
-    }
-  });
-
-  /* ===== الثقافة الطبية ===== */
-  safeRender('tips', () => {
-    const tipsGrid =
-      document.getElementById(
-        'tipsGrid'
-      );
-
-    if (!tipsGrid) return;
-
-    tipsGrid.innerHTML =
-      (data.tips || [])
-        .map(
-          (t, i) => `
-          <div class="tip-card tip-card-clean">
-
-            <h3
-              ${editAttr(
-                `tips.${i}.title`
-              )}
-            >
-              ${t.title}
-            </h3>
-
-            <p
-              ${editAttr(
-                `tips.${i}.description`
-              )}
-            >
-              ${t.description}
-            </p>
-
-          </div>
-        `
-        )
-        .join('');
-  });
-
+  );
   /* ===== المميزات ===== */
-  safeRender('features', () => {
-    const featuresGrid =
-      document.getElementById(
-        'featuresGrid'
-      );
-
-    if (!featuresGrid) return;
-
-    featuresGrid.innerHTML =
-      (data.features || [])
-        .map(
-          (f, i) => `
-          <div class="feature-card feature-card-premium">
-
-            <h3
-              ${editAttr(
-                `features.${i}.title`
-              )}
-            >
-              ${f.title}
-            </h3>
-
-            <p
-              ${editAttr(
-                `features.${i}.description`
-              )}
-            >
-              ${f.description}
-            </p>
-
-          </div>
-        `
+  safeRender(
+    'features',
+    () => {
+      const featuresGrid =
+        document.getElementById(
+          'featuresGrid'
+        );
+      if (!featuresGrid) return;
+      const features =
+        Array.isArray(
+          data.features
         )
-        .join('');
-  });
-
+          ? data.features
+          : [];
+      featuresGrid.innerHTML =
+        features
+          .map(
+            (feature, index) => {
+              const item =
+                feature &&
+                typeof feature ===
+                  'object'
+                  ? feature
+                  : {};
+              return `
+                <div class="feature-card feature-card-premium">
+                  <h3
+                    ${editAttr(
+                      `features.${index}.title`
+                    )}
+                  >
+                    ${escapeHtml(
+                      item.title ||
+                        ''
+                    )}
+                  </h3>
+                  <p
+                    ${editAttr(
+                      `features.${index}.description`
+                    )}
+                  >
+                    ${escapeHtml(
+                      item.description ||
+                        ''
+                    )}
+                  </p>
+                </div>
+              `;
+            }
+          )
+          .join('');
+    }
+  );
   /* ===== الأطباء ===== */
-  safeRender('doctors', () => {
-    const doctorsGrid =
-      document.getElementById(
-        'doctorsGrid'
-      );
-
-    if (!doctorsGrid) return;
-
-    doctorsGrid.innerHTML =
-      (data.doctors || [])
-        .map(
-          (d, i) => `
-          <div class="doctor-card reveal">
-
-            <div
-              class="doctor-avatar"
-              ${editAttr(
-                `doctors.${i}.initial`
-              )}
-            >
-              ${d.initial}
-            </div>
-
-            <h3
-              ${editAttr(
-                `doctors.${i}.name`
-              )}
-            >
-              ${d.name}
-            </h3>
-
-            <p
-              class="doctor-specialty"
-              ${editAttr(
-                `doctors.${i}.specialty`
-              )}
-            >
-              ${d.specialty}
-            </p>
-
-            <span
-              class="doctor-exp"
-              ${editAttr(
-                `doctors.${i}.experience`
-              )}
-            >
-              ${d.experience}
-            </span>
-
-          </div>
-        `
+  safeRender(
+    'doctors',
+    () => {
+      const doctorsGrid =
+        document.getElementById(
+          'doctorsGrid'
+        );
+      if (!doctorsGrid) return;
+      const doctors =
+        Array.isArray(
+          data.doctors
         )
-        .join('');
-  });
-
+          ? data.doctors
+          : [];
+      doctorsGrid.innerHTML =
+        doctors
+          .map(
+            (doctor, index) => {
+              const item =
+                doctor &&
+                typeof doctor ===
+                  'object'
+                  ? doctor
+                  : {};
+              return `
+                <div class="doctor-card reveal">
+                  <div
+                    class="doctor-avatar"
+                    ${editAttr(
+                      `doctors.${index}.initial`
+                    )}
+                  >
+                    ${escapeHtml(
+                      item.initial ||
+                        ''
+                    )}
+                  </div>
+                  <h3
+                    ${editAttr(
+                      `doctors.${index}.name`
+                    )}
+                  >
+                    ${escapeHtml(
+                      item.name ||
+                        ''
+                    )}
+                  </h3>
+                  <p
+                    class="doctor-specialty"
+                    ${editAttr(
+                      `doctors.${index}.specialty`
+                    )}
+                  >
+                    ${escapeHtml(
+                      item.specialty ||
+                        ''
+                    )}
+                  </p>
+                  <span
+                    class="doctor-exp"
+                    ${editAttr(
+                      `doctors.${index}.experience`
+                    )}
+                  >
+                    ${escapeHtml(
+                      item.experience ||
+                        ''
+                    )}
+                  </span>
+                </div>
+              `;
+            }
+          )
+          .join('');
+    }
+  );
   /* ===== التعليقات ===== */
-  safeRender('testimonials', () => {
-    const testimonialsGrid =
-      document.getElementById(
-        'testimonialsGrid'
-      );
-
-    if (!testimonialsGrid) return;
-
-    testimonialsGrid.innerHTML =
-      (testimonials || [])
-        .map(
-          (t, i) => `
-          <div class="testimonial-card reveal">
-
-            <div
-              class="testimonial-stars"
-              ${editAttr(
-                `reviews.${i}.rating`
-              )}
-            >
-              ${ndStars(t.rating)}
-            </div>
-
-            <p
-              class="testimonial-text"
-              ${editAttr(
-                `reviews.${i}.text`
-              )}
-            >
-              "${t.text}"
-            </p>
-
-            <p
-              class="testimonial-name"
-              ${editAttr(
-                `reviews.${i}.name`
-              )}
-            >
-              ${t.name}
-            </p>
-
-          </div>
-        `
-        )
-        .join('');
-  });
-
+  safeRender(
+    'testimonials',
+    () => {
+      const testimonialsGrid =
+        document.getElementById(
+          'testimonialsGrid'
+        );
+      if (!testimonialsGrid) return;
+      testimonialsGrid.innerHTML =
+        testimonials
+          .map(
+            (testimonial, index) => {
+              const item =
+                testimonial &&
+                typeof testimonial ===
+                  'object'
+                  ? testimonial
+                  : {};
+              return `
+                <div class="testimonial-card reveal">
+                  <div
+                    class="testimonial-stars"
+                    ${editAttr(
+                      `reviews.${index}.rating`
+                    )}
+                  >
+                    ${ndStars(
+                      item.rating
+                    )}
+                  </div>
+                  <p
+                    class="testimonial-text"
+                    ${editAttr(
+                      `reviews.${index}.text`
+                    )}
+                  >
+                    "${escapeHtml(
+                      item.text ||
+                        ''
+                    )}"
+                  </p>
+                  <p
+                    class="testimonial-name"
+                    ${editAttr(
+                      `reviews.${index}.name`
+                    )}
+                  >
+                    ${escapeHtml(
+                      item.name ||
+                        ''
+                    )}
+                  </p>
+                </div>
+              `;
+            }
+          )
+          .join('');
+    }
+  );
   /* ===== الحجز ===== */
-  safeRender('booking', () => {
-    setText(
-      'bookingTitle',
-      booking
-        ? booking.title
-        : ''
-    );
-
-    setText(
-      'bookingSubtitle',
-      booking
-        ? booking.subtitle
-        : ''
-    );
-
-    setText(
-      'submitBtn',
-      booking
-        ? booking.button
-        : ''
-    );
-
-    markEditable(
-      'bookingTitle',
-      'booking.title'
-    );
-
-    markEditable(
-      'bookingSubtitle',
-      'booking.subtitle'
-    );
-
-    markEditable(
-      'submitBtn',
-      'booking.button'
-    );
-
-    const serviceSelect =
-      document.getElementById(
-        'service'
+  safeRender(
+    'booking',
+    () => {
+      setText(
+        'bookingTitle',
+        booking.title || ''
       );
-
-    if (!serviceSelect) return;
-
-    serviceSelect.innerHTML =
-      '<option value="">اختر الخدمة</option>' +
-      bookingServices
-        .map(
-          (s) =>
-            `<option value="${s}">${s}</option>`
-        )
-        .join('');
-
-    serviceSelect.setAttribute(
-      'data-edit',
-      'bookingServices'
-    );
-
-    serviceSelect.setAttribute(
-      'data-edit-type',
-      'list'
-    );
-
-    serviceSelect.setAttribute(
-      'data-edit-label',
-      'قائمة خدمات الحجز (كل خدمة في سطر)'
-    );
-  });
-
-  /* ===== الأسئلة الشائعة ===== */
-  safeRender('faq', () => {
-    const list =
-      document.getElementById(
-        'faqList'
+      setText(
+        'bookingSubtitle',
+        booking.subtitle ||
+          ''
       );
-
-    if (!list) return;
-
-    const items =
-      data.faq || [];
-
-    list.innerHTML =
-      items
-        .map(
-          (item, i) => `
-          <details class="faq-item">
-
-            <summary class="faq-q">
-
-              <span
-                class="faq-q-text"
-                ${editAttr(
-                  'faq.' +
-                    i +
-                    '.q'
-                )}
-              >
-                ${item.q}
-              </span>
-
-              <span
-                class="faq-icon"
-                aria-hidden="true"
-              >
-                +
-              </span>
-
-            </summary>
-
-            <div
-              class="faq-a"
-              ${editAttr(
-                'faq.' +
-                  i +
-                  '.a'
-              )}
-            >
-              ${item.a}
-            </div>
-
-          </details>
-        `
-        )
-        .join('');
-  });
-
-  /* ===== التواصل ===== */
-  safeRender('contact', () => {
-    setText(
-      'contactAddress',
-      clinic.address
-    );
-
-    const addrEl =
-      document.getElementById(
-        'contactAddress'
+      setText(
+        'submitBtn',
+        booking.button ||
+          ''
       );
-
-    if (addrEl) {
-      addrEl.setAttribute(
-        'data-edit',
-        'clinic.address'
-      );
-    }
-
-    const phoneEl =
-      document.getElementById(
-        'contactPhone'
-      );
-
-    if (phoneEl) {
-      phoneEl.innerHTML =
-        `جوال: <a href="tel:${clinic.phone}" data-edit="clinic.phone" data-edit-type="text">${clinic.phone}</a>`;
-    }
-
-    const emailEl =
-      document.getElementById(
-        'contactEmail'
-      );
-
-    if (emailEl) {
-      emailEl.innerHTML =
-        clinic.email
-          ? `بريد: <a href="mailto:${clinic.email}" data-edit="clinic.email" data-edit-type="text">${clinic.email}</a>`
-          : '';
-    }
-
-    const mapBtn =
-      document.getElementById(
-        'mapBtn'
-      );
-
-    const mapQuery =
-      clinic.mapUrl ||
-      (
-        'https://www.google.com/maps/search/?api=1&query=' +
-        encodeURIComponent(
-          clinic.address || ''
-        )
-      );
-
-    if (mapBtn) {
-      mapBtn.href = mapQuery;
-
-      mapBtn.setAttribute(
-        'data-edit',
-        'clinic.mapUrl'
-      );
-
-      mapBtn.setAttribute(
-        'data-edit-type',
-        'text'
-      );
-
-      mapBtn.setAttribute(
-        'data-edit-label',
-        'رابط الخريطة'
-      );
-    }
-
-    const mapFrame =
-      document.getElementById(
-        'mapFrame'
-      );
-
-    if (mapFrame) {
-      mapFrame.src =
-        'https://maps.google.com/maps?q=' +
-        encodeURIComponent(
-          clinic.address || ''
-        ) +
-        '&hl=ar&z=15&output=embed';
-    }
-
-    const waBtn =
-      document.getElementById(
-        'whatsappBtn'
-      );
-
-    if (
-      waBtn &&
-      clinic.whatsapp
-    ) {
-      waBtn.href =
-        `https://wa.me/${clinic.whatsapp}?text=${encodeURIComponent(
-          'مرحباً، أرغب بالاستفسار عن خدمات ' +
-          (clinic.name || '')
-        )}`;
-    }
-
-    setText(
-      'footerAddress',
-      clinic.address
-    );
-
-    const footerAddressEl =
-      document.getElementById(
-        'footerAddress'
-      );
-
-    if (footerAddressEl) {
       markEditable(
-        'footerAddress',
-        'clinic.address'
+        'bookingTitle',
+        'booking.title'
+      );
+      markEditable(
+        'bookingSubtitle',
+        'booking.subtitle'
+      );
+      markEditable(
+        'submitBtn',
+        'booking.button'
+      );
+      const serviceSelect =
+        document.getElementById(
+          'service'
+        );
+      if (!serviceSelect) return;
+      serviceSelect.innerHTML =
+        '<option value="">اختر الخدمة</option>' +
+        bookingServices
+          .map(
+            (service) => {
+              const value =
+                String(
+                  service ?? ''
+                );
+              return `
+                <option value="${escapeAttr(
+                  value
+                )}">
+                  ${escapeHtml(
+                    value
+                  )}
+                </option>
+              `;
+            }
+          )
+          .join('');
+      serviceSelect.setAttribute(
+        'data-edit',
+        'bookingServices'
+      );
+      serviceSelect.setAttribute(
+        'data-edit-type',
+        'list'
+      );
+      serviceSelect.setAttribute(
+        'data-edit-label',
+        'قائمة خدمات الحجز (كل خدمة في سطر)'
       );
     }
-
-    const footerPhoneEl =
-      document.getElementById(
-        'footerPhone'
-      );
-
-    if (footerPhoneEl) {
-      footerPhoneEl.innerHTML =
-        clinic.phone
-          ? `جوال: <a href="tel:${clinic.phone}" data-edit="clinic.phone" data-edit-type="text">${clinic.phone}</a>`
-          : '';
+  );
+  /* ===== الأسئلة الشائعة ===== */
+  safeRender(
+    'faq',
+    () => {
+      const list =
+        document.getElementById(
+          'faqList'
+        );
+      if (!list) return;
+      const items =
+        Array.isArray(data.faq)
+          ? data.faq
+          : [];
+      list.innerHTML =
+        items
+          .map(
+            (faqItem, index) => {
+              const item =
+                faqItem &&
+                typeof faqItem ===
+                  'object'
+                  ? faqItem
+                  : {};
+              return `
+                <details class="faq-item">
+                  <summary class="faq-q">
+                    <span
+                      class="faq-q-text"
+                      ${editAttr(
+                        `faq.${index}.q`
+                      )}
+                    >
+                      ${escapeHtml(
+                        item.q || ''
+                      )}
+                    </span>
+                    <span
+                      class="faq-icon"
+                      aria-hidden="true"
+                    >
+                      +
+                    </span>
+                  </summary>
+                  <div
+                    class="faq-a"
+                    ${editAttr(
+                      `faq.${index}.a`
+                    )}
+                  >
+                    ${escapeHtml(
+                      item.a || ''
+                    )}
+                  </div>
+                </details>
+              `;
+            }
+          )
+          .join('');
     }
-
-    const footerEmailEl =
-      document.getElementById(
-        'footerEmail'
+  );
+  /* ===== التواصل ===== */
+  safeRender(
+    'contact',
+    () => {
+      setText(
+        'contactAddress',
+        clinic.address ||
+          ''
       );
-
-    if (footerEmailEl) {
-      footerEmailEl.innerHTML =
-        clinic.email
-          ? `بريد: <a href="mailto:${clinic.email}" data-edit="clinic.email" data-edit-type="text">${clinic.email}</a>`
-          : '';
-    }
-  });
-
-  /* ===== ساعات العمل ===== */
-  safeRender('workingHours', () => {
-    const hoursList =
-      document.getElementById(
-        'hoursList'
-      );
-
-    if (!hoursList) return;
-
-    hoursList.innerHTML =
-      workingHours
-        .map(
-          (h, i) => `
-          <li>
-
-            <span
-              ${editAttr(
-                `workingHours.${i}.days`
-              )}
-            >
-              ${h.days}
-            </span>
-
-            <span
-              class="${
-                h.open
-                  ? 'open'
-                  : 'closed'
-              }"
-              ${editAttr(
-                `workingHours.${i}.time`
-              )}
-              data-edit-open="${`workingHours.${i}.open`}"
-            >
-              ${h.time}
-            </span>
-
-          </li>
-        `
-        )
-        .join('');
-
-    hoursList
-      .querySelectorAll(
-        '[data-edit-open]'
-      )
-      .forEach((el) => {
-        el.setAttribute(
+      const addressEl =
+        document.getElementById(
+          'contactAddress'
+        );
+      if (addressEl) {
+        addressEl.setAttribute(
           'data-edit',
-          el.getAttribute(
-            'data-edit-open'
+          'clinic.address'
+        );
+        addressEl.setAttribute(
+          'data-edit-type',
+          'text'
+        );
+      }
+      const phoneEl =
+        document.getElementById(
+          'contactPhone'
+        );
+      if (phoneEl) {
+        const phone =
+          String(
+            clinic.phone || ''
+          );
+        phoneEl.innerHTML =
+          phone
+            ? `جوال: <a href="tel:${escapeAttr(
+                phone
+              )}" data-edit="clinic.phone" data-edit-type="text">${escapeHtml(
+                phone
+              )}</a>`
+            : '';
+      }
+      const emailEl =
+        document.getElementById(
+          'contactEmail'
+        );
+      if (emailEl) {
+        const email =
+          String(
+            clinic.email || ''
+          );
+        emailEl.innerHTML =
+          email
+            ? `بريد: <a href="mailto:${escapeAttr(
+                email
+              )}" data-edit="clinic.email" data-edit-type="text">${escapeHtml(
+                email
+              )}</a>`
+            : '';
+      }
+      const mapBtn =
+        document.getElementById(
+          'mapBtn'
+        );
+      const mapUrl =
+        normalizeUrl(
+          clinic.mapUrl
+        );
+      const mapQuery =
+        mapUrl ||
+        (
+          'https://www.google.com/maps/search/?api=1&query=' +
+          encodeURIComponent(
+            clinic.address || ''
           )
         );
-
-        el.setAttribute(
+      if (mapBtn) {
+        mapBtn.href =
+          mapQuery;
+        mapBtn.setAttribute(
+          'data-edit',
+          'clinic.mapUrl'
+        );
+        mapBtn.setAttribute(
           'data-edit-type',
-          'boolean'
+          'text'
         );
-
-        el.setAttribute(
+        mapBtn.setAttribute(
           'data-edit-label',
-          'حالة الدوام'
+          'رابط الخريطة'
         );
-
-        el.removeAttribute(
-          'data-edit-open'
-        );
-      });
-  });
-
-  /* ===== مواقع التواصل ===== */
-  safeRender('social', () => {
-    const socialLinks =
-      document.getElementById(
-        'socialLinks'
-      );
-
-    if (!socialLinks) return;
-
-    const socials = [
-      {
-        url: clinic.whatsapp
-          ? `https://wa.me/${clinic.whatsapp}`
-          : '',
-        icon: 'whatsapp',
-        name: 'واتساب',
-        path: 'clinic.whatsapp'
-      },
-      {
-        url: clinic.instagram,
-        icon: 'instagram',
-        name: 'انستقرام',
-        path: 'clinic.instagram'
-      },
-      {
-        url: clinic.snapchat,
-        icon: 'snapchat',
-        name: 'سناب شات',
-        path: 'clinic.snapchat'
-      },
-      {
-        url: clinic.tiktok,
-        icon: 'tiktok',
-        name: 'تيك توك',
-        path: 'clinic.tiktok'
-      },
-      {
-        url: clinic.twitter,
-        icon: 'twitter',
-        name: 'تويتر',
-        path: 'clinic.twitter'
       }
-    ];
-
-    const list =
-      socials.filter(
-        (s) => s.url
+      const mapFrame =
+        document.getElementById(
+          'mapFrame'
+        );
+      if (mapFrame) {
+        mapFrame.src =
+          'https://maps.google.com/maps?q=' +
+          encodeURIComponent(
+            clinic.address || ''
+          ) +
+          '&hl=ar&z=15&output=embed';
+      }
+      const whatsapp =
+        normalizeWhatsApp(
+          clinic.whatsapp
+        );
+      const waBtn =
+        document.getElementById(
+          'whatsappBtn'
+        );
+      if (waBtn) {
+        if (whatsapp) {
+          waBtn.href =
+            `https://wa.me/${whatsapp}?text=${encodeURIComponent(
+              'مرحباً، أرغب بالاستفسار عن خدمات ' +
+                (clinic.name || '')
+            )}`;
+          waBtn.style.display =
+            '';
+        } else {
+          waBtn.removeAttribute(
+            'href'
+          );
+          waBtn.style.display =
+            'none';
+        }
+      }
+      setText(
+        'footerAddress',
+        clinic.address ||
+          ''
       );
-
-    socialLinks.innerHTML =
-      list
-        .map(
-          (s) => `
-          <a
-            href="${s.url}"
-            target="_blank"
-            rel="noopener"
-            aria-label="${s.name}"
-            title="${s.name}"
-            ${editAttr(s.path)}
-          >
-            ${
-              window.ndIconHtml
-                ? window.ndIconHtml(
-                    s.icon
-                  )
-                : ''
+      const footerAddressEl =
+        document.getElementById(
+          'footerAddress'
+        );
+      if (footerAddressEl) {
+        markEditable(
+          'footerAddress',
+          'clinic.address'
+        );
+      }
+      const footerPhoneEl =
+        document.getElementById(
+          'footerPhone'
+        );
+      if (footerPhoneEl) {
+        const phone =
+          String(
+            clinic.phone || ''
+          );
+        footerPhoneEl.innerHTML =
+          phone
+            ? `جوال: <a href="tel:${escapeAttr(
+                phone
+              )}" data-edit="clinic.phone" data-edit-type="text">${escapeHtml(
+                phone
+              )}</a>`
+            : '';
+      }
+      const footerEmailEl =
+        document.getElementById(
+          'footerEmail'
+        );
+      if (footerEmailEl) {
+        const email =
+          String(
+            clinic.email || ''
+          );
+        footerEmailEl.innerHTML =
+          email
+            ? `بريد: <a href="mailto:${escapeAttr(
+                email
+              )}" data-edit="clinic.email" data-edit-type="text">${escapeHtml(
+                email
+              )}</a>`
+            : '';
+      }
+    }
+  );
+  /* ===== ساعات العمل ===== */
+  safeRender(
+    'workingHours',
+    () => {
+      const hoursList =
+        document.getElementById(
+          'hoursList'
+        );
+      if (!hoursList) return;
+      hoursList.innerHTML =
+        workingHours
+          .map(
+            (hour, index) => {
+              const item =
+                hour &&
+                typeof hour ===
+                  'object'
+                  ? hour
+                  : {};
+              const days =
+                item.days || '';
+              const time =
+                item.time || '';
+              const open =
+                Boolean(
+                  item.open
+                );
+              return `
+                <li>
+                  <span
+                    ${editAttr(
+                      `workingHours.${index}.days`
+                    )}
+                  >
+                    ${escapeHtml(
+                      days
+                    )}
+                  </span>
+                  <span
+                    class="${
+                      open
+                        ? 'open'
+                        : 'closed'
+                    }"
+                    ${editAttr(
+                      `workingHours.${index}.time`
+                    )}
+                    data-edit-open="${escapeAttr(
+                      `workingHours.${index}.open`
+                    )}"
+                  >
+                    ${escapeHtml(
+                      time
+                    )}
+                  </span>
+                </li>
+              `;
             }
-          </a>
-        `
+          )
+          .join('');
+      hoursList
+        .querySelectorAll(
+          '[data-edit-open]'
         )
-        .join('');
-
-    const block =
-      document.querySelector(
-        '.social-block'
-      );
-
-    if (block) {
-      block.style.display =
-        list.length
-          ? ''
-          : 'none';
+        .forEach((el) => {
+          el.setAttribute(
+            'data-edit',
+            el.getAttribute(
+              'data-edit-open'
+            )
+          );
+          el.setAttribute(
+            'data-edit-type',
+            'boolean'
+          );
+          el.setAttribute(
+            'data-edit-label',
+            'حالة الدوام'
+          );
+          el.removeAttribute(
+            'data-edit-open'
+          );
+        });
     }
-  });
-
+  );
+  /* ===== مواقع التواصل ===== */
+  safeRender(
+    'social',
+    () => {
+      const socialLinks =
+        document.getElementById(
+          'socialLinks'
+        );
+      if (!socialLinks) return;
+      const whatsapp =
+        normalizeWhatsApp(
+          clinic.whatsapp
+        );
+      const socials = [
+        {
+          url: whatsapp
+            ? `https://wa.me/${whatsapp}`
+            : '',
+          icon: 'whatsapp',
+          name: 'واتساب',
+          path: 'clinic.whatsapp'
+        },
+        {
+          url:
+            normalizeUrl(
+              clinic.instagram
+            ),
+          icon: 'instagram',
+          name: 'انستقرام',
+          path: 'clinic.instagram'
+        },
+        {
+          url:
+            normalizeUrl(
+              clinic.snapchat
+            ),
+          icon: 'snapchat',
+          name: 'سناب شات',
+          path: 'clinic.snapchat'
+        },
+        {
+          url:
+            normalizeUrl(
+              clinic.tiktok
+            ),
+          icon: 'tiktok',
+          name: 'تيك توك',
+          path: 'clinic.tiktok'
+        },
+        {
+          url:
+            normalizeUrl(
+              clinic.twitter
+            ),
+          icon: 'twitter',
+          name: 'تويتر',
+          path: 'clinic.twitter'
+        }
+      ];
+      const list =
+        socials.filter(
+          (social) =>
+            Boolean(social.url)
+        );
+      socialLinks.innerHTML =
+        list
+          .map(
+            (social) => `
+              <a
+                href="${escapeAttr(
+                  social.url
+                )}"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="${escapeAttr(
+                  social.name
+                )}"
+                title="${escapeAttr(
+                  social.name
+                )}"
+                ${editAttr(
+                  social.path
+                )}
+              >
+                ${
+                  window.ndIconHtml
+                    ? window.ndIconHtml(
+                        social.icon
+                      )
+                    : ''
+                }
+              </a>
+            `
+          )
+          .join('');
+      const block =
+        document.querySelector(
+          '.social-block'
+        );
+      if (block) {
+        block.style.display =
+          list.length
+            ? ''
+            : 'none';
+      }
+    }
+  );
   /* ===== واتساب العائم ===== */
-  safeRender('whatsapp', () => {
-    const waMessage =
-      encodeURIComponent(
-        'مرحباً، أرغب بحجز موعد في ' +
-        clinic.name
-      );
-
-    const floatBtn =
-      document.getElementById(
-        'whatsappFloat'
-      );
-
-    if (!floatBtn) return;
-
-    floatBtn.href =
-      `https://wa.me/${clinic.whatsapp}?text=${waMessage}`;
-
-    floatBtn.setAttribute(
-      'data-edit',
-      'clinic.whatsapp'
-    );
-
-    floatBtn.setAttribute(
-      'data-edit-type',
-      'text'
-    );
-
-    floatBtn.setAttribute(
-      'data-edit-label',
-      'رقم الواتساب (مثل 9665xxxxxxxx)'
-    );
-  });
-
-  /* ===== السنة ===== */
-  safeRender('year', () => {
-    const yearEl =
-      document.getElementById(
-        'currentYear'
-      );
-
-    if (yearEl) {
-      yearEl.textContent =
-        new Date().getFullYear();
+  safeRender(
+    'whatsapp',
+    () => {
+      const floatBtn =
+        document.getElementById(
+          'whatsappFloat'
+        );
+      if (!floatBtn) return;
+      const whatsapp =
+        normalizeWhatsApp(
+          clinic.whatsapp
+        );
+      if (whatsapp) {
+        const waMessage =
+          encodeURIComponent(
+            'مرحباً، أرغب بحجز موعد في ' +
+              (clinic.name || '')
+          );
+        floatBtn.href =
+          `https://wa.me/${whatsapp}?text=${waMessage}`;
+        floatBtn.style.display =
+          '';
+        floatBtn.setAttribute(
+          'data-edit',
+          'clinic.whatsapp'
+        );
+        floatBtn.setAttribute(
+          'data-edit-type',
+          'text'
+        );
+        floatBtn.setAttribute(
+          'data-edit-label',
+          'رقم الواتساب (مثل 9665xxxxxxxx)'
+        );
+      } else {
+        floatBtn.removeAttribute(
+          'href'
+        );
+        floatBtn.style.display =
+          'none';
+      }
     }
-  });
-
+  );
+  /* ===== السنة ===== */
+  safeRender(
+    'year',
+    () => {
+      const yearEl =
+        document.getElementById(
+          'currentYear'
+        );
+      if (yearEl) {
+        yearEl.textContent =
+          String(
+            new Date().getFullYear()
+          );
+      }
+    }
+  );
   initScrollReveal();
   initNavSpy();
 }
-
 /* ===== حفظ تعديلات وضع المالك ===== */
 window.saveOverride = function (
   path,
   value
 ) {
+  if (!path) return;
   const overrides =
     getOverrides();
-
   overrides[path] = value;
-
-  localStorage.setItem(
-    OVERRIDES_KEY,
-    JSON.stringify(overrides)
-  );
-
+  try {
+    localStorage.setItem(
+      OVERRIDES_KEY,
+      JSON.stringify(overrides)
+    );
+  } catch (error) {
+    console.error(
+      'تعذر حفظ التعديل المحلي.',
+      error
+    );
+    return;
+  }
   if (siteData) {
     setDeep(
       siteData,
@@ -1742,10 +2166,8 @@ window.saveOverride = function (
     );
   }
 };
-
 window.getSiteData = () =>
   siteData;
-
 window.getOverrideValue = (
   path
 ) =>
@@ -1753,173 +2175,226 @@ window.getOverrideValue = (
     siteData || {},
     path
   );
-
 /* ===== نموذج الحجز ===== */
-const bookingFormEl =
-  document.getElementById(
-    'bookingForm'
-  );
-
-if (bookingFormEl) {
+function initBookingForm() {
+  const bookingFormEl =
+    document.getElementById(
+      'bookingForm'
+    );
+  if (!bookingFormEl) return;
+  if (
+    bookingFormEl.dataset.initialized ===
+    'true'
+  ) {
+    return;
+  }
+  bookingFormEl.dataset.initialized =
+    'true';
   bookingFormEl.addEventListener(
     'submit',
-    function (e) {
-      e.preventDefault();
-
+    function (event) {
+      event.preventDefault();
       if (!siteData) return;
-
-      const name =
-        document
-          .getElementById('name')
-          .value.trim();
-
-      const phone =
-        document
-          .getElementById('phone')
-          .value.trim();
-
-      const service =
-        document
-          .getElementById('service')
-          .value;
-
+      const nameEl =
+        document.getElementById(
+          'name'
+        );
+      const phoneEl =
+        document.getElementById(
+          'phone'
+        );
+      const serviceEl =
+        document.getElementById(
+          'service'
+        );
       const dateEl =
         document.getElementById(
           'date'
         );
-
+      const name =
+        nameEl
+          ? nameEl.value.trim()
+          : '';
+      const phone =
+        phoneEl
+          ? phoneEl.value.trim()
+          : '';
+      const service =
+        serviceEl
+          ? serviceEl.value
+          : '';
       const date =
         dateEl
           ? dateEl.value
           : '';
-
+      if (
+        !name ||
+        !phone ||
+        !service
+      ) {
+        if (
+          typeof bookingFormEl
+            .reportValidity ===
+          'function'
+        ) {
+          bookingFormEl.reportValidity();
+        }
+        return;
+      }
+      const clinic =
+        siteData.clinic || {};
+      const whatsapp =
+        normalizeWhatsApp(
+          clinic.whatsapp
+        );
+      if (!whatsapp) {
+        console.error(
+          'رقم واتساب المجمع غير موجود في بيانات المحتوى.'
+        );
+        return;
+      }
       let message =
-        `طلب حجز موعد جديد\n\n`;
-
+        'طلب حجز موعد جديد\n\n';
       message +=
         `الاسم: ${name}\n`;
-
       message +=
         `الجوال: ${phone}\n`;
-
       message +=
         `الخدمة: ${service}\n`;
-
       if (date) {
         message +=
           `اليوم المفضل: ${date}\n`;
       }
-
       const waUrl =
-        `https://wa.me/${siteData.clinic.whatsapp}?text=${encodeURIComponent(
+        `https://wa.me/${whatsapp}?text=${encodeURIComponent(
           message
         )}`;
-
       window.open(
         waUrl,
-        '_blank'
+        '_blank',
+        'noopener'
       );
     }
   );
 }
-
 /* ===== نموذج التعليقات ===== */
-const reviewFormEl =
-  document.getElementById(
-    'reviewForm'
-  );
-
-if (reviewFormEl) {
+function initReviewForm() {
+  const reviewFormEl =
+    document.getElementById(
+      'reviewForm'
+    );
+  if (!reviewFormEl) return;
+  if (
+    reviewFormEl.dataset.initialized ===
+    'true'
+  ) {
+    return;
+  }
+  reviewFormEl.dataset.initialized =
+    'true';
   reviewFormEl.addEventListener(
     'submit',
-    function (e) {
-      e.preventDefault();
-
+    function (event) {
+      event.preventDefault();
       if (!siteData) return;
-
-      const name =
-        document
-          .getElementById(
-            'reviewName'
-          )
-          .value.trim();
-
-      const text =
-        document
-          .getElementById(
-            'reviewText'
-          )
-          .value.trim();
-
-      let message =
-        `تعليق جديد من موقع المجمع\n\n`;
-
-      message +=
-        `الاسم: ${name}\n`;
-
-      message +=
-        `التعليق: ${text}\n`;
-
-      const waUrl =
-        `https://wa.me/${siteData.clinic.whatsapp}?text=${encodeURIComponent(
-          message
-        )}`;
-
-      window.open(
-        waUrl,
-        '_blank'
-      );
-
-      const rn =
+      const nameEl =
         document.getElementById(
           'reviewName'
         );
-
-      const rt =
+      const textEl =
         document.getElementById(
           'reviewText'
         );
-
-      if (rn) rn.value = '';
-      if (rt) rt.value = '';
-
+      const name =
+        nameEl
+          ? nameEl.value.trim()
+          : '';
+      const text =
+        textEl
+          ? textEl.value.trim()
+          : '';
+      if (!name || !text) {
+        if (
+          typeof reviewFormEl
+            .reportValidity ===
+          'function'
+        ) {
+          reviewFormEl.reportValidity();
+        }
+        return;
+      }
+      const clinic =
+        siteData.clinic || {};
+      const whatsapp =
+        normalizeWhatsApp(
+          clinic.whatsapp
+        );
+      if (!whatsapp) {
+        console.error(
+          'رقم واتساب المجمع غير موجود في بيانات المحتوى.'
+        );
+        return;
+      }
+      let message =
+        'تعليق جديد من موقع المجمع\n\n';
+      message +=
+        `الاسم: ${name}\n`;
+      message +=
+        `التعليق: ${text}\n`;
+      const waUrl =
+        `https://wa.me/${whatsapp}?text=${encodeURIComponent(
+          message
+        )}`;
+      window.open(
+        waUrl,
+        '_blank',
+        'noopener'
+      );
+      if (nameEl) {
+        nameEl.value = '';
+      }
+      if (textEl) {
+        textEl.value = '';
+      }
       alert(
         'شكراً لك! تم إرسال تعليقك، وسيظهر بعد المراجعة.'
       );
     }
   );
 }
-
 /* ===== القائمة المتنقلة ===== */
-const menuToggle =
-  document.getElementById(
-    'navToggle'
-  );
-
-const navLinks =
-  document.getElementById(
-    'navLinks'
-  );
-
-function closeMobileMenu() {
-  if (!navLinks) return;
-
-  navLinks.classList.remove(
-    'open'
-  );
-
-  if (menuToggle) {
+function initMobileMenu() {
+  const menuToggle =
+    document.getElementById(
+      'navToggle'
+    );
+  const navLinks =
+    document.getElementById(
+      'navLinks'
+    );
+  if (
+    !menuToggle ||
+    !navLinks
+  ) {
+    return;
+  }
+  if (
+    menuToggle.dataset.initialized ===
+    'true'
+  ) {
+    return;
+  }
+  menuToggle.dataset.initialized =
+    'true';
+  function closeMobileMenu() {
+    navLinks.classList.remove(
+      'open'
+    );
     menuToggle.setAttribute(
       'aria-expanded',
       'false'
     );
   }
-}
-
-if (
-  menuToggle &&
-  navLinks
-) {
   menuToggle.addEventListener(
     'click',
     () => {
@@ -1927,7 +2402,6 @@ if (
         navLinks.classList.toggle(
           'open'
         );
-
       menuToggle.setAttribute(
         'aria-expanded',
         isOpen
@@ -1936,7 +2410,6 @@ if (
       );
     }
   );
-
   navLinks
     .querySelectorAll('a')
     .forEach((link) => {
@@ -1945,10 +2418,9 @@ if (
         closeMobileMenu
       );
     });
-
   document.addEventListener(
     'click',
-    (e) => {
+    (event) => {
       if (
         !navLinks.classList.contains(
           'open'
@@ -1956,31 +2428,29 @@ if (
       ) {
         return;
       }
-
       if (
         navLinks.contains(
-          e.target
+          event.target
         ) ||
         menuToggle.contains(
-          e.target
+          event.target
         )
       ) {
         return;
       }
-
       closeMobileMenu();
     }
   );
-
   document.addEventListener(
     'keydown',
-    (e) => {
-      if (e.key === 'Escape') {
+    (event) => {
+      if (
+        event.key === 'Escape'
+      ) {
         closeMobileMenu();
       }
     }
   );
-
   window.addEventListener(
     'resize',
     () => {
@@ -1989,43 +2459,43 @@ if (
       ) {
         closeMobileMenu();
       }
+    },
+    {
+      passive: true
     }
   );
 }
-
 /* ===== مراقبة أقسام القائمة ===== */
 function initNavSpy() {
+  const navLinks =
+    document.getElementById(
+      'navLinks'
+    );
   if (!navLinks) return;
-
   const links =
     Array.from(
       navLinks.querySelectorAll(
         '.nav-link'
       )
     );
-
   if (!links.length) return;
-
   const targets =
     links
       .map((link) => {
+        const href =
+          link.getAttribute(
+            'href'
+          ) || '';
         const id =
-          (
-            link.getAttribute(
-              'href'
-            ) || ''
-          ).replace(
-            '#',
-            ''
-          );
-
+          href.startsWith('#')
+            ? href.slice(1)
+            : '';
         const section =
           id
             ? document.getElementById(
                 id
               )
             : null;
-
         return section
           ? {
               link,
@@ -2034,20 +2504,32 @@ function initNavSpy() {
           : null;
       })
       .filter(Boolean);
-
   if (!targets.length) return;
-
+  if (
+    typeof IntersectionObserver ===
+    'undefined'
+  ) {
+    return;
+  }
   const setActive =
     (link) => {
       links.forEach(
-        (l) =>
-          l.classList.toggle(
+        (item) => {
+          item.classList.toggle(
             'active',
-            l === link
-          )
+            item === link
+          );
+        }
       );
     };
-
+  if (
+    navLinks.dataset.spyInitialized ===
+    'true'
+  ) {
+    return;
+  }
+  navLinks.dataset.spyInitialized =
+    'true';
   const observer =
     new IntersectionObserver(
       (entries) => {
@@ -2058,14 +2540,12 @@ function initNavSpy() {
             ) {
               return;
             }
-
             const match =
               targets.find(
-                (t) =>
-                  t.section ===
+                (target) =>
+                  target.section ===
                   entry.target
               );
-
             if (match) {
               setActive(
                 match.link
@@ -2080,39 +2560,42 @@ function initNavSpy() {
         threshold: 0
       }
     );
-
   targets.forEach(
-    (t) =>
+    (target) => {
       observer.observe(
-        t.section
-      )
+        target.section
+      );
+    }
   );
 }
-
 /* ===== تأثير الهيدر عند التمرير ===== */
-const headerEl =
-  document.getElementById(
-    'header'
-  );
-
-if (headerEl) {
+function initHeaderScroll() {
+  const headerEl =
+    document.getElementById(
+      'header'
+    );
+  if (!headerEl) return;
+  if (
+    headerEl.dataset.scrollInitialized ===
+    'true'
+  ) {
+    return;
+  }
+  headerEl.dataset.scrollInitialized =
+    'true';
   let scrollTicking =
     false;
-
   window.addEventListener(
     'scroll',
     () => {
       if (scrollTicking) return;
-
       scrollTicking = true;
-
       requestAnimationFrame(
         () => {
           headerEl.classList.toggle(
             'scrolled',
             window.scrollY > 30
           );
-
           scrollTicking = false;
         }
       );
@@ -2122,58 +2605,98 @@ if (headerEl) {
     }
   );
 }
-
 /* ===== ظهور العناصر أثناء التمرير ===== */
 function initScrollReveal() {
-  const observer =
-    new IntersectionObserver(
-      (entries) => {
-        entries.forEach(
-          (entry) => {
-            if (
-              entry.isIntersecting
-            ) {
-              entry.target.classList.add(
-                'visible'
-              );
-
-              observer.unobserve(
-                entry.target
-              );
-            }
-          }
+  if (
+    typeof IntersectionObserver ===
+    'undefined'
+  ) {
+    document
+      .querySelectorAll(
+        '.reveal:not(.visible)'
+      )
+      .forEach((el) => {
+        el.classList.add(
+          'visible'
         );
-      },
-      {
-        threshold: 0.12
-      }
-    );
-
+      });
+    return;
+  }
   document
     .querySelectorAll(
       '.reveal:not(.visible)'
     )
-    .forEach((el) =>
-      observer.observe(el)
-    );
+    .forEach((el) => {
+      if (
+        el.dataset.revealInitialized ===
+        'true'
+      ) {
+        return;
+      }
+      el.dataset.revealInitialized =
+        'true';
+      const observer =
+        new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach(
+              (entry) => {
+                if (
+                  !entry.isIntersecting
+                ) {
+                  return;
+                }
+                entry.target.classList.add(
+                  'visible'
+                );
+                obs.unobserve(
+                  entry.target
+                );
+              }
+            );
+          },
+          {
+            threshold: 0.12
+          }
+        );
+      observer.observe(el);
+    });
 }
-
-/* ===== بدء الموقع ===== */
-loadContent();
-
+/* ===== تشغيل وظائف الصفحة بعد جاهزية DOM ===== */
+function initPage() {
+  initBookingForm();
+  initReviewForm();
+  initMobileMenu();
+  initHeaderScroll();
+  loadContent();
+}
+if (
+  document.readyState ===
+  'loading'
+) {
+  document.addEventListener(
+    'DOMContentLoaded',
+    initPage,
+    {
+      once: true
+    }
+  );
+} else {
+  initPage();
+}
 /* ===== إعادة ضبط أسماء بطاقات الخدمات عند تغيير الحجم ===== */
 let _fitTimer = null;
-
 window.addEventListener(
   'resize',
   () => {
     clearTimeout(
       _fitTimer
     );
-
     _fitTimer = setTimeout(
       fitServiceCardNames,
       150
     );
+  },
+  {
+    passive: true
   }
 );
