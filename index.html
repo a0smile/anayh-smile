@@ -563,66 +563,56 @@
     </section>
 
 
-   <section class="section" id="services">
-      <div class="container" style="position: relative;">
+  <section class="section" id="services">
+      <div class="container" style="position: relative; padding-top: 15px;">
 
-        <!-- زر احجز موعدك الآن المطور والمنقول لزاوية بطاقة الأسعار لتنسيق فخم ومحترف -->
-        <div style="position: absolute; left: 15px; top: 10px; z-index: 10;">
+        <!-- حاوية توزيع الترويسة الجديدة لضمان عدم التداخل على شاشات الجوال والكاميرات الهاتفيّة -->
+        <div style="display: flex; flex-direction: column; align-items: flex-start; text-align: right; margin-bottom: 25px; padding-left: 90px; box-sizing: border-box; position: relative;">
+          
+          <!-- الختم الملكي الدائري الفخم المقوس في الزاوية بأبعاد هندسية ناعمة وصغيرة تناسب الهوية -->
+          <div style="position: absolute; left: 0; top: 0; z-index: 10; transform: rotate(-6deg); animation: stampGlowPulse 2.5s infinite ease-in-out;">
+            <svg width="78" height="78" viewBox="0 0 100 100" xmlns="http://w3.org" style="filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35));">
+              <!-- الدائرة الخارجية للختم باللون العنابي الملكي الفاخر مع حواف منقوشة بالذهب -->
+              <circle cx="50" cy="50" r="46" fill="#421654" stroke="#e8d9ae" stroke-width="2"/>
+              <circle cx="50" cy="50" r="42" fill="none" stroke="#e8d9ae" stroke-width="1" stroke-dasharray="2,2"/>
+              
+              <!-- مسار برمجى دائري غير مرئي لكتابة النص المقوس من الأعلى بشكل دائري دقيق -->
+              <path id="stampTextPath" d="M 16,50 A 34,34 0 1,1 84,50" fill="none"/>
+              <text font-family="'Tajawal', sans-serif" font-size="6.8" font-weight="700" fill="#e8d9ae" letter-spacing="0.2">
+                <textPath href="#stampTextPath" startOffset="50%" text-anchor="middle">مجمع عناية الابتسامة الطبي</textPath>
+              </text>
+              
+              <!-- نص الإعلان الداخلي في منتصف الختم بخط متناسق وواضح للمرضى -->
+              <text x="50" y="55" font-family="'Tajawal', sans-serif" font-size="6.5" font-weight="800" fill="#ffffff" text-anchor="middle">وفرنا لكم</text>
+              <text x="50" y="65" font-family="'Tajawal', sans-serif" font-size="6" font-weight="700" fill="#e8d9ae" text-anchor="middle">تابي & تمارا</text>
+              
+              <!-- زخرفة سن ضاحك خفيف في مركز الختم العلوي لتوثيق الهوية الطبية -->
+              <path d="M47 32c0-1 1-2 3-2s3 1 3 2c0 2-1 3-3 3s-3-1-3-3z" fill="#e8d9ae" opacity="0.7"/>
+            </svg>
+          </div>
+
+          <!-- ترويسة العناوين المصغرة والأنيقة للغاية لمنع الملاحظات البصرية -->
+          <span class="section-badge" id="servicesBadge" style="font-size: 10px; font-weight: 600; color: #e8d9ae; margin-bottom: 2px;">
+            خدماتنا
+          </span>
+
+          <h2 class="section-title" id="servicesTitle" style="font-size: 17px; font-weight: 700; margin: 0 0 4px 0; line-height: 1.3; color: #ffffff;">
+            خدمات وأسعار عناية الابتسامة الطبي
+          </h2>
+
+          <p class="section-subtitle" id="servicesSubtitle" style="font-size: 11px; font-weight: 400; margin: 0 0 12px 0; line-height: 1.4; opacity: 0.75; color: #e0e0e0;">
+            أسعار واضحة وشفافة — احجز الخدمة التي تناسبك مباشرة عبر الواتساب
+          </p>
+
+          <!-- زر احجز موعدك الآن بالخلفية الذهبية الملكية الفخمة والخط العريض العريض أسفل النص -->
           <a
             href="#booking"
             class="btn btn-primary"
             id="heroBtnMain"
-            style="font-size: 11px; padding: 6px 14px; border-radius: 4px; font-weight: 700; text-decoration: none; box-shadow: 0 2px 6px rgba(0,0,0,0.15); display: inline-block;"
+            style="font-size: 11px; padding: 7px 16px; border-radius: 4px; font-weight: 800; text-decoration: none; background: linear-gradient(135deg, #e8d9ae, #cbb577); color: #2b1654; box-shadow: 0 3px 8px rgba(203,181,119,0.3); border: none; display: inline-block; transition: 0.3s; transform: scale(1);"
           >
             احجز موعدك الآن
           </a>
-        </div>
-
-        <!-- لافتة تابي وتمارا الاحترافية الصغيرة والمائلة والنابضة بذكاء في زاوية القسم -->
-        <div style="position: absolute; left: 15px; top: 52px; z-index: 10; transform: rotate(-4deg); animation: servicesBadgePulse 2s infinite ease-in-out;">
-          <div style="background: linear-gradient(135deg, #111111, #222222); color: #ffffff; padding: 4px 10px; border-radius: 20px; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.15);">
-            <span style="font-size: 9px; font-weight: 700; font-family: 'Tajawal', sans-serif; color: #e8d9ae; letter-spacing: 0.3px;">متوفر لدينا</span>
-            
-            <!-- خط فاصل ناعم -->
-            <div style="width: 1px; height: 12px; background: rgba(255,255,255,0.2);"></div>
-
-            <!-- شعار تابي الحقيقي المدمج كـ SVG خفيف -->
-            <div style="display: flex; align-items: center;" aria-label="Tabby">
-              <svg width="32" height="10" viewBox="0 0 68 22" fill="none" xmlns="http://w3.org" style="color: #39FF14; fill: currentColor;">
-                <path d="M7.7 20.3H0V1.7h7.7v18.6zM21.1 6.8h-4.8v13.5h-7.7V6.8H3.8V1.7h17.3v5.1zM38.5 20.3h-7.4v-1.8c-1.3 1.4-3.2 2.2-5.4 2.2-4.4 0-8-3.4-8-8.2s3.6-8.2 8-8.2c2.2 0 4.1.8 5.4 2.2V1.7h7.4v18.6zm-7.4-7.8c0-2.4-1.7-4-3.9-4s-3.9 1.6-3.9 4 1.7 4 3.9 4 3.9-1.6 3.9-4zM54.1 12.3c0 4.8-3.6 8.2-8 8.2-2.2 0-4.1-.8-5.4-2.2v1.8h-7.4V1.7h7.4v6.4c1.3-1.4 3.2-2.2-5.4-2.2 4.4 0 8 3.4 8 8.2zm-7.4 0c0-2.4-1.7-4-3.9-4s-3.9 1.6-3.9 4 1.7 4 3.9 4 3.9-1.6 3.9-4zM67.7 6.8L61 22.3h-7.8l4-8.8-5.4-6.7h8.1l2.5 3.7 2.4-3.7h7.9z"/>
-              </svg>
-            </div>
-
-            <!-- شعار تمارا الحقيقي المدمج كـ SVG خفيف -->
-            <div style="display: flex; align-items: center;" aria-label="Tamara">
-              <svg width="34" height="11" viewBox="0 0 77 24" fill="none" xmlns="http://w3.org" style="color: #FFA500; fill: currentColor;">
-                <path d="M10.8 4.7H0V0h18.5v4.7h-7.7v18.7H10.8V4.7zM31.2 23.4c-4.4 0-7.8-3.4-7.8-8.2s3.4-8.2 7.8-8.2 7.8 3.4 7.8 8.2-3.4 8.2-7.8 8.2zm0-4.7c1.9 0 3.1-1.4 3.1-3.5s-1.2-3.5-3.1-3.5-3.1 1.4-3.1 3.5 1.2 3.5 3.1 3.5zM53.1 23.4V7.4h4.4v3.5c1.1-2.4 3.2-3.9 6.1-3.9 4.3 0 6.9 2.8 6.9 7.8v8.6h-4.7v-8.1c0-2.6-1.1-3.8-3.1-3.8-2 0-3.3 1.4-3.3 3.8v8.1h-4.7zM76.9 23.4V7.4h4.4v3.5c1.1-2.4 3.2-3.9 6.1-3.9 4.3 0 6.9 2.8 6.9 7.8v8.6h-4.7v-8.1c0-2.6-1.1-3.8-3.1-3.8-2 0-3.3 1.4-3.3 3.8v8.1H76.9z"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-
-        <!-- تم وضع كود التفتيح والنبض هنا بالمنتصف لضمان الأمان البرمجي وتطابق نهاية الملف تماماً -->
-        <style>
-          @keyframes servicesBadgePulse {
-            0%, 100% { transform: rotate(-4deg) scale(1); filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
-            50% { transform: rotate(-4deg) scale(1.04); filter: drop-shadow(0 4px 12px rgba(232,217,174,0.35)); }
-          }
-        </style>
-
-        <!-- ترويسة قسم الأسعار الجديد بنص رسمي 100% وحجم متناسق -->
-        <div class="section-head" id="servicesSectionHead" style="text-align: right; padding-left: 155px; margin-bottom: 25px;">
-          <span class="section-badge" id="servicesBadge" style="font-size: 11px; font-weight: 600;">
-            خدماتنا
-          </span>
-
-         <h2 class="section-title" id="servicesTitle" style="font-size: 20px; font-weight: 700; margin: 6px 0 4px; line-height: 1.3;">
-            خدمات وأسعار عناية الابتسامة الطبي
-          </h2>
-
-          <p class="section-subtitle" id="servicesSubtitle" style="font-size: 12px; font-weight: 400; margin: 0; line-height: 1.4; opacity: 0.75;">
-            أسعار واضحة وشفافة — احجز الخدمة التي تناسبك مباشرة عبر الواتساب
-          </p>
         </div>
 
         <div
