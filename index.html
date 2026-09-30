@@ -564,52 +564,52 @@
 
 
   <section class="section" id="services">
-      <div class="container" style="position: relative; padding-top: 15px;">
+      <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 15px; position: relative; text-align: center;">
 
-        <!-- حاوية توزيع الترويسة الجديدة لضمان عدم التداخل على شاشات الجوال والكاميرات الهاتفيّة -->
-        <div style="display: flex; flex-direction: column; align-items: flex-start; text-align: right; margin-bottom: 25px; padding-left: 90px; box-sizing: border-box; position: relative;">
+        <!-- حاوية مركزية فخمة لترتيب العناصر بشكل متناسق هندسياً ويمنع التبعثر تماماً -->
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 30px; position: relative; width: 100%; box-sizing: border-box;">
           
-          <!-- الختم الملكي الدائري الفخم المقوس في الزاوية بأبعاد هندسية ناعمة وصغيرة تناسب الهوية -->
-          <div style="position: absolute; left: 0; top: 0; z-index: 10; transform: rotate(-6deg); animation: stampGlowPulse 2.5s infinite ease-in-out;">
-            <svg width="78" height="78" viewBox="0 0 100 100" xmlns="http://w3.org" style="filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35));">
-              <!-- الدائرة الخارجية للختم باللون العنابي الملكي الفاخر مع حواف منقوشة بالذهب -->
-              <circle cx="50" cy="50" r="46" fill="#421654" stroke="#e8d9ae" stroke-width="2"/>
-              <circle cx="50" cy="50" r="42" fill="none" stroke="#e8d9ae" stroke-width="1" stroke-dasharray="2,2"/>
+          <!-- الختم الرسمي الورقي الحقيقي 100% بخلفية بيضاء ونقوش حبرية عنابية فاخرة بدون رسوم كرتونية -->
+          <div style="margin-bottom: 12px; transform: rotate(-5deg); display: inline-block; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.15));">
+            <svg width="85" height="85" viewBox="0 0 100 100" xmlns="http://w3.org">
+              <defs>
+                <!-- مسار دائري هندسي مضبوط بالملي لضمان ظهور النص المقوس كاملاً بدون اختفاء -->
+                <path id="stampTextPathClean" d="M 50,50 m -35,0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" />
+              </defs>
+              <circle cx="50" cy="50" r="45" fill="#ffffff" stroke="#421654" stroke-width="2"/>
+              <circle cx="50" cy="50" r="41" fill="none" stroke="#421654" stroke-width="1" stroke-dasharray="3,2" opacity="0.6"/>
               
-              <!-- مسار برمجى دائري غير مرئي لكتابة النص المقوس من الأعلى بشكل دائري دقيق -->
-              <path id="stampTextPath" d="M 16,50 A 34,34 0 1,1 84,50" fill="none"/>
-              <text font-family="'Tajawal', sans-serif" font-size="6.8" font-weight="700" fill="#e8d9ae" letter-spacing="0.2">
-                <textPath href="#stampTextPath" startOffset="50%" text-anchor="middle">مجمع عناية الابتسامة الطبي</textPath>
+              <!-- النص الدائري المقوس بالبصمة الحبرية العنابية الظاهر تماماً وبخط واضح -->
+              <text font-family="'Tajawal', sans-serif" font-size="5.8" font-weight="800" fill="#421654">
+                <textPath href="#stampTextPathClean" startOffset="50%" text-anchor="middle">مجمع عناية الابتسامة الطبي •</textPath>
               </text>
               
-              <!-- نص الإعلان الداخلي في منتصف الختم بخط متناسق وواضح للمرضى -->
-              <text x="50" y="55" font-family="'Tajawal', sans-serif" font-size="6.5" font-weight="800" fill="#ffffff" text-anchor="middle">وفرنا لكم</text>
-              <text x="50" y="65" font-family="'Tajawal', sans-serif" font-size="6" font-weight="700" fill="#e8d9ae" text-anchor="middle">تابي & تمارا</text>
-              
-              <!-- زخرفة سن ضاحك خفيف في مركز الختم العلوي لتوثيق الهوية الطبية -->
-              <path d="M47 32c0-1 1-2 3-2s3 1 3 2c0 2-1 3-3 3s-3-1-3-3z" fill="#e8d9ae" opacity="0.7"/>
+              <!-- النصوص الداخلية المحفورة بوسط الختم بلون رسمي مقروء للزوار -->
+              <text x="50" y="47" font-family="'Tajawal', sans-serif" font-size="7" font-weight="900" fill="#421654" text-anchor="middle">لخدمتكم وفرنا</text>
+              <text x="50" y="57" font-family="'Tajawal', sans-serif" font-size="7.5" font-weight="900" fill="#cbb577" text-anchor="middle">خدمات دفع</text>
+              <text x="50" y="67" font-family="'Tajawal', sans-serif" font-size="6.5" font-weight="800" fill="#421654" text-anchor="middle">تابي & تمارا</text>
             </svg>
           </div>
 
-          <!-- ترويسة العناوين المصغرة والأنيقة للغاية لمنع الملاحظات البصرية -->
-          <span class="section-badge" id="servicesBadge" style="font-size: 10px; font-weight: 600; color: #e8d9ae; margin-bottom: 2px;">
+          <!-- ترويسة العناوين المنسقة والناعمة والممركزة بالمنتصف -->
+          <span class="section-badge" id="servicesBadge" style="font-size: 10px; font-weight: 700; color: #cbb577; margin-bottom: 4px; letter-spacing: 0.5px;">
             خدماتنا
           </span>
 
-          <h2 class="section-title" id="servicesTitle" style="font-size: 17px; font-weight: 700; margin: 0 0 4px 0; line-height: 1.3; color: #ffffff;">
+          <h2 class="section-title" id="servicesTitle" style="font-size: 19px; font-weight: 700; margin: 0 0 4px 0; line-height: 1.3; color: #ffffff; font-family: 'Tajawal', sans-serif;">
             خدمات وأسعار عناية الابتسامة الطبي
           </h2>
 
-          <p class="section-subtitle" id="servicesSubtitle" style="font-size: 11px; font-weight: 400; margin: 0 0 12px 0; line-height: 1.4; opacity: 0.75; color: #e0e0e0;">
+          <p class="section-subtitle" id="servicesSubtitle" style="font-size: 11px; font-weight: 400; margin: 0 0 15px 0; line-height: 1.4; opacity: 0.75; color: #e0e0e0; font-family: 'Tajawal', sans-serif; max-width: 550px;">
             أسعار واضحة وشفافة — احجز الخدمة التي تناسبك مباشرة عبر الواتساب
           </p>
 
-          <!-- زر احجز موعدك الآن بالخلفية الذهبية الملكية الفخمة والخط العريض العريض أسفل النص -->
+          <!-- زر احجز موعدك الآن بالخلفية الذهبية الملكية المطفية (Matte Gold) والفخمة جداً بخط عريض -->
           <a
             href="#booking"
             class="btn btn-primary"
             id="heroBtnMain"
-            style="font-size: 11px; padding: 7px 16px; border-radius: 4px; font-weight: 800; text-decoration: none; background: linear-gradient(135deg, #e8d9ae, #cbb577); color: #2b1654; box-shadow: 0 3px 8px rgba(203,181,119,0.3); border: none; display: inline-block; transition: 0.3s; transform: scale(1);"
+            style="font-size: 11px; padding: 9px 24px; border-radius: 4px; font-weight: 800; text-decoration: none; background-color: #cbb577; color: #2b1654; box-shadow: 0 4px 10px rgba(0,0,0,0.2); border: 1px solid #bba367; display: inline-block; transition: all 0.3s ease; font-family: 'Tajawal', sans-serif;"
           >
             احجز موعدك الآن
           </a>
