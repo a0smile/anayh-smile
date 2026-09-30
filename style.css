@@ -1084,7 +1084,9 @@ textarea:focus-visible {
 }
 
 /* ============================================================
-   بطاقات الخدمات — الحفاظ على البطاقة الأصلية
+   بطاقات الخدمات — ضبط 100٪
+   مربعات الاسم والأسعار أصغر ومحكمة حول النص
+   خط عريض + مظهر ملكي فاخر + زر ذهبي بمقاس النص
    ============================================================ */
 
 .service-cards {
@@ -1111,40 +1113,19 @@ textarea:focus-visible {
   animation: cardFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.service-card-wrap:nth-child(1) {
-  animation-delay: 0.04s;
-}
-
-.service-card-wrap:nth-child(2) {
-  animation-delay: 0.08s;
-}
-
-.service-card-wrap:nth-child(3) {
-  animation-delay: 0.12s;
-}
-
-.service-card-wrap:nth-child(4) {
-  animation-delay: 0.16s;
-}
-
-.service-card-wrap:nth-child(5) {
-  animation-delay: 0.20s;
-}
-
-.service-card-wrap:nth-child(6) {
-  animation-delay: 0.24s;
-}
-
-.service-card-wrap:nth-child(n + 7) {
-  animation-delay: 0.28s;
-}
+.service-card-wrap:nth-child(1) { animation-delay: 0.04s; }
+.service-card-wrap:nth-child(2) { animation-delay: 0.08s; }
+.service-card-wrap:nth-child(3) { animation-delay: 0.12s; }
+.service-card-wrap:nth-child(4) { animation-delay: 0.16s; }
+.service-card-wrap:nth-child(5) { animation-delay: 0.20s; }
+.service-card-wrap:nth-child(6) { animation-delay: 0.24s; }
+.service-card-wrap:nth-child(n + 7) { animation-delay: 0.28s; }
 
 @keyframes cardFadeUp {
   from {
     opacity: 0;
     transform: translateY(14px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1216,41 +1197,47 @@ textarea:focus-visible {
   pointer-events: none !important;
 }
 
+/* ========== اسم الخدمة — مربع محكم حول النص ========== */
 .service-card-name {
   position: absolute !important;
-  top: 27% !important;
-  left: 9% !important;
-  right: 9% !important;
+  top: 26.5% !important;
+  left: 11% !important;
+  right: 11% !important;
   height: auto !important;
-  min-height: 17% !important;
-  max-height: 21% !important;
+  min-height: 0 !important;
+  max-height: none !important;
   margin: 0 !important;
-  padding: 7px 8px !important;
+  padding: 5px 8px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
   font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif !important;
-  font-size: clamp(0.68rem, 2.55vw, 0.90rem) !important;
+  font-size: clamp(0.66rem, 2.4vw, 0.86rem) !important;
   font-weight: 900 !important;
-  color: #3B1E6D !important;
-  background: #FDF6E3 !important;
-  border: 2px solid #C9A86A !important;
-  border-radius: 12px !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12) !important;
-  line-height: 1.18 !important;
+  color: #2A1548 !important;
+  background: linear-gradient(180deg, #FFFDF5 0%, #F8EED4 100%) !important;
+  border: 1.5px solid #C9A24D !important;
+  border-radius: 9px !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.7) inset,
+    0 2px 5px rgba(59, 30, 109, 0.12),
+    0 0 0 1px rgba(201, 162, 77, 0.25) !important;
+  line-height: 1.2 !important;
   overflow: hidden !important;
   word-break: normal !important;
   overflow-wrap: anywhere !important;
   text-wrap: balance;
   pointer-events: auto !important;
+  letter-spacing: 0.01em !important;
 }
 
+/* ========== الأسعار — مربعات أصغر ومحكمة ========== */
 .service-card-prices {
   position: absolute !important;
-  top: 49% !important;
-  left: 9% !important;
-  right: 9% !important;
+  top: 48% !important;
+  left: 11% !important;
+  right: 11% !important;
   height: auto !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -1258,7 +1245,7 @@ textarea:focus-visible {
   flex-direction: row !important;
   align-items: stretch !important;
   justify-content: space-between !important;
-  gap: 6% !important;
+  gap: 5% !important;
   background: transparent !important;
   border: none !important;
   pointer-events: auto !important;
@@ -1274,31 +1261,35 @@ textarea:focus-visible {
   align-items: center !important;
   justify-content: center !important;
   margin: 0 !important;
-  padding: 7px 4px !important;
-  background: #FDF6E3 !important;
-  border: 2px solid #C9A86A !important;
-  border-radius: 10px !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.10) !important;
+  padding: 4px 3px !important;
+  background: linear-gradient(180deg, #FFFDF5 0%, #F8EED4 100%) !important;
+  border: 1.5px solid #C9A24D !important;
+  border-radius: 8px !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.7) inset,
+    0 2px 5px rgba(59, 30, 109, 0.10),
+    0 0 0 1px rgba(201, 162, 77, 0.2) !important;
 }
 
 .price-label {
   display: block !important;
-  font-size: clamp(0.50rem, 1.9vw, 0.60rem) !important;
+  font-size: clamp(0.48rem, 1.75vw, 0.56rem) !important;
   font-weight: 900 !important;
-  color: #7D5BA6 !important;
+  color: #6B4E96 !important;
   line-height: 1.1 !important;
-  margin-bottom: 3px !important;
+  margin-bottom: 2px !important;
   text-align: center !important;
+  letter-spacing: 0.02em !important;
 }
 
 .price-old.price-value {
   position: relative !important;
-  font-size: clamp(0.62rem, 2.3vw, 0.78rem) !important;
+  font-size: clamp(0.58rem, 2.15vw, 0.72rem) !important;
   font-weight: 900 !important;
-  color: #0B0C10 !important;
+  color: #1A1228 !important;
   text-decoration: line-through !important;
   text-decoration-color: #E53935 !important;
-  text-decoration-thickness: 2px !important;
+  text-decoration-thickness: 1.5px !important;
   line-height: 1.15 !important;
   text-align: center !important;
 }
@@ -1310,70 +1301,74 @@ textarea:focus-visible {
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
   color: #E53935 !important;
-  font-size: 1.2em !important;
+  font-size: 1.05em !important;
   font-weight: 900 !important;
   text-decoration: none !important;
   pointer-events: none !important;
   z-index: 2 !important;
+  opacity: 0.9 !important;
 }
 
 .price-now.price-value {
-  font-size: clamp(0.74rem, 2.7vw, 0.94rem) !important;
+  font-size: clamp(0.70rem, 2.55vw, 0.88rem) !important;
   font-weight: 900 !important;
-  color: #0B0C10 !important;
+  color: #1A1228 !important;
   line-height: 1.15 !important;
   text-align: center !important;
   white-space: nowrap !important;
 }
 
+/* ========== زر طلب الخدمة — ذهبي فاخر بمقاس النص ========== */
 .service-card .price-wa-btn {
   position: absolute !important;
-  bottom: 4% !important;
-  left: 11% !important;
-  right: 11% !important;
+  bottom: 5% !important;
+  left: 14% !important;
+  right: 14% !important;
   width: auto !important;
   max-width: none !important;
-  height: 12% !important;
-  min-height: 32px !important;
+  height: auto !important;
+  min-height: 0 !important;
   margin: 0 !important;
-  padding: 0 10px !important;
+  padding: 6px 10px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 4px !important;
+  gap: 3px !important;
   background: linear-gradient(
-    135deg,
-    #BF953F 0%,
-    #FCF6BA 25%,
-    #B38728 50%,
-    #FBF5B7 75%,
-    #AA771C 100%
+    180deg,
+    #F8E9B0 0%,
+    #E8C84A 22%,
+    #D4A017 48%,
+    #C9A24D 72%,
+    #A67C1A 100%
   ) !important;
-  color: #4A2E80 !important;
+  color: #2A1548 !important;
   font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif !important;
-  font-size: clamp(0.68rem, 2.5vw, 0.84rem) !important;
+  font-size: clamp(0.66rem, 2.4vw, 0.80rem) !important;
   font-weight: 900 !important;
-  border: none !important;
-  border-radius: 8px !important;
+  border: 1px solid rgba(255, 230, 150, 0.55) !important;
+  border-radius: 7px !important;
   box-shadow:
-    0 3px 0 #7A5813,
-    0 5px 14px rgba(187, 143, 44, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+    0 2px 0 #7A5813,
+    0 4px 10px rgba(166, 124, 26, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
   text-decoration: none !important;
   z-index: 5 !important;
   pointer-events: auto !important;
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease !important;
-  text-shadow: none !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+  letter-spacing: 0.02em !important;
+  line-height: 1.2 !important;
 }
 
 .service-card .price-wa-btn:hover {
   transform: translateY(-2px) scale(1.03) !important;
   box-shadow:
-    0 5px 0 #7A5813,
-    0 8px 18px rgba(187, 143, 44, 0.6),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+    0 4px 0 #7A5813,
+    0 7px 14px rgba(166, 124, 26, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
 }
 
 .service-card .price-wa-btn:active {
@@ -2081,33 +2076,32 @@ body.admin-mode .catalog-tools {
   }
 
   .service-card-name {
-    left: 8% !important;
-    right: 8% !important;
-    padding-left: 5px !important;
-    padding-right: 5px !important;
+    left: 10% !important;
+    right: 10% !important;
+    padding: 4px 6px !important;
     border-width: 1.5px !important;
+    border-radius: 8px !important;
   }
 
   .service-card-prices {
-    left: 8% !important;
-    right: 8% !important;
+    left: 10% !important;
+    right: 10% !important;
     gap: 4% !important;
   }
 
   .price-old,
   .price-now,
   .price-cell {
-    padding-left: 2px !important;
-    padding-right: 2px !important;
+    padding: 3px 2px !important;
     border-width: 1.5px !important;
+    border-radius: 7px !important;
   }
 
   .service-card .price-wa-btn {
-    left: 9% !important;
-    right: 9% !important;
-    padding-left: 5px !important;
-    padding-right: 5px !important;
-    border-radius: 7px !important;
+    left: 12% !important;
+    right: 12% !important;
+    padding: 5px 8px !important;
+    border-radius: 6px !important;
   }
 }
 
