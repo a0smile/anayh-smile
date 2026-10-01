@@ -150,14 +150,14 @@ textarea:focus-visible {
 }
 
 .btn-primary {
-  background: #1E4D2B;
+  background: #115E2E;
   color: #FFFFFF;
-  box-shadow: 0 6px 16px rgba(30, 77, 43, 0.28);
+  box-shadow: 0 6px 16px rgba(17, 94, 46, 0.28);
 }
 
 .btn-primary:hover {
-  background: #17401F;
-  box-shadow: 0 10px 24px rgba(30, 77, 43, 0.38);
+  background: #0B4620;
+  box-shadow: 0 10px 24px rgba(17, 94, 46, 0.38);
 }
 
 .btn-outline {
@@ -194,7 +194,7 @@ textarea:focus-visible {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 8px 14px;
+  padding: 12px 14px;
   max-width: var(--maxw);
   margin: 0 auto;
   position: relative;
@@ -211,6 +211,8 @@ textarea:focus-visible {
 
 .logo-icon img {
   border-radius: 10px;
+  max-height: 40px;
+  object-fit: contain;
 }
 
 .logo-text {
@@ -250,6 +252,7 @@ textarea:focus-visible {
   white-space: nowrap;
   min-height: 44px;
   transition:
+
     background 0.2s var(--ease),
     color 0.2s var(--ease),
     transform 0.2s var(--ease);
