@@ -1589,7 +1589,7 @@ function renderSite(data) {
     }
   );
   /* ===== الحجز ===== */
-  safeRender(
+   safeRender(
     'booking',
     () => {
       setText(
@@ -1623,8 +1623,15 @@ function renderSite(data) {
           'service'
         );
       if (!serviceSelect) return;
+      
+      // بناء خدمات الحجز المحدثة بأسعارها التنافسية لعيادات مجمع عناية الابتسامة
       serviceSelect.innerHTML =
-        '<option value="">اختر الخدمة</option>' +
+        '<option value="">اختر الخدمة المطلوبة...</option>' +
+        '<option value="شد تقويم الأسنان للفك - 99 ريال">شد تقويم الأسنان للفك — 99 ريال</option>' +
+        '<option value="تنظيف الأسنان وإزالة الجير - 99 ريال">تنظيف الأسنان وإزالة الجير — 99 ريال</option>' +
+        '<option value="تبييض الأسنان بجهاز الفلاش - 399 ريال">تبييض الأسنان بجهاز الفلاش — 399 ريال</option>' +
+        '<option value="حشوة تجميلية نانو - 120 ريال">حشوة تجميلية نانو — 120 ريال</option>' +
+        '<option value="خلع السن البسيط - 99 ريال">خلع السن البسيط — 99 ريال</option>' +
         bookingServices
           .map(
             (service) => {
@@ -1632,6 +1639,7 @@ function renderSite(data) {
                 String(
                   service ?? ''
                 );
+              if(!value || value.trim() === '') return '';
               return `
                 <option value="${escapeAttr(
                   value
@@ -1644,6 +1652,7 @@ function renderSite(data) {
             }
           )
           .join('');
+          
       serviceSelect.setAttribute(
         'data-edit',
         'bookingServices'
@@ -1687,7 +1696,7 @@ function renderSite(data) {
                     <span
                       class="faq-q-text"
                       ${editAttr(
-                        `faq.${index}.q`
+                        `faq.\${index}.q`
                       )}
                     >
                       ${escapeHtml(
@@ -1704,7 +1713,7 @@ function renderSite(data) {
                   <div
                     class="faq-a"
                     ${editAttr(
-                      `faq.${index}.a`
+                      `faq.\${index}.a`
                     )}
                   >
                     ${escapeHtml(
