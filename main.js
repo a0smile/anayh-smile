@@ -1095,7 +1095,7 @@ function renderSite(data) {
     }
   );
   /* ===== بطاقات الخدمات والأسعار ===== */safeRender(
-    'services',
+      'services',
     () => {
       const servicesGrid =
         document.getElementById(
@@ -1192,10 +1192,31 @@ function renderSite(data) {
                                     service.name
                                   )
                                 : '';
-                            const iconName =
-                              serviceIconFor(
-                                serviceName
-                              );
+                            
+                            // هندسة وحقن أيقونات SVG تخصصية طبية حقيقية 100% لكل قسم (بدون كرتون أو إيموجي)
+                            let medicalSvgIcon = `
+                              <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#115E2E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2C8.5 2 6 4.5 6 8c0 3.5 1.5 5.5 3 7.5c1 1.3 1.5 2.5 1.5 4.5h3c0-2 .5-3.2 1.5-4.5c1.5-2 3-4 3-7.5c0-3.5-2.5-6-6-6z"/>
+                                <path d="M9 22h6"/>
+                              </svg>`;
+                            
+                            if (serviceName.includes("تقويم")) {
+                              medicalSvgIcon = `
+                                <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="#115E2E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                  <path d="M12 2C8.5 2 6 4.5 6 8c0 3.5 1.5 5.5 3 7.5c1 1.3 1.5 2.5 1.5 4.5h3c0-2 .5-3.2 1.5-4.5c1.5-2 3-4 3-7.5c0-3.5-2.5-6-6-6z"/>
+                                  <path d="M6 8h12" stroke-dasharray="2 2"/>
+                                  <rect x="10.5" y="6.5" width="3" height="3" rx="0.5" fill="#115E2E"/>
+                                  <rect x="15" y="6.5" width="2" height="3" rx="0.5" fill="#115E2E"/>
+                                  <rect x="7" y="6.5" width="2" height="3" rx="0.5" fill="#115E2E"/>
+                                </svg>`;
+                            } else if (serviceName.includes("تنظيف") || serviceName.includes("تبييض") || serviceName.includes("فلاش")) {
+                              medicalSvgIcon = `
+                                <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="#115E2E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                  <path d="M12 2C8.5 2 6 4.5 6 8c0 3.5 1.5 5.5 3 7.5c1 1.3 1.5 2.5 1.5 4.5h3c0-2 .5-3.2 1.5-4.5c1.5-2 3-4 3-7.5c0-3.5-2.5-6-6-6z"/>
+                                  <path d="M18 3l1.5 1.5M19.5 3L18 4.5M4 6l1.5 1.5M5.5 6L4 7.5M12 5v0" stroke-width="2"/>
+                                </svg>`;
+                            }
+
                             const servicePrice =
                               service.price !=
                                   null &&
@@ -1222,34 +1243,16 @@ function renderSite(data) {
                               );
                             const waHref =
                               whatsapp
-                                ? `https://wa.me/${whatsapp}?text=${waMsg}`
+                                ? `https://whatsapp.com{whatsapp}&text=${waMsg}`
                                 : '#';
                             return `
                               <article class="service-card-wrap">
                                 <div class="premium-card">
-                                  <svg class="corner-ornament tl" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                                    <path d="M1 17V8A7 7 0 0 1 8 1h9" stroke="#6FBF8A" stroke-width="1.5" stroke-linecap="round"/>
-                                    <circle cx="3" cy="15" r="1.5" fill="#6FBF8A"/>
-                                  </svg>
-                                  <svg class="corner-ornament tr" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                                    <path d="M1 17V8A7 7 0 0 1 8 1h9" stroke="#6FBF8A" stroke-width="1.5" stroke-linecap="round"/>
-                                    <circle cx="3" cy="15" r="1.5" fill="#6FBF8A"/>
-                                  </svg>
                                   <div class="card-inner">
                                     <div class="card-icon-wrap">
                                       <div class="card-icon-glow"></div>
-                                      <span class="sparkle s1" aria-hidden="true">
-                                        <svg viewBox="0 0 16 16"><path d="M8 0L9.5 5.5L15 7L9.5 8.5L8 14L6.5 8.5L1 7L6.5 5.5Z" fill="#fff" opacity="0.9"/></svg>
-                                      </span>
-                                      <span class="sparkle s2" aria-hidden="true">
-                                        <svg viewBox="0 0 16 16"><path d="M8 0L9.5 5.5L15 7L9.5 8.5L8 14L6.5 8.5L1 7L6.5 5.5Z" fill="#E9F6EC"/></svg>
-                                      </span>
-                                      <span class="sparkle s3" aria-hidden="true">
-                                        <svg viewBox="0 0 16 16"><path d="M8 0L9.5 5.5L15 7L9.5 8.5L8 14L6.5 8.5L1 7L6.5 5.5Z" fill="#fff"/></svg>
-                                      </span>
-                                      <div class="shine-sweep" aria-hidden="true"></div>
-                                      <span class="card-service-icon" aria-hidden="true">
-                                        ${window.ndIconHtml ? window.ndIconHtml(iconName) : ''}
+                                      <span class="card-service-icon" aria-hidden="true" style="display: flex; align-items: center; justify-content: center; z-index: 5;">
+                                        ${medicalSvgIcon}
                                       </span>
                                     </div>
                                     <h4
