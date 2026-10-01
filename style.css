@@ -1408,9 +1408,9 @@ textarea:focus-visible {
   position: relative !important;
   z-index: 60 !important;
   width: 100%;
-  background: var(--green-100) !important;
-  border-top: 1px solid rgba(111, 191, 138, 0.55) !important;
-  border-bottom: 1px solid rgba(111, 191, 138, 0.55) !important;
+  background: #D2EAD8 !important;
+  border-top: 1px solid rgba(17, 94, 46, 0.3) !important;
+  border-bottom: 1px solid rgba(17, 94, 46, 0.3) !important;
   overflow: hidden !important;
   height: 42px !important;
   display: flex !important;
@@ -1437,13 +1437,13 @@ textarea:focus-visible {
   display: inline-flex !important;
   align-items: center !important;
   direction: rtl !important;
-  color: var(--green-900) !important;
+  color: #0B4620 !important;
   font-family:
     'IBM Plex Sans Arabic',
     'Cairo',
     'Tajawal',
     sans-serif !important;
-  font-size: 14.5px !important;
+  font-size: 16.5px !important;
   font-weight: 900 !important;
   padding: 0 !important;
   line-height: 42px !important;
