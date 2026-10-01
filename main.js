@@ -848,7 +848,7 @@ function renderSite(data) {
     }
   );
   /* ===== هوية المجمع ===== */
-  safeRender(
+   safeRender(
     'clinicIdentity',
     () => {
       setText(
@@ -893,6 +893,44 @@ function renderSite(data) {
       );
     }
   );
+  
+  /* ===== معرض ابتسامات المراجعين الديناميكي الذكي المربوط بـ content.json ===== */
+  safeRender(
+    'smileGallery',
+    () => {
+      const track = document.getElementById('smileGalleryTrack');
+      if (!track) return;
+      
+      const clinicName = clinic.name || 'مجمع عناية الابتسامة الطبي';
+      const galleryData = Array.isArray(data.smileGalleryItems) ? data.smileGalleryItems : [];
+      
+      let htmlContent = '';
+      
+      // دوران برمجي حقيقي وثابت لـ 6 صور بالتناوب
+      for (let index = 0; index < 6; index++) {
+        const itemUrl = galleryData[index] ? String(galleryData[index]).trim() : '';
+        const currentPath = `smileGalleryItems.${index}`;
+        
+        htmlContent += `
+          <div class="gallery-slide-item">
+            ${
+              itemUrl
+                ? `<img class="gallery-slide-img" src="escapeAttr(itemUrl)" alt="حالة مراجع" data-edit="{currentPath}" data-edit-type="image">`
+                : `<div class="gallery-fallback-box" data-edit="currentPath" data-edit-type="image">{escapeHtml(clinicName)}</div>`
+            }
+          </div>
+        `;
+      }
+      
+      track.innerHTML = htmlContent;
+      
+      // تفعيل ميزة التعديل والحذف الحقيقية لمالك الموقع فقط بطريقة محمية
+      if (window.markEditable) {
+        markEditable('smileGalleryTrack', 'smileGalleryItems');
+      }
+    }
+  );
+
   /* ===== الهيرو ===== */
   safeRender(
     'hero',
