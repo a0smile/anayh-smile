@@ -1,4 +1,4 @@
-const CACHE_NAME = 'smile-care-v33-purple';
+const CACHE_NAME = 'smile-care-v34-green';
 
 const ASSETS = [
   './',

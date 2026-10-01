@@ -1,36 +1,36 @@
 /* ============================================================
    مجمع عناية الابتسامة الطبي — ملف التصميم الكامل
-   هوية بنفسجية فاخرة + تحسينات الجوال والحركة والاستجابة
+   هوية خضراء طبية فاتحة + تحسينات الجوال والحركة والاستجابة
    ============================================================ */
 
 :root {
-  --purple-900: #3B1E6D;
-  --purple-800: #4A2A85;
-  --purple-700: #7F53D1;
-  --purple-600: #8F6ADB;
-  --purple-500: #A78BEA;
-  --purple-400: #C4B0F0;
-  --purple-300: #D9CBF5;
-  --purple-200: #E8DFF8;
-  --purple-100: #F4EFFF;
-  --purple-50: #FAF7FF;
+  --green-900: #14532D;
+  --green-800: #166534;
+  --green-700: #15803D;
+  --green-600: #16A34A;
+  --green-500: #22C55E;
+  --green-400: #4ADE80;
+  --green-300: #86EFAC;
+  --green-200: #BBF7D0;
+  --green-100: #DCFCE7;
+  --green-50: #F0FDF4;
 
-  --gold: #9B7AE8;
-  --gold-dark: #6B3FB8;
-  --gold-light: #D4C4F5;
+  --gold: #34D399;
+  --gold-dark: #0F766E;
+  --gold-light: #A7F3D0;
 
   --bg: #FFFFFF;
   --surface: #FFFFFF;
-  --surface-alt: #F4EFFF;
-  --line: #E0D4F5;
+  --surface-alt: #F0FDF4;
+  --line: #BBF7D0;
 
-  --text: #3B1E6D;
-  --text-mid: #5A3A8A;
-  --text-light: #8A6BB0;
+  --text: #14532D;
+  --text-mid: #166534;
+  --text-light: #4D7C5F;
 
-  --shadow-sm: 0 2px 10px rgba(59, 30, 109, 0.08);
-  --shadow: 0 6px 20px rgba(59, 30, 109, 0.12);
-  --shadow-lg: 0 14px 36px rgba(59, 30, 109, 0.16);
+  --shadow-sm: 0 2px 10px rgba(20, 83, 45, 0.08);
+  --shadow: 0 6px 20px rgba(20, 83, 45, 0.12);
+  --shadow-lg: 0 14px 36px rgba(20, 83, 45, 0.16);
 
   --radius: 18px;
   --radius-sm: 14px;
@@ -66,7 +66,7 @@ body {
   font-size: 14.5px;
   text-align: center;
   overflow-x: hidden;
-  -webkit-tap-highlight-color: rgba(127, 83, 209, 0.12);
+  -webkit-tap-highlight-color: rgba(22, 163, 74, 0.12);
   touch-action: manipulation;
 }
 
@@ -145,28 +145,28 @@ summary:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: 3px solid rgba(127, 83, 209, 0.35);
+  outline: 3px solid rgba(22, 163, 74, 0.35);
   outline-offset: 3px;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--purple-600), var(--purple-800));
+  background: linear-gradient(135deg, var(--green-600), var(--green-800));
   color: #fff;
-  box-shadow: 0 6px 16px rgba(127, 83, 209, 0.3);
+  box-shadow: 0 6px 16px rgba(22, 163, 74, 0.3);
 }
 
 .btn-primary:hover {
-  box-shadow: 0 10px 24px rgba(127, 83, 209, 0.4);
+  box-shadow: 0 10px 24px rgba(22, 163, 74, 0.4);
 }
 
 .btn-outline {
   background: transparent;
-  color: var(--purple-800);
-  border: 1.8px solid var(--purple-700);
+  color: var(--green-800);
+  border: 1.8px solid var(--green-700);
 }
 
 .btn-outline:hover {
-  background: var(--purple-700);
+  background: var(--green-700);
   color: #fff;
 }
 
@@ -221,7 +221,7 @@ textarea:focus-visible {
 .logo-name {
   font-size: 0.9rem;
   font-weight: 900;
-  color: var(--purple-900);
+  color: var(--green-900);
   line-height: 1.2;
 }
 
@@ -255,12 +255,12 @@ textarea:focus-visible {
 }
 
 .nav-links a:hover {
-  background: var(--purple-50);
-  color: var(--purple-700);
+  background: var(--green-50);
+  color: var(--green-700);
 }
 
 .nav-links a.active {
-  background: var(--purple-700);
+  background: var(--green-700);
   color: #fff;
 }
 
@@ -271,14 +271,14 @@ textarea:focus-visible {
   align-items: center;
   gap: 5px;
   background: #FFFFFF !important;
-  border: 2px solid var(--purple-700) !important;
+  border: 2px solid var(--green-700) !important;
   padding: 10px;
   border-radius: 10px;
   width: 44px;
   height: 44px;
   min-width: 44px;
   min-height: 44px;
-  box-shadow: 0 2px 8px rgba(59, 30, 109, 0.12);
+  box-shadow: 0 2px 8px rgba(20, 83, 45, 0.12);
   z-index: 560;
   transition:
     background 0.2s,
@@ -294,7 +294,7 @@ textarea:focus-visible {
   display: block;
   width: 20px;
   height: 2.5px;
-  background: var(--purple-800);
+  background: var(--green-800);
   border-radius: 2px;
   transition:
     transform 0.3s var(--ease),
@@ -303,8 +303,8 @@ textarea:focus-visible {
 }
 
 .nav-toggle[aria-expanded="true"] {
-  background: var(--purple-50) !important;
-  border-color: var(--purple-500) !important;
+  background: var(--green-50) !important;
+  border-color: var(--green-500) !important;
 }
 
 .nav-toggle[aria-expanded="true"] span:nth-child(1) {
@@ -332,7 +332,7 @@ textarea:focus-visible {
   width: 100%;
   height: auto !important;
   overflow: hidden !important;
-  background: var(--purple-900);
+  background: var(--green-900);
 }
 
 .nd-banner-img {
@@ -348,8 +348,8 @@ textarea:focus-visible {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(59, 30, 109, 0.04) 0%,
-    rgba(59, 30, 109, 0.1) 100%
+    rgba(20, 83, 45, 0.04) 0%,
+    rgba(20, 83, 45, 0.1) 100%
   );
   pointer-events: none;
 }
@@ -374,7 +374,7 @@ textarea:focus-visible {
 .hero-cta-title {
   font-size: 1.05rem;
   font-weight: 900;
-  color: var(--purple-900);
+  color: var(--green-900);
   margin-bottom: 4px;
 }
 
@@ -416,7 +416,7 @@ textarea:focus-visible {
 
 .section-badge {
   display: inline-block;
-  background: linear-gradient(135deg, var(--purple-800), var(--purple-600));
+  background: linear-gradient(135deg, var(--green-800), var(--green-600));
   color: #fff;
   padding: 5px 16px;
   border-radius: 50px;
@@ -427,7 +427,7 @@ textarea:focus-visible {
 .section-title {
   font-size: 1.32rem;
   font-weight: 900;
-  color: var(--purple-900);
+  color: var(--green-900);
 }
 
 .section-subtitle {
@@ -454,7 +454,7 @@ textarea:focus-visible {
 }
 
 .price-cat-title {
-  background: linear-gradient(135deg, var(--purple-800), var(--purple-600));
+  background: linear-gradient(135deg, var(--green-800), var(--green-600));
   color: #fff;
   padding: 11px 14px;
   font-size: 0.9rem;
@@ -471,32 +471,30 @@ textarea:focus-visible {
 
 .section-fold {
   max-width: 760px;
-  margin: 0 auto 12px;
+  margin: 0 auto 10px;
+  text-align: center;
 }
 
 .section-fold > summary.section-toggle {
   list-style: none;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 14px 22px;
+  gap: 8px;
+  width: auto;
+  padding: 9px 20px;
   border-radius: 50px;
   font-family: 'Cairo', sans-serif;
   font-weight: 900;
-  font-size: 1.05rem;
-  color: #fff !important;
-  background: linear-gradient(
-    135deg,
-    #7F53D1 0%,
-    #5A3A8A 55%,
-    #3B1E6D 100%
-  ) !important;
+  font-size: 1rem;
+  line-height: 1.2;
+  color: #14532D !important;
+  background: linear-gradient(180deg, #FFFFFF 0%, #DCFCE7 100%) !important;
+  border: 1.5px solid #86EFAC !important;
   box-shadow:
-    0 6px 0 #2A1548,
-    0 12px 24px rgba(59, 30, 109, 0.25) !important;
-  border: none;
+    0 3px 0 #BBF7D0,
+    0 8px 18px rgba(20, 83, 45, 0.12) !important;
   user-select: none;
   text-align: center;
   transition:
@@ -504,11 +502,18 @@ textarea:focus-visible {
     box-shadow 0.2s var(--ease);
 }
 
+.section-fold > summary.section-toggle:hover {
+  background: linear-gradient(180deg, #F0FDF4 0%, #BBF7D0 100%) !important;
+  box-shadow:
+    0 4px 0 #86EFAC,
+    0 10px 22px rgba(20, 83, 45, 0.18) !important;
+}
+
 .section-fold > summary.section-toggle:active {
   transform: translateY(2px);
   box-shadow:
-    0 3px 0 #2A1548,
-    0 6px 14px rgba(59, 30, 109, 0.2) !important;
+    0 1px 0 #BBF7D0,
+    0 4px 10px rgba(20, 83, 45, 0.16) !important;
 }
 
 .section-fold > summary.section-toggle::-webkit-details-marker {
@@ -517,12 +522,13 @@ textarea:focus-visible {
 
 .section-fold > summary.section-toggle::after {
   content: '+';
-  font-size: 1.3rem;
-  font-weight: 700;
-  width: 28px;
-  height: 28px;
+  font-size: 1rem;
+  font-weight: 900;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
+  color: #14532D;
+  background: #A7F3D0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -560,7 +566,7 @@ textarea:focus-visible {
   background: var(--surface);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  border: 2px solid var(--purple-100);
+  border: 2px solid var(--green-100);
   padding: 16px 10px;
   max-width: var(--maxw);
   margin: 0 auto;
@@ -569,7 +575,7 @@ textarea:focus-visible {
 .stat-number {
   font-size: 1.55rem;
   font-weight: 900;
-  color: var(--purple-700);
+  color: var(--green-700);
 }
 
 .stat-label {
@@ -598,7 +604,7 @@ textarea:focus-visible {
   background: var(--surface);
   border-radius: var(--radius);
   padding: 16px 14px;
-  border: 2px solid var(--purple-100);
+  border: 2px solid var(--green-100);
   box-shadow: var(--shadow-sm);
   text-align: center;
   transition:
@@ -621,7 +627,7 @@ textarea:focus-visible {
 .contact-card-title {
   font-size: 0.9rem;
   font-weight: 900;
-  color: var(--purple-900);
+  color: var(--green-900);
 }
 
 .feature-card p,
@@ -638,7 +644,7 @@ textarea:focus-visible {
   border-radius: var(--radius);
   padding: 22px 20px;
   border: 3px solid #fff;
-  outline: 2px solid var(--purple-200);
+  outline: 2px solid var(--green-200);
   box-shadow: var(--shadow);
   text-align: center;
 }
@@ -660,7 +666,7 @@ textarea:focus-visible {
 .form-group label {
   font-size: 0.8rem;
   font-weight: 800;
-  color: var(--purple-900);
+  color: var(--green-900);
 }
 
 .form-group input,
@@ -673,7 +679,7 @@ textarea:focus-visible {
   font-family: inherit;
   font-size: 0.88rem;
   font-weight: 600;
-  background: var(--purple-50);
+  background: var(--green-50);
   color: var(--text);
   transition:
     border-color 0.2s,
@@ -696,9 +702,9 @@ textarea:focus-visible {
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--purple-500);
+  border-color: var(--green-500);
   background: #fff;
-  box-shadow: 0 0 0 3px rgba(127, 83, 209, 0.18);
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.18);
 }
 
 .map-wrap {
@@ -706,7 +712,7 @@ textarea:focus-visible {
   margin: 0 auto 16px;
   border-radius: var(--radius);
   overflow: hidden;
-  border: 2px solid var(--purple-100);
+  border: 2px solid var(--green-100);
 }
 
 .map-frame {
@@ -721,7 +727,7 @@ textarea:focus-visible {
 .social-block {
   max-width: 1000px;
   margin: 0 auto;
-  background: linear-gradient(140deg, var(--purple-900), var(--purple-700));
+  background: linear-gradient(140deg, var(--green-900), var(--green-700));
   border-radius: var(--radius);
   padding: 18px 16px;
   display: flex;
@@ -750,11 +756,11 @@ textarea:focus-visible {
   height: 48px;
   border-radius: 50%;
   background: #fff !important;
-  border: 2px solid var(--purple-300) !important;
+  border: 2px solid var(--green-300) !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--purple-800);
+  color: var(--green-800);
   transition:
     transform 0.25s var(--ease),
     background 0.25s,
@@ -764,15 +770,15 @@ textarea:focus-visible {
 
 .social-links a:hover {
   background: #fff !important;
-  border-color: var(--purple-600) !important;
-  color: var(--purple-700);
+  border-color: var(--green-600) !important;
+  color: var(--green-700);
   transform: translateY(-3px) scale(1.08);
 }
 
 /* ========== التذييل ========== */
 
 .footer {
-  background: var(--purple-900);
+  background: var(--green-900);
   color: #fff;
   padding: 24px 14px 14px;
   border-top: 3px solid var(--gold);
@@ -799,17 +805,17 @@ textarea:focus-visible {
   border-top: 1px solid rgba(255, 255, 255, 0.15);
   padding-top: 12px;
   font-size: 0.72rem;
-  color: #F3E7C3;
+  color: #DCFCE7;
   text-align: center;
 }
 
 .footer-bottom p {
-  color: #F3E7C3;
+  color: #DCFCE7;
 }
 
 .developer-credit {
   margin-top: 7px !important;
-  color: #F8E9B8 !important;
+  color: #A7F3D0 !important;
   font-weight: 800 !important;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
 }
@@ -819,7 +825,7 @@ textarea:focus-visible {
   font-weight: 900 !important;
   text-shadow:
     0 1px 3px rgba(0, 0, 0, 0.55),
-    0 0 10px rgba(245, 230, 184, 0.18);
+    0 0 10px rgba(220, 252, 231, 0.18);
 }
 
 /* ========== واتساب ========== */
@@ -977,16 +983,16 @@ textarea:focus-visible {
   }
 
   .nav-links.open a:active {
-    background: var(--purple-50) !important;
-    border-color: var(--purple-400) !important;
-    color: var(--purple-800) !important;
+    background: var(--green-50) !important;
+    border-color: var(--green-400) !important;
+    color: var(--green-800) !important;
     transform: scale(0.98);
   }
 
   .nav-links.open a.active {
-    background: var(--purple-50) !important;
-    border-color: var(--purple-400) !important;
-    color: var(--purple-800) !important;
+    background: var(--green-50) !important;
+    border-color: var(--green-400) !important;
+    color: var(--green-800) !important;
   }
 
   .features-grid,
@@ -1138,7 +1144,7 @@ textarea:focus-visible {
   max-width: 280px !important;
   aspect-ratio: 0.72 / 1 !important;
   min-height: 0 !important;
-  background-color: #F5F5DC !important;
+  background-color: #F0FDF4 !important;
   background-image: url('service-card-bg.jpg') !important;
   background-size: 100% 100% !important;
   background-position: center center !important;
@@ -1146,8 +1152,8 @@ textarea:focus-visible {
   border: none !important;
   border-radius: 18px !important;
   box-shadow:
-    0 4px 0 rgba(59, 30, 109, 0.18),
-    0 12px 24px rgba(59, 30, 109, 0.14) !important;
+    0 4px 0 rgba(20, 83, 45, 0.18),
+    0 12px 24px rgba(20, 83, 45, 0.14) !important;
   overflow: hidden !important;
   display: flex !important;
   flex-direction: column !important;
@@ -1163,8 +1169,8 @@ textarea:focus-visible {
 .service-card:hover {
   transform: translateY(-3px) !important;
   box-shadow:
-    0 5px 0 rgba(59, 30, 109, 0.18),
-    0 16px 30px rgba(59, 30, 109, 0.18) !important;
+    0 5px 0 rgba(20, 83, 45, 0.18),
+    0 16px 30px rgba(20, 83, 45, 0.18) !important;
 }
 
 .service-card::before {
@@ -1216,14 +1222,14 @@ textarea:focus-visible {
   font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif !important;
   font-size: clamp(0.62rem, 2.2vw, 0.80rem) !important;
   font-weight: 900 !important;
-  color: #2A1548 !important;
-  background: linear-gradient(180deg, #FFFDF5 0%, #F8EED4 100%) !important;
-  border: 1.5px solid #C9A24D !important;
+  color: #14532D !important;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F0FDF4 100%) !important;
+  border: 1.5px solid #34D399 !important;
   border-radius: 7px !important;
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.7) inset,
-    0 2px 4px rgba(59, 30, 109, 0.12),
-    0 0 0 1px rgba(201, 162, 77, 0.25) !important;
+    0 2px 4px rgba(20, 83, 45, 0.12),
+    0 0 0 1px rgba(52, 211, 153, 0.25) !important;
   line-height: 1.15 !important;
   overflow: hidden !important;
   word-break: normal !important;
@@ -1265,20 +1271,20 @@ textarea:focus-visible {
   justify-content: center !important;
   margin: 0 !important;
   padding: 2px 6px !important;
-  background: linear-gradient(180deg, #FFFDF5 0%, #F8EED4 100%) !important;
-  border: 1.5px solid #C9A24D !important;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F0FDF4 100%) !important;
+  border: 1.5px solid #34D399 !important;
   border-radius: 6px !important;
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.7) inset,
-    0 1px 4px rgba(59, 30, 109, 0.10),
-    0 0 0 1px rgba(201, 162, 77, 0.2) !important;
+    0 1px 4px rgba(20, 83, 45, 0.10),
+    0 0 0 1px rgba(52, 211, 153, 0.2) !important;
 }
 
 .price-label {
   display: block !important;
   font-size: clamp(0.44rem, 1.55vw, 0.52rem) !important;
   font-weight: 900 !important;
-  color: #6B4E96 !important;
+  color: #15803D !important;
   line-height: 1.05 !important;
   margin-bottom: 1px !important;
   text-align: center !important;
@@ -1289,9 +1295,9 @@ textarea:focus-visible {
   position: relative !important;
   font-size: clamp(0.54rem, 2.0vw, 0.68rem) !important;
   font-weight: 900 !important;
-  color: #1A1228 !important;
+  color: #14532D !important;
   text-decoration: line-through !important;
-  text-decoration-color: #E53935 !important;
+  text-decoration-color: #DC2626 !important;
   text-decoration-thickness: 1.5px !important;
   line-height: 1.1 !important;
   text-align: center !important;
@@ -1303,7 +1309,7 @@ textarea:focus-visible {
   top: 50% !important;
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
-  color: #E53935 !important;
+  color: #DC2626 !important;
   font-size: 1em !important;
   font-weight: 900 !important;
   text-decoration: none !important;
@@ -1315,7 +1321,7 @@ textarea:focus-visible {
 .price-now.price-value {
   font-size: clamp(0.64rem, 2.35vw, 0.80rem) !important;
   font-weight: 900 !important;
-  color: #1A1228 !important;
+  color: #14532D !important;
   line-height: 1.1 !important;
   text-align: center !important;
   white-space: nowrap !important;
@@ -1339,21 +1345,21 @@ textarea:focus-visible {
   gap: 2px !important;
   background: linear-gradient(
     180deg,
-    #F8E9B0 0%,
-    #E8C84A 22%,
-    #D4A017 48%,
-    #C9A24D 72%,
-    #A67C1A 100%
+    #D1FAE5 0%,
+    #6EE7B7 22%,
+    #34D399 48%,
+    #34D399 72%,
+    #0F766E 100%
   ) !important;
-  color: #2A1548 !important;
+  color: #14532D !important;
   font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif !important;
   font-size: clamp(0.60rem, 2.2vw, 0.74rem) !important;
   font-weight: 900 !important;
-  border: 1px solid rgba(255, 230, 150, 0.55) !important;
+  border: 1px solid rgba(167, 243, 208, 0.55) !important;
   border-radius: 6px !important;
   box-shadow:
-    0 2px 0 #7A5813,
-    0 3px 8px rgba(166, 124, 26, 0.35),
+    0 2px 0 #0F766E,
+    0 3px 8px rgba(15, 118, 110, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
   text-decoration: none !important;
   z-index: 5 !important;
@@ -1369,8 +1375,8 @@ textarea:focus-visible {
 .service-card .price-wa-btn:hover {
   transform: translateY(-2px) scale(1.03) !important;
   box-shadow:
-    0 4px 0 #7A5813,
-    0 7px 14px rgba(166, 124, 26, 0.5),
+    0 4px 0 #0F766E,
+    0 7px 14px rgba(15, 118, 110, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
 }
 
@@ -1389,9 +1395,9 @@ textarea:focus-visible {
   position: relative !important;
   z-index: 60 !important;
   width: 100%;
-  background: #3B1E6D !important;
-  border-top: 1px solid rgba(201, 162, 77, 0.72) !important;
-  border-bottom: 1px solid rgba(201, 162, 77, 0.72) !important;
+  background: #15803D !important;
+  border-top: 1px solid rgba(52, 211, 153, 0.72) !important;
+  border-bottom: 1px solid rgba(52, 211, 153, 0.72) !important;
   overflow: hidden !important;
   height: 42px !important;
   display: flex !important;
@@ -1512,7 +1518,7 @@ textarea:focus-visible {
 
 .testimonial-card {
   background: var(--surface) !important;
-  border: 2px solid var(--purple-200) !important;
+  border: 2px solid var(--green-200) !important;
   border-radius: var(--radius-sm) !important;
   box-shadow: var(--shadow-sm) !important;
   padding: 18px 14px !important;
@@ -1547,7 +1553,7 @@ textarea:focus-visible {
 .testimonial-name {
   font-size: 0.9rem !important;
   font-weight: 900 !important;
-  color: var(--purple-900) !important;
+  color: var(--green-900) !important;
   text-align: center !important;
   margin: 0 !important;
 }
@@ -1555,8 +1561,8 @@ textarea:focus-visible {
 .review-box {
   max-width: 560px !important;
   margin: 10px auto 0 !important;
-  background: var(--purple-50) !important;
-  border: 2px solid var(--purple-200) !important;
+  background: var(--green-50) !important;
+  border: 2px solid var(--green-200) !important;
   border-radius: var(--radius) !important;
   padding: 20px 18px !important;
   text-align: center !important;
@@ -1565,7 +1571,7 @@ textarea:focus-visible {
 .review-box h3 {
   font-size: 1.05rem !important;
   font-weight: 900 !important;
-  color: var(--purple-900) !important;
+  color: var(--green-900) !important;
   margin: 0 0 8px !important;
   text-align: center !important;
 }
@@ -1603,7 +1609,7 @@ textarea:focus-visible {
 
 .faq-item {
   background: var(--surface) !important;
-  border: 2px solid var(--purple-200) !important;
+  border: 2px solid var(--green-200) !important;
   border-radius: var(--radius-sm) !important;
   box-shadow: var(--shadow-sm) !important;
   overflow: hidden !important;
@@ -1611,7 +1617,7 @@ textarea:focus-visible {
 }
 
 .faq-item[open] {
-  border-color: var(--purple-500) !important;
+  border-color: var(--green-500) !important;
 }
 
 .faq-q {
@@ -1623,7 +1629,7 @@ textarea:focus-visible {
   gap: 10px !important;
   padding: 14px 16px !important;
   text-align: right !important;
-  background: var(--purple-50) !important;
+  background: var(--green-50) !important;
   transition: background 0.2s !important;
 }
 
@@ -1632,13 +1638,13 @@ textarea:focus-visible {
 }
 
 .faq-q:hover {
-  background: var(--purple-100) !important;
+  background: var(--green-100) !important;
 }
 
 .faq-q-text {
   font-size: 0.92rem !important;
   font-weight: 900 !important;
-  color: var(--purple-900) !important;
+  color: var(--green-900) !important;
   text-align: right !important;
   flex: 1 1 auto !important;
 }
@@ -1651,7 +1657,7 @@ textarea:focus-visible {
   align-items: center !important;
   justify-content: center !important;
   border-radius: 50% !important;
-  background: var(--purple-700) !important;
+  background: var(--green-700) !important;
   color: #fff !important;
   font-size: 1.1rem !important;
   font-weight: 900 !important;
@@ -1754,11 +1760,11 @@ textarea:focus-visible {
   color: #FFFFFF !important;
   font-size: 17px !important;
   line-height: 1 !important;
-  background: rgba(59, 30, 109, 0.92) !important;
-  border: 2px solid rgba(201, 162, 77, 0.8) !important;
+  background: rgba(20, 83, 45, 0.92) !important;
+  border: 2px solid rgba(52, 211, 153, 0.8) !important;
   border-radius: 50% !important;
   box-shadow:
-    0 4px 14px rgba(59, 30, 109, 0.32),
+    0 4px 14px rgba(20, 83, 45, 0.32),
     0 0 0 2px rgba(255, 255, 255, 0.15) !important;
   cursor: pointer !important;
   z-index: 450 !important;
@@ -1769,7 +1775,7 @@ textarea:focus-visible {
 }
 
 #adminEntryBtn:hover {
-  background: var(--purple-700) !important;
+  background: var(--green-700) !important;
   transform: translateY(-2px) scale(1.04) !important;
 }
 
@@ -1786,8 +1792,8 @@ body.admin-mode #adminEntryBtn {
 .section-offers {
   background: linear-gradient(
     180deg,
-    #FBF8FF 0%,
-    #F3ECFF 100%
+    #F0FDF4 0%,
+    #F0FDF4 100%
   );
 }
 
@@ -1813,10 +1819,10 @@ body.admin-mode #adminEntryBtn {
   max-width: 420px;
   border-radius: 22px;
   overflow: hidden;
-  background: linear-gradient(160deg, #ffffff, #F7F2FF);
+  background: linear-gradient(160deg, #ffffff, #F0FDF4);
   padding: 10px;
-  box-shadow: 0 14px 34px rgba(59, 30, 109, 0.16);
-  border: 2px solid #E0D4F5;
+  box-shadow: 0 14px 34px rgba(20, 83, 45, 0.16);
+  border: 2px solid #BBF7D0;
   transition:
     transform 0.35s ease,
     box-shadow 0.35s ease,
@@ -1827,15 +1833,15 @@ body.admin-mode #adminEntryBtn {
   content: "";
   position: absolute;
   inset: 5px;
-  border: 1px solid rgba(201, 162, 77, 0.55);
+  border: 1px solid rgba(52, 211, 153, 0.55);
   border-radius: 17px;
   pointer-events: none;
 }
 
 .catalog-item:hover {
   transform: translateY(-7px);
-  box-shadow: 0 24px 52px rgba(59, 30, 109, 0.26);
-  border-color: #7F53D1;
+  box-shadow: 0 24px 52px rgba(20, 83, 45, 0.26);
+  border-color: #16A34A;
 }
 
 .catalog-img-wrap {
@@ -1843,7 +1849,7 @@ body.admin-mode #adminEntryBtn {
   width: 100%;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  background: #F4EFFF;
+  background: #F0FDF4;
   border-radius: 14px;
 }
 
@@ -1876,8 +1882,8 @@ body.admin-mode #adminEntryBtn {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  color: #8A6BB0;
-  background: linear-gradient(135deg, #F4EFFF, #E8DFF8);
+  color: #4D7C5F;
+  background: linear-gradient(135deg, #F0FDF4, #DCFCE7);
 }
 
 .catalog-placeholder-icon {
@@ -1893,7 +1899,7 @@ body.admin-mode #adminEntryBtn {
   padding: 26px 16px 14px;
   background: linear-gradient(
     transparent,
-    rgba(59, 30, 109, 0.9)
+    rgba(20, 83, 45, 0.9)
   );
   color: #fff;
   font-weight: 800;
@@ -1905,9 +1911,9 @@ body.admin-mode #adminEntryBtn {
   grid-column: 1 / -1;
   text-align: center;
   padding: 54px 22px;
-  color: #6B4E96;
-  background: #FAF7FF;
-  border: 2px dashed #C4B0F0;
+  color: #15803D;
+  background: #F0FDF4;
+  border: 2px dashed #86EFAC;
   border-radius: 22px;
   font-size: 1.05rem;
   font-weight: 800;
@@ -1916,7 +1922,7 @@ body.admin-mode #adminEntryBtn {
 
 .catalog-empty-hint {
   font-size: 0.9rem;
-  color: #999;
+  color: #9CA3AF;
   margin-top: 8px;
   font-weight: 600;
 }
@@ -1933,9 +1939,9 @@ body.admin-mode #adminEntryBtn {
   font-family: inherit;
   font-size: 1rem;
   font-weight: 800;
-  color: #7F53D1;
-  background: linear-gradient(160deg, #FBF8FF, #F0E7FF);
-  border: 2px dashed #A98BE0;
+  color: #16A34A;
+  background: linear-gradient(160deg, #F0FDF4, #DCFCE7);
+  border: 2px dashed #4ADE80;
   border-radius: 22px;
   cursor: pointer;
   transition:
@@ -1946,8 +1952,8 @@ body.admin-mode #adminEntryBtn {
 
 .catalog-add-card:hover {
   transform: translateY(-5px);
-  border-color: #7F53D1;
-  box-shadow: 0 16px 34px rgba(127, 83, 209, 0.22);
+  border-color: #16A34A;
+  box-shadow: 0 16px 34px rgba(22, 163, 74, 0.22);
 }
 
 .catalog-add-plus {
@@ -1979,7 +1985,7 @@ body.admin-mode .catalog-tools {
   padding: 6px 11px;
   border-radius: 18px;
   cursor: pointer;
-  color: #1f2937;
+  color: #14532D;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.28);
   transition:
     transform 0.15s ease,
@@ -2011,7 +2017,7 @@ body.admin-mode .catalog-tools {
 }
 
 .ctool-order {
-  background: #3B1E6D;
+  background: #15803D;
   color: #fff;
 }
 
@@ -2021,12 +2027,12 @@ body.admin-mode .catalog-tools {
 }
 
 .ctool-shape {
-  background: #8b5cf6;
+  background: #22C55E;
   color: #fff;
 }
 
 .ctool-size {
-  background: #7F53D1;
+  background: #16A34A;
   color: #fff;
 }
 
@@ -2177,11 +2183,11 @@ body.admin-mode .catalog-tools {
   margin: 0 auto !important;
   border-radius: 22px !important;
   overflow: hidden !important;
-  background: linear-gradient(165deg, #4A2A85 0%, #3B1E6D 40%, #2A1548 100%) !important;
+  background: linear-gradient(165deg, #16A34A 0%, #15803D 40%, #14532D 100%) !important;
   box-shadow:
-    0 4px 0 #1a0d30,
-    0 14px 32px rgba(59, 30, 109, 0.32),
-    0 0 0 1px rgba(201, 162, 77, 0.35) !important;
+    0 4px 0 #0B3B22,
+    0 14px 32px rgba(20, 83, 45, 0.32),
+    0 0 0 1px rgba(52, 211, 153, 0.35) !important;
   transition:
     transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.35s ease !important;
@@ -2190,9 +2196,9 @@ body.admin-mode .catalog-tools {
 .premium-card:hover {
   transform: translateY(-6px) scale(1.02) !important;
   box-shadow:
-    0 6px 0 #1a0d30,
-    0 24px 48px rgba(59, 30, 109, 0.4),
-    0 0 0 1px rgba(201, 162, 77, 0.5) !important;
+    0 6px 0 #0B3B22,
+    0 24px 48px rgba(20, 83, 45, 0.4),
+    0 0 0 1px rgba(52, 211, 153, 0.5) !important;
 }
 
 .premium-card::before {
@@ -2200,7 +2206,7 @@ body.admin-mode .catalog-tools {
   position: absolute !important;
   inset: 5px !important;
   border-radius: 17px !important;
-  border: 1.5px solid rgba(201, 162, 77, 0.55) !important;
+  border: 1.5px solid rgba(52, 211, 153, 0.55) !important;
   pointer-events: none !important;
   z-index: 3 !important;
 }
@@ -2241,7 +2247,7 @@ body.admin-mode .catalog-tools {
   position: absolute !important;
   inset: -10px !important;
   border-radius: 50% !important;
-  background: radial-gradient(circle, rgba(255,255,255,0.22) 0%, rgba(167,139,250,0.18) 40%, transparent 70%) !important;
+  background: radial-gradient(circle, rgba(255,255,255,0.22) 0%, rgba(74,222,128,0.18) 40%, transparent 70%) !important;
   animation: glowPulse 2.8s ease-in-out infinite !important;
 }
 
@@ -2327,7 +2333,7 @@ body.admin-mode .catalog-tools {
 .premium-card .card-clinic {
   font-size: 0.6rem !important;
   font-weight: 700 !important;
-  color: rgba(245, 230, 184, 0.85) !important;
+  color: rgba(220, 252, 231, 0.85) !important;
   letter-spacing: 0.03em !important;
   margin: 0 0 7px !important;
   text-align: center !important;
@@ -2350,10 +2356,10 @@ body.admin-mode .catalog-tools {
   text-align: center !important;
   font-size: clamp(0.7rem, 2.3vw, 0.84rem) !important;
   font-weight: 900 !important;
-  color: #2A1548 !important;
+  color: #14532D !important;
   line-height: 1.25 !important;
-  background: linear-gradient(180deg, #FFFDF5 0%, #F5E6B8 100%) !important;
-  border: 1.5px solid #C9A24D !important;
+  background: linear-gradient(180deg, #FFFFFF 0%, #D1FAE5 100%) !important;
+  border: 1.5px solid #34D399 !important;
   border-radius: 9px !important;
   box-shadow:
     0 1px 0 rgba(255,255,255,0.65) inset,
@@ -2389,8 +2395,8 @@ body.admin-mode .catalog-tools {
   justify-content: center !important;
   margin: 0 !important;
   padding: 5px 4px !important;
-  background: linear-gradient(180deg, #FFFDF5 0%, #F5E6B8 100%) !important;
-  border: 1.5px solid #C9A24D !important;
+  background: linear-gradient(180deg, #FFFFFF 0%, #D1FAE5 100%) !important;
+  border: 1.5px solid #34D399 !important;
   border-radius: 8px !important;
   box-shadow:
     0 1px 0 rgba(255,255,255,0.65) inset,
@@ -2402,7 +2408,7 @@ body.admin-mode .catalog-tools {
   display: block !important;
   font-size: clamp(0.48rem, 1.6vw, 0.55rem) !important;
   font-weight: 900 !important;
-  color: #6B4E96 !important;
+  color: #15803D !important;
   line-height: 1.1 !important;
   margin-bottom: 2px !important;
   text-align: center !important;
@@ -2412,7 +2418,7 @@ body.admin-mode .catalog-tools {
 .premium-card .price-value {
   font-size: clamp(0.68rem, 2.3vw, 0.8rem) !important;
   font-weight: 900 !important;
-  color: #1A1228 !important;
+  color: #14532D !important;
   line-height: 1.15 !important;
   text-align: center !important;
   white-space: nowrap !important;
@@ -2423,9 +2429,9 @@ body.admin-mode .catalog-tools {
 .premium-card .price-box.old .value,
 .premium-card .price-old .price-value {
   text-decoration: line-through !important;
-  text-decoration-color: #E53935 !important;
+  text-decoration-color: #DC2626 !important;
   text-decoration-thickness: 1.5px !important;
-  color: #4a3a5c !important;
+  color: #3F6B52 !important;
 }
 
 .premium-card .price-old .price-value::after {
@@ -2449,25 +2455,25 @@ body.admin-mode .catalog-tools {
   bottom: auto !important;
   margin: 0 !important;
   padding: 8px 10px !important;
-  border: 1px solid rgba(255, 230, 150, 0.5) !important;
+  border: 1px solid rgba(167, 243, 208, 0.5) !important;
   border-radius: 9px !important;
   cursor: pointer !important;
   font-family: inherit !important;
   font-size: clamp(0.7rem, 2.3vw, 0.8rem) !important;
   font-weight: 900 !important;
-  color: #2A1548 !important;
+  color: #14532D !important;
   text-decoration: none !important;
   background: linear-gradient(
     180deg,
-    #F8E9B0 0%,
-    #E8C84A 22%,
-    #D4A017 50%,
-    #C9A24D 75%,
-    #A67C1A 100%
+    #D1FAE5 0%,
+    #6EE7B7 22%,
+    #34D399 50%,
+    #34D399 75%,
+    #0F766E 100%
   ) !important;
   box-shadow:
-    0 3px 0 #7A5813,
-    0 5px 12px rgba(166, 124, 26, 0.4),
+    0 3px 0 #0F766E,
+    0 5px 12px rgba(15, 118, 110, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
   transition: transform 0.2s ease, box-shadow 0.2s ease !important;
   letter-spacing: 0.02em !important;
@@ -2481,8 +2487,8 @@ body.admin-mode .catalog-tools {
 .premium-card .price-wa-btn:hover {
   transform: translateY(-2px) !important;
   box-shadow:
-    0 5px 0 #7A5813,
-    0 8px 16px rgba(166, 124, 26, 0.5),
+    0 5px 0 #0F766E,
+    0 8px 16px rgba(15, 118, 110, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
 }
 

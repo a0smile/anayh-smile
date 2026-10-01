@@ -31,9 +31,9 @@ let pendingImagePath = null;
       display: flex!important;
       align-items: center!important;
       justify-content: center!important;
-      background: linear-gradient(135deg,#241438,#3B1E6D)!important;
+      background: linear-gradient(135deg,#14532D,#15803D)!important;
       color: #fff!important;
-      box-shadow: 0 10px 28px rgba(59,30,109,.35)!important;
+      box-shadow: 0 10px 28px rgba(20,83,45,.35)!important;
       cursor: pointer!important;
       font-size: 22px!important;
       line-height: 1!important;
@@ -62,7 +62,7 @@ let pendingImagePath = null;
         linear-gradient(
           135deg,
           rgba(28,18,48,.98),
-          rgba(59,30,109,.98)
+          rgba(20,83,45,.98)
         )!important;
       backdrop-filter: blur(14px)!important;
       -webkit-backdrop-filter: blur(14px)!important;
@@ -97,10 +97,10 @@ let pendingImagePath = null;
       flex-wrap: wrap!important;
       align-items: center!important;
       background: rgba(255,255,255,.97)!important;
-      border: 1px solid rgba(127,83,209,.35)!important;
+      border: 1px solid rgba(22,163,74,.35)!important;
       border-radius: 10px!important;
       padding: 4px!important;
-      box-shadow: 0 6px 18px rgba(59,30,109,.20)!important;
+      box-shadow: 0 6px 18px rgba(20,83,45,.20)!important;
       direction: rtl!important;
     }
 
@@ -121,25 +121,25 @@ let pendingImagePath = null;
       transform: translateY(-1px)!important;
     }
 
-    .op-edit { background: #7F53D1!important; }
+    .op-edit { background: #16A34A!important; }
     .op-add { background: #128C7E!important; }
     .op-del { background: #c0392b!important; }
-    .op-save { background: #3B1E6D!important; }
-    .op-manage { background: #b58b28!important; }
+    .op-save { background: #15803D!important; }
+    .op-manage { background: #0F766E!important; }
 
     #smileToast {
       position: fixed!important;
       top: 20px!important;
       left: 50%!important;
       transform: translateX(-50%) translateY(-20px)!important;
-      background: #3B1E6D!important;
+      background: #15803D!important;
       color: #fff!important;
       font-family: inherit!important;
       font-weight: 800!important;
       font-size: .9rem!important;
       padding: 12px 22px!important;
       border-radius: 50px!important;
-      box-shadow: 0 8px 24px rgba(59,30,109,.35)!important;
+      box-shadow: 0 8px 24px rgba(20,83,45,.35)!important;
       z-index: 999999!important;
       opacity: 0!important;
       pointer-events: none!important;
@@ -176,7 +176,7 @@ let pendingImagePath = null;
       overflow: hidden!important;
       display: flex!important;
       flex-direction: column!important;
-      background: #fffaf2!important;
+      background: #F0FDF4!important;
       border: 1px solid rgba(181,139,40,.45)!important;
       border-radius: 22px!important;
       box-shadow: 0 30px 90px rgba(0,0,0,.35)!important;
@@ -189,7 +189,7 @@ let pendingImagePath = null;
       gap: 12px!important;
       padding: 18px 20px!important;
       color: #fff!important;
-      background: linear-gradient(135deg,#241438,#3B1E6D)!important;
+      background: linear-gradient(135deg,#14532D,#15803D)!important;
       border-bottom: 1px solid rgba(218,180,82,.45)!important;
     }
 
@@ -222,17 +222,17 @@ let pendingImagePath = null;
       grid-template-columns: 1fr auto auto auto!important;
       gap: 8px!important;
       padding: 12px!important;
-      border-bottom: 1px solid #eadfce!important;
-      background: #fffdf9!important;
+      border-bottom: 1px solid #BBF7D0!important;
+      background: #FFFFFF!important;
     }
 
     .admin-manager-search {
       min-width: 0!important;
-      border: 1px solid #d9cdbb!important;
+      border: 1px solid #BBF7D0!important;
       border-radius: 12px!important;
       padding: 10px 12px!important;
       background: #fff!important;
-      color: #241438!important;
+      color: #14532D!important;
       font-family: inherit!important;
       outline: none!important;
     }
@@ -244,12 +244,12 @@ let pendingImagePath = null;
       cursor: pointer!important;
       font-family: inherit!important;
       font-weight: 800!important;
-      background: #3B1E6D!important;
+      background: #15803D!important;
       color: #fff!important;
     }
 
     .admin-manager-tool-btn.gold {
-      background: #b58b28!important;
+      background: #0F766E!important;
     }
 
     .admin-manager-tool-btn.red {
@@ -263,7 +263,7 @@ let pendingImagePath = null;
 
     .admin-manager-group {
       margin-bottom: 14px!important;
-      border: 1px solid #eadfce!important;
+      border: 1px solid #BBF7D0!important;
       border-radius: 15px!important;
       background: #fff!important;
       overflow: hidden!important;
@@ -271,10 +271,10 @@ let pendingImagePath = null;
 
     .admin-manager-group-title {
       padding: 11px 13px!important;
-      background: #f6efe4!important;
-      color: #3B1E6D!important;
+      background: #F0FDF4!important;
+      color: #15803D!important;
       font-weight: 900!important;
-      border-bottom: 1px solid #eadfce!important;
+      border-bottom: 1px solid #BBF7D0!important;
     }
 
     .admin-field-row {
@@ -283,7 +283,7 @@ let pendingImagePath = null;
       gap: 9px!important;
       align-items: center!important;
       padding: 9px 11px!important;
-      border-bottom: 1px solid #f0e8dc!important;
+      border-bottom: 1px solid #BBF7D0!important;
     }
 
     .admin-field-row:last-child {
@@ -295,13 +295,13 @@ let pendingImagePath = null;
       text-align: left!important;
       font-family: ui-monospace,SFMono-Regular,Menlo,monospace!important;
       font-size: .7rem!important;
-      color: #735f82!important;
+      color: #4D7C5F!important;
       overflow-wrap: anywhere!important;
     }
 
     .admin-field-value {
       min-width: 0!important;
-      color: #251a30!important;
+      color: #14532D!important;
       font-size: .82rem!important;
       overflow-wrap: anywhere!important;
       max-height: 90px!important;
@@ -324,7 +324,7 @@ let pendingImagePath = null;
       font-size: .68rem!important;
       cursor: pointer!important;
       color: #fff!important;
-      background: #7F53D1!important;
+      background: #16A34A!important;
     }
 
     .admin-field-action.delete {
@@ -338,7 +338,7 @@ let pendingImagePath = null;
     .admin-manager-empty {
       text-align: center!important;
       padding: 35px 15px!important;
-      color: #75697d!important;
+      color: #4D7C5F!important;
       font-weight: 700!important;
     }
 
