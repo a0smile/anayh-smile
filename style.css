@@ -467,10 +467,10 @@ textarea:focus-visible {
 }
 
 .price-cat-title {
-  background: linear-gradient(135deg, var(--green-300), var(--green-400));
-  color: var(--green-900);
+  background: linear-gradient(135deg, #9ED1A9, #7CBF8B);
+  color: #0A3617;
   padding: 11px 14px;
-  font-size: 0.9rem;
+  font-size: 1.05rem;
   font-weight: 900;
   display: flex;
   align-items: center;
