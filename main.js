@@ -779,8 +779,7 @@ function renderSite(data) {
       }
     }
   );
-  /* ===== الشريط المتحرك ===== */
-  safeRender(
+  /* ===== الشريط المتحرك ===== */  safeRender(
     'announcement',
     () => {
       const bar =
@@ -799,35 +798,36 @@ function renderSite(data) {
           bar.querySelector(
             '.announcement-track'
           );
-        const ann =
+        let ann =
           escapeHtml(
             String(
               data.announcement
             )
           );
+
+        // تلوين وتظليل كلمة تابي وتمارا باحترافية ملفتة للانتباه
+        ann = ann.replace(/تابي/g, '<span style="background: #39F5C5; color: #0A3617; padding: 2px 8px; border-radius: 4px; font-weight: 900; margin: 0 3px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">تابي</span>');
+        ann = ann.replace(/تمارا/g, '<span style="background: #FFA494; color: #0A3617; padding: 2px 8px; border-radius: 4px; font-weight: 900; margin: 0 3px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">تمارا</span>');
+
         if (track) {
+          // تكرار متتالي ممتد يملأ الشاشة بالكامل ويقضي على مشكلة الرمشة نهائياً
           track.innerHTML = `
-            <span class="announcement-text">
-              <span id="announcementText">
-                ${ann}
-              </span>
+            <span class="announcement-text" style="font-size: 16px; font-weight: 900; display: inline-flex; align-items: center; padding: 0 10px;">
+              ${ann}
             </span>
-            <span
-              class="announcement-spacer"
-              aria-hidden="true"
-            ></span>
-            <span
-              class="announcement-text"
-              aria-hidden="true"
-            >
-              <span id="announcementText2">
-                ${ann}
-              </span>
+            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #115E2E; font-weight: 900;"> ◆ </span>
+            <span class="announcement-text" aria-hidden="true" style="font-size: 16px; font-weight: 900; display: inline-flex; align-items: center; padding: 0 10px;">
+              ${ann}
             </span>
-            <span
-              class="announcement-spacer"
-              aria-hidden="true"
-            ></span>
+            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #115E2E; font-weight: 900;"> ◆ </span>
+            <span class="announcement-text" aria-hidden="true" style="font-size: 16px; font-weight: 900; display: inline-flex; align-items: center; padding: 0 10px;">
+              ${ann}
+            </span>
+            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #115E2E; font-weight: 900;"> ◆ </span>
+            <span class="announcement-text" aria-hidden="true" style="font-size: 16px; font-weight: 900; display: inline-flex; align-items: center; padding: 0 10px;">
+              ${ann}
+            </span>
+            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #115E2E; font-weight: 900;"> ◆ </span>
           `;
         }
         bar.setAttribute(
