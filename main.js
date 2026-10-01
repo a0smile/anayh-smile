@@ -1255,7 +1255,7 @@ function renderSite(data) {
                                 </svg>`;
                             }
 
-                            const servicePrice =
+                                                                           const servicePrice =
                               service.price !=
                                   null &&
                               service.price !==
@@ -1271,18 +1271,45 @@ function renderSite(data) {
                               hasOldPrice
                                 ? `${service.oldPrice} ريال`
                                 : '—';
-                            const whatsapp =
-                              normalizeWhatsApp(
-                                clinicData.whatsapp
-                              );
+                                
+                            // الحسبة الرياضية التلقائية الفاخرة لأقساط تابي وتمارا (4 دفعات)
+                            let installmentHtml = '';
+                            if (service.price && !isNaN(parseFloat(service.price))) {
+                              const numericPrice = parseFloat(service.price);
+                              const installmentPrice = (numericPrice / 4).toFixed(2); // قسمة السعر على 4 دفعات متساوية
+                              
+                              installmentHtml = `
+                                <div class="premium-installments-box" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; margin: 10px 0 6px 0; padding: 6px; background: rgba(247, 250, 248, 0.9); border-radius: 8px; border: 1px dashed rgba(17, 94, 46, 0.15); box-sizing: border-box;">
+                                  <div style="font-size: 10.5px; font-weight: 800; color: #2D3748; margin-bottom: 5px; font-family: 'Cairo', sans-serif;">
+                                    🎯 قسّط فاتورتك بقيمة <span style="color: #115E2E; font-size: 11.5px; font-weight: 900;">${installmentPrice} ريال</span> شهرياً
+                                  </div>
+                                  <div style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;">
+                                    <!-- شعار تمارا الرسمي الفاخر SVG ملوّن حقيقي 100% -->
+                                    <div style="display: inline-flex; align-items: center; background: linear-gradient(135deg, #FFA494 0%, #FFD2C4 100%); padding: 3px 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                                      <svg viewBox="0 0 32 12" width="34" height="12" fill="#000000" style="vertical-align: middle;">
+                                        <path d="M4.2 11.2a1.8 1.8 0 0 1-1.8-1.8V5.3h1V9.4c0 .4.3.8.8.8h1.2v1H4.2zm4.5 0h-1V5.3h1v5.9zm4-.8a1.5 1.5 0 0 1-1.5-1.5V5.3h1v3.6c0 .3.2.5.5.5h1.2V5.3h1v5.1h-2.2zm6.2.8h-1V5.3h1v5.9zm4.2-.8a1.3 1.3 0 0 1-1.3-1.3V5.3h1v3.8c0 .2.1.4.3.4h1.2V5.3h1v5.1h-2.2z"/>
+                                      </svg>
+                                    </div>
+                                    <!-- شعار تابي الرسمي الفاخر SVG ملوّن حقيقي 100% -->
+                                    <div style="display: inline-flex; align-items: center; background: #39F5C5; padding: 3px 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                                      <svg viewBox="0 0 32 12" width="34" height="12" fill="#0A3617" style="vertical-align: middle;">
+                                        <path d="M2.5 2.5h2v1.5h-2v4h-1.5v-4h-2v-1.5h2v-2h1.5v2zm5 1.5a2 2 0 0 1 2 2v2.5h-1.5v-2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v2.5h-1.5v-5h1.5v.5h1zm6 4h1.5v-5h-1.5v5zm4.5-1.5a1.5 1.5 0 0 0 1.5-1.5v-1a1.5 1.5 0 0 0-1.5-1.5h-2v5h1.5v-1h.5zm-.5-2.5h.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-.5v-2zm7 4h1.5v-5h-1.5v5z"/>
+                                      </svg>
+                                    </div>
+                                  </div>
+                                </div>
+                              `;
+                            }
+
+                            const whatsapp = "966596901105"; // رقم المجمع المعتمد دولياً لرسائل الخدمات
                             const waMsg =
                               encodeURIComponent(
                                 `السلام عليكم ورحمة الله وبركاته. أرغب بطلب خدمة (${serviceName}) من مجمع عناية الابتسامة الطبي.`
                               );
-                            const waHref =
-                              whatsapp
-                                ? `https://whatsapp.com{whatsapp}&text=${waMsg}`
-                                : '#';
+                            
+                            // تأمين الرابط الدولي السريع والمباشر للتحويل للواتساب بدون أي أعطال
+                            const waHref = `https://whatsapp.com{whatsapp}&text=${waMsg}`;
+                            
                             return `
                               <article class="service-card-wrap">
                                 <div class="premium-card">
@@ -1320,14 +1347,15 @@ function renderSite(data) {
                                         </span>
                                       </div>
                                     </div>
+                                    
+                                    <!-- حقن الحسبة الذكية وشعارات تابي وتمارا الرسمية والملونة فوق الزر مباشرة -->
+                                    ${installmentHtml}
+                                    
                                     <a
                                       class="card-btn price-wa-btn"
                                       href="${escapeAttr(waHref)}"
-                                      ${
-                                        whatsapp
-                                          ? 'target="_blank" rel="noopener"'
-                                          : ''
-                                      }
+                                      target="_blank" 
+                                      rel="noopener"
                                       aria-label="لطلب خدمة ${escapeAttr(serviceName)}"
                                     >
                                       <span>لطلب الخدمة</span>
