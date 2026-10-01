@@ -984,11 +984,12 @@ textarea:focus-visible {
       color 0.2s,
       transform 0.15s !important;
   }
+
   .nav-links.open a:active {
     background: var(--green-50) !important;
     border-color: var(--green-400) !important;
     color: var(--green-800) !important;
-    transform: scale(0.98);
+    transform: scale(0.97) !important; /* تأثير ضغط ناعم وفاخر عند اللمس */
   }
 
   .nav-links.open a.active {
@@ -1090,7 +1091,6 @@ textarea:focus-visible {
     transform: none !important;
   }
 }
-
 /* ============================================================
    بطاقات الخدمات — ضبط 100٪
    مربعات الاسم والأسعار أصغر ومحكمة حول النص
