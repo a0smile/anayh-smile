@@ -354,6 +354,35 @@ function fitServiceCardNames() {
       }
     });
 }
+/* ===== اختيار أيقونة مناسبة لكل خدمة حسب اسمها ===== */
+const SERVICE_ICON_RULES = [
+  { re: /تقويم|كاش فك|كاش فكين/, icon: 'braces' },
+  { re: /تبييض|ليزر/, icon: 'whitening' },
+  { re: /تلميع|بوليش|تنظيف|جير/, icon: 'polish' },
+  { re: /ابتسامة/, icon: 'smile' },
+  { re: /زيركون|إيماكس|ايمكس|emax|zircon|تلبيسة|تاج|تركيب|بورسلان/, icon: 'crownz' },
+  { re: /خلع|جذور/, icon: 'extract' },
+  { re: /عصب/, icon: 'root' },
+  { re: /حشو/, icon: 'filling' },
+  { re: /أطفال|اطفال|طفل/, icon: 'kids' },
+  { re: /فلورايد/, icon: 'fluoride' },
+  { re: /حافظة مسافة|مسافة/, icon: 'spacer' },
+  { re: /زرع|غرس/, icon: 'implant' },
+  { re: /أشعة|اشعة|تصوير/, icon: 'xray' }
+];
+
+function serviceIconFor(name) {
+  const text = String(name == null ? '' : name);
+
+  for (const rule of SERVICE_ICON_RULES) {
+    if (rule.re.test(text)) {
+      return rule.icon;
+    }
+  }
+
+  return 'tooth';
+}
+
 function renderDataIcons() {
   document
     .querySelectorAll(
@@ -1075,48 +1104,12 @@ function renderSite(data) {
       if (!servicesGrid) return;
       const clinicData =
         clinic || {};
-      const clinicName =
-        clinicData.name != null
-          ? String(clinicData.name)
-          : 'مجمع عناية الابتسامة الطبي';
       const categories =
         Array.isArray(
           data.serviceCategories
         )
           ? data.serviceCategories
           : [];
-
-      const toothSvg = `
-        <svg class="tooth-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs>
-            <linearGradient id="toothBody__ID__" x1="16" y1="10" x2="48" y2="56" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#FFFFFF"/>
-              <stop offset="35%" stop-color="#F4FAF5"/>
-              <stop offset="70%" stop-color="#E9F6EC"/>
-              <stop offset="100%" stop-color="#C9E8D1"/>
-            </linearGradient>
-            <linearGradient id="toothShade__ID__" x1="32" y1="20" x2="32" y2="56" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0"/>
-              <stop offset="100%" stop-color="#86C493" stop-opacity="0.18"/>
-            </linearGradient>
-            <radialGradient id="cornerShine__ID__" cx="28%" cy="22%" r="35%" gradientUnits="objectBoundingBox">
-              <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95"/>
-              <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.25"/>
-              <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
-            </radialGradient>
-          </defs>
-          <path d="M22 14 C18 14 15 18 15 24 C15 34 17 44 19 50 C20 53 22.5 55 25 54 C27 53 27.5 49 27.5 45 L27.5 38 L36.5 38 L36.5 45 C36.5 49 37 53 39 54 C41.5 55 44 53 45 50 C47 44 49 34 49 24 C49 18 46 14 42 14 C39 14 36.5 16 32 16 C27.5 16 25 14 22 14 Z" fill="url(#toothBody__ID__)" stroke="#B4DDBD" stroke-width="1.2"/>
-          <path d="M22 14 C18 14 15 18 15 24 C15 34 17 44 19 50 C20 53 22.5 55 25 54 C27 53 27.5 49 27.5 45 L27.5 38 L36.5 38 L36.5 45 C36.5 49 37 53 39 54 C41.5 55 44 53 45 50 C47 44 49 34 49 24 C49 18 46 14 42 14 C39 14 36.5 16 32 16 C27.5 16 25 14 22 14 Z" fill="url(#toothShade__ID__)"/>
-          <ellipse cx="24" cy="22" rx="9" ry="11" fill="url(#cornerShine__ID__)" transform="rotate(-18 24 22)"/>
-          <ellipse cx="26.5" cy="28" rx="2.2" ry="2.6" fill="#3E7D4E"/>
-          <circle cx="27.2" cy="27.2" r="0.7" fill="#fff" opacity="0.9"/>
-          <ellipse cx="37.5" cy="28" rx="2.2" ry="2.6" fill="#3E7D4E"/>
-          <circle cx="38.2" cy="27.2" r="0.7" fill="#fff" opacity="0.9"/>
-          <ellipse cx="22.5" cy="32.5" rx="3" ry="1.8" fill="#B4DDBD" opacity="0.45"/>
-          <ellipse cx="41.5" cy="32.5" rx="3" ry="1.8" fill="#B4DDBD" opacity="0.45"/>
-          <path d="M26 35.5 Q32 41 38 35.5" fill="none" stroke="#3E7D4E" stroke-width="2" stroke-linecap="round"/>
-          <path d="M40 18 Q43 20 42 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity="0.55"/>
-        </svg>`;
 
       servicesGrid.innerHTML =
         categories
@@ -1199,6 +1192,10 @@ function renderSite(data) {
                                     service.name
                                   )
                                 : '';
+                            const iconName =
+                              serviceIconFor(
+                                serviceName
+                              );
                             const servicePrice =
                               service.price !=
                                   null &&
@@ -1227,16 +1224,6 @@ function renderSite(data) {
                               whatsapp
                                 ? `https://wa.me/${whatsapp}?text=${waMsg}`
                                 : '#';
-                            const uid =
-                              categoryIndex +
-                              '_' +
-                              itemIndex;
-                            const svg =
-                              toothSvg
-                                .replace(
-                                  /__ID__/g,
-                                  uid
-                                );
                             return `
                               <article class="service-card-wrap">
                                 <div class="premium-card">
@@ -1261,9 +1248,10 @@ function renderSite(data) {
                                         <svg viewBox="0 0 16 16"><path d="M8 0L9.5 5.5L15 7L9.5 8.5L8 14L6.5 8.5L1 7L6.5 5.5Z" fill="#fff"/></svg>
                                       </span>
                                       <div class="shine-sweep" aria-hidden="true"></div>
-                                      ${svg}
+                                      <span class="card-service-icon" aria-hidden="true">
+                                        ${window.ndIconHtml ? window.ndIconHtml(iconName) : ''}
+                                      </span>
                                     </div>
-                                    <p class="card-clinic">${escapeHtml(clinicName)}</p>
                                     <h4
                                       class="card-service service-card-name"
                                       ${editAttr(base + '.name')}
@@ -1837,27 +1825,6 @@ function renderSite(data) {
         normalizeWhatsApp(
           clinic.whatsapp
         );
-      const waBtn =
-        document.getElementById(
-          'whatsappBtn'
-        );
-      if (waBtn) {
-        if (whatsapp) {
-          waBtn.href =
-            `https://wa.me/${whatsapp}?text=${encodeURIComponent(
-              'مرحباً، أرغب بالاستفسار عن خدمات ' +
-                (clinic.name || '')
-            )}`;
-          waBtn.style.display =
-            '';
-        } else {
-          waBtn.removeAttribute(
-            'href'
-          );
-          waBtn.style.display =
-            'none';
-        }
-      }
       setText(
         'footerAddress',
         clinic.address ||
@@ -2010,14 +1977,6 @@ function renderSite(data) {
           clinic.whatsapp
         );
       const socials = [
-        {
-          url: whatsapp
-            ? `https://wa.me/${whatsapp}`
-            : '',
-          icon: 'whatsapp',
-          name: 'واتساب',
-          path: 'clinic.whatsapp'
-        },
         {
           url:
             normalizeUrl(

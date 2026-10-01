@@ -232,7 +232,7 @@ let pendingImagePath = null;
       border-radius: 12px!important;
       padding: 10px 12px!important;
       background: #fff!important;
-      color: #2F5D3A!important;
+      color: #000000!important;
       font-family: inherit!important;
       outline: none!important;
     }
@@ -272,7 +272,7 @@ let pendingImagePath = null;
     .admin-manager-group-title {
       padding: 11px 13px!important;
       background: #F4FAF5!important;
-      color: #3E7D4E!important;
+      color: #000000!important;
       font-weight: 900!important;
       border-bottom: 1px solid #D6EEDB!important;
     }
@@ -295,13 +295,13 @@ let pendingImagePath = null;
       text-align: left!important;
       font-family: ui-monospace,SFMono-Regular,Menlo,monospace!important;
       font-size: .7rem!important;
-      color: #4A7A5A!important;
+      color: #000000!important;
       overflow-wrap: anywhere!important;
     }
 
     .admin-field-value {
       min-width: 0!important;
-      color: #2F5D3A!important;
+      color: #000000!important;
       font-size: .82rem!important;
       overflow-wrap: anywhere!important;
       max-height: 90px!important;
@@ -338,7 +338,7 @@ let pendingImagePath = null;
     .admin-manager-empty {
       text-align: center!important;
       padding: 35px 15px!important;
-      color: #4A7A5A!important;
+      color: #000000!important;
       font-weight: 700!important;
     }
 
