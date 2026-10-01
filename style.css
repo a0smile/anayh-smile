@@ -1283,21 +1283,21 @@ textarea:focus-visible {
   align-items: center !important;
   justify-content: center !important;
   margin: 0 !important;
-  padding: 2px 6px !important;
-  background: linear-gradient(180deg, #FFFFFF 0%, #F4FAF5 100%) !important;
-  border: 1.5px solid #6FBF8A !important;
+  padding: 3px 8px !important;
+  background: linear-gradient(180deg, #E6F4EA 0%, #C9E8D1 100%) !important;
+  border: 1.8px solid #3E7D4E !important;
   border-radius: 6px !important;
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.7) inset,
-    0 1px 4px rgba(47, 93, 58, 0.10),
-    0 0 0 1px rgba(111, 191, 138, 0.2) !important;
+    0 1px 0 rgba(255, 255, 255, 0.8) inset,
+    0 2px 6px rgba(11, 70, 32, 0.15),
+    0 0 0 1px rgba(62, 125, 78, 0.3) !important;
 }
 
 .price-label {
   display: block !important;
   font-size: clamp(0.44rem, 1.55vw, 0.52rem) !important;
   font-weight: 900 !important;
-  color: #3E7D4E !important;
+  color: #0A3617 !important;
   line-height: 1.05 !important;
   margin-bottom: 1px !important;
   text-align: center !important;
@@ -1308,10 +1308,10 @@ textarea:focus-visible {
   position: relative !important;
   font-size: clamp(0.54rem, 2.0vw, 0.68rem) !important;
   font-weight: 900 !important;
-  color: #2F5D3A !important;
+  color: #115E2E !important;
   text-decoration: line-through !important;
   text-decoration-color: #DC2626 !important;
-  text-decoration-thickness: 1.5px !important;
+  text-decoration-thickness: 2px !important;
   line-height: 1.1 !important;
   text-align: center !important;
 }
@@ -1334,13 +1334,13 @@ textarea:focus-visible {
 .price-now.price-value {
   font-size: clamp(0.64rem, 2.35vw, 0.80rem) !important;
   font-weight: 900 !important;
-  color: #2F5D3A !important;
+  color: #0A3617 !important;
   line-height: 1.1 !important;
   text-align: center !important;
   white-space: nowrap !important;
 }
 
-/* ========== زر طلب الخدمة — ذهبي فاخر بمقاس النص تماماً ========== */
+/* ========== زر طلب الخدمة — بمقاس النص تماماً وتأثير لمعان فخم ========== */
 .service-card .price-wa-btn {
   position: absolute !important;
   bottom: 5.5% !important;
@@ -1351,50 +1351,59 @@ textarea:focus-visible {
   height: auto !important;
   min-height: 0 !important;
   margin: 0 auto !important;
-  padding: 4px 10px !important;
+  padding: 3px 6px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   gap: 2px !important;
   background: linear-gradient(
     180deg,
-    #D6EEDB 0%,
-    #A7D8B4 22%,
-    #6FBF8A 48%,
-    #6FBF8A 72%,
-    #3E7D4E 100%
+    #69E292 0%,
+    #42C671 30%,
+    #2BB15B 60%,
+    #1F954A 100%
   ) !important;
-  color: #2F5D3A !important;
+  color: #000000 !important;
   font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif !important;
   font-size: clamp(0.60rem, 2.2vw, 0.74rem) !important;
-  font-weight: 900 !important;
-  border: 1px solid rgba(201, 232, 209, 0.55) !important;
-  border-radius: 6px !important;
+  font-weight: 950 !important;
+  border: 1.5px solid #0B4620 !important;
+  border-radius: 4px !important;
   box-shadow:
-    0 2px 0 #3E7D4E,
-    0 3px 8px rgba(62, 125, 78, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
+    0 2px 0 #0B4620,
+    0 4px 10px rgba(11, 70, 32, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6) !important;
   text-decoration: none !important;
   z-index: 5 !important;
   pointer-events: auto !important;
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease !important;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) !important;
-  letter-spacing: 0.02em !important;
+  text-shadow: none !important;
+  letter-spacing: 0.01em !important;
   line-height: 1.15 !important;
 }
 
 .service-card .price-wa-btn:hover {
-  transform: translateY(-2px) scale(1.03) !important;
+  transform: translateY(-1.5px) scale(1.02) !important;
+  background: linear-gradient(
+    180deg,
+    #7BF2A3 0%,
+    #53D982 30%,
+    #3CC46C 60%,
+    #25A957 100%
+  ) !important;
   box-shadow:
-    0 4px 0 #3E7D4E,
-    0 7px 14px rgba(62, 125, 78, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
+    0 3px 0 #0B4620,
+    0 6px 14px rgba(11, 70, 32, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.7) !important;
 }
 
 .service-card .price-wa-btn:active {
   transform: scale(0.97) !important;
+  box-shadow:
+    0 1px 0 #0B4620,
+    0 2px 5px rgba(11, 70, 32, 0.4) !important;
 }
 
 .service-card .price-wa-btn .nd-icon,
