@@ -742,29 +742,30 @@ textarea:focus-visible {
 }
 
 .social-title {
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 900;
-  color: var(--green-900);
+  color: #000000;
 }
 
 .social-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 20px;
   justify-content: center;
   align-items: center;
 }
 
 .social-links a {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  background: #1E4D2B !important;
-  border: 2px solid #1E4D2B !important;
+  background: transparent !important; /* مفرغة وبدون خلفية خضراء */
+  border: none !important; /* حذف الحدود بالكامل */
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #FFFFFF;
+  color: #115E2E; /* لون أخضر واضح ونقي للأيقونات */
+  font-size: 1.8rem; /* تكبير حجم الأيقونة بالداخل */
   transition:
     transform 0.25s var(--ease),
     background 0.25s,
@@ -773,19 +774,19 @@ textarea:focus-visible {
 }
 
 .social-links a:hover {
-  background: #17401F !important;
-  border-color: #17401F !important;
-  color: #FFFFFF;
-  transform: translateY(-3px) scale(1.08);
+  background: transparent !important;
+  border-color: transparent !important;
+  color: #0B4620;
+  transform: translateY(-4px) scale(1.12);
 }
 
 /* ========== التذييل ========== */
 
 .footer {
-  background: linear-gradient(180deg, var(--green-50), var(--green-100));
-  color: var(--green-900);
+  background: #FFFFFF !important; /* خلفية بيضاء لتباين عالي ومريح للعين */
+  color: #000000 !important;
   padding: 24px 14px 14px;
-  border-top: 3px solid var(--green-400);
+  border-top: 2px solid #E2E8F0;
 }
 
 .footer-content {
@@ -798,37 +799,36 @@ textarea:focus-visible {
 }
 
 .footer-brand h2 {
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 900;
-  color: var(--green-900);
+  color: #000000 !important;
 }
 
 .footer-bottom {
   width: 100%;
   margin-top: 14px;
-  border-top: 1px solid rgba(47, 93, 58, 0.15);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
   padding-top: 12px;
-  font-size: 0.72rem;
-  color: var(--green-900);
+  font-size: 0.78rem;
+  color: #000000 !important;
   text-align: center;
 }
 
 .footer-bottom p {
-  color: var(--green-900);
+  color: #000000 !important;
+  font-weight: 700 !important;
 }
 
 .developer-credit {
   margin-top: 7px !important;
-  color: var(--green-700) !important;
+  color: #000000 !important;
   font-weight: 800 !important;
 }
 
 .developer-credit strong {
-  color: #FFFFFF !important;
+  color: #000000 !important;
   font-weight: 900 !important;
-  text-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.55),
-    0 0 10px rgba(233, 246, 236, 0.18);
+  text-shadow: none !important;
 }
 
 /* ========== واتساب ========== */
@@ -984,7 +984,6 @@ textarea:focus-visible {
       color 0.2s,
       transform 0.15s !important;
   }
-
   .nav-links.open a:active {
     background: var(--green-50) !important;
     border-color: var(--green-400) !important;
