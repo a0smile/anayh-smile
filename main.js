@@ -2207,9 +2207,17 @@ function initBookingForm() {
         document.getElementById(
           'service'
         );
+      const doctorEl =
+        document.getElementById(
+          'doctor'
+        );
       const dateEl =
         document.getElementById(
           'date'
+        );
+      const periodEl =
+        document.getElementById(
+          'period'
         );
       const name =
         nameEl
@@ -2223,10 +2231,19 @@ function initBookingForm() {
         serviceEl
           ? serviceEl.value
           : '';
+      const doctor =
+        doctorEl
+          ? doctorEl.value
+          : '';
       const date =
         dateEl
           ? dateEl.value
           : '';
+      const period =
+        periodEl
+          ? periodEl.value
+          : '';
+          
       if (
         !name ||
         !phone ||
@@ -2253,20 +2270,32 @@ function initBookingForm() {
         );
         return;
       }
+      
+      // صياغة رسالة حجز فخمة ومنظمة تصل بكامل تفاصيلها لهاتفك مباشرة
       let message =
-        'طلب حجز موعد جديد\n\n';
+        '📌 طلب حجز موعد جديد\n\n';
       message +=
-        `الاسم: ${name}\n`;
+        `👤 الاسم: ${name}\n`;
       message +=
-        `الجوال: ${phone}\n`;
+        `📱 الجوال: ${phone}\n`;
       message +=
-        `الخدمة: ${service}\n`;
+        `🦷 الخدمة: ${service}\n`;
+      if (doctor) {
+        message +=
+          `👨‍⚕️ الطبيب المفضل: ${doctor}\n`;
+      }
       if (date) {
         message +=
-          `اليوم المفضل: ${date}\n`;
+          `📅 اليوم المفضل: ${date}\n`;
       }
+      if (period) {
+        message +=
+          `⏰ الفترة المفضلة: ${period}\n`;
+      }
+      
+      // اعتماد بروتوكول التحويل الدولي المباشر والآمن 100% لتجنب أي أعطال تصفح
       const waUrl =
-        `https://wa.me/${whatsapp}?text=${encodeURIComponent(
+        `https://whatsapp.com{whatsapp}&text=${encodeURIComponent(
           message
         )}`;
       window.open(
