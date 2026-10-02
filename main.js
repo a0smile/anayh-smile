@@ -1165,6 +1165,10 @@ function renderSite(data) {
       if (!servicesGrid) return;
       const clinicData =
         clinic || {};
+      const whatsapp =
+        normalizeWhatsApp(
+          clinic.whatsapp || clinicData.whatsapp || '966596901105'
+        );
       const categories =
         Array.isArray(
           data.serviceCategories
@@ -1331,7 +1335,7 @@ function renderSite(data) {
                               );
                             
                             // تأمين الرابط الدولي السريع والمباشر للتحويل للواتساب بدون أي أعطال
-                            const waHref = `https://whatsapp.com{whatsapp}&text=${waMsg}`;
+                            const waHref = `https://wa.me/${whatsapp}?text=${waMsg}`;
                             
                             return `
                               <article class="service-card-wrap">
@@ -2384,7 +2388,7 @@ function initBookingForm() {
       
       // اعتماد بروتوكول التحويل الدولي المباشر والآمن 100% لتجنب أي أعطال تصفح
       const waUrl =
-        `https://whatsapp.com{whatsapp}&text=${encodeURIComponent(
+        `https://wa.me/${whatsapp}?text=${encodeURIComponent(
           message
         )}`;
       window.open(
