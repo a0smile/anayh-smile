@@ -812,24 +812,24 @@ function renderSite(data) {
         if (track) {
           // تكرار متتالي ممتد يملأ الشاشة بالكامل ويقضي على مشكلة الرمشة نهائياً
           track.innerHTML = `
-            <span class="announcement-text" style="font-size: 17px; font-weight: 900; color: #FFFFFF; display: inline-flex; align-items: center; padding: 0 12px;">
+            <span class="announcement-text" style="font-size: 17px; font-weight: 900; color: #000000; display: inline-flex; align-items: center; padding: 0 12px;">
               ${ann}
             </span>
-            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #B4DDBD; font-weight: 900;"> ◆ </span>
-            <span class="announcement-text" aria-hidden="true" style="font-size: 17px; font-weight: 900; color: #FFFFFF; display: inline-flex; align-items: center; padding: 0 12px;">
+            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #86C493; font-weight: 900;"> ◆ </span>
+            <span class="announcement-text" aria-hidden="true" style="font-size: 17px; font-weight: 900; color: #000000; display: inline-flex; align-items: center; padding: 0 12px;">
               ${ann}
             </span>
-            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #B4DDBD; font-weight: 900;"> ◆ </span>
-            <span class="announcement-text" aria-hidden="true" style="font-size: 17px; font-weight: 900; color: #FFFFFF; display: inline-flex; align-items: center; padding: 0 12px;">
+            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #86C493; font-weight: 900;"> ◆ </span>
+            <span class="announcement-text" aria-hidden="true" style="font-size: 17px; font-weight: 900; color: #000000; display: inline-flex; align-items: center; padding: 0 12px;">
               ${ann}
             </span>
-            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #B4DDBD; font-weight: 900;"> ◆ </span>
-            <span class="announcement-text" aria-hidden="true" style="font-size: 17px; font-weight: 900; color: #FFFFFF; display: inline-flex; align-items: center; padding: 0 12px;">
+            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #86C493; font-weight: 900;"> ◆ </span>
+            <span class="announcement-text" aria-hidden="true" style="font-size: 17px; font-weight: 900; color: #000000; display: inline-flex; align-items: center; padding: 0 12px;">
               ${ann}
             </span>
-            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #B4DDBD; font-weight: 900;"> ◆ </span>
+            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #86C493; font-weight: 900;"> ◆ </span>
           `;
-          bar.style.background = '#1E4D2B';
+          bar.style.background = '#2F5D3A';
           bar.style.padding = '16px 0';
         }
         bar.setAttribute(
@@ -1260,13 +1260,8 @@ function renderSite(data) {
                                   )
                                 : '';
                             
-                            // أيقونة الخدمة: سن ضاحك / أيقونة طبية من نظام الأيقونات الموحد (بدون مصباح)
-                            const iconKey = (typeof serviceIconFor === 'function')
-                              ? serviceIconFor(serviceName)
-                              : 'tooth';
-                            const medicalSvgIcon = window.ndIconHtml
-                              ? window.ndIconHtml(iconKey || 'smile')
-                              : '';
+                            // أيقونة موحدة: سن ضاحك حقيقي (صورة) لجميع بطاقات الخدمات
+                            const medicalSvgIcon = `<img class="card-tooth-img" src="IMG_0317.jpeg" alt="سن ضاحك" width="64" height="64" loading="lazy" decoding="async">`;
 
                             const servicePrice =
                               service.price !=
