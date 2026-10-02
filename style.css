@@ -756,28 +756,31 @@ textarea:focus-visible {
 }
 
 .social-links a {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: transparent !important; /* مفرغة وبدون خلفية خضراء */
-  border: none !important; /* حذف الحدود بالكامل */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #115E2E; /* لون أخضر واضح ونقي للأيقونات */
-  font-size: 1.8rem; /* تكبير حجم الأيقونة بالداخل */
+  width: 58px !important;
+  height: 58px !important;
+  min-width: 58px !important;
+  min-height: 58px !important;
+  border-radius: 50% !important;
+  background: #FFFFFF !important;
+  border: 1.5px solid rgba(17, 94, 46, 0.12) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 4px 12px rgba(47, 93, 58, 0.1) !important;
   transition:
     transform 0.25s var(--ease),
-    background 0.25s,
-    border-color 0.25s,
-    color 0.25s;
+    box-shadow 0.25s ease !important;
+}
+
+.social-links a .nd-icon,
+.social-links a .nd-icon svg {
+  width: 32px !important;
+  height: 32px !important;
 }
 
 .social-links a:hover {
-  background: transparent !important;
-  border-color: transparent !important;
-  color: #0B4620;
-  transform: translateY(-4px) scale(1.12);
+  transform: translateY(-4px) scale(1.08) !important;
+  box-shadow: 0 8px 20px rgba(47, 93, 58, 0.18) !important;
 }
 
 /* ========== التذييل ========== */
@@ -2825,4 +2828,38 @@ body.admin-mode .catalog-tools {
   .booking-subtitle { font-size: 0.95rem !important; }
   .btn.btn-primary,
   .hero-cta-actions .btn.btn-primary { font-size: 0.95rem !important; padding: 12px 22px !important; }
+}
+
+
+/* توحيد حقول نموذج الحجز ومنع قص النص */
+.booking-form select,
+.booking-form input,
+.booking-form textarea {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  min-height: 48px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #0A3617 !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+}
+
+.booking-form select {
+  white-space: normal !important;
+}
+
+/* توحيد أقسام الطي بدون خلفيات متناوبة */
+.section.section-alt {
+  background: transparent !important;
+}
+
+.section-fold > summary.section-toggle {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #0B4620 !important;
+  font-weight: 900 !important;
+  font-size: 1.2rem !important;
 }
