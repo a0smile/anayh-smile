@@ -481,9 +481,14 @@ textarea:focus-visible {
 }
 
 /* ========== أزرار الأقسام القابلة للطي ========== */.section-fold {
-  max-width: 760px;
-  margin: 0 auto 55px; /* تباعد رأسي بمقدار 2 سم تقريباً بين كل خيار وآخر */
+  max-width: 720px;
+  margin: 0 auto 14px;
   text-align: center;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(47, 93, 58, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(47, 93, 58, 0.06);
+  padding: 4px 8px;
 }
 
 .section-fold > summary.section-toggle {
@@ -2393,16 +2398,34 @@ body.admin-mode .catalog-tools {
 .premium-card .card-service-icon {
   position: relative !important;
   z-index: 1 !important;
-  width: 62px !important;
-  height: 62px !important;
-  filter: drop-shadow(0 5px 10px rgba(47,93,58,0.22)) !important;
-  animation: toothFloat 3.5s ease-in-out infinite !important;
-  transform-origin: center center !important;
+  width: 72px !important;
+  height: 72px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  filter: none !important;
+  animation: none !important;
+  transform: none !important;
 }
 
-.premium-card .card-service-icon .nd-icon {
-  width: 62px !important;
-  height: 62px !important;
+.premium-card .card-service-icon .nd-icon,
+.premium-card .card-service-icon svg {
+  display: none !important;
+}
+
+.premium-card .card-tooth-img {
+  width: 64px !important;
+  height: 64px !important;
+  max-width: 64px !important;
+  max-height: 64px !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 0 auto !important;
+  filter: none !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 @keyframes toothFloat {
@@ -2411,7 +2434,9 @@ body.admin-mode .catalog-tools {
 }
 
 .premium-card:hover .card-service-icon {
-  animation: toothBounce 0.6s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  animation: none !important;
+  transform: scale(1.05) !important;
+  transition: transform 0.25s ease !important;
 }
 
 @keyframes toothBounce {
@@ -2851,7 +2876,8 @@ body.admin-mode .catalog-tools {
 }
 
 /* توحيد أقسام الطي بدون خلفيات متناوبة */
-.section.section-alt {
+.section.section-alt,
+section#tips {
   background: transparent !important;
 }
 
@@ -2862,4 +2888,29 @@ body.admin-mode .catalog-tools {
   color: #0B4620 !important;
   font-weight: 900 !important;
   font-size: 1.2rem !important;
+}
+
+
+/* سن ضاحك في بطاقات الخدمات — بدون تلوين إضافي */
+.premium-card .card-tooth-img,
+.premium-card .card-service-icon img.card-tooth-img {
+  width: 58px !important;
+  height: 58px !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 0 auto !important;
+  filter: none !important;
+  background: transparent !important;
+}
+
+.premium-card .card-service-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* الشريط المتحرك — نص أسود فخم */
+.announcement-bar .announcement-text {
+  color: #000000 !important;
+  font-weight: 900 !important;
 }
