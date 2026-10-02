@@ -1488,47 +1488,63 @@ textarea:focus-visible {
    أنيميشن وتنسيق معرض ابتسامات المراجعين الديناميكي الذكي (6 صور)
    ============================================================ */
 .gallery-slide-item {
-  position: absolute !important;
-  width: 100% !important;
-  height: 100% !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  opacity: 0 !important;
-  transform: translateX(100%) !important;
-  animation: slideInOut 24s linear infinite !important;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateX(100%);
+  animation: smileSlideCycle 24s linear infinite;
   box-sizing: border-box;
-  padding: 8px 12px !important;
+  padding: 8px 12px;
+  pointer-events: none;
 }
 
-/* التوقيت الزمني التتابعي الموزون لـ 6 عناصر (ثبات 4 ثوانٍ لكل عنصر بالتناوب) */
-.gallery-slide-item:nth-child(1) { animation-delay: 0s !important; }
-.gallery-slide-item:nth-child(2) { animation-delay: 4s !important; }
-.gallery-slide-item:nth-child(3) { animation-delay: 8s !important; }
-.gallery-slide-item:nth-child(4) { animation-delay: 12s !important; }
-.gallery-slide-item:nth-child(5) { animation-delay: 16s !important; }
-.gallery-slide-item:nth-child(6) { animation-delay: 20s !important; }
+/* أول شريحة تظهر فوراً عند التحميل حتى لا يبقى المكان أبيض */
+.gallery-slide-item:nth-child(1) {
+  animation-delay: 0s;
+  opacity: 1;
+  transform: translateX(0);
+}
+.gallery-slide-item:nth-child(2) { animation-delay: 4s; }
+.gallery-slide-item:nth-child(3) { animation-delay: 8s; }
+.gallery-slide-item:nth-child(4) { animation-delay: 12s; }
+.gallery-slide-item:nth-child(5) { animation-delay: 16s; }
+.gallery-slide-item:nth-child(6) { animation-delay: 20s; }
 
-@keyframes slideInOut {
+@keyframes smileSlideCycle {
   0% {
     opacity: 0;
     transform: translateX(100%);
   }
-  2% {
+  1.5% {
     opacity: 1;
     transform: translateX(0);
   }
-  16.66% {
+  15.5% {
     opacity: 1;
     transform: translateX(0);
   }
-  18.66% {
+  17% {
     opacity: 0;
     transform: translateX(-100%);
   }
   100% {
     opacity: 0;
     transform: translateX(-100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-slide-item {
+    animation: none !important;
+    opacity: 0 !important;
+    transform: none !important;
+  }
+  .gallery-slide-item:nth-child(1) {
+    opacity: 1 !important;
   }
 }
 
