@@ -812,23 +812,25 @@ function renderSite(data) {
         if (track) {
           // تكرار متتالي ممتد يملأ الشاشة بالكامل ويقضي على مشكلة الرمشة نهائياً
           track.innerHTML = `
-            <span class="announcement-text" style="font-size: 16px; font-weight: 900; display: inline-flex; align-items: center; padding: 0 10px;">
+            <span class="announcement-text" style="font-size: 17px; font-weight: 900; color: #FFFFFF; display: inline-flex; align-items: center; padding: 0 12px;">
               ${ann}
             </span>
-            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #115E2E; font-weight: 900;"> ◆ </span>
-            <span class="announcement-text" aria-hidden="true" style="font-size: 16px; font-weight: 900; display: inline-flex; align-items: center; padding: 0 10px;">
+            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #B4DDBD; font-weight: 900;"> ◆ </span>
+            <span class="announcement-text" aria-hidden="true" style="font-size: 17px; font-weight: 900; color: #FFFFFF; display: inline-flex; align-items: center; padding: 0 12px;">
               ${ann}
             </span>
-            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #115E2E; font-weight: 900;"> ◆ </span>
-            <span class="announcement-text" aria-hidden="true" style="font-size: 16px; font-weight: 900; display: inline-flex; align-items: center; padding: 0 10px;">
+            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #B4DDBD; font-weight: 900;"> ◆ </span>
+            <span class="announcement-text" aria-hidden="true" style="font-size: 17px; font-weight: 900; color: #FFFFFF; display: inline-flex; align-items: center; padding: 0 12px;">
               ${ann}
             </span>
-            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #115E2E; font-weight: 900;"> ◆ </span>
-            <span class="announcement-text" aria-hidden="true" style="font-size: 16px; font-weight: 900; display: inline-flex; align-items: center; padding: 0 10px;">
+            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #B4DDBD; font-weight: 900;"> ◆ </span>
+            <span class="announcement-text" aria-hidden="true" style="font-size: 17px; font-weight: 900; color: #FFFFFF; display: inline-flex; align-items: center; padding: 0 12px;">
               ${ann}
             </span>
-            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #115E2E; font-weight: 900;"> ◆ </span>
+            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #B4DDBD; font-weight: 900;"> ◆ </span>
           `;
+          bar.style.background = '#1E4D2B';
+          bar.style.padding = '16px 0';
         }
         bar.setAttribute(
           'data-edit',
@@ -1258,31 +1260,15 @@ function renderSite(data) {
                                   )
                                 : '';
                             
-                            // هندسة وحقن أيقونات SVG تخصصية طبية حقيقية 100% لكل قسم (بدون كرتون أو إيموجي)
-                            let medicalSvgIcon = `
-                              <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#115E2E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 2C8.5 2 6 4.5 6 8c0 3.5 1.5 5.5 3 7.5c1 1.3 1.5 2.5 1.5 4.5h3c0-2 .5-3.2 1.5-4.5c1.5-2 3-4 3-7.5c0-3.5-2.5-6-6-6z"/>
-                                <path d="M9 22h6"/>
-                              </svg>`;
-                            
-                            if (serviceName.includes("تقويم")) {
-                              medicalSvgIcon = `
-                                <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="#115E2E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                  <path d="M12 2C8.5 2 6 4.5 6 8c0 3.5 1.5 5.5 3 7.5c1 1.3 1.5 2.5 1.5 4.5h3c0-2 .5-3.2 1.5-4.5c1.5-2 3-4 3-7.5c0-3.5-2.5-6-6-6z"/>
-                                  <path d="M6 8h12" stroke-dasharray="2 2"/>
-                                  <rect x="10.5" y="6.5" width="3" height="3" rx="0.5" fill="#115E2E"/>
-                                  <rect x="15" y="6.5" width="2" height="3" rx="0.5" fill="#115E2E"/>
-                                  <rect x="7" y="6.5" width="2" height="3" rx="0.5" fill="#115E2E"/>
-                                </svg>`;
-                            } else if (serviceName.includes("تنظيف") || serviceName.includes("تبييض") || serviceName.includes("فلاش")) {
-                              medicalSvgIcon = `
-                                <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="#115E2E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                  <path d="M12 2C8.5 2 6 4.5 6 8c0 3.5 1.5 5.5 3 7.5c1 1.3 1.5 2.5 1.5 4.5h3c0-2 .5-3.2 1.5-4.5c1.5-2 3-4 3-7.5c0-3.5-2.5-6-6-6z"/>
-                                  <path d="M18 3l1.5 1.5M19.5 3L18 4.5M4 6l1.5 1.5M5.5 6L4 7.5M12 5v0" stroke-width="2"/>
-                                </svg>`;
-                            }
+                            // أيقونة الخدمة: سن ضاحك / أيقونة طبية من نظام الأيقونات الموحد (بدون مصباح)
+                            const iconKey = (typeof serviceIconFor === 'function')
+                              ? serviceIconFor(serviceName)
+                              : 'tooth';
+                            const medicalSvgIcon = window.ndIconHtml
+                              ? window.ndIconHtml(iconKey || 'smile')
+                              : '';
 
-                                                                           const servicePrice =
+                            const servicePrice =
                               service.price !=
                                   null &&
                               service.price !==
@@ -1306,26 +1292,16 @@ function renderSite(data) {
                               const installmentPrice = (numericPrice / 4).toFixed(2); // قسمة السعر على 4 دفعات متساوية
                               
                               installmentHtml = `
-                                <div class="premium-installments-box" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; margin: 10px 0 6px 0; padding: 6px; background: rgba(247, 250, 248, 0.9); border-radius: 8px; border: 1px dashed rgba(17, 94, 46, 0.15); box-sizing: border-box;">
-                                  <div style="font-size: 10.5px; font-weight: 800; color: #2D3748; margin-bottom: 5px; font-family: 'Cairo', sans-serif;">
-                                    🎯 قسّط فاتورتك بقيمة <span style="color: #115E2E; font-size: 11.5px; font-weight: 900;">${installmentPrice} ريال</span> شهرياً
+                                <div class="premium-installments-box" style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;margin:8px 0 6px;padding:8px 6px;background:rgba(255,255,255,0.85);border-radius:10px;border:1px solid rgba(17,94,46,0.12);box-sizing:border-box;">
+                                  <div style="font-size:11px;font-weight:900;color:#0A3617;margin-bottom:6px;font-family:inherit;text-align:center;line-height:1.4;">
+                                    قسّط فاتورتك بقيمة <span style="color:#115E2E;font-size:12px;font-weight:900;">${installmentPrice} ريال</span> شهرياً
                                   </div>
-                                  <div style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;">
-                                    <!-- شعار تمارا الرسمي الفاخر SVG ملوّن حقيقي 100% -->
-                                    <div style="display: inline-flex; align-items: center; background: linear-gradient(135deg, #FFA494 0%, #FFD2C4 100%); padding: 3px 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-                                      <svg viewBox="0 0 32 12" width="34" height="12" fill="#000000" style="vertical-align: middle;">
-                                        <path d="M4.2 11.2a1.8 1.8 0 0 1-1.8-1.8V5.3h1V9.4c0 .4.3.8.8.8h1.2v1H4.2zm4.5 0h-1V5.3h1v5.9zm4-.8a1.5 1.5 0 0 1-1.5-1.5V5.3h1v3.6c0 .3.2.5.5.5h1.2V5.3h1v5.1h-2.2zm6.2.8h-1V5.3h1v5.9zm4.2-.8a1.3 1.3 0 0 1-1.3-1.3V5.3h1v3.8c0 .2.1.4.3.4h1.2V5.3h1v5.1h-2.2z"/>
-                                      </svg>
-                                    </div>
-                                    <!-- شعار تابي الرسمي الفاخر SVG ملوّن حقيقي 100% -->
-                                    <div style="display: inline-flex; align-items: center; background: #39F5C5; padding: 3px 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-                                      <svg viewBox="0 0 32 12" width="34" height="12" fill="#0A3617" style="vertical-align: middle;">
-                                        <path d="M2.5 2.5h2v1.5h-2v4h-1.5v-4h-2v-1.5h2v-2h1.5v2zm5 1.5a2 2 0 0 1 2 2v2.5h-1.5v-2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v2.5h-1.5v-5h1.5v.5h1zm6 4h1.5v-5h-1.5v5zm4.5-1.5a1.5 1.5 0 0 0 1.5-1.5v-1a1.5 1.5 0 0 0-1.5-1.5h-2v5h1.5v-1h.5zm-.5-2.5h.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-.5v-2zm7 4h1.5v-5h-1.5v5z"/>
-                                      </svg>
-                                    </div>
+                                  <div style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;flex-wrap:wrap;">
+                                    <span style="display:inline-flex;align-items:center;justify-content:center;min-width:64px;padding:4px 12px;border-radius:6px;background:#39F5C5;color:#0A3617;font-size:13px;font-weight:900;letter-spacing:0.02em;box-shadow:0 1px 3px rgba(0,0,0,0.08);">تابي</span>
+                                    <span style="display:inline-flex;align-items:center;justify-content:center;min-width:64px;padding:4px 12px;border-radius:6px;background:#FFA494;color:#0A3617;font-size:13px;font-weight:900;letter-spacing:0.02em;box-shadow:0 1px 3px rgba(0,0,0,0.08);">تمارا</span>
                                   </div>
                                 </div>
-                              `;
+                              `
                             }
 
                             const whatsapp = "966596901105"; // رقم المجمع المعتمد دولياً لرسائل الخدمات
