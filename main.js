@@ -2059,6 +2059,14 @@ function renderSite(data) {
         );
       const socials = [
         {
+          url: whatsapp
+            ? ('https://wa.me/' + whatsapp)
+            : '',
+          icon: 'whatsapp',
+          name: 'واتساب',
+          path: 'clinic.whatsapp'
+        },
+        {
           url:
             normalizeUrl(
               clinic.instagram
@@ -2084,15 +2092,6 @@ function renderSite(data) {
           icon: 'tiktok',
           name: 'تيك توك',
           path: 'clinic.tiktok'
-        },
-        {
-          url:
-            normalizeUrl(
-              clinic.twitter
-            ),
-          icon: 'twitter',
-          name: 'تويتر',
-          path: 'clinic.twitter'
         }
       ];
       const list =
