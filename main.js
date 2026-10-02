@@ -848,7 +848,7 @@ function renderSite(data) {
     }
   );
   /* ===== هوية المجمع ===== */
-   safeRender(
+     safeRender(
     'clinicIdentity',
     () => {
       setText(
@@ -893,8 +893,8 @@ function renderSite(data) {
       );
     }
   );
-  
-  /* ===== معرض ابتسامات المراجعين الديناميكي الذكي المربوط بـ content.json ===== */
+
+  /* ===== تفعيل معرض ابتسامات المراجعين الديناميكي وحظر البياض نهائياً ===== */
   safeRender(
     'smileGallery',
     () => {
@@ -906,10 +906,10 @@ function renderSite(data) {
       
       let htmlContent = '';
       
-      // دوران برمجي حقيقي وثابت لـ 6 صور بالتناوب
-      for (let index = 0; index < 6; index++) {
-        const itemUrl = galleryData[index] ? String(galleryData[index]).trim() : '';
-        const currentPath = `smileGalleryItems.${index}`;
+      // توليد الـ 6 صور التتابعية هندسياً وبشكل مستمر دون توقف
+      for (let i = 0; i < 6; i++) {
+        const itemUrl = galleryData[i] ? String(galleryData[i]).trim() : '';
+        const currentPath = `smileGalleryItems.${i}`;
         
         htmlContent += `
           <div class="gallery-slide-item">
@@ -924,7 +924,6 @@ function renderSite(data) {
       
       track.innerHTML = htmlContent;
       
-      // تفعيل ميزة التعديل والحذف الحقيقية لمالك الموقع فقط بطريقة محمية
       if (window.markEditable) {
         markEditable('smileGalleryTrack', 'smileGalleryItems');
       }
@@ -944,6 +943,7 @@ function renderSite(data) {
         hero.badge ||
           'رعاية طبية متخصصة'
       );
+
       setText(
         'ndBannerTitle',
         titleParts
