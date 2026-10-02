@@ -900,31 +900,54 @@ function renderSite(data) {
     () => {
       const track = document.getElementById('smileGalleryTrack');
       if (!track) return;
-      
+
       const clinicName = clinic.name || 'مجمع عناية الابتسامة الطبي';
-      const galleryData = Array.isArray(data.smileGalleryItems) ? data.smileGalleryItems : [];
-      
+      const galleryData = Array.isArray(data.smileGalleryItems)
+        ? data.smileGalleryItems
+        : [];
+
       let htmlContent = '';
-      
+
       // توليد الـ 6 صور التتابعية هندسياً وبشكل مستمر دون توقف
       for (let i = 0; i < 6; i++) {
         const itemUrl = galleryData[i] ? String(galleryData[i]).trim() : '';
         const currentPath = `smileGalleryItems.${i}`;
-        
-        htmlContent += `
-          <div class="gallery-slide-item">
-            ${
-              itemUrl
-                ? `<img class="gallery-slide-img" src="escapeAttr(itemUrl)" alt="حالة مراجع" data-edit="{currentPath}" data-edit-type="image">`
-                : `<div class="gallery-fallback-box" data-edit="currentPath" data-edit-type="image">{escapeHtml(clinicName)}</div>`
-            }
-          </div>
-        `;
+
+        if (itemUrl) {
+          htmlContent += `
+            <div class="gallery-slide-item">
+              <img
+                class="gallery-slide-img"
+                src="${escapeAttr(itemUrl)}"
+                alt="حالة مراجع ${i + 1}"
+                data-edit="${currentPath}"
+                data-edit-type="image"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+          `;
+        } else {
+          htmlContent += `
+            <div class="gallery-slide-item">
+              <div
+                class="gallery-fallback-box"
+                data-edit="${currentPath}"
+                data-edit-type="image"
+              >
+                <div class="gallery-fallback-logo">
+                  ${window.ndIconHtml ? window.ndIconHtml('smile') : '🦷'}
+                </div>
+                <div class="gallery-fallback-name">${escapeHtml(clinicName)}</div>
+              </div>
+            </div>
+          `;
+        }
       }
-      
+
       track.innerHTML = htmlContent;
-      
-      if (window.markEditable) {
+
+      if (typeof markEditable === 'function') {
         markEditable('smileGalleryTrack', 'smileGalleryItems');
       }
     }
