@@ -484,11 +484,18 @@ textarea:focus-visible {
   max-width: 720px;
   margin: 0 auto 14px;
   text-align: center;
-  background: #FFFFFF;
-  border: 1.5px solid rgba(47, 93, 58, 0.12);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px) saturate(1.1);
+  -webkit-backdrop-filter: blur(10px) saturate(1.1);
+  border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: 16px;
-  box-shadow: 0 4px 14px rgba(47, 93, 58, 0.06);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07), 0 2px 6px rgba(0, 0, 0, 0.03);
   padding: 4px 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+.section-fold:hover {
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.1);
 }
 
 .section-fold > summary.section-toggle {
@@ -2321,23 +2328,27 @@ body.admin-mode .catalog-tools {
   margin: 0 auto !important;
   border-radius: 18px !important;
   overflow: hidden !important;
-  background:
-    linear-gradient(165deg, #E8F5EB 0%, #C8E6D0 40%, #A8D5B5 100%) !important;
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(12px) saturate(1.15) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(1.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.55) !important;
   box-shadow:
-    0 4px 16px rgba(30, 77, 43, 0.14),
-    0 0 0 1.5px rgba(30, 77, 43, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.55) !important;
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    0 2px 6px rgba(0, 0, 0, 0.04) !important;
   transition:
     transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.35s ease !important;
+    box-shadow 0.35s ease,
+    background 0.35s ease,
+    border-color 0.35s ease !important;
 }
 
 .premium-card:hover {
-  transform: translateY(-5px) !important;
+  transform: translateY(-6px) !important;
+  background: rgba(255, 255, 255, 0.94) !important;
+  border-color: rgba(255, 255, 255, 0.75) !important;
   box-shadow:
-    0 12px 28px rgba(30, 77, 43, 0.22),
-    0 0 0 2px rgba(30, 77, 43, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+    0 14px 32px rgba(0, 0, 0, 0.12),
+    0 4px 10px rgba(0, 0, 0, 0.06) !important;
 }
 
 .premium-card::before {
@@ -2345,7 +2356,7 @@ body.admin-mode .catalog-tools {
   position: absolute !important;
   inset: 5px !important;
   border-radius: 11px !important;
-  border: 1px solid rgba(30, 77, 43, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
   pointer-events: none !important;
   z-index: 3 !important;
 }
@@ -2932,12 +2943,20 @@ section#tips {
   margin: 0 auto !important;
 }
 .doctor-card {
-  background: #FFFFFF !important;
-  border: 1.5px solid rgba(47, 93, 58, 0.12) !important;
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(10px) saturate(1.1) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(1.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.55) !important;
   border-radius: 14px !important;
   padding: 12px 10px !important;
   text-align: center !important;
-  box-shadow: 0 3px 10px rgba(47, 93, 58, 0.06) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease !important;
+}
+.doctor-card:hover {
+  transform: translateY(-4px) !important;
+  background: rgba(255, 255, 255, 0.94) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.11) !important;
 }
 .doctor-card h3 {
   font-size: 0.92rem !important;
@@ -2994,4 +3013,48 @@ section#tips {
 #services {
   padding-top: 8px !important;
   padding-bottom: 8px !important;
+}
+
+
+/* ===== زجاج فخم موحّد لجميع البطاقات ===== */
+.service-card,
+.review-card,
+.faq-item,
+.tip-card,
+.offer-card,
+.catalog-card,
+.hours-card,
+.map-card,
+.social-card,
+.contact-card {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(12px) saturate(1.15) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(1.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.55) !important;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    0 2px 6px rgba(0, 0, 0, 0.04) !important;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease,
+    background 0.35s ease !important;
+}
+
+.service-card:hover,
+.review-card:hover,
+.faq-item:hover,
+.tip-card:hover,
+.offer-card:hover,
+.catalog-card:hover {
+  transform: translateY(-5px) !important;
+  background: rgba(255, 255, 255, 0.94) !important;
+  box-shadow:
+    0 14px 32px rgba(0, 0, 0, 0.12),
+    0 4px 10px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* إلغاء الأطر الخضراء السميكة على أغلفة البطاقات */
+.service-card-wrap > .premium-card,
+.premium-card {
+  outline: none !important;
 }
