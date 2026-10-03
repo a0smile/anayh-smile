@@ -2914,3 +2914,84 @@ section#tips {
   color: #000000 !important;
   font-weight: 900 !important;
 }
+
+
+/* ===== أطباؤنا — بعد الخدمات مباشرة ===== */
+#doctors .section-title {
+  text-align: center !important;
+  font-weight: 900 !important;
+}
+#doctors .section-subtitle {
+  text-align: center !important;
+}
+.doctors-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
+  gap: 10px !important;
+  max-width: 900px !important;
+  margin: 0 auto !important;
+}
+.doctor-card {
+  background: #FFFFFF !important;
+  border: 1.5px solid rgba(47, 93, 58, 0.12) !important;
+  border-radius: 14px !important;
+  padding: 12px 10px !important;
+  text-align: center !important;
+  box-shadow: 0 3px 10px rgba(47, 93, 58, 0.06) !important;
+}
+.doctor-card h3 {
+  font-size: 0.92rem !important;
+  font-weight: 900 !important;
+  color: #0A3617 !important;
+  margin: 6px 0 3px !important;
+  line-height: 1.35 !important;
+}
+.doctor-card .doctor-specialty {
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  color: #2F5D3A !important;
+  margin: 0 0 4px !important;
+  line-height: 1.35 !important;
+}
+.doctor-card .doctor-exp,
+.doctor-card p:not(.doctor-specialty) {
+  font-size: 0.68rem !important;
+  font-weight: 500 !important;
+  color: #718096 !important;
+  line-height: 1.45 !important;
+  margin: 0 !important;
+}
+.doctor-avatar {
+  width: 44px !important;
+  height: 44px !important;
+  margin: 0 auto 4px !important;
+  font-size: 0.95rem !important;
+  font-weight: 900 !important;
+}
+
+/* صورة السن بدون خلفية بيضاء ظاهرة */
+.premium-card .card-tooth-img {
+  background: transparent !important;
+  mix-blend-mode: multiply;
+}
+@supports (background: color-mix(in srgb, white 50%, transparent)) {
+  .premium-card .card-tooth-img {
+    mix-blend-mode: normal;
+  }
+}
+
+/* تقليل الفراغات العامة بين الأقسام */
+.section {
+  padding-top: 18px !important;
+  padding-bottom: 14px !important;
+}
+.section-fold {
+  margin: 0 auto 10px !important;
+}
+.hero {
+  padding-bottom: 12px !important;
+}
+#services {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
