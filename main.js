@@ -806,30 +806,30 @@ function renderSite(data) {
           );
 
         // تلوين وتظليل كلمة تابي وتمارا باحترافية ملفتة للانتباه
-        ann = ann.replace(/تابي/g, '<span style="background: #39F5C5; color: #0A3617; padding: 2px 8px; border-radius: 4px; font-weight: 900; margin: 0 3px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">تابي</span>');
-        ann = ann.replace(/تمارا/g, '<span style="background: #FFA494; color: #0A3617; padding: 2px 8px; border-radius: 4px; font-weight: 900; margin: 0 3px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">تمارا</span>');
+        ann = ann.replace(/تابي/g, '<span style="background: #F4F6F8; color: #111827; padding: 2px 8px; border-radius: 4px; font-weight: 900; margin: 0 3px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">تابي</span>');
+        ann = ann.replace(/تمارا/g, '<span style="background: #F4F6F8; color: #111827; padding: 2px 8px; border-radius: 4px; font-weight: 900; margin: 0 3px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">تمارا</span>');
 
         if (track) {
           // تكرار متتالي ممتد يملأ الشاشة بالكامل ويقضي على مشكلة الرمشة نهائياً
           track.innerHTML = `
-            <span class="announcement-text" style="font-size: 17px; font-weight: 900; color: #000000; display: inline-flex; align-items: center; padding: 0 12px;">
+            <span class="announcement-text" style="font-size: 17px; font-weight: 900; color: #FFFFFF; display: inline-flex; align-items: center; padding: 0 12px;">
               ${ann}
             </span>
-            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #86C493; font-weight: 900;"> ◆ </span>
-            <span class="announcement-text" aria-hidden="true" style="font-size: 17px; font-weight: 900; color: #000000; display: inline-flex; align-items: center; padding: 0 12px;">
+            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #A8D0D4; font-weight: 900;"> ◆ </span>
+            <span class="announcement-text" aria-hidden="true" style="font-size: 17px; font-weight: 900; color: #FFFFFF; display: inline-flex; align-items: center; padding: 0 12px;">
               ${ann}
             </span>
-            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #86C493; font-weight: 900;"> ◆ </span>
-            <span class="announcement-text" aria-hidden="true" style="font-size: 17px; font-weight: 900; color: #000000; display: inline-flex; align-items: center; padding: 0 12px;">
+            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #A8D0D4; font-weight: 900;"> ◆ </span>
+            <span class="announcement-text" aria-hidden="true" style="font-size: 17px; font-weight: 900; color: #FFFFFF; display: inline-flex; align-items: center; padding: 0 12px;">
               ${ann}
             </span>
-            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #86C493; font-weight: 900;"> ◆ </span>
-            <span class="announcement-text" aria-hidden="true" style="font-size: 17px; font-weight: 900; color: #000000; display: inline-flex; align-items: center; padding: 0 12px;">
+            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #A8D0D4; font-weight: 900;"> ◆ </span>
+            <span class="announcement-text" aria-hidden="true" style="font-size: 17px; font-weight: 900; color: #FFFFFF; display: inline-flex; align-items: center; padding: 0 12px;">
               ${ann}
             </span>
-            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #86C493; font-weight: 900;"> ◆ </span>
+            <span class="announcement-spacer" aria-hidden="true" style="display: inline-block; width: 60px; text-align: center; color: #A8D0D4; font-weight: 900;"> ◆ </span>
           `;
-          bar.style.background = '#2F5D3A';
+          bar.style.background = '#0D5C65';
           bar.style.padding = '16px 0';
         }
         bar.setAttribute(
@@ -1287,13 +1287,13 @@ function renderSite(data) {
                               const installmentPrice = (numericPrice / 4).toFixed(2); // قسمة السعر على 4 دفعات متساوية
                               
                               installmentHtml = `
-                                <div class="premium-installments-box" style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;margin:8px 0 6px;padding:8px 6px;background:rgba(255,255,255,0.85);border-radius:10px;border:1px solid rgba(17,94,46,0.12);box-sizing:border-box;">
-                                  <div style="font-size:11px;font-weight:900;color:#0A3617;margin-bottom:6px;font-family:inherit;text-align:center;line-height:1.4;">
-                                    قسّط فاتورتك بقيمة <span style="color:#115E2E;font-size:12px;font-weight:900;">${installmentPrice} ريال</span> شهرياً
+                                <div class="premium-installments-box" style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;margin:8px 0 6px;padding:8px 6px;background:rgba(255,255,255,0.85);border-radius:10px;border:1px solid rgba(13,92,101,0.12);box-sizing:border-box;">
+                                  <div style="font-size:11px;font-weight:900;color:#111827;margin-bottom:6px;font-family:inherit;text-align:center;line-height:1.4;">
+                                    قسّط فاتورتك بقيمة <span style="color:#0D5C65;font-size:12px;font-weight:900;">${installmentPrice} ريال</span> شهرياً
                                   </div>
                                   <div style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;flex-wrap:wrap;">
-                                    <span style="display:inline-flex;align-items:center;justify-content:center;min-width:64px;padding:4px 12px;border-radius:6px;background:#39F5C5;color:#0A3617;font-size:13px;font-weight:900;letter-spacing:0.02em;box-shadow:0 1px 3px rgba(0,0,0,0.08);">تابي</span>
-                                    <span style="display:inline-flex;align-items:center;justify-content:center;min-width:64px;padding:4px 12px;border-radius:6px;background:#FFA494;color:#0A3617;font-size:13px;font-weight:900;letter-spacing:0.02em;box-shadow:0 1px 3px rgba(0,0,0,0.08);">تمارا</span>
+                                    <span style="display:inline-flex;align-items:center;justify-content:center;min-width:64px;padding:4px 12px;border-radius:6px;background:#F4F6F8;color:#111827;font-size:13px;font-weight:900;letter-spacing:0.02em;box-shadow:0 1px 3px rgba(0,0,0,0.08);">تابي</span>
+                                    <span style="display:inline-flex;align-items:center;justify-content:center;min-width:64px;padding:4px 12px;border-radius:6px;background:#F4F6F8;color:#111827;font-size:13px;font-weight:900;letter-spacing:0.02em;box-shadow:0 1px 3px rgba(0,0,0,0.08);">تمارا</span>
                                   </div>
                                 </div>
                               `

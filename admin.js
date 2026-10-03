@@ -21,7 +21,7 @@ let pendingImagePath = null;
       min-height: 48px!important;
       padding: 0!important;
       margin: 0!important;
-      border: 1px solid rgba(111,191,138,.85)!important;
+      border: 1px solid rgba(61,138,147,.85)!important;
       border-radius: 50%!important;
       opacity: 1!important;
       visibility: visible!important;
@@ -31,9 +31,9 @@ let pendingImagePath = null;
       display: flex!important;
       align-items: center!important;
       justify-content: center!important;
-      background: linear-gradient(135deg,#2F5D3A,#3E7D4E)!important;
+      background: linear-gradient(135deg,#0D5C65,#0D5C65)!important;
       color: #fff!important;
-      box-shadow: 0 10px 28px rgba(47,93,58,.35)!important;
+      box-shadow: 0 10px 28px rgba(13,92,101,.35)!important;
       cursor: pointer!important;
       font-size: 22px!important;
       line-height: 1!important;
@@ -62,7 +62,7 @@ let pendingImagePath = null;
         linear-gradient(
           135deg,
           rgba(30,64,40,.98),
-          rgba(47,93,58,.98)
+          rgba(13,92,101,.98)
         )!important;
       backdrop-filter: blur(14px)!important;
       -webkit-backdrop-filter: blur(14px)!important;
@@ -72,7 +72,7 @@ let pendingImagePath = null;
       justify-content: center!important;
       align-items: center!important;
       flex-wrap: wrap!important;
-      border-top: 1px solid rgba(111,191,138,.55)!important;
+      border-top: 1px solid rgba(61,138,147,.55)!important;
       box-shadow: 0 -8px 30px rgba(0,0,0,.18)!important;
     }
 
@@ -97,10 +97,10 @@ let pendingImagePath = null;
       flex-wrap: wrap!important;
       align-items: center!important;
       background: rgba(255,255,255,.97)!important;
-      border: 1px solid rgba(74,143,91,.35)!important;
+      border: 1px solid rgba(13,92,101,.35)!important;
       border-radius: 10px!important;
       padding: 4px!important;
-      box-shadow: 0 6px 18px rgba(47,93,58,.20)!important;
+      box-shadow: 0 6px 18px rgba(13,92,101,.20)!important;
       direction: rtl!important;
     }
 
@@ -121,25 +121,25 @@ let pendingImagePath = null;
       transform: translateY(-1px)!important;
     }
 
-    .op-edit { background: #4A8F5B!important; }
+    .op-edit { background: #0D5C65!important; }
     .op-add { background: #128C7E!important; }
     .op-del { background: #c0392b!important; }
-    .op-save { background: #3E7D4E!important; }
-    .op-manage { background: #3E7D4E!important; }
+    .op-save { background: #0D5C65!important; }
+    .op-manage { background: #0D5C65!important; }
 
     #smileToast {
       position: fixed!important;
       top: 20px!important;
       left: 50%!important;
       transform: translateX(-50%) translateY(-20px)!important;
-      background: #3E7D4E!important;
+      background: #0D5C65!important;
       color: #fff!important;
       font-family: inherit!important;
       font-weight: 800!important;
       font-size: .9rem!important;
       padding: 12px 22px!important;
       border-radius: 50px!important;
-      box-shadow: 0 8px 24px rgba(47,93,58,.35)!important;
+      box-shadow: 0 8px 24px rgba(13,92,101,.35)!important;
       z-index: 999999!important;
       opacity: 0!important;
       pointer-events: none!important;
@@ -176,8 +176,8 @@ let pendingImagePath = null;
       overflow: hidden!important;
       display: flex!important;
       flex-direction: column!important;
-      background: #F4FAF5!important;
-      border: 1px solid rgba(62,125,78,.45)!important;
+      background: #F8FAFA!important;
+      border: 1px solid rgba(13,92,101,.45)!important;
       border-radius: 22px!important;
       box-shadow: 0 30px 90px rgba(0,0,0,.35)!important;
     }
@@ -189,8 +189,8 @@ let pendingImagePath = null;
       gap: 12px!important;
       padding: 18px 20px!important;
       color: #fff!important;
-      background: linear-gradient(135deg,#2F5D3A,#3E7D4E)!important;
-      border-bottom: 1px solid rgba(111,191,138,.45)!important;
+      background: linear-gradient(135deg,#0D5C65,#0D5C65)!important;
+      border-bottom: 1px solid rgba(61,138,147,.45)!important;
     }
 
     .admin-manager-title {
@@ -222,13 +222,13 @@ let pendingImagePath = null;
       grid-template-columns: 1fr auto auto auto!important;
       gap: 8px!important;
       padding: 12px!important;
-      border-bottom: 1px solid #D6EEDB!important;
+      border-bottom: 1px solid #E6F3F4!important;
       background: #FFFFFF!important;
     }
 
     .admin-manager-search {
       min-width: 0!important;
-      border: 1px solid #D6EEDB!important;
+      border: 1px solid #E6F3F4!important;
       border-radius: 12px!important;
       padding: 10px 12px!important;
       background: #fff!important;
@@ -244,12 +244,12 @@ let pendingImagePath = null;
       cursor: pointer!important;
       font-family: inherit!important;
       font-weight: 800!important;
-      background: #3E7D4E!important;
+      background: #0D5C65!important;
       color: #fff!important;
     }
 
     .admin-manager-tool-btn.gold {
-      background: #3E7D4E!important;
+      background: #0D5C65!important;
     }
 
     .admin-manager-tool-btn.red {
@@ -263,7 +263,7 @@ let pendingImagePath = null;
 
     .admin-manager-group {
       margin-bottom: 14px!important;
-      border: 1px solid #D6EEDB!important;
+      border: 1px solid #E6F3F4!important;
       border-radius: 15px!important;
       background: #fff!important;
       overflow: hidden!important;
@@ -271,10 +271,10 @@ let pendingImagePath = null;
 
     .admin-manager-group-title {
       padding: 11px 13px!important;
-      background: #F4FAF5!important;
+      background: #F8FAFA!important;
       color: #000000!important;
       font-weight: 900!important;
-      border-bottom: 1px solid #D6EEDB!important;
+      border-bottom: 1px solid #E6F3F4!important;
     }
 
     .admin-field-row {
@@ -283,7 +283,7 @@ let pendingImagePath = null;
       gap: 9px!important;
       align-items: center!important;
       padding: 9px 11px!important;
-      border-bottom: 1px solid #D6EEDB!important;
+      border-bottom: 1px solid #E6F3F4!important;
     }
 
     .admin-field-row:last-child {
@@ -324,7 +324,7 @@ let pendingImagePath = null;
       font-size: .68rem!important;
       cursor: pointer!important;
       color: #fff!important;
-      background: #4A8F5B!important;
+      background: #0D5C65!important;
     }
 
     .admin-field-action.delete {

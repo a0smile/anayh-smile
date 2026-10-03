@@ -9,8 +9,8 @@
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#F4FAF5",
-  "theme_color": "#3E7D4E",
+  "background_color": "#F8FAFA",
+  "theme_color": "#0D5C65",
   "categories": [
     "health",
     "medical",
