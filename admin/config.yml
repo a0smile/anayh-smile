@@ -3,7 +3,31 @@ backend:
   repo: a0smile/anayh-smile
   branch: main
   auth_type: pkce
-  base_url: https://auth.decapbridge.com
+  base_url: https://decapbridge.com
   auth_endpoint: /sites/bc92069e-6d76-4a6b-9ddb-7c3937ae10ba/pkce
   auth_token_endpoint: /sites/bc92069e-6d76-4a6b-9ddb-7c3937ae10ba/token
-  gateway_url: https://gateway.decapbridge.com
+  gateway_url: https://decapbridge.com
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "pages"
+    label: "صفحات الموقع"
+    files:
+      - file: "content.json"
+        label: "تعديل محتوى وملفات البيانات"
+        name: "site_content"
+        fields:
+          - label: "الالبيانات البرمجية"
+            name: "json_data"
+            widget: "code"
+            default_language: "json"
+      - file: "catalog.html"
+        label: "صفحة الكتالوج العامة"
+        name: "catalog_page"
+        fields:
+          - label: "كود الصفحة الكامل"
+            name: "catalog_body"
+            widget: "code"
+            default_language: "html"
