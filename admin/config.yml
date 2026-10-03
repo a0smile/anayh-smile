@@ -1,0 +1,36 @@
+# إعدادات الربط المباشر مع مستودع GitHub والصلاحيات الخلفية لموقعك الحقيقي
+backend:
+  name: github
+  repo: a0smile/anayh-smile
+  branch: main
+  base_url: https://pages.dev
+  auth_endpoint: api/admin-login
+
+# مجلدات حفظ وإدارة الصور في الموقع الحالي
+media_folder: "images"
+public_folder: "/images"
+
+# الهيكلة الاحترافية للتحكم بالملفات الثابتة لموقعك (Content Management)
+collections:
+  - name: "pages"
+    label: "صفحات الموقع"
+    files:
+      # ربط لوحة التحكم بملف البيانات الأساسي لتعديله مرئياً
+      - file: "content.json"
+        label: "تعديل محتوى وملفات البيانات"
+        name: "site_content"
+        fields:
+          - label: "البيانات البرمجية (JSON)"
+            name: "json_data"
+            widget: "code"
+            default_language: "json"
+
+      # ربط لوحة التحكم بصفحة الكتالوج لتحديثها
+      - file: "catalog.html"
+        label: "صفحة الكتالوج العامة"
+        name: "catalog_page"
+        fields:
+          - label: "كود الصفحة الكامل"
+            name: "catalog_body"
+            widget: "code"
+            default_language: "html"
