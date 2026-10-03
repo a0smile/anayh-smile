@@ -1261,7 +1261,7 @@ function renderSite(data) {
                                 : '';
                             
                             // أيقونة موحدة: سن ضاحك حقيقي (صورة) لجميع بطاقات الخدمات
-                            const medicalSvgIcon = `<img class="card-tooth-img" src="IMG_0317.jpeg" alt="سن ضاحك" width="64" height="64" loading="lazy" decoding="async">`;
+                            const medicalSvgIcon = `<img class="card-tooth-img" src="IMG_0317.png" alt="سن ضاحك" width="64" height="64" loading="lazy" decoding="async">`;
 
                             const servicePrice =
                               service.price !=
