@@ -3177,3 +3177,62 @@ html, body {
   background: linear-gradient(135deg, #0D5C65, #0A4A52) !important;
   border-color: rgba(13, 92, 101, 0.85) !important;
 }
+
+
+/* ===== بطاقات الخدمات — خلفية أغمق فخمة ===== */
+.premium-card {
+  background: linear-gradient(165deg, rgba(13, 92, 101, 0.18) 0%, rgba(13, 92, 101, 0.11) 40%, rgba(232, 244, 245, 0.95) 100%) !important;
+  border: 1px solid rgba(13, 92, 101, 0.32) !important;
+  box-shadow:
+    0 10px 28px rgba(13, 92, 101, 0.18),
+    0 3px 8px rgba(0, 0, 0, 0.06) !important;
+}
+.premium-card:hover {
+  background: linear-gradient(165deg, rgba(13, 92, 101, 0.24) 0%, rgba(13, 92, 101, 0.15) 40%, rgba(240, 248, 249, 0.98) 100%) !important;
+  border-color: rgba(13, 92, 101, 0.42) !important;
+  box-shadow:
+    0 16px 36px rgba(13, 92, 101, 0.24),
+    0 5px 12px rgba(0, 0, 0, 0.08) !important;
+  transform: translateY(-6px) !important;
+}
+
+/* معرض الابتسامات — أزرار المالك تعمل */
+body.admin-mode .gallery-slide-item {
+  pointer-events: auto !important;
+  animation-play-state: paused !important;
+}
+body.admin-mode .gallery-slide-item .admin-edit-bar,
+body.admin-mode .gallery-slide-item .edit-btn {
+  pointer-events: auto !important;
+  z-index: 9995 !important;
+}
+body.admin-mode #smileGalleryTrack,
+body.admin-mode .premium-smile-gallery {
+  overflow: visible !important;
+}
+body.admin-mode .gallery-slide-img,
+body.admin-mode .gallery-fallback-box {
+  pointer-events: auto !important;
+  position: relative !important;
+}
+
+/* أقسام الطي — أصغر وأقرب */
+.section-fold {
+  margin: 0 auto 5px !important;
+  padding: 2px 6px !important;
+}
+.section-fold > summary.section-toggle {
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  padding: 6px 12px !important;
+  gap: 6px !important;
+}
+#reviews.section,
+#faq.section,
+#about.section,
+#tips.section,
+section.section-faq {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin: 0 !important;
+}

@@ -739,10 +739,17 @@ function attachEditButtons() {
       })
     );
 
-    const host =
-      type === 'image'
-        ? el
-        : (el.parentElement || el);
+    // للصور: لا نضيف داخل <img> — نستخدم الحاوية الأب
+    let host = el;
+    if (type === 'image') {
+      host =
+        el.closest('.gallery-slide-item') ||
+        el.closest('.premium-card') ||
+        el.parentElement ||
+        el;
+    } else {
+      host = el.parentElement || el;
+    }
 
     if (
       getComputedStyle(host).position === 'static'
@@ -753,6 +760,8 @@ function attachEditButtons() {
     host.appendChild(bar);
   });
 }
+
+window.attachEditButtons = attachEditButtons;
 
 function removeEditButtons() {
   document

@@ -949,8 +949,23 @@ function renderSite(data) {
 
       track.innerHTML = htmlContent;
 
+      if (!Array.isArray(data.smileGalleryItems)) {
+        data.smileGalleryItems = ['', '', '', '', '', ''];
+      }
+      while (data.smileGalleryItems.length < 6) {
+        data.smileGalleryItems.push('');
+      }
+
+      track.setAttribute('data-edit', 'smileGalleryItems');
+      track.setAttribute('data-edit-type', 'list');
+      track.setAttribute('data-edit-label', 'صور المعرض المتحرك (6 صور)');
+
       if (typeof markEditable === 'function') {
         markEditable('smileGalleryTrack', 'smileGalleryItems');
+      }
+
+      if (window.adminActive && typeof window.attachEditButtons === 'function') {
+        setTimeout(function () { window.attachEditButtons(); }, 40);
       }
     }
   );

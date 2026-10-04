@@ -488,7 +488,14 @@
     "subtitle": "تصميمات وحالات حقيقية من داخل مجمعنا — بلمسة فخمة تليق بابتسامتك",
     "items": []
   },
-  "smileGalleryItems": [],
+  "smileGalleryItems": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
   "nationalDay": {
     "enabled": false,
     "year": "",
