@@ -11,23 +11,271 @@ backend:
 media_folder: "images"
 public_folder: "/images"
 
+locale: "ar"
+
 collections:
-  - name: "pages"
-    label: "صفحات الموقع"
+  - name: "content"
+    label: "محتوى الموقع"
     files:
       - file: "content.json"
-        label: "تعديل محتوى وملفات البيانات"
+        label: "تعديل محتوى الموقع"
         name: "site_content"
         fields:
-          - label: "البيانات البرمجية"
-            name: "json_data"
-            widget: "code"
-            default_language: "json"
-      - file: "catalog.html"
-        label: "صفحة الكتالوج العامة"
-        name: "catalog_page"
-        fields:
-          - label: "كود الصفحة الكامل"
-            name: "catalog_body"
-            widget: "code"
-            default_language: "html"
+
+          # ==================== معلومات المجمع ====================
+          - label: "معلومات المجمع الأساسية"
+            name: "clinic"
+            widget: "object"
+            collapsed: false
+            fields:
+              - { label: "اسم المجمع", name: "name", widget: "string" }
+              - { label: "الوصف القصير", name: "tagline", widget: "string" }
+              - { label: "رقم الجوال", name: "phone", widget: "string" }
+              - { label: "واتساب (بدون +)", name: "whatsapp", widget: "string" }
+              - { label: "البريد الإلكتروني", name: "email", widget: "string" }
+              - { label: "العنوان", name: "address", widget: "string" }
+              - { label: "رابط الخريطة", name: "mapUrl", widget: "string" }
+              - { label: "إنستغرام", name: "instagram", widget: "string" }
+              - { label: "سناب شات", name: "snapchat", widget: "string" }
+              - { label: "تيك توك", name: "tiktok", widget: "string" }
+              - { label: "تويتر / إكس", name: "twitter", widget: "string", required: false }
+
+          # ==================== الإعلان العلوي ====================
+          - label: "الإعلان المتحرك في أعلى الموقع"
+            name: "announcement"
+            widget: "text"
+
+          # ==================== القسم الرئيسي (Hero) ====================
+          - label: "القسم الرئيسي في أعلى الصفحة"
+            name: "hero"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "الشارة الصغيرة", name: "badge", widget: "string" }
+              - { label: "العنوان الرئيسي", name: "title", widget: "string" }
+              - { label: "العنوان المميز (اختياري)", name: "titleHighlight", widget: "string", required: false }
+              - { label: "الوصف تحت العنوان", name: "subtitle", widget: "text" }
+              - { label: "زر الحجز الرئيسي", name: "buttonMain", widget: "string" }
+              - { label: "الزر الثانوي", name: "buttonSecondary", widget: "string" }
+              - { label: "صورة الخلفية", name: "image", widget: "image" }
+              - { label: "صورة إضافية", name: "image2", widget: "image", required: false }
+
+          # ==================== الإحصائيات ====================
+          - label: "الإحصائيات (الأرقام)"
+            name: "stats"
+            widget: "list"
+            summary: "{{number}} - {{label}}"
+            fields:
+              - { label: "الرقم", name: "number", widget: "string" }
+              - { label: "الوصف", name: "label", widget: "string" }
+
+          # ==================== الخدمات ====================
+          - label: "الخدمات الرئيسية"
+            name: "services"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - { label: "الأيقونة", name: "icon", widget: "string", hint: "tooth / clean / smile / brush / crown / stethoscope / doctor" }
+              - { label: "عنوان الخدمة", name: "title", widget: "string" }
+              - { label: "الوصف", name: "description", widget: "text" }
+
+          # ==================== النصائح ====================
+          - label: "نصائح العناية بالأسنان"
+            name: "tips"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - { label: "الأيقونة", name: "icon", widget: "string" }
+              - { label: "العنوان", name: "title", widget: "string" }
+              - { label: "الوصف", name: "description", widget: "text" }
+
+          # ==================== المميزات ====================
+          - label: "لماذا تختارنا؟ (المميزات)"
+            name: "features"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - { label: "الأيقونة", name: "icon", widget: "string" }
+              - { label: "العنوان", name: "title", widget: "string" }
+              - { label: "الوصف", name: "description", widget: "text" }
+
+          # ==================== العروض الخاصة ====================
+          - label: "العروض الخاصة"
+            name: "offers"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "تفعيل العروض؟", name: "enabled", widget: "boolean", default: false }
+              - { label: "عنوان القسم", name: "title", widget: "string" }
+              - { label: "الوصف", name: "subtitle", widget: "string" }
+              - label: "قائمة العروض"
+                name: "items"
+                widget: "list"
+                summary: "{{title}}"
+                fields:
+                  - { label: "عنوان العرض", name: "title", widget: "string" }
+                  - { label: "الوصف", name: "description", widget: "text" }
+                  - { label: "السعر", name: "price", widget: "string" }
+                  - { label: "صورة العرض", name: "image", widget: "image", required: false }
+
+          # ==================== الأطباء ====================
+          - label: "الأطباء"
+            name: "doctors"
+            widget: "list"
+            summary: "{{name}} - {{specialty}}"
+            fields:
+              - { label: "اسم الطبيب", name: "name", widget: "string" }
+              - { label: "التخصص", name: "specialty", widget: "string" }
+              - { label: "لون البطاقة", name: "themeColor", widget: "string", hint: "مثال: #D4AF37" }
+              - { label: "الصفة المميزة", name: "signature_trait", widget: "string" }
+              - { label: "الخبرة / الوصف", name: "experience", widget: "text" }
+              - { label: "صورة الطبيب", name: "image", widget: "image", required: false }
+
+          # ==================== آراء العملاء ====================
+          - label: "آراء العملاء"
+            name: "reviews"
+            widget: "list"
+            summary: "{{name}} ★{{rating}}"
+            fields:
+              - { label: "اسم العميل", name: "name", widget: "string" }
+              - { label: "التقييم (1-5)", name: "rating", widget: "number", min: 1, max: 5, default: 5 }
+              - { label: "نص الرأي", name: "text", widget: "text" }
+
+          # ==================== أوقات العمل ====================
+          - label: "أوقات العمل"
+            name: "workingHours"
+            widget: "list"
+            summary: "{{days}} : {{time}}"
+            fields:
+              - { label: "الأيام", name: "days", widget: "string" }
+              - { label: "الوقت", name: "time", widget: "string" }
+              - { label: "مفتوح؟", name: "open", widget: "boolean", default: true }
+
+          # ==================== خدمات الحجز ====================
+          - label: "قائمة خدمات الحجز"
+            name: "bookingServices"
+            widget: "list"
+            field: { label: "اسم الخدمة", name: "name", widget: "string" }
+
+          # ==================== نموذج الحجز ====================
+          - label: "نصوص صفحة الحجز"
+            name: "booking"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "عنوان الحجز", name: "title", widget: "string" }
+              - { label: "الوصف", name: "subtitle", widget: "text" }
+              - { label: "نص الزر", name: "button", widget: "string" }
+
+          # ==================== عناوين الأقسام ====================
+          - label: "عناوين الأقسام في الموقع"
+            name: "sections"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "شارة الخدمات", name: "servicesBadge", widget: "string" }
+              - { label: "عنوان الخدمات", name: "servicesTitle", widget: "string" }
+              - { label: "وصف الخدمات", name: "servicesSubtitle", widget: "string" }
+              - { label: "شارة النصائح", name: "tipsBadge", widget: "string" }
+              - { label: "عنوان النصائح", name: "tipsTitle", widget: "string" }
+              - { label: "وصف النصائح", name: "tipsSubtitle", widget: "string" }
+              - { label: "شارة المميزات", name: "featuresBadge", widget: "string" }
+              - { label: "عنوان المميزات", name: "featuresTitle", widget: "string" }
+              - { label: "وصف المميزات", name: "featuresSubtitle", widget: "string" }
+              - { label: "شارة الأطباء", name: "doctorsBadge", widget: "string" }
+              - { label: "عنوان الأطباء", name: "doctorsTitle", widget: "string" }
+              - { label: "وصف الأطباء", name: "doctorsSubtitle", widget: "string" }
+              - { label: "شارة الآراء", name: "reviewsBadge", widget: "string" }
+              - { label: "عنوان الآراء", name: "reviewsTitle", widget: "string" }
+              - { label: "وصف الآراء", name: "reviewsSubtitle", widget: "string" }
+              - { label: "عنوان صندوق الرأي", name: "reviewBoxTitle", widget: "string" }
+              - { label: "نص صندوق الرأي", name: "reviewBoxText", widget: "text" }
+              - { label: "زر إرسال الرأي", name: "reviewButton", widget: "string" }
+              - { label: "شارة التواصل", name: "contactBadge", widget: "string" }
+              - { label: "عنوان التواصل", name: "contactTitle", widget: "string" }
+              - { label: "ملاحظة النموذج", name: "formNote", widget: "string" }
+              - { label: "نص الدعم 1", name: "support1", widget: "string" }
+              - { label: "نص الدعم 2", name: "support2", widget: "string" }
+              - { label: "وصف الفوتر", name: "footerDesc", widget: "text" }
+              - { label: "عنوان العنوان", name: "contactAddressTitle", widget: "string" }
+              - { label: "عنوان الهاتف", name: "contactPhoneTitle", widget: "string" }
+              - { label: "عنوان أوقات العمل", name: "contactHoursTitle", widget: "string" }
+
+          # ==================== أسعار الخدمات ====================
+          - label: "أسعار الخدمات (القائمة المفصلة)"
+            name: "serviceCategories"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - { label: "عنوان التصنيف", name: "title", widget: "string", required: false }
+              - { label: "الأيقونة", name: "icon", widget: "string", required: false }
+              - label: "الخدمات داخل التصنيف"
+                name: "items"
+                widget: "list"
+                summary: "{{name}} - {{price}} ريال"
+                fields:
+                  - { label: "اسم الخدمة", name: "name", widget: "string" }
+                  - { label: "السعر القديم", name: "oldPrice", widget: "number", required: false }
+                  - { label: "السعر الحالي", name: "price", widget: "number" }
+
+          # ==================== النصائح اليومية ====================
+          - label: "النصائح اليومية"
+            name: "dailyTips"
+            widget: "list"
+            field: { label: "نصيحة", name: "tip", widget: "string" }
+
+          # ==================== كتالوج الصور (الأهم) ====================
+          - label: "كتالوج الصور والعروض (Gallery)"
+            name: "catalog"
+            widget: "object"
+            collapsed: false
+            fields:
+              - { label: "الشارة", name: "badge", widget: "string" }
+              - { label: "العنوان", name: "title", widget: "string" }
+              - { label: "الوصف", name: "subtitle", widget: "string" }
+              - label: "الصور"
+                name: "items"
+                widget: "list"
+                summary: "{{caption}}"
+                fields:
+                  - { label: "الصورة", name: "src", widget: "image" }
+                  - { label: "التعليق تحت الصورة", name: "caption", widget: "string", required: false }
+                  - { label: "الشكل", name: "shape", widget: "select", options: ["square", "portrait", "landscape"], default: "square" }
+                  - { label: "الحجم %", name: "size", widget: "number", default: 100, min: 50, max: 100 }
+
+          # ==================== معرض الابتسامات ====================
+          - label: "معرض الابتسامات"
+            name: "smileGalleryItems"
+            widget: "list"
+            field: { label: "رابط الصورة", name: "image", widget: "image" }
+
+          # ==================== الأسئلة الشائعة ====================
+          - label: "الأسئلة الشائعة (FAQ)"
+            name: "faq"
+            widget: "list"
+            summary: "{{q}}"
+            fields:
+              - { label: "السؤال", name: "q", widget: "string" }
+              - { label: "الإجابة", name: "a", widget: "text" }
+
+          # ==================== اليوم الوطني (اختياري) ====================
+          - label: "قسم اليوم الوطني"
+            name: "nationalDay"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "تفعيل القسم؟", name: "enabled", widget: "boolean", default: false }
+              - { label: "السنة", name: "year", widget: "string", required: false }
+              - { label: "الشارة", name: "badge", widget: "string", required: false }
+              - { label: "العنوان", name: "title", widget: "string", required: false }
+              - { label: "الشعار", name: "slogan", widget: "string", required: false }
+              - { label: "عنوان التحية", name: "greetingTitle", widget: "string", required: false }
+              - { label: "نص التحية 1", name: "greeting", widget: "text", required: false }
+              - { label: "نص التحية 2", name: "greeting2", widget: "text", required: false }
+              - { label: "نص التحية 3", name: "greeting3", widget: "text", required: false }
+              - { label: "الخاتمة", name: "closing", widget: "text", required: false }
+              - { label: "صورة المزج", name: "blendImage", widget: "image", required: false }
+              - { label: "صورة خارجية", name: "exteriorImage", widget: "image", required: false }
+              - { label: "صورة داخلية", name: "interiorImage", widget: "image", required: false }
+              - { label: "صورة العلم", name: "flagImage", widget: "image", required: false }
+              - { label: "صورة الشعار", name: "emblemImage", widget: "image", required: false }
