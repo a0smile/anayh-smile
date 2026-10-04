@@ -807,8 +807,9 @@ function renderSite(data) {
 
         // تلوين وتظليل كلمة تابي وتمارا باحترافية ملفتة للانتباه
                 // تلوين وتظليل كلمة تابي وتمارا باحترافية ملفتة للانتباه
+                // تلوين وتظليل كلمة تابي وتمارا باحترافية ملفتة للانتباه
         ann = ann.replace(/تابي/g, '<span style="background: #6CFE92; color: #111827; padding: 2px 8px; border-radius: 4px; font-weight: 900; margin: 0 3px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">تابي</span>');
-        ann = ann.replace(/تمارا/g, '<span style="background: #9601F1; color: #FFFFFF; padding: 2px 8px; border-radius: 4px; font-weight: 900; margin: 0 3px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">تمارا</span>');
+        ann = ann.replace(/تمارا/g, '<span style="background: linear-gradient(135deg, #A8D8FF, #FFE5A0, #F5B0D8); color: #111827; padding: 2px 8px; border-radius: 4px; font-weight: 900; margin: 0 3px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">تمارا</span>');
         if (track) {
           // تكرار متتالي ممتد يملأ الشاشة بالكامل ويقضي على مشكلة الرمشة نهائياً
           track.innerHTML = `
@@ -1297,6 +1298,7 @@ function renderSite(data) {
                                 
                             // الحسبة الرياضية التلقائية الفاخرة لأقساط تابي وتمارا (4 دفعات)
                                                         // الحسبة الرياضية التلقائية الفاخرة لأقساط تابي وتمارا (4 دفعات)
+                                                        // الحسبة الرياضية التلقائية الفاخرة لأقساط تابي وتمارا (4 دفعات)
                             let installmentHtml = '';
                             if (service.price && !isNaN(parseFloat(service.price))) {
                               const numericPrice = parseFloat(service.price);
@@ -1309,7 +1311,7 @@ function renderSite(data) {
                                   </div>
                                   <div style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;flex-wrap:wrap;">
                                     <span style="display:inline-flex;align-items:center;justify-content:center;min-width:64px;padding:4px 12px;border-radius:6px;background:#6CFE92;color:#111827;font-size:13px;font-weight:900;letter-spacing:0.02em;box-shadow:0 1px 3px rgba(0,0,0,0.08);">تابي</span>
-                                    <span style="display:inline-flex;align-items:center;justify-content:center;min-width:64px;padding:4px 12px;border-radius:6px;background:#9601F1;color:#FFFFFF;font-size:13px;font-weight:900;letter-spacing:0.02em;box-shadow:0 1px 3px rgba(0,0,0,0.08);">تمارا</span>
+                                    <span style="display:inline-flex;align-items:center;justify-content:center;min-width:64px;padding:4px 12px;border-radius:6px;background:linear-gradient(135deg, #A8D8FF, #FFE5A0, #F5B0D8);color:#111827;font-size:13px;font-weight:900;letter-spacing:0.02em;box-shadow:0 1px 3px rgba(0,0,0,0.08);">تمارا</span>
                                   </div>
                                 </div>
                               `
