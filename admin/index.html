@@ -2,12 +2,74 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0f766e" />
   <title>لوحة تحكم مجمع عناية الابتسامة</title>
+
+  <style>
+    /* ===== تحسينات الجوال للوحة التحكم ===== */
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #f8fafc;
+    }
+
+    /* تكبير الأزرار والحقول على الجوال */
+    @media (max-width: 768px) {
+      /* الأزرار */
+      button, .css-1yjws19, .css-1yjws19-Button, [class*="Button"] {
+        min-height: 44px !important;
+        font-size: 16px !important;
+        padding: 10px 16px !important;
+      }
+
+      /* حقول الإدخال */
+      input, textarea, select, [class*="Control"] input, [class*="Control"] textarea {
+        font-size: 16px !important; /* يمنع الزوم التلقائي في iOS */
+        min-height: 44px !important;
+        padding: 10px 12px !important;
+      }
+
+      /* البطاقات والحقول */
+      [class*="Card"], [class*="ControlContainer"], [class*="FieldLabel"] {
+        margin-bottom: 12px !important;
+      }
+
+      /* القائمة الجانبية */
+      [class*="Sidebar"], [class*="AppHeader"] {
+        font-size: 15px !important;
+      }
+
+      /* زر Publish */
+      [class*="ToolbarButton"], .css-1n5o5m8 {
+        min-height: 48px !important;
+        font-size: 16px !important;
+      }
+
+      /* الصور في المكتبة */
+      [class*="MediaCard"] {
+        min-width: 140px !important;
+      }
+
+      /* تحسين المسافات */
+      [class*="MainContainer"], [class*="CollectionTop"] {
+        padding: 12px !important;
+      }
+
+      /* إخفاء بعض العناصر غير الضرورية على الجوال */
+      [class*="EditorControlBar"] button:nth-child(n+4) {
+        display: none;
+      }
+    }
+
+    /* تحسين عام للمس */
+    button, a, [role="button"] {
+      touch-action: manipulation;
+    }
+  </style>
 </head>
 <body>
-  <!-- تحميل مكتبة Decap CMS بشكل صحيح -->
   <script src="https://unpkg.com/decap-cms@latest/dist/decap-cms.js"></script>
 </body>
 </html>
